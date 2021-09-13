@@ -1,0 +1,14 @@
+export const HOSPITAL_ROUTE = "/hospital";
+export const DOCTORS_ROUTE = "/doctors";
+export const LOGIN_ROUTE = "/login";
+export const HOSPITAL_REGISTERATION_ROUTE = "/register-hospital";
+export const PATIENT_REGISTERATION_ROUTE = "/register-patient";
+export const SELECT_REGISTERATION_TYPE_ROUTE = "/select-registeration-type";
+export const HOSPITAL_PROFILE_ROUTE = "/hospital/profile";
+export const NURSE_PROFILE_ROUTE = "/nurse/profile";
+export const DOCTOR_INFO_ROUTE = "/hospital/doctor-info";
+export const HOSPITAL_PATIENT_INFO_ROUTE = "/hospital/patient-info";
+export const NURSE_PATIENT_INFO_ROUTE = "/nurse/patient-info";
+export const NURSE_ROUTE = "/nurse";
+export const LAB_ROUTE = "/laboratory";
+export const LAB_PROFILE_ROUTE = "/laboratory/profile";
