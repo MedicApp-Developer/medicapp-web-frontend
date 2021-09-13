@@ -54,7 +54,7 @@ function HospitalRegisteration() {
             formData.append("location", values.name);
             formData.append("phoneNo", values.name);
             formData.append("email", values.email);
-            formData.append("password", values.name);
+            formData.append("password", values.password);
             formData.append('tradeLicenseFile', file);
             await AuthApi.registerHospital(formData).then(res => {
                 toast.success("Hospital Registered Successfully");
