@@ -4,8 +4,11 @@ import axios from 'axios';
 const token = window.localStorage.getItem('auth');
 
 const instance = axios.create({
-  baseURL: "http://localhost:1337/api"
+  baseURL: "https://sheltered-depths-86378.herokuapp.com/api"
 });
+
+// https://sheltered-depths-86378.herokuapp.com/api
+// http://localhost:1337/api
 
 instance.interceptors.response.use(function (response) {
   // Do something with response data
