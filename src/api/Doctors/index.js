@@ -3,8 +3,8 @@ import { DOCTOR_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise} from 'react-promise-tracker';
 
 const DoctorApi = {
-    getAllDoctors(pageNo) {
-        return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}?page=${pageNo}`));
+    getAllDoctors(pageNo, referenceId) {
+        return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}?page=${pageNo}&reference_id=${referenceId}`));
     },
     createDoctor(data) {
         return trackPromise(axios.post(`${DOCTOR_NAMESPACE}`, data));

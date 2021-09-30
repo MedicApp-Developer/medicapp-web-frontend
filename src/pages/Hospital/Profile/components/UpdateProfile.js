@@ -44,7 +44,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
             services:  Yup.string().required('Required'),
             about: Yup.string().required('Required'),
             type: Yup.string().required('Required'),
-            category: Yup.string().required('Required'),
+            category: Yup.string().required('Required').nullable(),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true);
