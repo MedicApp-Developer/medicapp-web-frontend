@@ -57,6 +57,7 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "engines": {
+    "npm": "7.x",
     "node": "14.x"
   }
 }
