@@ -1,16 +1,20 @@
 import axios from '../../axios';
 import { LABORATORY_NAMESPACE } from '../../constants/namespaces';
+import { trackPromise} from 'react-promise-tracker';
 
 const LaboratoryApi = {
-    getAllLaboratories() {
-        return axios.get(`/${LABORATORY_NAMESPACE}`);
+    getAllLaboratories(pageNo) {
+        return trackPromise(axios.get(`/${LABORATORY_NAMESPACE}?page=${pageNo}`));
     },
     createLaboratory(data) {
-        return axios.post(`${LABORATORY_NAMESPACE}`, data);
+        return trackPromise(axios.post(`${LABORATORY_NAMESPACE}`, data));
     },
     deleteLab(id){
-        return axios.delete(`${LABORATORY_NAMESPACE}/${id}`);
-    }
+        return trackPromise(axios.delete(`${LABORATORY_NAMESPACE}/${id}`));
+    },
+    searchLabs(pageNo, searchedText) {
+        return trackPromise(axios.get(`${LABORATORY_NAMESPACE}/search/${searchedText}?page=${pageNo}`));
+    },
 }
 
 export default LaboratoryApi;

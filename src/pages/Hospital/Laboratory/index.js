@@ -3,26 +3,30 @@ import { href } from '../../../constants/extra';
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PLACEHOLDER_LAB_IMAGE from '../../../assets/images/laboratory.png'
 import AddLaboratory from './components/AddLaboratory';
-import LaboratoryApi from '../../../api/Laboratory';
-import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { getLabs, deleteLab, setPageNumber, searchLab } from '../../../store/actions/labActions'
+import { getPagesArray } from '../../../Utills/functions';
+import classNames from 'classnames';
 
-function Laboratory() {
+function Laboratory({ getLabs, deleteLab, labs, setPageNumber, searchLab }) {
 
-    const [laboratories, setLaboratories] = useState([]);
+    const { pageNumber, numberOfPages, labs: allLabs, searchedLabs, searchedText } = labs && labs;
 
     useEffect(() => {
-        LaboratoryApi.getAllLaboratories().then(res => {
-            setLaboratories(res.data.data)
-        });
-    }, []);
+        if(searchedText !== ""){
+            searchLab(pageNumber, searchedText);
+        }else {
+            getLabs(pageNumber || 0);
+        }
+    }, [getLabs, pageNumber, searchLab, searchedText]);
 
-    const deleteLab = (lab) => {
-        LaboratoryApi.deleteLab(lab._id).then(res => {
-            toast.success("Successfully deleted the Laboratory");
-        }).catch(err => {
-            toast.error("Problem while deleting the laboratory");
-        })
+    const deleteLabHandler = (lab) => {
+        deleteLab(lab._id);
     }
+
+    const pages = getPagesArray(numberOfPages);
+
+    const labsList = searchedLabs.length > 0 ? searchedLabs : allLabs;
 
     return (
         <div>
@@ -36,7 +40,7 @@ function Laboratory() {
                     </div>
                 </div>
                 <div class="row list-block">
-                    { laboratories?.map(laboratory => (
+                    { labsList?.map(laboratory => (
                         <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                             <div class="card">
                                 <div class="card-body">
@@ -48,8 +52,8 @@ function Laboratory() {
                                     </div>
                                     </div>
                                     <div class="contact-info">
-                                        <a href={href}><span class="icon-email"></span></a>
-                                        <a href={href}><span class="icon-phone"></span></a>
+                                        <a href={`mailto:${laboratory.email}`}><span className="icon-email"></span></a>
+                                        <a href={`tel:${laboratory.mobile}`}><span className="icon-phone"></span></a>
                                     </div>
                                 </div>
                                 <div class="dropdown">
@@ -57,7 +61,7 @@ function Laboratory() {
                                         <span class="icon-dots"></span>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a href={href} class="dropdown-item delete-item" onClick={(e) => { e.preventDefault(); deleteLab(laboratory) }}>Delete</a>
+                                        <a href={href} class="dropdown-item delete-item" onClick={(e) => { e.preventDefault(); deleteLabHandler(laboratory) }}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -67,16 +71,20 @@ function Laboratory() {
                 {/* Pagination */}
                 <div class="row">
                     <div class="col-md-12">
+                        {labsList?.length > 0 ? (
                             <nav>
                                 <ul class="pagination justify-content-center align-items-center my-md-2">
-                                    <li class="page-item"><a href="#">Prev</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a href="#">Next</a></li>
+                                    <li class="page-item" style={{ pointerEvents: +pageNumber <= 0 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber - 1)}}>Prev</a></li>
+                                    {pages.map((pageIndex) => (
+                                        <li class={classNames("page-item", { "active": +pageIndex === pageNumber })} key={pageIndex} onClick={() => setPageNumber(pageIndex)}><a class="page-link" href={href} onClick={(e) => e.preventDefault()}>{pageIndex + 1}</a></li>
+                                    ))}
+                                    <li class="page-item" style={{ pointerEvents: +pageNumber === +numberOfPages - 1 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber + 1)}}>Next</a></li>
                                 </ul>
                             </nav>
+                        ): (
+                            <p>No laboratory found</p>
+                        )}
+                            
                         </div>
                     </div>
                 {/* Add laboratory Modal */}
@@ -86,5 +94,16 @@ function Laboratory() {
     )
 }
 
-export default Laboratory
+const mapStateToProps = state => ({
+    labs: state.labs
+});
+
+const mapDispatchToProps = {
+    getLabs,
+    deleteLab,
+    setPageNumber,
+    searchLab
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Laboratory)
 

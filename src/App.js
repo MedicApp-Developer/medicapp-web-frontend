@@ -18,6 +18,7 @@ import PublicRoute from './ProtectedRoutes/PublicRoute';
 import NurseRouter from './pages/Nurse';
 import LabortoriesRouter from './pages/Laboratories';
 
+// TODO: Confirmation on deleting anything
 function App() {
   return (
     <RootContext>

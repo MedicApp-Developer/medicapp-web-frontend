@@ -6,7 +6,7 @@ export const RootContext = React.createContext();
 export default ({ children }) => {
 
   const prevSelectedNav = window.localStorage.getItem('selectedNav') || "";
-  const prevUser = window.localStorage.getItem('user') && JSON.parse(window.localStorage.getItem('user')) || "";
+  const prevUser = (window.localStorage.getItem('user') && JSON.parse(window.localStorage.getItem('user'))) || "";
   
   const [selectedNav, setSelectedNav] = useState(prevSelectedNav);
   const [user, setUser] = useState(prevUser);

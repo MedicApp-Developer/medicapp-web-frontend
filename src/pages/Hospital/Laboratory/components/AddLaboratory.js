@@ -1,10 +1,10 @@
 import React from 'react'
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
-import LaboratoryApi from '../../../../api/Laboratory';
+import { connect } from 'react-redux';
+import { addLab } from '../../../../store/actions/labActions';
 
-function AddLaboratory() {
+function AddLaboratory({ addLab }) {
 
     const formik = useFormik({
         initialValues: {
@@ -19,13 +19,9 @@ function AddLaboratory() {
           email: Yup.string().required().email(),
           mobile: Yup.string().required(),
         }),
-        onSubmit: async values => {
-            await LaboratoryApi.createLaboratory(values).then(res => {
-                toast.success("Laboratory created successfully");
-                formik.handleReset();
-            }).catch(err => {
-                toast.error("Problem while creating the laboratory, choose different email")
-            })
+        onSubmit: values => {
+            addLab(values);
+            formik.handleReset();
         },
       });
 
@@ -86,4 +82,10 @@ function AddLaboratory() {
     )
 }
 
-export default AddLaboratory
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+    addLab
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddLaboratory);

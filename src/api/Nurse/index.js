@@ -1,16 +1,26 @@
 import axios from '../../axios';
 import { NURSE_NAMESPACE } from '../../constants/namespaces';
+import { trackPromise} from 'react-promise-tracker';
 
 const NurseApi = {
-    getAllNurses() {
-        return axios.get(`/${NURSE_NAMESPACE}`);
+    getAllNurses(pageNo) {
+        return trackPromise(axios.get(`/${NURSE_NAMESPACE}?page=${pageNo}`));
     },
     createNurse(data) {
-        return axios.post(`${NURSE_NAMESPACE}`, data);
+        return trackPromise(axios.post(`${NURSE_NAMESPACE}`, data));
     },
     deleteNurse(id){
-        return axios.delete(`${NURSE_NAMESPACE}/${id}`);
-    }
+        return trackPromise(axios.delete(`${NURSE_NAMESPACE}/${id}`));
+    },
+    getSingleNurse(id) {
+        return trackPromise(axios.get(`${NURSE_NAMESPACE}/${id}`));
+    },
+    updateNurse(id, values) {
+        return trackPromise(axios.put(`${NURSE_NAMESPACE}/${id}`, values));
+    },
+    searchNurses(pageNo, searchedText) {
+        return trackPromise(axios.get(`${NURSE_NAMESPACE}/search/${searchedText}?page=${pageNo}`));
+    },
 }
 
 export default NurseApi;

@@ -1,68 +1,74 @@
-import React, { useEffect, useState } from 'react'
-import DoctorApi from '../../../api/Doctors';
+import React, { useContext, useEffect } from 'react'
 import { href } from '../../../constants/extra';
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PLACEHOLDER_DOCTOR_IMAGE from '../../../assets/images/doctor_placeholder.png'
 import AddDoctor from './components/AddDoctor';
-import { toast } from 'react-toastify';
 import SetDoctorSchedule from './components/SetDoctorSchedule';
 import { useHistory } from 'react-router-dom';
 import { DOCTOR_INFO_ROUTE } from '../../../constants/Redirects';
+import { getDoctors, deleteDoctor, setPageNumber, searchDoctor } from '../../../store/actions/doctorActions';
+import { connect } from 'react-redux';
+import { getPagesArray } from '../../../Utills/functions';
+import classNames from 'classnames';
 
-function Doctors() {
-
-    const [doctors, setDoctors] = useState([]);
+function Doctors({ getDoctors, doctors, deleteDoctor, setPageNumber, searchDoctor }) {
     const history = useHistory();
+    const { pageNumber, numberOfPages, doctors: allDoctors, searchedDoctors, searchedText } = doctors && doctors;
 
     useEffect(() => {
-        DoctorApi.getAllDoctors().then(res => {
-            setDoctors(res.data.data)
-        });
-    }, []);
+        if(searchedText !== ""){
+            searchDoctor(pageNumber, searchedText);
+        }else {
+            getDoctors(pageNumber || 0);
+        }
+    }, [getDoctors, pageNumber, searchDoctor, searchedText]);
 
-    const deleteDoctor = (doctor) => {
-        DoctorApi.deleteDoctor(doctor._id).then(res => {
-            toast.success("Doctor deleted successfully");
-        }).catch(err => {
-            toast.error("Problem while deleting doctor");
-        });
+    const onDoctorSelect = (id) => {
+        history.push(DOCTOR_INFO_ROUTE + `/${id}`);
     }
+
+    const deleteDoctorHandler = (doctor) => {
+        deleteDoctor(doctor._id);
+    }
+
+    const pages = getPagesArray(numberOfPages);
+
+    const doctorsList = searchedDoctors.length > 0 ? searchedDoctors : allDoctors;
 
     return (
         <div>
             <DashboardLayout>
-                <div class="row align-items-center add-list">
-                    <div class="col-6">
+                <div className="row align-items-center add-list">
+                    <div className="col-6">
                         <h4>Doctors List</h4>
                     </div>
-                    <div class="col-6 text-right">
-                        <a href={href} data-toggle="modal" data-target="#addDoctor" class="btn btn-primary px-3">+ ADD DOCTOR</a>
+                    <div className="col-6 text-right">
+                        <a href={href} data-toggle="modal" data-target="#addDoctor" className="btn btn-primary px-3">+ ADD DOCTOR</a>
                     </div>
                 </div>
-                <div class="row list-block">
-                    { doctors?.map(doctor => (
-                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                            <div class="card">
-                                <div class="card-body pointer" onClick={() => { history.push(DOCTOR_INFO_ROUTE) }}>
-                                    <div class="media">
-                                    <img src={doctor?.image ? doctor?.image : PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
-                                    <div class="media-body">
-                                        <h5 class="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
+                <div className="row list-block">
+                    { doctorsList?.map(doctor => (
+                        <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="media">
+                                    <img className="pointer" src={doctor?.image ? doctor?.image : PLACEHOLDER_DOCTOR_IMAGE} onClick={() => { onDoctorSelect(doctor._id) }} alt="doctor" />
+                                    <div className="media-body">
+                                        <h5 className="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
                                         <p>Dentist</p>
                                     </div>
                                     </div>
-                                    <div class="contact-info">
-                                        <a href={href}><span class="icon-email"></span></a>
-                                        <a href={href}><span class="icon-phone"></span></a>
+                                    <div className="contact-info">
+                                        <a href={`mailto:${doctor.email}`}><span className="icon-email"></span></a>
+                                        <a href={`tel:${doctor.mobile}`}><span className="icon-phone"></span></a>
                                     </div>
                                 </div>
-                                <div class="dropdown">
+                                <div className="dropdown">
                                     <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="icon-dots"></span>
+                                        <span className="icon-dots"></span>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href={href} data-toggle="modal" data-target="#setSchedule">Set Schedule</a>
-                                        <a class="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteDoctor(doctor)}}>Delete</a>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteDoctorHandler(doctor)}}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -70,27 +76,41 @@ function Doctors() {
                     ))}
                 </div>
                 {/* Pagination */}
-                <div class="row">
-                    <div class="col-md-12">
-                            <nav>
-                                <ul class="pagination justify-content-center align-items-center my-md-2">
-                                    <li class="page-item"><a href="#">Prev</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                <div className="row">
+                    <div className="col-md-12">
+                            {doctorsList?.length > 0 ? (
+                                <nav>
+                                    <ul className="pagination justify-content-center align-items-center my-md-2">
+                                        <li className="page-item" style={{ pointerEvents: +pageNumber <= 0 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber - 1)}}>Prev</a></li>
+                                        {pages.map((pageIndex) => (
+                                            <li className={classNames("page-item", { "active": +pageIndex === pageNumber })} key={pageIndex} onClick={() => setPageNumber(pageIndex)}><a className="page-link" href={href} onClick={(e) => e.preventDefault()}>{pageIndex + 1}</a></li>
+                                        ))}
+                                        <li className="page-item" style={{ pointerEvents: +pageNumber === +numberOfPages - 1 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber + 1)}}>Next</a></li>
+                                    </ul>
+                                </nav>
+                            ): (
+                                <p>No doctors Found</p>
+                            )}
+                            
                         </div>
                     </div>
                 {/* Add Doctor Modal */}
                 <AddDoctor />
                 {/* Set Doctor Schedule */}
-                <SetDoctorSchedule />
             </DashboardLayout>
         </div>
     )
 }
 
-export default Doctors
+const mapStateToProps = (state) => ({
+    doctors: state.doctors
+})
+
+const mapDispatchToProps = {
+    getDoctors,
+    deleteDoctor,
+    setPageNumber,
+    searchDoctor
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Doctors);

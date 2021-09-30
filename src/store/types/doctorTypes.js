@@ -1,0 +1,8 @@
+export const GET_DOCTORS = "GET_DOCTORS";
+export const ADD_DOCTOR = "ADD_DOCTOR";
+export const DELETE_DOCTOR = "DELETE_DOCTOR";
+
+export const SEARCH_DOCTOR = "SEARCH_DOCTOR";
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER";
+export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
+export const SELECT_DOCTOR = "SELECT_DOCTOR";

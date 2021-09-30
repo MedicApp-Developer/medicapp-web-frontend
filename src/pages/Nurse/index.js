@@ -1,7 +1,7 @@
 import { Switch, withRouter } from "react-router-dom";
 import NurseRoute from "../../ProtectedRoutes/NurseRoute";
 import Patient from "../shared/Patient";
-import PatientInfo from "../shared/Patient/components/PatientInfo";
+import NursePatientInfo from "../shared/Patient/components/NursePatientInfo";
 import NurseProfile from "./Profile";
 
 const NurseRouter = withRouter(({ match, ...props }) => {
@@ -10,8 +10,8 @@ const NurseRouter = withRouter(({ match, ...props }) => {
             <NurseRoute exact path={`${match.path}`}>
                 <Patient />
             </NurseRoute>
-            <NurseRoute exact path={`${match.path}/patient-info`} >
-                <PatientInfo />
+            <NurseRoute exact path={`${match.path}/patient-info/:id`} >
+                <NursePatientInfo />
             </NurseRoute>
             <NurseRoute exact path={`${match.path}/profile`} >
                 <NurseProfile />

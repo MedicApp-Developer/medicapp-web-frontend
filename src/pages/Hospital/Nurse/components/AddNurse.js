@@ -1,10 +1,10 @@
 import React from 'react'
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
-import NurseApi from '../../../../api/Nurse';
+import { connect } from 'react-redux';
+import { addNurse } from '../../../../store/actions/nurseActions';
 
-function AddNurse() {
+function AddNurse({ addNurse }) {
 
     const formik = useFormik({
         initialValues: {
@@ -20,12 +20,8 @@ function AddNurse() {
           mobile: Yup.string().required(),
         }),
         onSubmit: async values => {
-            await NurseApi.createNurse(values).then(res => {
-                toast.success("Nurse created successfully");
-                formik.handleReset();
-            }).catch(err => {
-                toast.error("Problem while creating the nurse, choose different email")
-            })
+            addNurse(values);
+            formik.handleReset();
         },
       });
 
@@ -86,4 +82,10 @@ function AddNurse() {
     )
 }
 
-export default AddNurse;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+    addNurse
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNurse);

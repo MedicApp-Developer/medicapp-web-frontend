@@ -49,10 +49,10 @@ function HospitalRegisteration() {
             let formData = new FormData();
             formData.append("name", values.name);
             formData.append("tradeLicenseNo", values.tradeLicenseNo);
-            formData.append("issueDate", values.name);
-            formData.append("expiryDate", values.name);
-            formData.append("location", values.name);
-            formData.append("phoneNo", values.name);
+            formData.append("issueDate", values.issueDate);
+            formData.append("expiryDate", values.expiryDate);
+            formData.append("location", values.location);
+            formData.append("phoneNo", values.phoneNo);
             formData.append("email", values.email);
             formData.append("password", values.password);
             formData.append('tradeLicenseFile', file);
@@ -121,9 +121,6 @@ function HospitalRegisteration() {
                                 ) : null}
                             </div>
                             <div class="form-group">
-                                {/* <select class="form-control">
-                                <option>Location</option>
-                                </select> */}
                                 <input type="text" {...formik.getFieldProps('location')} class={ (formik.touched.location && formik.errors.location) ? "form-control is-invalid" : "form-control"} placeholder="Location" /> 
                                 {formik.touched.location && formik.errors.location ? (
                                     <div class="invalid-feedback text-right-aligned">{formik.errors.location}</div>

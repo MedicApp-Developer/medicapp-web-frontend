@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import NurseApi from '../../../api/Nurse';
 import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import NURSE_PLACEHOLDER from '../../../assets/images/nurse_placeholder.png'
 import AddNurse from './components/AddNurse';
-import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { getNurses, deleteNurse, searchNurse, setPageNumber } from '../../../store/actions/nurseActions';
+import { getPagesArray } from '../../../Utills/functions';
+import classNames from 'classnames';
 
-function Nurse() {
+function Nurse({ getNurses, deleteNurse, nurses, setPageNumber }) {
 
-    const [nurses, setNurses] = useState([]);
+    const { pageNumber, numberOfPages, nurses: allNurses, searchedNurses, searchedText } = nurses && nurses;
 
     useEffect(() => {
-        NurseApi.getAllNurses().then(res => {
-            setNurses(res.data.data);
-        })
-    }, []); 
+        if(searchedText !== ""){
+            searchNurse(pageNumber, searchedText);
+        }else {
+            getNurses(pageNumber || 0);
+        }
+    }, [getNurses, pageNumber, searchNurse, searchedText]);
 
-    const deleteNurse = (nurse) => {
-        NurseApi.deleteNurse(nurse._id).then(res => {
-            toast.success("Successfully deleted Nurse")
-        }).catch(err => {
-            toast.error("Problem while deleting the nurse")
-        })
+    const deleteNurseHandler = (nurse) => {
+        deleteNurse(nurse._id);
     }
+
+    const pages = getPagesArray(numberOfPages);
+
+    const nursesList = searchedNurses.length > 0 ? searchedNurses : allNurses;
 
     return (
         <DashboardLayout>
@@ -35,7 +39,7 @@ function Nurse() {
                </div>
             </div>
             <div className="row list-block">
-                { nurses?.length > 0 && nurses.map(nurse => (
+                { nursesList?.length > 0 && nursesList?.map(nurse => (
                     <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                         <div className="card">
                         <div className="card-body">
@@ -47,8 +51,8 @@ function Nurse() {
                                 </div>
                             </div>
                             <div className="contact-info">
-                                <a href={href}><span className="icon-email"></span></a>
-                                <a href={href}><span className="icon-phone"></span></a>
+                                <a href={`mailto:${nurse.email}`}><span className="icon-email"></span></a>
+                                <a href={`tel:${nurse.mobile}`}><span className="icon-phone"></span></a>
                             </div>
                         </div>
                         <div className="dropdown">
@@ -56,7 +60,7 @@ function Nurse() {
                             <span className="icon-dots"></span>
                             </a>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteNurse(nurse) }}>Delete</a>
+                                <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteNurseHandler(nurse) }}>Delete</a>
                             </div>
                         </div>
                         </div>
@@ -65,16 +69,20 @@ function Nurse() {
             </div>
             <div className="row">
                <div className="col-md-12">
-                  <nav>
-                     <ul className="pagination justify-content-center align-items-center my-md-2">
-                        <li className="page-item"><a href="#">Prev</a></li>
-                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item"><a className="page-link" href="#">4</a></li>
-                        <li className="page-item"><a href="#">Next</a></li>
-                     </ul>
-                  </nav>
+                   {nursesList?.length > 0 ? (
+                       <nav>
+                            <ul class="pagination justify-content-center align-items-center my-md-2">
+                                <li class="page-item" style={{ pointerEvents: +pageNumber <= 0 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber - 1)}}>Prev</a></li>
+                                    {pages.map((pageIndex) => (
+                                        <li class={classNames("page-item", { "active": +pageIndex === pageNumber })} key={pageIndex} onClick={() => setPageNumber(pageIndex)}><a class="page-link" href={href} onClick={(e) => e.preventDefault()}>{pageIndex + 1}</a></li>
+                                    ))}
+                                <li class="page-item" style={{ pointerEvents: +pageNumber === +numberOfPages - 1 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber + 1)}}>Next</a></li>
+                            </ul>
+                        </nav>
+                   ): (
+                       <p>No nurse found</p>
+                   )}
+                  
                </div>
             </div>
 
@@ -84,4 +92,14 @@ function Nurse() {
     )
 }
 
-export default Nurse
+const mapStateToProps = (state) => ({
+    nurses: state.nurses
+});
+
+const mapDispatchToProps = {
+    getNurses,
+    deleteNurse,
+    setPageNumber
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nurse)

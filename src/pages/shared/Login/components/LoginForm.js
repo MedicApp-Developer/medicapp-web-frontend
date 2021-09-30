@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { selectNav } from '../../../../Utills/selectNav';
 import { Link } from 'react-router-dom';
 import { SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects';
+import instance from '../../../../axios';
 
  const LoginForm = () => {
   
@@ -35,6 +36,9 @@ import { SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects
         await AuthApi.login(values).then(res => {
           toast.success("Logged In Successfully");
           setUser(res?.data?.data?.user);
+        
+          instance.defaults.headers.common['authorization'] = "Bearer" + " " +  res?.data?.data?.token;
+
           setSelectedNav(selectNav(res?.data?.data?.user?.role));
           localStorage.setItem("auth", res?.data?.data?.token);
           localStorage.setItem('user', res?.data?.data?.user);
