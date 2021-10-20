@@ -2,12 +2,12 @@ import React, { useState, useContext } from 'react'
 import SideNav from '../SideNav';
 import { RootContext } from '../../contextApi/index';
 import { useHistory } from 'react-router-dom';
-import { HOSPITAL_PROFILE_ROUTE, LAB_PROFILE_ROUTE, LOGIN_ROUTE, NURSE_PROFILE_ROUTE } from '../../constants/Redirects';
+import { DOCTOR_PROFILE_ROUTE, HOSPITAL_PROFILE_ROUTE, LAB_PROFILE_ROUTE, LOGIN_ROUTE, NURSE_PROFILE_ROUTE, PHARMACY_PROFILE_ROUTE } from '../../constants/Redirects';
 import { href } from '../../constants/extra';
 import LOGO from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { HOSPITAL, LABORTORY, NURSE } from '../../constants/Roles';
+import { DOCTOR, HOSPITAL, LABORTORY, NURSE, PHARMACY } from '../../constants/Roles';
 import { DOCTORS_NAV, NURSE_NAV, LABORATORY_NAV } from '../../constants/navs';
 import SearchDoctors from '../../pages/Hospital/Doctors/components/SearchDoctors';
 import HashLoader from "react-spinners/HashLoader";
@@ -43,6 +43,8 @@ function DashboardLayout({ children }) {
         case NURSE: redirectTo = NURSE_PROFILE_ROUTE; break;
         case HOSPITAL: redirectTo = HOSPITAL_PROFILE_ROUTE; break;
         case LABORTORY: redirectTo = LAB_PROFILE_ROUTE; break;
+        case DOCTOR: redirectTo = DOCTOR_PROFILE_ROUTE; break;
+        case PHARMACY: redirectTo = PHARMACY_PROFILE_ROUTE; break;
         default: redirectTo = "/";
     }
 

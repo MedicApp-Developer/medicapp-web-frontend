@@ -44,6 +44,7 @@ import instance from '../../../../axios';
           localStorage.setItem('user', res?.data?.data?.user);
           history.push(redirectTo(res?.data?.data?.user?.role));
         }).catch(err => {
+          console.log("Err => ", err);
           toast.error("Invalid Credentials")
         })
      },

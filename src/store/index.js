@@ -6,13 +6,19 @@ import { nurseReducer } from './reducers/nurseReducer';
 import { labReducer } from './reducers/labReducer';
 import { patientReducer } from './reducers/patientReducer';
 import { appointmentReducer } from './reducers/appointmentReducer';
+import { doctorAppointmentReducer } from './reducers/doctorAppointmentsReducer';
+import { pendingLabRequestReducer } from './reducers/pendingLabRequestReducer';
+import { completedLabRequestReducer } from './reducers/completedLabRequestReducer';
 
 const rootReducer = combineReducers({
     doctors: doctorReducer,
     nurses: nurseReducer,
     labs: labReducer,
     patients: patientReducer,
-    appointments: appointmentReducer
+    appointments: appointmentReducer,
+    doctorAppointments: doctorAppointmentReducer,
+    pendingLabRequests: pendingLabRequestReducer,
+    completedLabRequests: completedLabRequestReducer
 })
 
 export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

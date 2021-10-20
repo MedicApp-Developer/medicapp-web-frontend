@@ -1,17 +1,17 @@
-import Appointments from "../../pages/Doctors/Appointments";
-import DoctorsDashboard from "../../pages/Doctors/Dashboard";
-
 export const DoctorsRoutes = [
     {
-        name: "Dashboard",
-        icon: "icon-dashboard",
-        route: "/doctors",
-        component: DoctorsDashboard
+        name: "Appointments",
+        icon: "icon-appointment",
+        route: "/doctors"
     },
     {
-        name: "Appointments",
-        icon: "icon-stethoscope",
-        route: "/doctors/appointments",
-        component: Appointments
+        name: "Patients",
+        icon: "icon-patient",
+        route: "/doctors/patient"
+    },
+    {
+        name: "Lab Results Records",
+        icon: "icon-lab",
+        route: "/doctors/lab-results"
     }
 ]

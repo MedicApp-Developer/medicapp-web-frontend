@@ -3,9 +3,9 @@ import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PATIENT_IMAGE from '../../../assets/images/patient.png';
 import { useHistory } from 'react-router-dom';
-import { HOSPITAL_PATIENT_INFO_ROUTE, NURSE_PATIENT_INFO_ROUTE } from '../../../constants/Redirects';
+import { HOSPITAL_PATIENT_INFO_ROUTE, NURSE_PATIENT_INFO_ROUTE, DOCTOR_PATIENT_INFO_ROUTE } from '../../../constants/Redirects';
 import { RootContext } from '../../../contextApi';
-import { NURSE } from '../../../constants/Roles';
+import { DOCTOR, HOSPITAL, NURSE } from '../../../constants/Roles';
 import { getPatients, deletePatient, setPageNumber } from '../../../store/actions/patientActions';
 import { connect } from 'react-redux';
 import AddPatient from './components/AddPatient';
@@ -27,7 +27,16 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
       deletePatient(id);
     }
 
-    const redirectTo = user.role === NURSE ? NURSE_PATIENT_INFO_ROUTE : HOSPITAL_PATIENT_INFO_ROUTE;
+    let redirectTo = null; 
+    
+    switch(user.role){
+       case NURSE: redirectTo = NURSE_PATIENT_INFO_ROUTE; break;
+       case HOSPITAL: redirectTo = HOSPITAL_PATIENT_INFO_ROUTE; break;
+       case DOCTOR: redirectTo = DOCTOR_PATIENT_INFO_ROUTE; break;
+       default: redirectTo = HOSPITAL_PATIENT_INFO_ROUTE;
+    }
+
+
 
     const pages = getPagesArray(numberOfPages);
 
@@ -88,9 +97,6 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                      </div>
                   </div>
                )) }
-               {allPatients.length === 0 && (
-                  <p> No Patients Found </p>
-               )}
             </div>
             <div className="row">
                     <div className="col-md-12">

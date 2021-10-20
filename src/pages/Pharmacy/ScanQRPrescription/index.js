@@ -1,12 +1,12 @@
 import React from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
 
-function DoctorsDashboard() {
+function ScanQRPrescription() {
     return (
         <DashboardLayout>
-            Doctors Dashboard
+            Scan QR prescription
         </DashboardLayout>
     )
 }
 
-export default DoctorsDashboard
+export default ScanQRPrescription
