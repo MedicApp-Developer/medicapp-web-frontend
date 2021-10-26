@@ -4,7 +4,7 @@ import axios from 'axios';
 const token = window.localStorage.getItem('auth');
 
 const instance = axios.create({
-  baseURL: "http://localhost:1337/api"
+  baseURL: "http://ec2-3-132-213-127.us-east-2.compute.amazonaws.com:1337/api"
 });
 
 // https://sheltered-depths-86378.herokuapp.com/api
