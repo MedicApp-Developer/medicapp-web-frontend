@@ -36,3 +36,9 @@
        opacity: 1;
     }
   }
+
+.dropzone {
+  border: 1px dotted gray !important;
+  padding: 10px !important;
+  margin-bottom: 15px;
+}

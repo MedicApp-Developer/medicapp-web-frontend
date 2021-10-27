@@ -24,4 +24,9 @@ export const HospitalRoutes = [
         icon: "icon-patient",
         route: "/hospital/patient"
     },
+    {
+        name: "Promos",
+        icon: "icon-patient",
+        route: "/hospital/promos"
+    },
 ]

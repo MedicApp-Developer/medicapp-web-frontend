@@ -8,6 +8,7 @@ import Nurse from "./Nurse";
 import Patient from "../shared/Patient";
 import HospitalPatientInfo from "../shared/Patient/components/HospitalPatientInfo";
 import HospitalProfile from "./Profile";
+import Promos from "./Promos";
 
 const HospitalRouter = withRouter(({ match, ...props }) => {
     return (
@@ -26,6 +27,9 @@ const HospitalRouter = withRouter(({ match, ...props }) => {
             </HospitalRoute>
             <HospitalRoute exact path={`${match.path}/patient`}>
                 <Patient />
+            </HospitalRoute>
+            <HospitalRoute exact path={`${match.path}/promos`}>
+                <Promos />
             </HospitalRoute>
             <HospitalRoute exact path={`${match.path}/profile`} >
                 <HospitalProfile />
