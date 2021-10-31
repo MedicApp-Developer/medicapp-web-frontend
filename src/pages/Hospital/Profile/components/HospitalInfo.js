@@ -20,7 +20,7 @@ function HospitalInfo({ hospital }) {
     const uploadImage = () => {
         if(imageSrc && image){
             let formData = new FormData();
-            formData.append('image', image);
+            formData.append('video', image);
             HospitalApi.uploadHospitalImage(_id, formData).then(res => {
                 toast.success("Image Uploaded Successfully");
                 setImage(null);
