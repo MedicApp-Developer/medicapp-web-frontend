@@ -33,14 +33,10 @@ export const deletePromo = (id) => async (dispatch, getState) => {
 
 export const createPromo = (data) => async (dispatch, getState) => {
     try {
-        PromoApi.createPromo(data).then(async res => {
-            const response = await PromoApi.getAllPromos(0);
-
-            dispatch({
-                type: GET_PROMOS,
-                payload: response.data.data
-            })
-        });
+        dispatch({
+            type: GET_PROMOS,
+            payload: data
+        })
         toast.success("Promo created successfully");
     }catch(err) {
         toast.error(err.response.data.message);

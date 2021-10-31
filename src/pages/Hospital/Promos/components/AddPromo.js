@@ -2,6 +2,12 @@ import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { createPromo } from '../../../../store/actions/promosActions';
 import {useDropzone} from 'react-dropzone';
+import PromoApi from '../../../../api/promos';
+import { trackPromise } from 'react-promise-tracker';
+import axios from '../../../../axios';
+import { PROMO_REQUEST_NAMESPACE } from '../../../../constants/namespaces';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 function AddPromo({ createPromo }) {
     
@@ -11,17 +17,29 @@ function AddPromo({ createPromo }) {
     
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone({ maxFiles: 1, accept: 'video/*', onDrop });
     const [uploadedVideo, setUploadedVideo] = useState([]);
-    
+    const [progress, setProgress] = useState();
+
     const files = acceptedFiles.map(file => (
         <li key={file.path}>
           {file.path} - {file.size} bytes
         </li>
     ));
 
-    const onUploadVideo = () => {
+    const onUploadVideo = async () => {
         const formData = new FormData();
         formData.append("video", uploadedVideo[0]);
-        createPromo(formData);
+        await axios.post(`/${PROMO_REQUEST_NAMESPACE}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: (data) => {
+                setProgress(Math.round((100 * data.loaded) / data.total))
+            }
+        }).then(async res => {
+            setProgress(null);
+            const response = await PromoApi.getAllPromos(0);
+            createPromo(response.data.data);
+        })
     }
 
     return (
@@ -33,19 +51,26 @@ function AddPromo({ createPromo }) {
                         <span class="icon-close"></span>
                         </button>
                         <h4 class="text-center">Add Promo Video</h4>
-                        <section className="container">
-                            <div {...getRootProps({className: 'dropzone'})}>
-                                <input {...getInputProps()} />
-                                <p>Drag 'n' drop video here, or click to select video</p>
-                                <em>(Only video file will be accepted)</em>
+                        {progress ? (
+                            <div style={{ width: 170, height: 170, margin: 'auto' }}>
+                                <CircularProgressbar value={progress} text={`${progress}%`} />
+                                <br/>
                             </div>
-                            <aside>
-                                <h4>Files</h4>
-                                <ul>{files}</ul>
-                            </aside>
-                        </section>
+                        ) : (
+                            <section className="container">
+                                <div {...getRootProps({className: 'dropzone'})}>
+                                    <input {...getInputProps()} />
+                                    <p>Drag 'n' drop video here, or click to select video</p>
+                                    <em>(Only video file will be accepted)</em>
+                                </div>
+                                <aside>
+                                    <h4>Files</h4>
+                                    <ul>{files}</ul>
+                                </aside>
+                            </section>
+                        )}
                         <div class="col-12 text-right">
-                            <a href="javascript:void(0)" class="btn btn-primary px-3" onClick={onUploadVideo}>UPLOAD VIDEO</a>
+                            <a href="javascript:void(0)" style={progress && { pointerEvents: "none" }} class="btn btn-primary px-3" onClick={onUploadVideo}>{progress ? "Uploading..." : "UPLOAD VIDEO" }</a>
                         </div>
                     </div>
                     </div>

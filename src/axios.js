@@ -7,8 +7,7 @@ const instance = axios.create({
   baseURL: "https://medicappae.com/api"
 });
 
-// https://sheltered-depths-86378.herokuapp.com/api
-// http://18.219.79.121:1337/api
+// https://medicappae.com/api
 // http://localhost:1337/api
 
 instance.interceptors.response.use(function (response) {
