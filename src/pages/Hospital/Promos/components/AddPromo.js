@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { createPromo } from '../../../../store/actions/promosActions';
 import {useDropzone} from 'react-dropzone';
 import PromoApi from '../../../../api/promos';
-import { trackPromise } from 'react-promise-tracker';
 import axios from '../../../../axios';
 import { PROMO_REQUEST_NAMESPACE } from '../../../../constants/namespaces';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { toast } from 'react-toastify';
 
 function AddPromo({ createPromo }) {
     
@@ -27,19 +27,29 @@ function AddPromo({ createPromo }) {
 
     const onUploadVideo = async () => {
         const formData = new FormData();
-        formData.append("video", uploadedVideo[0]);
-        await axios.post(`/${PROMO_REQUEST_NAMESPACE}`, formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-            onUploadProgress: (data) => {
-                setProgress(Math.round((100 * data.loaded) / data.total))
+        
+        if(uploadedVideo[0]){
+            if(uploadedVideo[0].size > 20000000) {
+                toast.error("File too Big, please select a file less than 20mb")
+                return false;    
             }
-        }).then(async res => {
-            setProgress(null);
-            const response = await PromoApi.getAllPromos(0);
-            createPromo(response.data.data);
-        })
+    
+            formData.append("video", uploadedVideo[0]);
+            await axios.post(`/${PROMO_REQUEST_NAMESPACE}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                onUploadProgress: (data) => {
+                    setProgress(Math.round((100 * data.loaded) / data.total))
+                }
+            }).then(async res => {
+                setProgress(null);
+                const response = await PromoApi.getAllPromos(0);
+                createPromo(response.data.data);
+            })
+        }else {
+            toast.error('Please select a video');
+        }
     }
 
     return (

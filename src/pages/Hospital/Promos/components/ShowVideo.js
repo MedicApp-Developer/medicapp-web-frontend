@@ -20,6 +20,7 @@ function ShowVideo({ selectedPromo }) {
                                         pip={true}
                                         width={"100%"}
                                         height="100%"
+                                        stopOnUnmount={true}
                                     />
                                     <br/>
                                 </div>
