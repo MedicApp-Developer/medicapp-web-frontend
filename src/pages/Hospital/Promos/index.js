@@ -5,10 +5,10 @@ import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { href } from '../../../constants/extra';
-import PATIENT_IMAGE from '../../../assets/images/patient.png';
 import AddPromo from './components/AddPromo';
 import ShowVideo from './components/ShowVideo';
 import ReactPlayer from 'react-player';
+import LIKE_IMAGE from '../../../assets/images/like.png';
 
 function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
 
@@ -51,6 +51,7 @@ function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
                                     <li>
                                        <h6>Name</h6>
                                        <p>{promo.name}</p>
+                                       <p style={{ fontSize: "1rem" }}>{ promo?.likes } <span> <img style={{ paddingTop: '7px', paddingLeft: '2px' }} src={LIKE_IMAGE}></img> </span></p>
                                     </li>
                                  </ul>
                               </div>
