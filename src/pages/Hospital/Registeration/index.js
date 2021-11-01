@@ -55,12 +55,12 @@ function HospitalRegisteration() {
             formData.append("phoneNo", values.phoneNo);
             formData.append("email", values.email);
             formData.append("password", values.password);
-            formData.append('tradeLicenseFile', file);
+            formData.append('video', file);
             await AuthApi.registerHospital(formData).then(res => {
                 toast.success("Hospital Registered Successfully");
                 history.push(LOGIN_ROUTE);
             }).catch(err => {
-                toast.error("Validation Failed");
+                toast.error(err.response.data.message);
             })
         },
       });

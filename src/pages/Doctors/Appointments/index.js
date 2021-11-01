@@ -42,7 +42,7 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                </div>
             </div>
             <div class="row">
-               {appointments.map(appointment => (
+               {appointments?.map(appointment => (
                   <div class="col-md-12 col-xl-12">
                      <div class="card lab-result">
                         <div class="card-body">

@@ -18,8 +18,8 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
    useEffect(() => {
       selectDoctor(id);
       AppointmentApi.getDoctorAppointments(id).then(res => {
-         setAppointments(res.data.data);
-         setPatients(res?.data?.data?.map(item => ( item.patientId )))
+         setAppointments(res.data.data.appointments);
+         setPatients(res?.data?.data?.appointments?.map(item => ( item.patientId )))
       });
    }, [id, selectDoctor]);
 
@@ -152,7 +152,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                              </td>
                                           </>
                                        ))}
-                                       {appointments.length === 0 && (
+                                       {appointments?.length === 0 && (
                                             <p>No appointment found</p>
                                         )}
                                     </tr>
