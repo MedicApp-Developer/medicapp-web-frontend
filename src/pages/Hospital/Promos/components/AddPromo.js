@@ -46,6 +46,9 @@ function AddPromo({ createPromo }) {
                 setProgress(null);
                 const response = await PromoApi.getAllPromos(0);
                 createPromo(response.data.data);
+            }).catch(err => {
+                setProgress(null);
+                toast.error(err.response.data.message);
             })
         }else {
             toast.error('Please select a video');

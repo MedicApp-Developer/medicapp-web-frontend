@@ -6,3 +6,8 @@ export const PHARMACY = "PHARMACY";
 
 // Hospital Types
 export const CLINIC = "CLINIC";
+
+// GENDER CONSTANTS
+export const MALE = "MALE";
+export const FEMALE = "FEMALE";
+export const OTHER = "OTHER";
