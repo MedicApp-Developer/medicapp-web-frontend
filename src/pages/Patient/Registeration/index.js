@@ -27,7 +27,7 @@ function PatientRegisteration() {
             firstName: "",
             lastName: "",
             email: "",
-            emiratesId: "",
+            // emiratesId: "",
             birthday: "",
             gender: "",
             issueDate: "",
@@ -41,7 +41,7 @@ function PatientRegisteration() {
             firstName:  Yup.string().required(),
             lastName: Yup.string().required(),
             email: Yup.string().required(),
-            emiratesId: Yup.string().required(),
+            // emiratesId: Yup.string().required(),
             birthday: Yup.string().required(),
             gender: Yup.string().required().nullable(),
             issueDate: Yup.string().required('Required'),
@@ -63,14 +63,14 @@ function PatientRegisteration() {
             formData.append("firstName", values.firstName);
             formData.append("lastName", values.lastName);
             formData.append("email", values.email);
-            formData.append("emiratesId", values.emiratesId);
+            // formData.append("emiratesId", values.emiratesId);
             formData.append("birthday", values.birthday);
             formData.append("gender", values.gender);
             formData.append("issueDate", values.issueDate);
             formData.append("expiryDate", values.expiryDate);
             formData.append("location", values.location);
             formData.append("phone", values.phone);
-            formData.append('emirateIdFile', file);
+            // formData.append('emirateIdFile', file);
             await AuthApi.registerHospital(formData).then(res => {
                 toast.success("Patient Registered Successfully");
                 history.push(LOGIN_ROUTE);
@@ -108,9 +108,9 @@ function PatientRegisteration() {
                                 <div class="form-group">
                                     <TextInput type="email" name="email" placeholder="Email" />
                                 </div>
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                     <TextInput type="text" name="emiratesId" placeholder="Emirates ID" />
-                                </div>
+                                </div> */}
                                 <div class="form-group">
                                     <TextInput type="date" name="birthday" placeholder="Birthday" />
                                 </div>
@@ -140,13 +140,13 @@ function PatientRegisteration() {
                                     </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                {/* <div class="form-group">
                                     <input type="file" class="form-control custom-file-input" id="validatedCustomFile" onChange={onFileUpload} />
                                     <label class="custom-file-label form-control" for="validatedCustomFile">{file ? file.name : "Upload Emirates ID File"} </label>
                                     {submited && !file ? (
                                         <div class="invalid-feedback text-right-aligned">Trade License is required</div>
                                     ) : null}
-                                </div>
+                                </div> */}
                                 <div class="form-group">
                                     <TextInput type="password" name="password" placeholder="Password" />
                                 </div>
