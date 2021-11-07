@@ -9,6 +9,7 @@ import LOGO from '../../../assets/images/logo.png'
 import { FEMALE, MALE, OTHER } from '../../../constants/Roles';
 import SelectInput from '../../../components/forms/SelectInput';
 import TextInput from '../../../components/forms/TextInput';
+import PatientApi from '../../../api/Patients';
 
 function PatientRegisteration() {
 
@@ -58,25 +59,12 @@ function PatientRegisteration() {
             })
           })}
           onSubmit={ async (values, { setSubmitting }) => {
-            setSubmited(true);
-            let formData = new FormData();
-            formData.append("firstName", values.firstName);
-            formData.append("lastName", values.lastName);
-            formData.append("email", values.email);
-            // formData.append("emiratesId", values.emiratesId);
-            formData.append("birthday", values.birthday);
-            formData.append("gender", values.gender);
-            formData.append("issueDate", values.issueDate);
-            formData.append("expiryDate", values.expiryDate);
-            formData.append("location", values.location);
-            formData.append("phone", values.phone);
-            // formData.append('emirateIdFile', file);
-            await AuthApi.registerHospital(formData).then(res => {
+            PatientApi.registerPatient(values).then(res => {
                 toast.success("Patient Registered Successfully");
                 history.push(LOGIN_ROUTE);
             }).catch(err => {
                 toast.error(err.response.data.message);
-            })
+            });
           }}
           enableReinitialize={true}
         >
@@ -116,7 +104,7 @@ function PatientRegisteration() {
                                 </div>
                                 <div class="form-group">
                                     <SelectInput name="gender">
-                                            <option value="">Treatment Type</option>
+                                            <option value="">Gender</option>
                                             <option value={MALE}>Male</option>
                                             <option value={FEMALE}>Female</option>
                                             <option value={OTHER}>Other</option>

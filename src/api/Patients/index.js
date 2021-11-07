@@ -17,6 +17,9 @@ const PatientApi = {
     },
     updatePatient(id, data) {
         return trackPromise(axios.put(`/${PATIENT_NAMESPACE}/${id}`, data));
+    },
+    registerPatient(data) {
+        return trackPromise(axios.post(`/${PATIENT_NAMESPACE}`, data));
     }
 }
 
