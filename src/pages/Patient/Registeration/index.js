@@ -31,8 +31,6 @@ function PatientRegisteration() {
             // emiratesId: "",
             birthday: "",
             gender: "",
-            issueDate: "",
-            expiryDate: "",
             location: "",
             phone: "",
             password: "",
@@ -45,8 +43,6 @@ function PatientRegisteration() {
             // emiratesId: Yup.string().required(),
             birthday: Yup.string().required(),
             gender: Yup.string().required().nullable(),
-            issueDate: Yup.string().required('Required'),
-            expiryDate: Yup.string().required(),
             location: Yup.string().required(),
             phone: Yup.string().required(),
             password: Yup.string().required(),
@@ -115,18 +111,6 @@ function PatientRegisteration() {
                                 </div>
                                 <div class="form-group">
                                     <TextInput type="text" name="phone" placeholder="Phone" />
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                    <div class="form-group">
-                                        <TextInput type="text" name="issueDate" placeholder="Issue Date" onFocus={(e) => e.target.type = 'date'} />
-                                    </div>
-                                    </div>
-                                    <div class="col">
-                                    <div class="form-group">
-                                        <TextInput type="text" name="expiryDate" placeholder="Expiry Date" onFocus={(e) => e.target.type = 'date'} />
-                                    </div>
-                                    </div>
                                 </div>
                                 {/* <div class="form-group">
                                     <input type="file" class="form-control custom-file-input" id="validatedCustomFile" onChange={onFileUpload} />
