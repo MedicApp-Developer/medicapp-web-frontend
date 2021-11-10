@@ -29,7 +29,7 @@ function NurseProfile() {
             password: ""
           }}
           validationSchema={Yup.object({
-            email: Yup.string().required('Required'),
+            email: Yup.string().required('Required').email(),
             firstName: Yup.string().required('Required'),
             lastName: Yup.string().required('Required'),
             mobile:  Yup.string().required('Required'),

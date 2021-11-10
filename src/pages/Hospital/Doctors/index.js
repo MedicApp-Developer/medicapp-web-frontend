@@ -55,7 +55,7 @@ function Doctors({ getDoctors, doctors, deleteDoctor, setPageNumber, searchDocto
                                     <img className="pointer" src={doctor?.image ? doctor?.image : PLACEHOLDER_DOCTOR_IMAGE} onClick={() => { onDoctorSelect(doctor._id) }} alt="doctor" />
                                     <div className="media-body">
                                         <h5 className="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
-                                        <p>Dentist</p>
+                                        <p>{doctor?.specialityId?.name}</p>
                                     </div>
                                     </div>
                                     <div className="contact-info">

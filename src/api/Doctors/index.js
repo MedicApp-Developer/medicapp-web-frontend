@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { DOCTOR_NAMESPACE } from '../../constants/namespaces';
+import { DOCTOR_NAMESPACE, SPECIALITY_REQUEST_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise} from 'react-promise-tracker';
 
 const DoctorApi = {
@@ -20,6 +20,9 @@ const DoctorApi = {
     },
     updateDoctor(id, values) {
         return trackPromise(axios.put(`${DOCTOR_NAMESPACE}/${id}`, values));
+    },
+    getAllSpecialities() {
+        return trackPromise(axios.get(`${SPECIALITY_REQUEST_NAMESPACE}`));
     }
 }
 

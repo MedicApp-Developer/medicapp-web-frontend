@@ -8,3 +8,4 @@ export const PATIENT_NAMESPACE = 'patients';
 export const APPOINTMENT_NAMESPACE = 'appointments';
 export const LAB_REQUEST_NAMESPACE = 'labRequests';
 export const PROMO_REQUEST_NAMESPACE = 'promos';
+export const SPECIALITY_REQUEST_NAMESPACE = 'speciality';
