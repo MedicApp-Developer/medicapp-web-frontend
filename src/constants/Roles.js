@@ -3,6 +3,7 @@ export const HOSPITAL = "HOSPITAL";
 export const NURSE = "NURSE";
 export const LABORTORY = "LABORTORY";
 export const PHARMACY = "PHARMACY";
+export const ADMIN = "ADMIN";
 
 // Hospital Types
 export const CLINIC = "CLINIC";

@@ -18,6 +18,7 @@ import PublicRoute from './ProtectedRoutes/PublicRoute';
 import NurseRouter from './pages/Nurse';
 import LabortoriesRouter from './pages/Laboratories';
 import PharmacyRouter from './pages/Pharmacy';
+import AdminRouter from './pages/Admin';
 
 // TODO: Confirmation on deleting anything
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/nurse" component={NurseRouter} />
           <Route path="/laboratory" component={LabortoriesRouter} />
           <Route path="/pharmacy" component={PharmacyRouter} />
+          <Route path="/admin" component={AdminRouter} />
           <PublicRoute path="/select-registeration-type" component={SelectRegisterationType} />
           <PublicRoute exact path="/register-hospital" component={HospitalRegisteration} />
           <PublicRoute exact path="/register-patient" component={PatientRegisteration} />

@@ -14,7 +14,6 @@ function SideNav() {
         setSelectedNav(item.name);
         history.push(item.route);
     }
-
     return (
         <ul class="sidebar-nav">
             {getRoutes(user?.role).length > 0 && getRoutes(user?.role).map((item, index) => (

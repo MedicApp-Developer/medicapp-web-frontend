@@ -10,6 +10,7 @@ import { doctorAppointmentReducer } from './reducers/doctorAppointmentsReducer';
 import { pendingLabRequestReducer } from './reducers/pendingLabRequestReducer';
 import { completedLabRequestReducer } from './reducers/completedLabRequestReducer';
 import { promoReducer } from './reducers/promosReducer';
+import { specialitiesReducer } from './reducers/specialitiesReducer';
 
 const rootReducer = combineReducers({
     doctors: doctorReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     doctorAppointments: doctorAppointmentReducer,
     pendingLabRequests: pendingLabRequestReducer,
     completedLabRequests: completedLabRequestReducer,
-    promos: promoReducer
+    promos: promoReducer,
+    specialities: specialitiesReducer
 })
 
 export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
