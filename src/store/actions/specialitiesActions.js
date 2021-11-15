@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import SpecialityApi from "../../api/specialities";
+import SpecialityApi from "../../api/Specialities";
 import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES } from "../types/specialityTypes";
 
 export const getSpecialities = () => async (dispatch, getState) => {
