@@ -118,16 +118,13 @@
 	content: "\e90c";
 }
 
-@font-face {
-	font-family: 'Depot-Regular';
-	src: url('../../assets/fonts/Depot-Regular.otf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 body {
 	position: relative;
 	min-height: 100%;
 	color: #000000;
-	font-family: Depot-Regular !important;
+	font-family: 'Lato', sans-serif !important;
 }
 
 a {
@@ -331,7 +328,7 @@ header .dropdown-menu {
 	display: block;
 	text-decoration: none;
 	color: #35256c;
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 16px;
 }
 
