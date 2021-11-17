@@ -4,8 +4,12 @@ import DENTAL_IMAGE from '../../../assets/images/dental.png';
 import APP_STORE_IMAGE from '../../../assets/images/app-store.png';
 import GOOGLE_APP_IMAGE from '../../../assets/images/google-play.png';
 import APP_IMAGE from '../../../assets/images/app.png'
+import { Link } from 'react-router-dom';
 
 function Home() {
+
+    const href = "";
+
     return (
         <AppLayout>
                   <section class="hero-section">
@@ -15,7 +19,7 @@ function Home() {
                                 <h1>Lorem Ipsum 
                                     Dolor
                                 </h1>
-                                <a class="btn btn-light" href="javascript:void(0)">Register</a>
+                                <Link to="/select-registeration-type" class="btn btn-light" href={href}>Register</Link>
                             </div>
                             </div>
                         </div>

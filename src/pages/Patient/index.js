@@ -5,6 +5,8 @@ import Hospital from "./Hospital";
 import Doctor from './Doctor';
 import Pharmacy from "./Pharmacy";
 import Insurance from "./Insurance";
+import Promos from "./Promos";
+import BookAppointment from "./Doctor/components/BookAppointment";
 
 const PatientRouter = withRouter(({ match, ...props }) => {
     return (
@@ -18,11 +20,17 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             <PatientRoute exact path={`${match.path}/doctor`}>
                 <Doctor />
             </PatientRoute>
+            <PatientRoute exact path={`${match.path}/doctor/:id`}>
+                <BookAppointment />
+            </PatientRoute>
             <PatientRoute exact path={`${match.path}/pharmacy`}>
                 <Pharmacy />
             </PatientRoute>
             <PatientRoute exact path={`${match.path}/insurance`}>
                 <Insurance />
+            </PatientRoute>
+            <PatientRoute exact path={`${match.path}/promos`}>
+                <Promos />
             </PatientRoute>
         </Switch>
     )

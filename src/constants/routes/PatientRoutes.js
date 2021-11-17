@@ -14,14 +14,19 @@ export const PatientRoutes = [
         icon: "icon-qr-code",
         route: "/patient/doctor"
     },
+    // {
+    //     name: "Pharmacy",
+    //     icon: "icon-qr-code",
+    //     route: "/patient/pharmacy"
+    // },
+    // {
+    //     name: "Insurance",
+    //     icon: "icon-qr-code",
+    //     route: "/patient/insurance"
+    // }
     {
-        name: "Pharmacy",
+        name: "Promos",
         icon: "icon-qr-code",
-        route: "/patient/pharmacy"
-    },
-    {
-        name: "Insurance",
-        icon: "icon-qr-code",
-        route: "/patient/insurance"
+        route: "/patient/promos"
     }
 ]
