@@ -16,5 +16,6 @@ export const NURSE_ROUTE = "/nurse";
 export const LAB_ROUTE = "/laboratory";
 export const PHARMACY_ROUTE = "/pharmacy";
 export const ADMIN_ROUTE = "/admin";
+export const PATIENT_ROUTE = "/patient";
 export const LAB_PROFILE_ROUTE = "/laboratory/profile";
 export const PHARMACY_DETAILS_ROUTE = "/pharmacy/pharmacy-details"
