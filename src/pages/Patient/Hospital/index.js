@@ -236,7 +236,6 @@ function Hospital() {
                         </div>
                     </div>
                     <div class="col-md-2 mt-4 mt-md-0">
-                        <a href="javascript:void(0)" class="btn btn-primary px-3 mb-3">Hospital Registration</a>
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />
                     </div>
                     </div>
