@@ -127,7 +127,7 @@ function Doctor() {
                             </select>
                         </div>
                         <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push("/patient/doctor/id")} />
+                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push("/doctor/id")} />
                             <div class="media-body">
                                 <div class="d-flex flex-wrap justify-content-between align-items-center">
                                 <h5 class="mt-0">Dr. Albert Smith</h5>

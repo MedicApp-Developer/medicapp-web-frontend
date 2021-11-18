@@ -28,5 +28,10 @@ export const PatientRoutes = [
         name: "Promos",
         icon: "icon-qr-code",
         route: "/patient/promos"
+    },
+    {
+        name: "Get Qoute",
+        icon: "icon-qr-code",
+        route: "/patient/get-qoute"
     }
 ]

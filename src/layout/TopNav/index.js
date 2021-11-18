@@ -35,8 +35,16 @@ function TopNav() {
                 </li>
             ))}
             {user && Object.values(user).length > 0 ? (
-                <li class="nav-item">
-                    <a onClick={onLogout} href={href} class="nav-link btn btn-primary px-4 py-2">Log out</a>
+                <li class="nav-item" style={{paddingTop: "2.5%"}}>
+                    <div className="dropdown">
+                        <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <Link className="dropdown-item" to="/profile">Profile</Link>
+                            <a className="dropdown-item" href={href} onClick={onLogout}>Logout</a>
+                        </div>
+                    </div>
                 </li>
             ) : (
                 <li class="nav-item">

@@ -81,7 +81,7 @@ function DashboardLayout({ children }) {
                                 <li className="nav-item">
                                     <div className="dropdown">
                                     <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span className="icon-user"></span> {user?.name}
+                                        <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <Link className="dropdown-item" to={redirectTo}>Profile</Link>
