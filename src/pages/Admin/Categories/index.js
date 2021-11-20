@@ -1,20 +1,20 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { href } from '../../../constants/extra';
 import DashboardLayout from '../../../layout/DashboardLayout'
-import PLACEHOLDER_DOCTOR_IMAGE from '../../../assets/images/doctor_placeholder.png'
-import AddSpecialities from './components/AddSpecialities';
-import { getSpecialities, deleteSpeciality } from '../../../store/actions/specialitiesActions';
+import AddCategories from './components/AddCategory';
+import { getCategories, deleteCategory } from '../../../store/actions/categoriesActions';
 import { connect } from 'react-redux';
+import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png';
 
-function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
-    const { specialities: allSpecialities } = specialities && specialities;
+function Categories({ getCategories, categories, deleteCategory }) {
+    const { categories: allCategories } = categories && categories;
 
     useEffect(() => {
-        getSpecialities();
-    }, [getSpecialities]);
+        getCategories();
+    }, [getCategories]);
 
-    const deleteSpecialityHandler = (speciality) => {
-        deleteSpeciality(speciality._id);
+    const deleteCategoryHandler = (category) => {
+        deleteCategory(category._id);
     }
 
     return (
@@ -22,21 +22,21 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
             <DashboardLayout>
                 <div className="row align-items-center add-list">
                     <div className="col-6">
-                        <h4>Specialities</h4>
+                        <h4>Categories</h4>
                     </div>
                     <div className="col-6 text-right">
-                        <a href={href} data-toggle="modal" data-target="#addSpeciality" className="btn btn-primary px-3">+ ADD Speciality</a>
+                        <a href={href} data-toggle="modal" data-target="#addCategory" className="btn btn-primary px-3">+ ADD Category</a>
                     </div>
                 </div>
                 <div className="row list-block">
-                    { allSpecialities?.map((spec, key) => (
+                    { allCategories?.map((cat, key) => (
                         <div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="media">
-                                    <img className="pointer" src={spec?.logo ? spec?.logo : PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
+                                    <img className="pointer" src={CATEGORY_PLACEHOLDER_IMAGE} alt="Category" />
                                     <div className="media-body">
-                                        <h5 className="mt-0">{spec.name}</h5>
+                                        <h5 className="mt-0">{cat.name}</h5>
                                     </div>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                                         <span className="icon-dots"></span>
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteSpecialityHandler(spec)}}>Delete</a>
+                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteCategoryHandler(cat)}}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                     ))}
                 </div>
                 {/* Add Doctor Modal */}
-                <AddSpecialities />
+                <AddCategories />
                 {/* Set Doctor Schedule */}
             </DashboardLayout>
         </div>
@@ -61,12 +61,12 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
 }
 
 const mapStateToProps = (state) => ({
-    specialities: state.specialities
+    categories: state.categories
 })
 
 const mapDispatchToProps = {
-    getSpecialities,
-    deleteSpeciality,
+    getCategories,
+    deleteCategory,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialities);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

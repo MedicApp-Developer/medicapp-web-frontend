@@ -41,7 +41,7 @@ function TopNav() {
                             <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
                         </a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <Link className="dropdown-item" to="/profile">Profile</Link>
+                            <Link className="dropdown-item" to="/patient/profile">Profile</Link>
                             <a className="dropdown-item" href={href} onClick={onLogout}>Logout</a>
                         </div>
                     </div>

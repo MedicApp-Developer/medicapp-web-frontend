@@ -11,6 +11,8 @@ import { pendingLabRequestReducer } from './reducers/pendingLabRequestReducer';
 import { completedLabRequestReducer } from './reducers/completedLabRequestReducer';
 import { promoReducer } from './reducers/promosReducer';
 import { specialitiesReducer } from './reducers/specialitiesReducer';
+import { categoriesReducer } from './reducers/categoriesReducer';
+import { addonsReducer } from './reducers/addonsReducer';
 
 const rootReducer = combineReducers({
     doctors: doctorReducer,
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
     pendingLabRequests: pendingLabRequestReducer,
     completedLabRequests: completedLabRequestReducer,
     promos: promoReducer,
-    specialities: specialitiesReducer
+    specialities: specialitiesReducer,
+    categories: categoriesReducer,
+    addons: addonsReducer
 })
 
 export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

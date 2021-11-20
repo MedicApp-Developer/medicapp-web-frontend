@@ -9,3 +9,5 @@ export const APPOINTMENT_NAMESPACE = 'appointments';
 export const LAB_REQUEST_NAMESPACE = 'labRequests';
 export const PROMO_REQUEST_NAMESPACE = 'promos';
 export const SPECIALITY_REQUEST_NAMESPACE = 'speciality';
+export const CATEGORY_REQUEST_NAMESPACE = 'categories';
+export const HOSPITAL_ADDON_SERVICES_NAMESPACE = 'hospitals/services';
