@@ -16,7 +16,6 @@ function DoctorProfile() {
     useEffect(() => {
         DoctorApi.getSingleDoctor(user.referenceId).then(res => {
             setDoctor(res.data.data);
-            console.log("Doc => ", res.data.data);
         });
     }, []);
 

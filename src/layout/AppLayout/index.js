@@ -25,7 +25,7 @@ function AppLayout({ children }) {
     }
 
     return (
-        <>
+        <div>
             <header>
                 <nav class="navbar navbar-expand-lg navbar-light navabr-home mb-0">
                     <div class="container">
@@ -38,14 +38,16 @@ function AppLayout({ children }) {
                     </div>
                 </nav>
             </header>
-            {children}
+            <div style={promiseInProgress ? {opacity: '0.2'} : {}}>
+                {children}
+            </div>
             <Footer />
             {promiseInProgress && (
                 <div className="centered-loader">
                     <HashLoader color="#417EBF" loading={true} size={50} />
                 </div>
             )}
-        </>
+        </div>
     )
 }
 

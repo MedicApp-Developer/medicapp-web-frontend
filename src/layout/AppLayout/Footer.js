@@ -8,7 +8,6 @@ function Footer() {
                 <div class="row">
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     <img class="img-fluid mb-4" src={FOOTER_LOGO} alt="logo" />
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                     <div class="media align-items-center mb-3">
                         <i class="icon-phone mr-3"></i>
                         <div class="media-body">

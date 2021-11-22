@@ -1,10 +1,7 @@
 import React from 'react'
 import AppLayout from '../../../layout/AppLayout'
-import PLACEHOLDER_LARGE from '../../../assets/images/placeholder-lg.png';
-import PLACEHOLDER_SMALL from '../../../assets/images/placeholder-sm.png';
-import MEDOR_LOGO from '../../../assets/images/medeor_logo.png';
-import DENTAL_IMAGE from '../../../assets/images/dental.png';
 import { useHistory } from 'react-router';
+import SearchedHospitals from './components/SearchedHospitals';
 
 function Hospital() {
 
@@ -129,111 +126,8 @@ function Hospital() {
                                 <option>Sort by: Recomendation</option>
                             </select>
                         </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} style={{ cursor: "pointer" }} onClick={() => { history.push("/patient/hospital/id") }} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Medeor Hospital  </h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-success px-3 py-1 mr-1">Verified</a>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1">Since 2014</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Medeor Hospital  </h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-success px-3 py-1 mr-1">Verified</a>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1">Since 2014</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Medeor Hospital  </h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-success px-3 py-1 mr-1">Verified</a>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1">Since 2014</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Medeor Hospital  </h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-success px-3 py-1 mr-1">Verified</a>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1">Since 2014</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Medeor Hospital  </h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-success px-3 py-1 mr-1">Verified</a>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1">Since 2014</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
+                        {/* Searched Hospitals */}
+                        <SearchedHospitals />
                     </div>
                     <div class="col-md-2 mt-4 mt-md-0">
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />

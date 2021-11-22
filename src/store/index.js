@@ -13,6 +13,8 @@ import { promoReducer } from './reducers/promosReducer';
 import { specialitiesReducer } from './reducers/specialitiesReducer';
 import { categoriesReducer } from './reducers/categoriesReducer';
 import { addonsReducer } from './reducers/addonsReducer';
+import { searchedDoctorsReducer } from './reducers/patient/searchedDoctorReducer';
+import { searchedHospitalsReducer } from './reducers/patient/searchedHospitalReducer';
 
 const rootReducer = combineReducers({
     doctors: doctorReducer,
@@ -26,7 +28,9 @@ const rootReducer = combineReducers({
     promos: promoReducer,
     specialities: specialitiesReducer,
     categories: categoriesReducer,
-    addons: addonsReducer
+    addons: addonsReducer,
+    searchedDoctors: searchedDoctorsReducer,
+    searchedHospitals: searchedHospitalsReducer
 })
 
 export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

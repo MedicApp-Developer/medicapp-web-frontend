@@ -1,11 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import AppLayout from '../../../layout/AppLayout';
-import MEDOR_LOGO from '../../../assets/images/medeor_logo.png';
-import { useHistory } from 'react-router';
+import SearchedDoctors from './components/SearchedDoctors';
 
-function Doctor() {
+function Doctor({ searchedDoctors }) {
 
-    const history = useHistory();
+    const { searchedDoctors: allSearchedDoctors } = searchedDoctors && searchedDoctors;
 
     return (
         <AppLayout>
@@ -48,72 +48,101 @@ function Doctor() {
                                 Category <i class="fa fa-angle-down float-right"></i>
                                 </a>
                                 <div class="collapse show" id="collapseExample">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Company" />
-                                    <label class="form-check-label" for="Company">Company Clinic</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Surgery" />
-                                    <label class="form-check-label" for="Surgery">Day Surgery Center</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Dental" />
-                                    <label class="form-check-label" for="Dental">Dental Genaral Clinic </label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Diagnostic" />
-                                    <label class="form-check-label" for="Diagnostic">Diagnostic Center</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="General" />
-                                    <label class="form-check-label" for="General">General Clinic</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Hospital" />
-                                    <label class="form-check-label" for="Hospital">General Hospital</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="PolyClinic" />
-                                    <label class="form-check-label" for="PolyClinic">PolyClinic</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Specialty" />
-                                    <label class="form-check-label" for="Specialty">Specialty Hospital</label>
-                                </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="health" />
+                                        <label class="form-check-label" for="health">Allied Health</label>
+                                    </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="dentist" />
+                                        <label class="form-check-label" for="dentist">Dentist</label>
+                                    </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="Physician" />
+                                        <label class="form-check-label" for="Physician">Physician </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="custom-checkbox">
                                 <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-                                Add-Ons <i class="fa fa-angle-down float-right"></i>
+                                Speciality <i class="fa fa-angle-down float-right"></i>
                                 </a>
                                 <div class="collapse show" id="collapseExample1">
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Facility" />
-                                    <label class="form-check-label" for="Facility">24 Hour Facility</label>
+                                    <input type="checkbox" class="form-check-input" id="Cardiology" />
+                                    <label class="form-check-label" for="Cardiology">Cardiology</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Training" />
-                                    <label class="form-check-label" for="Training">Clinical Training Services</label>
+                                    <input type="checkbox" class="form-check-input" id="Chiropractor" />
+                                    <label class="form-check-label" for="Chiropractor">Chiropractor</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Testing" />
-                                    <label class="form-check-label" for="Testing">COVID RT-PCR Testing</label>
+                                    <input type="checkbox" class="form-check-input" id="Psychology" />
+                                    <label class="form-check-label" for="Psychology">Psychology</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="COVID" />
-                                    <label class="form-check-label" for="COVID">COVID Swabbing</label>
+                                    <input type="checkbox" class="form-check-input" id="Dental" />
+                                    <label class="form-check-label" for="Dental">Dental Care</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Drive" />
-                                    <label class="form-check-label" for="Drive">Drive Through</label>
+                                    <input type="checkbox" class="form-check-input" id="Dermatology" />
+                                    <label class="form-check-label" for="Dermatology">Dermatology</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Healthcare" />
-                                    <label class="form-check-label" for="Healthcare">Home Healthcare</label>
+                                    <input type="checkbox" class="form-check-input" id="Family Medicine" />
+                                    <label class="form-check-label" for="Family Medicine">Family Medicine</label>
                                 </div>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Mobile" />
-                                    <label class="form-check-label" for="Mobile">Mobile Unit</label>
+                                    <input type="checkbox" class="form-check-input" id="General Surgery" />
+                                    <label class="form-check-label" for="General Surgery">General Surgery</label>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="custom-checkbox">
+                                <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                                Language <i class="fa fa-angle-down float-right"></i>
+                                </a>
+                                <div class="collapse show" id="collapseExample2">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="Arabic" />
+                                    <label class="form-check-label" for="Arabic">Arabic</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="English" />
+                                    <label class="form-check-label" for="English">English</label>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="custom-checkbox">
+                                <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                                Nationality <i class="fa fa-angle-down float-right"></i>
+                                </a>
+                                <div class="collapse show" id="collapseExample3">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="UAE" />
+                                    <label class="form-check-label" for="UAE">UAE</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="USA" />
+                                    <label class="form-check-label" for="USA">USA</label>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="custom-checkbox">
+                                <a data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+                                Gender <i class="fa fa-angle-down float-right"></i>
+                                </a>
+                                <div class="collapse show" id="collapseExample4">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="Male" />
+                                    <label class="form-check-label" for="Male">Male</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="Female" />
+                                    <label class="form-check-label" for="Female">Female</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="Other" />
+                                    <label class="form-check-label" for="Other">Other</label>
                                 </div>
                                 </div>
                             </div>
@@ -121,111 +150,13 @@ function Doctor() {
                     </div>
                     <div class="col-md-7">
                         <div class="d-flex justify-content-between align-items-center mb-4 mt-4 mt-md-0">
-                            <h5 class="text-primary mb-0">1000 Doctors</h5>
+                            <h5 class="text-primary mb-0">{allSearchedDoctors.length > 0 ? allSearchedDoctors.length : 0} Doctors</h5>
                             <select class="form-control">
                                 <option>Sort by: Recomendation</option>
                             </select>
                         </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push("/patient/doctor/id")} />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Dr. Albert Smith</h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2">Book Appointment</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Dr. Albert Smith</h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2">Book Appointment</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Dr. Albert Smith</h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2">Book Appointment</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Dr. Albert Smith</h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2">Book Appointment</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
-                        <div class="media mb-0">
-                            <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" />
-                            <div class="media-body">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <h5 class="mt-0">Dr. Albert Smith</h5>
-                                <span>
-                                <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2">Book Appointment</a>
-                                </span>
-                                </div>
-                                <p class="rating mb-0">
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                </p>
-                                <p class="my-1"><i class="icon-phone"></i> +971 4 1234567 </p>
-                                <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
-                            </div>
-                        </div>
+                        {/* Searched Doctors */}
+                        <SearchedDoctors allSearchedDoctors={allSearchedDoctors} />
                     </div>
                     <div class="col-md-2 mt-4 mt-md-0">
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />
@@ -237,4 +168,11 @@ function Doctor() {
     )
 }
 
-export default Doctor
+const mapStateToProps = (state) => ({
+    searchedDoctors: state.searchedDoctors
+});
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+

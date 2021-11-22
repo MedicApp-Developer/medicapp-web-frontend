@@ -1,23 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form , Formik } from 'formik';
 import * as Yup from 'yup';
 import TextArea from '../../../../components/forms/TextArea';
 import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
 import { toast } from 'react-toastify';
+import SelectInput from '../../../../components/forms/SelectInput';
 
 function UpdateDoctorProfile({ doctor, setDoctor }) {
-    return (
+
+   const [allSpecialities, setAllSpecialities] = useState([]);
+
+   useEffect(() => {
+      DoctorApi.getAllSpecialities().then(res => {
+          setAllSpecialities(res.data.data);
+      })
+  }, []);
+
+   return (
        <>
        {Object.keys(doctor).length > 0 && (
           <Formik
             initialValues={{
-               speciality: doctor.speciality,
+               specialityId: doctor.speciality,
                experience: doctor.experience,
                about: doctor.about
             }}
             validationSchema={Yup.object({
-               speciality: Yup.string().required('Required'),
+               specialityId: Yup.string().required('Required'),
                experience: Yup.string().required('Required'),
                about: Yup.string().required('Required')
             })}
@@ -43,7 +53,12 @@ function UpdateDoctorProfile({ doctor, setDoctor }) {
                          <div class="row">
                                <div class="col-sm-6">
                                   <div class="form-group">
-                                     <TextInput type="text" name="speciality" placeholder="Speciality" />
+                                    <SelectInput name="specialityId">
+                                        <option value="">Select Speciality</option>
+                                        {allSpecialities?.map(spec => (
+                                            <option value={spec._id}>{spec.name}</option>
+                                        ))}
+                                    </SelectInput> 
                                   </div>
                                </div>
                                <div class="col-sm-6">

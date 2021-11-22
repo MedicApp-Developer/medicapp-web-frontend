@@ -23,6 +23,12 @@ const DoctorApi = {
     },
     getAllSpecialities() {
         return trackPromise(axios.get(`${SPECIALITY_REQUEST_NAMESPACE}`));
+    },
+    searchDoctorBySpeciality(specialityId) {
+        return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/searchDoctorBySpeciality/${specialityId}`))
+    },
+    searchDoctorByText(text) {
+        return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/search/${text}`));
     }
 }
 

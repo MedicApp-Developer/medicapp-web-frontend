@@ -112,7 +112,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                         <ul>
                            <li>
                               <span>Speciality:</span> 
-                              <p>{selectedDoctor?.speciality}</p>
+                              <p>{selectedDoctor?.specialityId?.name}</p>
                            </li>
                            <li>
                               <span>Experience:</span>
@@ -120,7 +120,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                            </li>
                            <li>
                               <span>Description:</span> 
-                              <p>{selectedDoctor?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing eli. Lorem ipsum dolor sit amet, consectetur adipiscing eli"}</p>
+                              <p>{selectedDoctor?.about}</p>
                            </li>
                         </ul>
                      </div>

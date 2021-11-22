@@ -3,8 +3,10 @@ import { getRoutes } from '../../Utills/SideNavItems'
 import { Link, useHistory } from 'react-router-dom';
 import { RootContext } from "../../contextApi/index";
 import { LOGIN_ROUTE } from '../../constants/Redirects';
+import { clearDoctorSearch } from '../../store/actions/patient/searchedDoctorsActions';
+import { connect } from 'react-redux';
 
-function TopNav() {
+function TopNav({ clearDoctorSearch }) {
 
     const { selectedNav, setSelectedNav, user } = useContext(RootContext);
 
@@ -13,6 +15,11 @@ function TopNav() {
 
     const onNavClick = (item) => {
         setSelectedNav(item.name);
+        if(item.name === "Hospital") {
+            
+        }else if (item.name === "Doctor") {
+            clearDoctorSearch();
+        }
         history.push(item.route);
     }
 
@@ -22,8 +29,6 @@ function TopNav() {
         window.location.reload();
     }
 
-    console.log("User => ", user);
-    
     const newRoutes = getRoutes(user?.role).length > 0 && getRoutes(user?.role)?.filter((item) => item.name !== "Home");
 
     return (
@@ -56,4 +61,10 @@ function TopNav() {
     )
 }
 
-export default TopNav
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+    clearDoctorSearch
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);

@@ -17,6 +17,9 @@ const HospitalApi = {
     },
     uploadHospitalImage(id, data) {
         return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/uploadImage/${id}`, data));
+    },
+    searchHospitalByText(text) {
+        return trackPromise(axios.get(`/${HOSPITAL_NAMESPACE}/search/${text}`));
     }
 }
 
