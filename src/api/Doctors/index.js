@@ -29,6 +29,9 @@ const DoctorApi = {
     },
     searchDoctorByText(text) {
         return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/search/${text}`));
+    },
+    uploadProfilePic(id, data) {
+        return trackPromise(axios.put(`${DOCTOR_NAMESPACE}/uploadProfilePicture/${id}`, data));
     }
 }
 

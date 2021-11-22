@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 // https://medicappae.com/api
-// http://localhost:1337/api
+// http://localhost:8080/api
 
 instance.interceptors.response.use(function (response) {
   // Do something with response data

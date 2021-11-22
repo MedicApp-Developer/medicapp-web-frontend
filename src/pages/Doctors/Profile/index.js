@@ -25,7 +25,7 @@ function DoctorProfile() {
                <div class="col-md-12">
                   <ul class="nav justify-content-center">
                         <li className="nav-item">
-                            <a className={classNames('nav-link', { 'active': !accountTabSelected })} href={href} onClick={(e) => {e.preventDefault(); setAccountTabSelected(false)}}>Hospital Profile</a>
+                            <a className={classNames('nav-link', { 'active': !accountTabSelected })} href={href} onClick={(e) => {e.preventDefault(); setAccountTabSelected(false)}}>Doctor Profile</a>
                         </li>
                         <li className="nav-item">
                             <a className={classNames('nav-link', { 'active': accountTabSelected })} href={href} onClick={(e) => { e.preventDefault(); setAccountTabSelected(true)}}>Account</a>
