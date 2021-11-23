@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
 import { toast } from 'react-toastify';
+import DOCTOR_SHIFTING_IN_FRONT from '../../../../assets/images/empty_profile.png';
 
 function DoctorAccount({ doctor }) {
     return (
@@ -48,8 +49,7 @@ function DoctorAccount({ doctor }) {
                <div class="row patient-profile">
                   <div class="col-md-3 col-lg-3 col-xl-2">
                      <div class="profile-image">
-                        <img src={DOCTOR_IMAGE} alt="doctor" />
-                        <a href={href}><span class="fa fa-pencil"></span></a>
+                        <img src={doctor?.image ? doctor?.image : DOCTOR_SHIFTING_IN_FRONT } alt="doctor" />
                      </div>
                   </div>
                   <div class="col-md-9 col-lg-9 col-xl-8">

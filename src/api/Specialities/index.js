@@ -3,8 +3,8 @@ import { SPECIALITY_REQUEST_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise} from 'react-promise-tracker';
 
 const SpecialityApi = {
-    getAllSpecialities() {
-        return trackPromise(axios.get(`/${SPECIALITY_REQUEST_NAMESPACE}`));
+    getAllSpecialities(pageNo) {
+        return trackPromise(axios.get(`/${SPECIALITY_REQUEST_NAMESPACE}?page=${pageNo}`));
     },
     deleteSpeciality(id){
         return trackPromise(axios.delete(`${SPECIALITY_REQUEST_NAMESPACE}/${id}`));

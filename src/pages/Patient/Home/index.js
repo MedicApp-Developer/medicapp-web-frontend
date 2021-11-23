@@ -17,8 +17,8 @@ function Home() {
                         <div class="container">
                             <div class="row">
                             <div class="col-md-12 col-xl-3">
-                                <h1>Book Appointments And Get Rewarded
-                                </h1>
+                                <h1>Book Appointments</h1>
+                                <h2 style={{marginTop: '-15px'}}>And Get Rewarded</h2>
                             </div>
                             </div>
                         </div>

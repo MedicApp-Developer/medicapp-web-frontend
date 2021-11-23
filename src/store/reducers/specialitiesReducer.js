@@ -1,7 +1,10 @@
-import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES } from "../types/specialityTypes";
+import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES, GET_PAGINATED_SPECIALITIES, SET_PAGE_NUMBER } from "../types/specialityTypes";
 
 const initialState = {
-    specialities: []
+    specialities: [],
+    paginatedSpecialities: [],
+    numberOfPages: 0,
+    pageNumber: 0
 }
 
 export const specialitiesReducer = (state = initialState, action) => {
@@ -11,6 +14,18 @@ export const specialitiesReducer = (state = initialState, action) => {
                 ...state,
                 specialities: action.payload,
             };
+        case GET_PAGINATED_SPECIALITIES: 
+            return { 
+                ...state,
+                paginatedSpecialities: action.payload.specialities,
+                numberOfPages: action.payload.totalPages 
+            };
+        case SET_PAGE_NUMBER: {
+            return {
+                ...state,
+                pageNumber: action.payload
+            }
+        }
         case DELETE_SPECIALITY: {
             return {
                 ...state, 

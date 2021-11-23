@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import SelectInput from '../../../../components/forms/SelectInput';
 import DoctorApi from '../../../../api/Doctors';
 import TextInput from '../../../../components/forms/TextInput';
+import { countryList, genderList, languagesList } from '../../../../constants/extra';
 
 function AddDoctor({ addDoctor }) {
 
@@ -25,7 +26,10 @@ function AddDoctor({ addDoctor }) {
             email: "",
             mobile: "",
             experience: "",
-            specialityId: ""
+            specialityId: "",
+            gender: "",
+            country: "",
+            language: ""
           }}
           validationSchema={Yup.object({
             firstName: Yup.string().required('Required'),
@@ -34,6 +38,9 @@ function AddDoctor({ addDoctor }) {
             mobile:  Yup.string().required('Required'),
             experience:  Yup.string().required('Required'),
             specialityId:  Yup.string().required('Required'),
+            gender: Yup.string().required('Required'),
+            country: Yup.string().required('Required'),
+            language: Yup.string().required('Required')
           })}
           onSubmit={(values, { resetForm }) => {
             addDoctor(values);
@@ -86,6 +93,40 @@ function AddDoctor({ addDoctor }) {
                                         <option value="">Select Speciality</option>
                                         {allSpecialities?.map(spec => (
                                             <option value={spec._id}>{spec.name}</option>
+                                        ))}
+                                    </SelectInput> 
+                                </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                <div className="form-group">
+                                    <SelectInput name="gender">
+                                        <option value="">Select Gender</option>
+                                        {genderList?.map(spec => (
+                                            <option value={spec}>{spec}</option>
+                                        ))}
+                                    </SelectInput> 
+                                </div>
+                                </div>
+                                <div className="col-md-6">
+                                <div className="form-group">
+                                    <SelectInput name="country">
+                                        <option value="">Select Country</option>
+                                        {countryList?.map(spec => (
+                                            <option value={spec}>{spec}</option>
+                                        ))}
+                                    </SelectInput> 
+                                </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12">
+                                <div className="form-group">
+                                    <SelectInput name="language">
+                                        <option value="">Select Language</option>
+                                        {languagesList?.map(spec => (
+                                            <option value={spec}>{spec}</option>
                                         ))}
                                     </SelectInput> 
                                 </div>

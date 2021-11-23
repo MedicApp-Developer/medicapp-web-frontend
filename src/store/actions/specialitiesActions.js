@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import SpecialityApi from "../../api/Specialities";
-import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES } from "../types/specialityTypes";
+import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES, GET_PAGINATED_SPECIALITIES, SET_PAGE_NUMBER } from "../types/specialityTypes";
 
 export const getSpecialities = () => async (dispatch, getState) => {
     try {
@@ -8,6 +8,20 @@ export const getSpecialities = () => async (dispatch, getState) => {
 
         dispatch({
             type: GET_SPECIALITIES,
+            payload: response.data.data
+        })
+        return response;
+    }catch(err) {
+        toast.error("Problem while getting specialities");
+    }
+}
+
+export const getPaginatedSpecialities = (pageNo) => async (dispatch, getState) => {
+    try {
+        const response = await SpecialityApi.getAllSpecialities(pageNo);
+
+        dispatch({
+            type: GET_PAGINATED_SPECIALITIES,
             payload: response.data.data
         })
         return response;
@@ -41,3 +55,8 @@ export const createSpeciality = (data) => async (dispatch, getState) => {
         toast.error(err.response.data.message);
     }
 }
+
+export const setPageNumber = (pageNo) => ({
+    type: SET_PAGE_NUMBER,
+    payload: pageNo
+})

@@ -2,11 +2,8 @@ import React, { useContext } from 'react'
 import { getRoutes } from '../../Utills/SideNavItems'
 import { Link, useHistory } from 'react-router-dom';
 import { RootContext } from "../../contextApi/index";
-import { LOGIN_ROUTE } from '../../constants/Redirects';
-import { clearDoctorSearch } from '../../store/actions/patient/searchedDoctorsActions';
-import { connect } from 'react-redux';
 
-function TopNav({ clearDoctorSearch }) {
+function TopNav() {
 
     const { selectedNav, setSelectedNav, user } = useContext(RootContext);
 
@@ -15,11 +12,6 @@ function TopNav({ clearDoctorSearch }) {
 
     const onNavClick = (item) => {
         setSelectedNav(item.name);
-        if(item.name === "Hospital") {
-            
-        }else if (item.name === "Doctor") {
-            clearDoctorSearch();
-        }
         history.push(item.route);
     }
 
@@ -61,10 +53,4 @@ function TopNav({ clearDoctorSearch }) {
     )
 }
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {
-    clearDoctorSearch
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopNav);
+export default TopNav;

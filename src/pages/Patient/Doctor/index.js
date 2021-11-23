@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import AppLayout from '../../../layout/AppLayout';
+import GenderFilters from './components/filters/GenderFilters';
+import HospitalTypeFilters from './components/filters/HospitalTypeFilters';
+import LanguageFilters from './components/filters/LanguageFilters';
+import NationalityFilters from './components/filters/NationalityFilters';
+import SpecialityFilters from './components/filters/SpecialityFilters';
 import SearchedDoctors from './components/SearchedDoctors';
 
 function Doctor({ searchedDoctors }) {
 
     const { searchedDoctors: allSearchedDoctors } = searchedDoctors && searchedDoctors;
+    const [checkedSpecialities, setCheckedSpecialities] = useState([]);
+    const [hospitalTypes, setHospitalTypes] = useState([]);
+    const [checkedLanguages, setCheckedLanguages] = useState([]);
+    const [checkedNationalities, setCheckedNationalities] = useState([]);
+    const [checkedGenders, setCheckedGenders] = useState([]);
 
     return (
         <AppLayout>
@@ -35,14 +45,8 @@ function Doctor({ searchedDoctors }) {
                         </div>
                         <hr class="mt-0" />
                         <form>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="Hospital" />
-                                <label class="form-check-label" for="Hospital">Hospital</label>
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="Clinic" />
-                                <label class="form-check-label" for="Clinic">Clinic</label>
-                            </div>
+                            {/* Hospital Types Filters */}
+                            <HospitalTypeFilters hospitalTypes={hospitalTypes} setHospitalTypes={setHospitalTypes} />
                             <div class="custom-checkbox">
                                 <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Category <i class="fa fa-angle-down float-right"></i>
@@ -62,90 +66,17 @@ function Doctor({ searchedDoctors }) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="custom-checkbox">
-                                <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
-                                Speciality <i class="fa fa-angle-down float-right"></i>
-                                </a>
-                                <div class="collapse show" id="collapseExample1">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Cardiology" />
-                                    <label class="form-check-label" for="Cardiology">Cardiology</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Chiropractor" />
-                                    <label class="form-check-label" for="Chiropractor">Chiropractor</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Psychology" />
-                                    <label class="form-check-label" for="Psychology">Psychology</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Dental" />
-                                    <label class="form-check-label" for="Dental">Dental Care</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Dermatology" />
-                                    <label class="form-check-label" for="Dermatology">Dermatology</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Family Medicine" />
-                                    <label class="form-check-label" for="Family Medicine">Family Medicine</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="General Surgery" />
-                                    <label class="form-check-label" for="General Surgery">General Surgery</label>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="custom-checkbox">
-                                <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                                Language <i class="fa fa-angle-down float-right"></i>
-                                </a>
-                                <div class="collapse show" id="collapseExample2">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Arabic" />
-                                    <label class="form-check-label" for="Arabic">Arabic</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="English" />
-                                    <label class="form-check-label" for="English">English</label>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="custom-checkbox">
-                                <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
-                                Nationality <i class="fa fa-angle-down float-right"></i>
-                                </a>
-                                <div class="collapse show" id="collapseExample3">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="UAE" />
-                                    <label class="form-check-label" for="UAE">UAE</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="USA" />
-                                    <label class="form-check-label" for="USA">USA</label>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="custom-checkbox">
-                                <a data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
-                                Gender <i class="fa fa-angle-down float-right"></i>
-                                </a>
-                                <div class="collapse show" id="collapseExample4">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Male" />
-                                    <label class="form-check-label" for="Male">Male</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Female" />
-                                    <label class="form-check-label" for="Female">Female</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="Other" />
-                                    <label class="form-check-label" for="Other">Other</label>
-                                </div>
-                                </div>
-                            </div>
+                            {/* Specialities Filters */}
+                            <SpecialityFilters checkedSpecialities={checkedSpecialities} setCheckedSpecialities={setCheckedSpecialities} />
+                            
+                            {/* Language Filters Here */}
+                            <LanguageFilters checkedLanguages={checkedLanguages} setCheckedLanguages={setCheckedLanguages} />
+                            
+                            {/*  */}
+                            <NationalityFilters checkedNationalities={checkedNationalities} setCheckedNationalities={setCheckedNationalities} />
+
+                            {/* Gender Filters */}
+                            <GenderFilters checkedGenders={checkedGenders} setCheckedGenders={setCheckedGenders} />
                         </form>
                     </div>
                     <div class="col-md-7">
