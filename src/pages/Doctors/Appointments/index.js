@@ -103,7 +103,7 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                   )}
                </div>
             </div>
-            <StartTreatment QRCodeValue={QRCodeValue} setQRCodeValue={setQRCodeValue} />
+            <StartTreatment QRCodeValue={QRCodeValue} setQRCodeValue={setQRCodeValue} doctorId={user?.referenceId} patientId={selectedAppointment?.patientId?._id} />
             <RequestToLab appointment={selectedAppointment} />
             <GenerateQR />
         </DashboardLayout>

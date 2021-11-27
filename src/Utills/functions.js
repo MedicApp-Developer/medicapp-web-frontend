@@ -17,3 +17,18 @@ export const getTimesArray = () => {
 export const getPagesArray = (totalPages) => {
   return new Array(totalPages).fill(null).map((v, i) => i);
 }
+
+// Get age from birthday
+
+export function getAge(dateString) 
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { href } from '../../../constants/extra';
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PLACEHOLDER_LAB_IMAGE from '../../../assets/images/laboratory.png'
@@ -7,16 +7,18 @@ import { connect } from 'react-redux';
 import { getLabs, deleteLab, setPageNumber, searchLab } from '../../../store/actions/labActions'
 import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames';
+import { RootContext } from '../../../contextApi';
 
 function Laboratory({ getLabs, deleteLab, labs, setPageNumber, searchLab }) {
 
     const { pageNumber, numberOfPages, labs: allLabs, searchedLabs, searchedText } = labs && labs;
+    const { user } = useContext(RootContext);
 
     useEffect(() => {
         if(searchedText !== ""){
             searchLab(pageNumber, searchedText);
         }else {
-            getLabs(pageNumber || 0);
+            getLabs(pageNumber || 0, user.referenceId);
         }
     }, [getLabs, pageNumber, searchLab, searchedText]);
 

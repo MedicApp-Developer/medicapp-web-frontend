@@ -13,7 +13,7 @@ function AddDoctor({ addDoctor }) {
     const [allSpecialities, setAllSpecialities] = useState([]);
 
     useEffect(() => {
-        DoctorApi.getAllSpecialities().then(res => {
+        DoctorApi.getAllSpecialities("undefined").then(res => {
             setAllSpecialities(res.data.data);
         })
     }, []);

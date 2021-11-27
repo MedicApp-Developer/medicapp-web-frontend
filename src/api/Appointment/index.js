@@ -12,6 +12,9 @@ const AppointmentApi = {
     deleteAppointment(id) {
         return trackPromise(axios.delete(`/${APPOINTMENT_NAMESPACE}/${id}`));
     },
+    deletePatientAppointment(id, patientId) {
+        return trackPromise(axios.delete(`/${APPOINTMENT_NAMESPACE}/${id}/${patientId}`));
+    },
     getLabRequests(doctorId, pageNo, status) {
         return trackPromise(axios.get(`/${LAB_REQUEST_NAMESPACE}/${doctorId}?page=${pageNo}&status=${status}`));
     }

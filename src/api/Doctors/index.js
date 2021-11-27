@@ -21,8 +21,8 @@ const DoctorApi = {
     updateDoctor(id, values) {
         return trackPromise(axios.put(`${DOCTOR_NAMESPACE}/${id}`, values));
     },
-    getAllSpecialities() {
-        return trackPromise(axios.get(`${SPECIALITY_REQUEST_NAMESPACE}`));
+    getAllSpecialities(pageNo) {
+        return trackPromise(axios.get(`${SPECIALITY_REQUEST_NAMESPACE}?page=${pageNo}`));
     },
     searchDoctorBySpeciality(specialityId) {
         return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/searchDoctorBySpeciality/${specialityId}`))

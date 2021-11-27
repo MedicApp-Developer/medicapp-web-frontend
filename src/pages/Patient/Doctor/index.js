@@ -17,6 +17,86 @@ function Doctor({ searchedDoctors }) {
     const [checkedNationalities, setCheckedNationalities] = useState([]);
     const [checkedGenders, setCheckedGenders] = useState([]);
 
+    const onSpecialityCheckboxChanged = (spec) => {
+        if(checkedSpecialities.filter(item => item === spec._id).length > 0){
+            setCheckedSpecialities(checkedSpecialities.filter(item => item !== spec._id))
+        }else {
+            setCheckedSpecialities([...checkedSpecialities, spec._id]);
+        }
+
+        console.log("Filters => ", {
+            checkedSpecialities,
+            hospitalTypes,
+            checkedLanguages,
+            checkedNationalities,
+            checkedGenders
+        });
+    }
+
+    const onLanguageCheckboxChanged = (spec) => {
+        if (checkedLanguages.filter(item => item === spec).length > 0) {
+            setCheckedLanguages(checkedLanguages.filter(item => item !== spec))
+        } else {
+            setCheckedLanguages([...checkedLanguages, spec]);
+        }
+        
+        console.log("Filters => ", {
+            checkedSpecialities,
+            hospitalTypes,
+            checkedLanguages,
+            checkedNationalities,
+            checkedGenders
+        });
+    }
+
+    const onCountryCheckboxChanged = (spec) => {
+        if (checkedNationalities.filter(item => item === spec).length > 0) {
+            setCheckedNationalities(checkedNationalities.filter(item => item !== spec))
+        } else {
+            setCheckedNationalities([...checkedNationalities, spec]);
+        }
+
+        console.log("Filters => ", {
+            checkedSpecialities,
+            hospitalTypes,
+            checkedLanguages,
+            checkedNationalities,
+            checkedGenders
+        });
+    }
+
+    const onGenderCheckboxChanged = (spec) => {
+        if (checkedGenders.filter(item => item === spec).length > 0) {
+            setCheckedGenders(checkedGenders.filter(item => item !== spec))
+        } else {
+            setCheckedGenders([...checkedGenders, spec]);
+        }
+
+        console.log("Filters => ", {
+            checkedSpecialities,
+            hospitalTypes,
+            checkedLanguages,
+            checkedNationalities,
+            checkedGenders
+        });
+    }
+
+    const onHospitalCheckboxChange = (spec) => {
+        if (hospitalTypes.filter(item => item === spec).length > 0) {
+            setHospitalTypes(hospitalTypes.filter(item => item !== spec))
+        } else {
+            setHospitalTypes([...hospitalTypes, spec]);
+        }
+
+        console.log("Filters => ", {
+            checkedSpecialities,
+            hospitalTypes,
+            checkedLanguages,
+            checkedNationalities,
+            checkedGenders
+        });
+    }
+
     return (
         <AppLayout>
             <section class="search-block pt-4">
@@ -46,7 +126,7 @@ function Doctor({ searchedDoctors }) {
                         <hr class="mt-0" />
                         <form>
                             {/* Hospital Types Filters */}
-                            <HospitalTypeFilters hospitalTypes={hospitalTypes} setHospitalTypes={setHospitalTypes} />
+                            <HospitalTypeFilters onHospitalCheckboxChange={onHospitalCheckboxChange} />
                             <div class="custom-checkbox">
                                 <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Category <i class="fa fa-angle-down float-right"></i>
@@ -67,16 +147,16 @@ function Doctor({ searchedDoctors }) {
                                 </div>
                             </div>
                             {/* Specialities Filters */}
-                            <SpecialityFilters checkedSpecialities={checkedSpecialities} setCheckedSpecialities={setCheckedSpecialities} />
+                            <SpecialityFilters onSpecialityCheckboxChanged={onSpecialityCheckboxChanged} />
                             
                             {/* Language Filters Here */}
-                            <LanguageFilters checkedLanguages={checkedLanguages} setCheckedLanguages={setCheckedLanguages} />
+                            <LanguageFilters onLanguageCheckboxChanged={onLanguageCheckboxChanged} />
                             
                             {/*  */}
-                            <NationalityFilters checkedNationalities={checkedNationalities} setCheckedNationalities={setCheckedNationalities} />
+                            <NationalityFilters onCountryCheckboxChanged={onCountryCheckboxChanged} />
 
                             {/* Gender Filters */}
-                            <GenderFilters checkedGenders={checkedGenders} setCheckedGenders={setCheckedGenders} />
+                            <GenderFilters onGenderCheckboxChanged={onGenderCheckboxChanged} />
                         </form>
                     </div>
                     <div class="col-md-7">

@@ -4,8 +4,8 @@ import { ADD_SPECIALITY, DELETE_SPECIALITY, GET_SPECIALITIES, GET_PAGINATED_SPEC
 
 export const getSpecialities = () => async (dispatch, getState) => {
     try {
-        const response = await SpecialityApi.getAllSpecialities();
-
+        const response = await SpecialityApi.getAllSpecialities(undefined);
+        console.log("specialities resp => ", response);
         dispatch({
             type: GET_SPECIALITIES,
             payload: response.data.data

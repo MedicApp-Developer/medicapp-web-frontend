@@ -6,8 +6,10 @@ import * as Yup from 'yup';
 import SelectInput from '../../../../components/forms/SelectInput';
 import TextArea from '../../../../components/forms/TextArea';
 import TextInput from '../../../../components/forms/TextInput';
+import QrPrescriptionApi from '../../../../api/QrPrescription';
+import { toast } from 'react-toastify';
 
-function StartTreatment({ QRCodeValue, setQRCodeValue }) {
+function StartTreatment({ QRCodeValue, setQRCodeValue, patientId, doctorId }) {
    const generateQRCode = (values) => {
       setQRCodeValue(`
          Treatment Type is: ${values.treatmentType}.
@@ -15,6 +17,21 @@ function StartTreatment({ QRCodeValue, setQRCodeValue }) {
          Dosage A Day: ${values.dosageADay}.
          Consumption Days: ${values.consumptionDays}
       `);
+      QrPrescriptionApi.createQRPrescription({
+         patientId,
+         doctorId,
+         date: new Date().toISOString(),
+         data: `
+            Treatment Type is: ${values.treatmentType}.
+            Prescription: ${values.prescription}.
+            Dosage A Day: ${values.dosageADay}.
+            Consumption Days: ${values.consumptionDays}
+         `
+      }).then(res => {
+         toast.success("QR Prescription Saved");
+      }).catch(err => {
+         toast.error("QR Prescription failed");
+      })
    }
     return (
 

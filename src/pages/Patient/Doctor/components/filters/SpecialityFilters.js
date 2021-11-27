@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { getSpecialities } from '../../../../../store/actions/specialitiesActions';
 import { connect } from 'react-redux';
 
-function SpecialityFilters({ getSpecialities, specialities, checkedSpecialities, setCheckedSpecialities }) {
+function SpecialityFilters({ getSpecialities, specialities, onSpecialityCheckboxChanged }) {
 
     const { specialities: allSpecialities } = specialities && specialities;
 
@@ -11,14 +11,6 @@ function SpecialityFilters({ getSpecialities, specialities, checkedSpecialities,
             getSpecialities();
         }
     }, [getSpecialities]);
-
-    const onSpecialityCheckboxChanged = (spec) => {
-        if(checkedSpecialities.filter(item => item === spec._id).length > 0){
-            setCheckedSpecialities(checkedSpecialities.filter(item => item !== spec._id))
-        }else {
-            setCheckedSpecialities([...checkedSpecialities, spec._id]);
-        }
-    }
 
     return (
         <div class="custom-checkbox">

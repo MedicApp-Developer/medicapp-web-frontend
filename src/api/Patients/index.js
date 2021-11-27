@@ -20,6 +20,9 @@ const PatientApi = {
     },
     registerPatient(data) {
         return trackPromise(axios.post(`/${PATIENT_NAMESPACE}`, data));
+    },
+    getPatientAccountInfo(patientId) {
+        return trackPromise(axios.get(`/${PATIENT_NAMESPACE}/profile/${patientId}`));
     }
 }
 

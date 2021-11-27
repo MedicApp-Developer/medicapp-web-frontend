@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION } from '../../../constants/patientProfile';
 import ProfileTopNavigation from './components/ProfileTopNavigation';
 import AppLayout from '../../../layout/AppLayout';
@@ -7,25 +7,35 @@ import Appointments from './components/Appointments';
 import QRPrescription from './components/QRPrescription';
 import LabResults from './components/LabResults';
 import Account from './components/Account';
+import { connect } from 'react-redux';
+import { getPatientAccountInfo } from '../../../store/actions/patientActions';
+import { RootContext } from '../../../contextApi';
 
-function PatientProfile() {
+function PatientProfile({ getPatientAccountInfo, patients }) {
     const [selectedTab, setSelectedTab] = useState(MEDICAL_PROFILE);
+    const { user } = useContext(RootContext);
+
+    const { patient } = patients && patients;
+
+    useEffect(() => {
+        getPatientAccountInfo(user?.referenceId);
+    }, [getPatientAccountInfo]);
 
     let componentToRender = null;
 
     switch(selectedTab) {
         case MEDICAL_PROFILE: 
-            componentToRender = <MedicalProfile />; break;
+            componentToRender = <MedicalProfile patient={patient} />; break;
         case APPOINTMENTS: 
-            componentToRender = <Appointments />; break;
+            componentToRender = <Appointments appointments={patient?.upcommingAppointments} />; break;
         case QR_PRESCRIPTION: 
-            componentToRender = <QRPrescription />; break;
+            componentToRender = <QRPrescription prescriptions={patient?.qrPrescriptions} />; break;
         case LAB_RESULTS: 
-            componentToRender = <LabResults />; break;
+            componentToRender = <LabResults results={patient?.labResults} />; break;
         case ACCOUNT: 
-            componentToRender = <Account />; break;
+            componentToRender = <Account patient={patient} user={user} />; break;
         default: 
-            componentToRender = <MedicalProfile />; 
+            componentToRender = <MedicalProfile patient={patient?.patient} />; 
     }
 
     return (
@@ -36,4 +46,12 @@ function PatientProfile() {
     )
 }
 
-export default PatientProfile
+const mapStateToProps = (state) => ({
+    patients: state.patients
+});
+
+const mapDispatchToProps = {
+    getPatientAccountInfo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PatientProfile)

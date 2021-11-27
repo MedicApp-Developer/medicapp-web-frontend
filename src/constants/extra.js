@@ -441,3 +441,7 @@ export const genderList = [
     "Female",
     "Other"
 ]
+export const hospitalList = [
+	"HOSPITAL",
+	"CLINIC"
+]

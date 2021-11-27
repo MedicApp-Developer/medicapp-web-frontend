@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { languagesList } from '../../../../../constants/extra';
 
-function LanguageFilters({ checkedLanguages, setCheckedLanguages }) {
+function LanguageFilters({ onLanguageCheckboxChanged }) {
 
-    const onLanguageCheckboxChanged = (spec) => {
-        if (checkedLanguages.filter(item => item === spec).length > 0) {
-            setCheckedLanguages(checkedLanguages.filter(item => item !== spec))
-        } else {
-            setCheckedLanguages([...checkedLanguages, spec]);
-        }
-    }
+    const [seeMore, setSeeMore] = useState(false);
+
+    const list = seeMore ? languagesList : languagesList?.slice(0, 5);
+
+    const href = "";
 
     return (
         <div class="custom-checkbox">
@@ -17,22 +15,17 @@ function LanguageFilters({ checkedLanguages, setCheckedLanguages }) {
                 Language <i class="fa fa-angle-down float-right"></i>
             </a>
             <div class="collapse show" id="collapseExample2">
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="Arabic" />
-                    <label class="form-check-label" for="Arabic">Arabic</label>
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="English" />
-                    <label class="form-check-label" for="English">English</label>
-                </div>
-
-                {languagesList?.map(lang => (
+                {list.map(lang => (
                     <div class="form-group form-check">
                         <input type="checkbox" onChange={onLanguageCheckboxChanged.bind(this, lang)} class="form-check-input" id={lang} />
                         <label class="form-check-label" for={lang}>{lang}</label>
                     </div>
                 ))}
-
+                {seeMore ? (
+                    <a style={{ color: 'blue' }} href={href} onClick={(e) => {e.preventDefault(); setSeeMore(false)}}>Show Less...</a>
+                ): (
+                    <a style={{ color: 'blue' }} href={href} onClick={(e) => {e.preventDefault(); setSeeMore(true)}}>See More...</a>
+                )}
             </div>
         </div>
     )

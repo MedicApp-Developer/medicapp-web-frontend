@@ -1,16 +1,7 @@
 import React from 'react'
 import { genderList } from '../../../../../constants/extra';
 
-function GenderFilters({ checkedGenders, setCheckedGenders }) {
-
-    const onGenderCheckboxChanged = (spec) => {
-        if (checkedGenders.filter(item => item === spec).length > 0) {
-            setCheckedGenders(checkedGenders.filter(item => item !== spec))
-        } else {
-            setCheckedGenders([...checkedGenders, spec]);
-        }
-    }
-
+function GenderFilters({ onGenderCheckboxChanged }) {
     return (
         <div class="custom-checkbox">
             <a data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">

@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import AddPatient from './components/AddPatient';
 import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames';
+import CreateAnotherAppointment from './components/CreateAnotherAppointment';
+import { useState } from 'react';
 
 function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
 
@@ -18,6 +20,7 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
     const { user } = useContext(RootContext);
 
     const { pageNumber, numberOfPages, patients: allPatients } = patients && patients;
+    const [selectedPatient, setSelectedPatient] = useState(null);
 
     useEffect(() => {
       getPatients(pageNumber || 0);
@@ -94,6 +97,7 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                               <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePatientHandler(patient?._id) }}>Delete</a>
                            </div>
                         </div>
+                        <a className="dropdown-item" style={{ backgroundColor: "#417EBF", color: "white" }} onClick={(e) => setSelectedPatient(patient)} href={href} data-toggle="modal" data-target="#addAnotherAppointment">Create Appointment</a>
                      </div>
                   </div>
                )) }
@@ -118,7 +122,10 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                     </div>
             {/* Add Patient By Nurse */}
             {user.role === NURSE && (
-               <AddPatient />
+               <>
+                  <AddPatient />
+                  <CreateAnotherAppointment selectedPatient={selectedPatient} />
+               </>
             )}
         </DashboardLayout>
     )

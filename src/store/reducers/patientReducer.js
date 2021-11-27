@@ -1,6 +1,7 @@
-import { ADD_PATIENT_BY_NURSE, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, UPDATE_VITALS } from "../types/patientTypes";
+import { ADD_PATIENT_BY_NURSE, CLEAR_SEARCH_RESULTS, DELETE_APPOINTMENT, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, UPDATE_VITALS } from "../types/patientTypes";
 
 const initialState = {
+    patient: {},
     patients: [],
     numberOfPages: 0,
     pageNumber: 0,
@@ -17,10 +18,24 @@ export const patientReducer = (state = initialState, action) => {
                 patients: action.payload.patients,
                 numberOfPages: action.payload.totalPages 
             };
+        case GET_PATIENT: 
+            return { 
+                ...state,
+                patient: action.payload
+            };
         case DELETE_PATIENT: {
             return {
                 ...state, 
                 patients: state.patients.filter(pat => pat._id !== action.payload)
+            }
+        }
+        case DELETE_APPOINTMENT: {
+            return {
+                ...state,
+                patient: {
+                    ...state.patient,
+                    upcommingAppointments: action.payload
+                }
             }
         }
         case ADD_PATIENT_BY_NURSE: {

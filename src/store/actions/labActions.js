@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 import LaboratoryApi from "../../api/Laboratory";
 import { ADD_LAB, CLEAR_SEARCH_RESULTS, DELETE_LAB, GET_LABS, SEARCH_LAB, SET_PAGE_NUMBER } from "../types/labTypes"
 
-export const getLabs = (pageNo) => async (dispatch, getState) => {
+export const getLabs = (pageNo, hospitalId) => async (dispatch, getState) => {
     try {
-        const response = await LaboratoryApi.getAllLaboratories(pageNo);
+        const response = await LaboratoryApi.getAllLaboratories(pageNo, false, hospitalId);
 
         dispatch({
             type: GET_LABS,

@@ -1,16 +1,7 @@
 import React from 'react'
 import { countryList } from '../../../../../constants/extra';
 
-function NationalityFilters({ checkedNationalities, setCheckedNationalities }) {
-
-    const onCountryCheckboxChanged = (spec) => {
-        if (checkedNationalities.filter(item => item === spec).length > 0) {
-            setCheckedNationalities(checkedNationalities.filter(item => item !== spec))
-        } else {
-            setCheckedNationalities([...checkedNationalities, spec]);
-        }
-    }
-
+function NationalityFilters({ onCountryCheckboxChanged }) {
     return (
         <div class="custom-checkbox">
             <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
