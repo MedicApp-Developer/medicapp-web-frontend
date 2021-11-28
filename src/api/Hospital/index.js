@@ -20,6 +20,12 @@ const HospitalApi = {
     },
     searchHospitalByText(text) {
         return trackPromise(axios.get(`/${HOSPITAL_NAMESPACE}/search/${text}`));
+    },
+    filterHospitals(filters) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/filter`, filters));
+    },
+    getAllHospitals() {
+        return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}`));
     }
 }
 

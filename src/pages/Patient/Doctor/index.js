@@ -181,7 +181,7 @@ function Doctor({ searchDoctorsByText, clearDoctorSearch, searchedDoctors, filte
                         <hr class="mt-0" />
                         <form>
                             {/* Hospital Types Filters */}
-                            <HospitalTypeFilters onHospitalCheckboxChange={onHospitalCheckboxChange} />
+                            <HospitalTypeFilters onHospitalCheckboxChange={onHospitalCheckboxChange} hospitalTypes={hospitalTypes} />
                     
                             {/* Specialities Filters */}
                             <SpecialityFilters checkedSpecialities={checkedSpecialities} onSpecialityCheckboxChanged={onSpecialityCheckboxChanged} />

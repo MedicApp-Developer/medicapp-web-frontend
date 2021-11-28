@@ -25,11 +25,13 @@ function HospitalRegisteration() {
           phoneNo: "",
           email: "",
           password: "",
-          confirmPassword: ""
+          confirmPassword: "",
+          type: "HOSPITAL"
         },
         validationSchema: Yup.object({
           name:  Yup.string().required(),
           tradeLicenseNo: Yup.string().required(),
+          type: Yup.string(),
           issueDate: Yup.string().required(),
           expiryDate: Yup.string().required(),
           location: Yup.string().required(),
@@ -53,6 +55,7 @@ function HospitalRegisteration() {
             formData.append("expiryDate", values.expiryDate);
             formData.append("location", values.location);
             formData.append("phoneNo", values.phoneNo);
+            formData.append("type", values.type);
             formData.append("email", values.email);
             formData.append("password", values.password);
             formData.append('video', file);
@@ -83,6 +86,12 @@ function HospitalRegisteration() {
                         <img class="logo" src={LOGO} alt="logo" />
                         <h3 class="mb-4">Hospital Registration</h3>
                         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+                            <div class="form-group">
+                                <select {...formik.getFieldProps('type')} className="form-control">
+                                    <option value="HOSPITAL">HOSPITAL</option>
+                                    <option value="CLINIC">CLINIC</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <input type="text" {...formik.getFieldProps('name')} class={ (formik.touched.name && formik.errors.name) ? "form-control is-invalid" : "form-control"} placeholder="Hospital Name" />
                                 {formik.touched.name && formik.errors.name ? (

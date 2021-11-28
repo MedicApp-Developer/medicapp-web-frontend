@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 import DoctorApi from "../../api/Doctors"
 import { ADD_DOCTOR, CLEAR_SEARCH_RESULTS, DELETE_DOCTOR, GET_DOCTORS, SEARCH_DOCTOR, SELECT_DOCTOR, SET_PAGE_NUMBER } from "../types/doctorTypes"
 
-export const getDoctors = (pageNo) => async (dispatch, getState) => {
+export const getDoctors = (pageNo, referenceId) => async (dispatch, getState) => {
     try {
-        const response = await DoctorApi.getAllDoctors(pageNo);
+        const response = await DoctorApi.getAllDoctors(pageNo, referenceId);
 
         dispatch({
             type: GET_DOCTORS,

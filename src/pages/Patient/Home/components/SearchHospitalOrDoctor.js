@@ -17,6 +17,7 @@ function SearchHospitalOrDoctor({ searchDoctorsByText, searchHospitalByText }) {
         if(selectedTab === "hospital"){
             if(searchText !== ""){
                 searchHospitalByText(searchText);
+                localStorage.setItem("hospitalSearchText", searchText);
                 history.push("/patient/hospital");
             }
         }else {
