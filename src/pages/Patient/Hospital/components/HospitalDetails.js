@@ -58,11 +58,11 @@ function HospitalDetails() {
                     </div>
                     <div class="row mt-2">
                     <div class="col-md-8 mb-3">
-                        <img class="img-fluid h-100 w-100" src={hospital.images.length > 0 ? hospital.images[0] : PLACEHOLDER_LARGE} alt="placeholder" />
+                        <img class="img-fluid h-100 w-100" src={hospital?.images?.length > 0 ? hospital.images[0] : PLACEHOLDER_LARGE} alt="placeholder" />
                     </div>
                     <div class="col-md-4">
-                        <img class="img-fluid w-100 mb-3" src={hospital.images.length > 1 ? hospital.images[1] : PLACEHOLDER_SMALL} alt="placeholder" />
-                        <img class="img-fluid w-100 mb-3" src={hospital.images.length > 2 ? hospital.images[2] : PLACEHOLDER_SMALL} alt="placeholder" />
+                        <img class="img-fluid w-100 mb-3" src={hospital?.images?.length > 1 ? hospital.images[1] : PLACEHOLDER_SMALL} alt="placeholder" />
+                        <img class="img-fluid w-100 mb-3" src={hospital?.images?.length > 2 ? hospital.images[2] : PLACEHOLDER_SMALL} alt="placeholder" />
                     </div>
                     </div>
                     <div class="row mt-4 pb-5">
