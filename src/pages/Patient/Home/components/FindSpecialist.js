@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getPagesArray } from '../../../../Utills/functions';
 import classNames from 'classnames';
+import { specialityFilter } from '../../../../store/actions/patient/searchedDoctorsActions';
 
-function FindSpecialist({ getPaginatedSpecialities, specialities, setPageNumber }) {
+function FindSpecialist({ specialityFilter, getPaginatedSpecialities, specialities, setPageNumber }) {
 
     const { pageNumber, numberOfPages, paginatedSpecialities: allSpecialities } = specialities && specialities;
 
@@ -17,6 +18,7 @@ function FindSpecialist({ getPaginatedSpecialities, specialities, setPageNumber 
     }, [getPaginatedSpecialities, pageNumber]);
     
     const searchDoctor = (speciality) => {
+        specialityFilter([speciality._id]);
         history.push("/patient/doctor");
     }
 
@@ -77,7 +79,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     getPaginatedSpecialities,
-    setPageNumber
+    setPageNumber,
+    specialityFilter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindSpecialist);

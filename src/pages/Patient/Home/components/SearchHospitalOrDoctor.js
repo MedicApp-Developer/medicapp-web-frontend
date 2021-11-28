@@ -22,6 +22,7 @@ function SearchHospitalOrDoctor({ searchDoctorsByText, searchHospitalByText }) {
         }else {
             if(searchText !== ""){
                 searchDoctorsByText(searchText);
+                localStorage.setItem("doctorSearchText", searchText);
                 history.push("/patient/doctor");
             }
         }

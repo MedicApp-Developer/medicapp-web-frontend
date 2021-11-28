@@ -3,8 +3,8 @@ import { DOCTOR_NAMESPACE, SPECIALITY_REQUEST_NAMESPACE } from '../../constants/
 import { trackPromise} from 'react-promise-tracker';
 
 const DoctorApi = {
-    getAllDoctors(pageNo, referenceId) {
-        return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}?page=${pageNo}&reference_id=${referenceId}`));
+    getAllDoctors(pageNo, referenceId, getAll = undefined) {
+        return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}?page=${pageNo}&reference_id=${referenceId}&getAll=${getAll}`));
     },
     createDoctor(data) {
         return trackPromise(axios.post(`${DOCTOR_NAMESPACE}`, data));
@@ -28,10 +28,13 @@ const DoctorApi = {
         return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/searchDoctorBySpeciality/${specialityId}`))
     },
     searchDoctorByText(text) {
-        return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/search/${text}`));
+        return trackPromise(axios.get(`${DOCTOR_NAMESPACE}/searchAll/${text}`));
     },
     uploadProfilePic(id, data) {
         return trackPromise(axios.put(`${DOCTOR_NAMESPACE}/uploadProfilePicture/${id}`, data));
+    },
+    filterDoctors(filters) {
+        return trackPromise(axios.post(`${DOCTOR_NAMESPACE}/filter`, filters));
     }
 }
 

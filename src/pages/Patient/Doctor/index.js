@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import AppLayout from '../../../layout/AppLayout';
 import GenderFilters from './components/filters/GenderFilters';
@@ -7,113 +7,168 @@ import LanguageFilters from './components/filters/LanguageFilters';
 import NationalityFilters from './components/filters/NationalityFilters';
 import SpecialityFilters from './components/filters/SpecialityFilters';
 import SearchedDoctors from './components/SearchedDoctors';
+import axios from '../../../axios';
+import { searchDoctorsByText, clearDoctorSearch, filterDoctors, specialityFilter, hospitalTypesFilter, nationalityFilter, genderFilter, languageFilter } from '../../../store/actions/patient/searchedDoctorsActions';
+import SearchDoctor from './components/filters/SearchDoctor';
 
-function Doctor({ searchedDoctors }) {
+function Doctor({ searchDoctorsByText, clearDoctorSearch, searchedDoctors, filterDoctors, specialityFilter, hospitalTypesFilter, nationalityFilter, genderFilter, languageFilter }) {
 
-    const { searchedDoctors: allSearchedDoctors } = searchedDoctors && searchedDoctors;
-    const [checkedSpecialities, setCheckedSpecialities] = useState([]);
-    const [hospitalTypes, setHospitalTypes] = useState([]);
-    const [checkedLanguages, setCheckedLanguages] = useState([]);
-    const [checkedNationalities, setCheckedNationalities] = useState([]);
-    const [checkedGenders, setCheckedGenders] = useState([]);
+    const { searchedDoctors: allSearchedDoctors, filters: { checkedSpecialities, hospitalTypes, checkedGenders, checkedLanguages, checkedNationalities } } = searchedDoctors && searchedDoctors;
+    const [searchText, setSearchText] = useState("");
+    
+    useEffect(() => {
+        if(localStorage.getItem('doctorSearchText')){
+            // We have searched at the time of clicking the search button on previous screen
+            setSearchText(localStorage.getItem('doctorSearchText'))
+            localStorage.removeItem('doctorSearchText');
+        } else if (
+            checkedSpecialities.length === 0 &&
+            checkedGenders.length === 0 && 
+            checkedLanguages.length === 0 && 
+            checkedNationalities.length === 0 &&
+            hospitalTypes.length === 0 && 
+            allSearchedDoctors.length === 0
+           ){
+            clearDoctorSearch();
+           }else {
+               filterOutDoctors({
+                   checkedGenders, 
+                   checkedLanguages,
+                   checkedNationalities,
+                   checkedSpecialities,
+                   hospitalTypes
+               })
+           }
+    }, []);
 
     const onSpecialityCheckboxChanged = (spec) => {
         if(checkedSpecialities.filter(item => item === spec._id).length > 0){
-            setCheckedSpecialities(checkedSpecialities.filter(item => item !== spec._id))
+            specialityFilter(checkedSpecialities.filter(item => item !== spec._id));
+            filterOutDoctors({
+                checkedSpecialities: checkedSpecialities.filter(item => item !== spec._id),
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders
+            });
         }else {
-            setCheckedSpecialities([...checkedSpecialities, spec._id]);
+            specialityFilter([...checkedSpecialities, spec._id])
+            filterOutDoctors({
+                checkedSpecialities: [...checkedSpecialities, spec._id],
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders
+            });
         }
-
-        console.log("Filters => ", {
-            checkedSpecialities,
-            hospitalTypes,
-            checkedLanguages,
-            checkedNationalities,
-            checkedGenders
-        });
     }
 
     const onLanguageCheckboxChanged = (spec) => {
         if (checkedLanguages.filter(item => item === spec).length > 0) {
-            setCheckedLanguages(checkedLanguages.filter(item => item !== spec))
+            languageFilter(checkedLanguages.filter(item => item !== spec));
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages: checkedLanguages.filter(item => item !== spec),
+                checkedNationalities,
+                checkedGenders
+            });
         } else {
-            setCheckedLanguages([...checkedLanguages, spec]);
+            languageFilter([...checkedLanguages, spec])
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages: [...checkedLanguages, spec],
+                checkedNationalities,
+                checkedGenders
+            });
         }
-        
-        console.log("Filters => ", {
-            checkedSpecialities,
-            hospitalTypes,
-            checkedLanguages,
-            checkedNationalities,
-            checkedGenders
-        });
     }
 
     const onCountryCheckboxChanged = (spec) => {
         if (checkedNationalities.filter(item => item === spec).length > 0) {
-            setCheckedNationalities(checkedNationalities.filter(item => item !== spec))
+            nationalityFilter(checkedNationalities.filter(item => item !== spec))
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities: checkedNationalities.filter(item => item !== spec),
+                checkedGenders
+            });
         } else {
-            setCheckedNationalities([...checkedNationalities, spec]);
+            nationalityFilter([...checkedNationalities, spec])
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities: [...checkedNationalities, spec],
+                checkedGenders
+            });
         }
-
-        console.log("Filters => ", {
-            checkedSpecialities,
-            hospitalTypes,
-            checkedLanguages,
-            checkedNationalities,
-            checkedGenders
-        });
     }
 
     const onGenderCheckboxChanged = (spec) => {
         if (checkedGenders.filter(item => item === spec).length > 0) {
-            setCheckedGenders(checkedGenders.filter(item => item !== spec))
+            genderFilter(checkedGenders.filter(item => item !== spec))
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders: checkedGenders.filter(item => item !== spec)
+            });
         } else {
-            setCheckedGenders([...checkedGenders, spec]);
+            genderFilter([...checkedGenders, spec])
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes,
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders: [...checkedGenders, spec]
+            });
         }
-
-        console.log("Filters => ", {
-            checkedSpecialities,
-            hospitalTypes,
-            checkedLanguages,
-            checkedNationalities,
-            checkedGenders
-        });
     }
 
     const onHospitalCheckboxChange = (spec) => {
         if (hospitalTypes.filter(item => item === spec).length > 0) {
-            setHospitalTypes(hospitalTypes.filter(item => item !== spec))
+            hospitalTypesFilter(hospitalTypes.filter(item => item !== spec))
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes: hospitalTypes.filter(item => item !== spec),
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders
+            });
         } else {
-            setHospitalTypes([...hospitalTypes, spec]);
+            hospitalTypesFilter([...hospitalTypes, spec])
+            filterOutDoctors({
+                checkedSpecialities,
+                hospitalTypes: [...hospitalTypes, spec],
+                checkedLanguages,
+                checkedNationalities,
+                checkedGenders
+            });
         }
+    }
 
-        console.log("Filters => ", {
-            checkedSpecialities,
-            hospitalTypes,
-            checkedLanguages,
-            checkedNationalities,
-            checkedGenders
-        });
+    const filterOutDoctors = (filters) => {
+        filterDoctors(filters);
+        setSearchText("");
+    }
+
+    const onSearchDoctor = (e) => {
+        // Search Doctor by text
+        e.preventDefault();
+        if(searchText !== ""){
+            searchDoctorsByText(searchText);
+        }
     }
 
     return (
         <AppLayout>
-            <section class="search-block pt-4">
-                <div class="container">
-                    <div class="row">
-                    <div class="col-md-12">
-                        <form>
-                            <div class="form-group position-relative d-sm-flex">
-                                <span class="icon-search"></span>
-                                <input type="text" class="form-control mr-3 mb-3" placeholder="Enter specialist" />
-                                <button class="btn btn-primary px-3 mb-3" type="submit"><span class="icon-search"></span> Search</button>
-                            </div>
-                        </form>
-                    </div>
-                    </div>
-                </div>
-            </section>
+            
+            {/* Search Doctor */}
+            <SearchDoctor searchText={searchText} setSearchText={setSearchText} onSearchDoctor={onSearchDoctor} />
 
             <section class="user-dashboard search-filter-section">
                 <div class="container">
@@ -127,36 +182,18 @@ function Doctor({ searchedDoctors }) {
                         <form>
                             {/* Hospital Types Filters */}
                             <HospitalTypeFilters onHospitalCheckboxChange={onHospitalCheckboxChange} />
-                            <div class="custom-checkbox">
-                                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Category <i class="fa fa-angle-down float-right"></i>
-                                </a>
-                                <div class="collapse show" id="collapseExample">
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="health" />
-                                        <label class="form-check-label" for="health">Allied Health</label>
-                                    </div>
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="dentist" />
-                                        <label class="form-check-label" for="dentist">Dentist</label>
-                                    </div>
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="Physician" />
-                                        <label class="form-check-label" for="Physician">Physician </label>
-                                    </div>
-                                </div>
-                            </div>
+                    
                             {/* Specialities Filters */}
-                            <SpecialityFilters onSpecialityCheckboxChanged={onSpecialityCheckboxChanged} />
+                            <SpecialityFilters checkedSpecialities={checkedSpecialities} onSpecialityCheckboxChanged={onSpecialityCheckboxChanged} />
                             
                             {/* Language Filters Here */}
-                            <LanguageFilters onLanguageCheckboxChanged={onLanguageCheckboxChanged} />
+                            <LanguageFilters checkedLanguages={checkedLanguages} onLanguageCheckboxChanged={onLanguageCheckboxChanged} />
                             
                             {/*  */}
-                            <NationalityFilters onCountryCheckboxChanged={onCountryCheckboxChanged} />
+                            <NationalityFilters checkedNationalities={checkedNationalities} onCountryCheckboxChanged={onCountryCheckboxChanged} />
 
                             {/* Gender Filters */}
-                            <GenderFilters onGenderCheckboxChanged={onGenderCheckboxChanged} />
+                            <GenderFilters checkedGenders={checkedGenders} onGenderCheckboxChanged={onGenderCheckboxChanged} />
                         </form>
                     </div>
                     <div class="col-md-7">
@@ -183,7 +220,16 @@ const mapStateToProps = (state) => ({
     searchedDoctors: state.searchedDoctors
 });
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+    filterDoctors,
+    specialityFilter,
+    genderFilter,
+    hospitalTypesFilter,
+    nationalityFilter,
+    languageFilter,
+    clearDoctorSearch,
+    searchDoctorsByText
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
 

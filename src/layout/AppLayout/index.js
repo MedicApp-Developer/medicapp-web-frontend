@@ -13,8 +13,10 @@ import TopNav from '../TopNav';
 import MEDICAPP_LOGO from '../../assets/images/logo.png';
 import { PatientRoutes } from '../../constants/routes/PatientRoutes';
 import Footer from './Footer';
+import { connect } from 'react-redux';
+import { clearDoctorsFiltersOnly } from '../../store/actions/patient/searchedDoctorsActions';
 
-function AppLayout({ children }) {
+function AppLayout({ children, clearDoctorsFiltersOnly}) {
 
     const history = useHistory();
     const { promiseInProgress } = usePromiseTracker();
@@ -29,7 +31,7 @@ function AppLayout({ children }) {
             <header>
                 <nav class="navbar navbar-expand-lg navbar-light navabr-home mb-0">
                     <div class="container">
-                    <Link to={PatientRoutes[0].route} class="navbar-brand" href="#"><img src={MEDICAPP_LOGO} alt="logo" /></Link>
+                    <Link to={PatientRoutes[0].route} class="navbar-brand" onClick={() => clearDoctorsFiltersOnly()} href="#"><img src={MEDICAPP_LOGO} alt="logo" /></Link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -51,4 +53,11 @@ function AppLayout({ children }) {
     )
 }
 
-export default AppLayout
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+    clearDoctorsFiltersOnly
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);
+
