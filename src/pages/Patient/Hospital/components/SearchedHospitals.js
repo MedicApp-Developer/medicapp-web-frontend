@@ -15,7 +15,7 @@ function SearchedHospitals({ searchedHospitals }) {
         <>
             {allSearchedHospitals.length > 0 && allSearchedHospitals?.map(hospital => (
                 <div class="media mb-0">
-                    <img src={MEDOR_LOGO} style={{ cursor: "pointer" }} onClick={() => { history.push("/patient/hospital/id") }} class="mr-3 py-4" alt="medeor_logo" />
+                    <img src={MEDOR_LOGO} style={{ cursor: "pointer" }} onClick={() => { history.push(`/patient/hospital/${hospital._id}`) }} class="mr-3 py-4" alt="medeor_logo" />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h5 class="mt-0">{hospital?.name}</h5>
