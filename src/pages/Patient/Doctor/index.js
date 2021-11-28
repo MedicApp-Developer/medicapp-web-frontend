@@ -176,7 +176,7 @@ function Doctor({ searchDoctorsByText, clearDoctorSearch, searchedDoctors, filte
                     <div class="col-md-3 search-filter">
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-2">Filters</h5>
-                            <p class="text-gray mb-2">Reset filters</p>
+                            <p class="text-gray mb-2" style={{ cursor: "pointer" }} onClick={() => clearDoctorSearch()}>Reset filters</p>
                         </div>
                         <hr class="mt-0" />
                         <form>

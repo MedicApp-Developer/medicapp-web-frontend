@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import MEDOR_LOGO from '../../../../assets/images/medeor_logo.png';
 import { useHistory } from 'react-router';
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
 
 function SearchedDoctors({ allSearchedDoctors }) {
 
@@ -11,7 +12,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
         <>
         {allSearchedDoctors?.length > 0 && allSearchedDoctors.map(doctor => (
             <div class="media mb-0">
-                <img src={MEDOR_LOGO} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/patient/doctor/${doctor._id}`)} />
+                <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/patient/doctor/${doctor._id}`)} />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h5 class="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
