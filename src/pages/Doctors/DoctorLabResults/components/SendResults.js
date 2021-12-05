@@ -11,7 +11,7 @@ function SendResults({ selectedLabResult }) {
                   </button>
                   <br/>
                   <div>
-                     {Object.keys(selectedLabResult).length > 0 && (
+                     {selectedLabResult && Object.keys(selectedLabResult).length > 0 && (
                         <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                            <thead>
                               <tr>

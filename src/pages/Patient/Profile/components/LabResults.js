@@ -1,124 +1,48 @@
-import React from 'react'
-import DOCTOR_IMAGE from '../../../../assets/images/doctor.png';
+import React, { useState } from 'react'
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import moment from 'moment';
+import SendResults from '../../../Doctors/DoctorLabResults/components/SendResults';
 
-function LabResults() {
+function LabResults({ results }) {
+
+   const [selectedLabResult, setSelectedLabResult] = useState(null);
+
     return (
         <section class="user-dashboard">
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-md-12 col-xl-10 pb-5">
-                  <div class="card lab-result">
-                     <div class="card-body py-2">
-                        <div class="row align-items-center">
-                           <div class="col-md-9">
-                              <ul>
-                                 <li>
-                                    <small class="d-block">Date</small>
-                                    20 Aug 2021
-                                 </li>
-                                 <li>
-                                    <small class="d-block">Report</small>
-                                    Blood Test
-                                 </li>
-                                 <li class="media">
-                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
-                                    <div class="media-body">
-                                       <h5 class="mt-0 mb-1">Dr. Travis Martin</h5>
-                                       <p>Dentist</p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
-                              <a href="javascript:void(0)" data-toggle="modal" data-target="#viewResult" class="btn btn-primary px-3 py-2">View Result</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="card lab-result">
-                     <div class="card-body py-2">
-                        <div class="row align-items-center">
-                           <div class="col-md-9">
-                              <ul>
-                                 <li>
-                                    <small class="d-block">Date</small>
-                                    20 Aug 2021
-                                 </li>
-                                 <li>
-                                    <small class="d-block">Report</small>
-                                    Blood Test
-                                 </li>
-                                 <li class="media">
-                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
-                                    <div class="media-body">
-                                       <h5 class="mt-0 mb-1">Dr. Travis Martin</h5>
-                                       <p>Dentist</p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
-                              <a href="javascript:void(0)" data-toggle="modal" data-target="#viewResult" class="btn btn-primary px-3 py-2">View Result</a>
+                  {results?.map((result, index) => (
+                     <div key={index} class="card lab-result">
+                        <div class="card-body py-2">
+                           <div class="row align-items-center">
+                              <div class="col-md-9">
+                                 <ul>
+                                    <li>
+                                       <small class="d-block">Date</small>
+                                       {moment(result.date).format('LL')}
+                                    </li>
+                                    <li>
+                                       <small class="d-block">Report</small>
+                                       {result?.tests?.map(test => test.test + ", ")}
+                                    </li>
+                                    <li class="media">
+                                       <img class="avatar-sm" src={result?.doctorId?.image ? result?.doctorId?.image : EMPTY_IMAGE_PLACEHOLDER} alt="doctor" />
+                                       <div class="media-body">
+                                          <h5 class="mt-0 mb-1">Dr. {result?.doctorId?.firstName + " " + result?.doctorId?.lastName}</h5>
+                                          <p>{result?.doctorId?.specialityId.name}</p>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
+                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#labResults" onClick={(e) => { e.preventDefault(); setSelectedLabResult(result) }} class="btn btn-primary px-3 py-2" style={result?.status === "pending" ? { pointerEvents: 'none' } : {}} >{result?.status === "pending" ? "Pending" : "View Result"}</a>
+                              </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-                  <div class="card lab-result">
-                     <div class="card-body py-2">
-                        <div class="row align-items-center">
-                           <div class="col-md-9">
-                              <ul>
-                                 <li>
-                                    <small class="d-block">Date</small>
-                                    20 Aug 2021
-                                 </li>
-                                 <li>
-                                    <small class="d-block">Report</small>
-                                    Blood Test
-                                 </li>
-                                 <li class="media">
-                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
-                                    <div class="media-body">
-                                       <h5 class="mt-0 mb-1">Dr. Travis Martin</h5>
-                                       <p>Dentist</p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
-                              <a href="javascript:void(0)" data-toggle="modal" data-target="#viewResult" class="btn btn-primary px-3 py-2">View Result</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="card lab-result">
-                     <div class="card-body py-2">
-                        <div class="row align-items-center">
-                           <div class="col-md-9">
-                              <ul>
-                                 <li>
-                                    <small class="d-block">Date</small>
-                                    20 Aug 2021
-                                 </li>
-                                 <li>
-                                    <small class="d-block">Report</small>
-                                    Blood Test
-                                 </li>
-                                 <li class="media">
-                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
-                                    <div class="media-body">
-                                       <h5 class="mt-0 mb-1">Dr. Travis Martin</h5>
-                                       <p>Dentist</p>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
-                              <a href="javascript:void(0)" data-toggle="modal" data-target="#viewResult" class="btn btn-primary px-3 py-2">View Result</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  ))}
+                  <SendResults selectedLabResult={selectedLabResult} />
                </div>
             </div>
          </div>

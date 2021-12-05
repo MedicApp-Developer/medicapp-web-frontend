@@ -10,10 +10,12 @@ import { getAge } from '../../../../Utills/functions';
 import moment from 'moment';
 import GenerateQrCode from './GenerateQrCode';
 import { href } from '../../../../constants/extra';
+import CancelAppointment from './CancelAppointment';
 
 function MedicalProfile({ patient }) {
 
     const [selectedResult, setSelectedResult] = useState(null);
+    const [selectedAAppointment, setSelectedAppointment] = useState({});
 
     return (
         <>
@@ -131,7 +133,7 @@ function MedicalProfile({ patient }) {
                                                     <a class="mt-0" href="javascript:void(0)"><span class="fa fa-map"></span></a>
                                                     <a class="mt-0" href="javascript:void(0)"><span class="icon-phone"></span></a>
                                                     </span>
-                                                    <a href="javascript:void(0)" class="btn btn-danger px-3">CANCEL</a>
+                                                    <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(appointment) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">CANCEL</a>
                                                 </div>
                                             </div>
                                         ))}
@@ -186,6 +188,7 @@ function MedicalProfile({ patient }) {
                     </div>
                     </div>
                 </div>
+                <CancelAppointment selectedAppointment={selectedAAppointment} />
             </section>
         </>
     )

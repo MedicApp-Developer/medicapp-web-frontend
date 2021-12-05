@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import AppointmentApi from '../../../../api/Appointment';
 import { RootContext } from '../../../../contextApi';
 import { deletePatientAppointment } from '../../../../store/actions/patientActions';
 
