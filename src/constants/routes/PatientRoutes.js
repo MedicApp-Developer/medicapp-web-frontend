@@ -24,14 +24,14 @@ export const PatientRoutes = [
     //     icon: "icon-qr-code",
     //     route: "/patient/insurance"
     // }
-    {
-        name: "Promos",
-        icon: "icon-qr-code",
-        route: "/patient/promos"
-    },
-    {
-        name: "Get Qoute",
-        icon: "icon-qr-code",
-        route: "/patient/get-qoute"
-    }
+    // {
+    //     name: "Promos",
+    //     icon: "icon-qr-code",
+    //     route: "/patient/promos"
+    // },
+    // {
+    //     name: "Get Qoute",
+    //     icon: "icon-qr-code",
+    //     route: "/patient/get-qoute"
+    // }
 ]
