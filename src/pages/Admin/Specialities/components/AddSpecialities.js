@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import { createSpeciality } from '../../../../store/actions/specialitiesActions';
 import { connect } from 'react-redux';
 import TextInput from '../../../../components/forms/TextInput';
+import TextArea from '../../../../components/forms/TextArea';
 import {useDropzone} from 'react-dropzone';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import SpecialityApi from '../../../../api/Specialities';
@@ -29,10 +30,12 @@ function AddSpecialities({ createSpeciality }) {
     return (
         <Formik
           initialValues={{
-            name: ""
+            name: "",
+            tags: ""
           }}
           validationSchema={Yup.object({
             name: Yup.string().required('Required'),
+            tags: Yup.string().required('Required'),
           })}
           onSubmit={(values, { resetForm }) => {
             
@@ -46,6 +49,7 @@ function AddSpecialities({ createSpeciality }) {
         
                 formData.append("image", uploadedImage[0]);
                 formData.append("name", values.name);
+                formData.append("tags", "," + values.tags + ",");
                 axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
@@ -60,7 +64,7 @@ function AddSpecialities({ createSpeciality }) {
                     resetForm();
                 }).catch(err => {
                     setProgress(null);
-                    toast.error(err.response.data.message);
+                    toast.error(err.response.data.error.message);
                 })
             }else {
                 toast.error('Please select a video');
@@ -82,6 +86,9 @@ function AddSpecialities({ createSpeciality }) {
                                     <div className="form-group">
                                         <TextInput type="text" name="name" placeholder="Name" />
                                     </div>
+                                    <div className="form-group">
+                                        <TextArea name="tags" rows="5" placeholder="Add Search Tags in comma seperated formate ( i.e: fever,blood pressure,sugar )" />
+                                    </div>
                                     {progress ? (
                                             <div style={{ width: 170, height: 170, margin: 'auto' }}>
                                                 <CircularProgressbar value={progress} text={`${progress}%`} />
@@ -91,8 +98,8 @@ function AddSpecialities({ createSpeciality }) {
                                             <section className="container">
                                                 <div {...getRootProps({className: 'dropzone'})}>
                                                     <input {...getInputProps()} />
-                                                    <p>Drag 'n' drop video here, or click to select video</p>
-                                                    <em>(Only video file will be accepted)</em>
+                                                    <p>Drag 'n' drop image here, or click to select image</p>
+                                                    <em>(Only image file will be accepted)</em>
                                                 </div>
                                                 <aside>
                                                     <h4>Files</h4>
