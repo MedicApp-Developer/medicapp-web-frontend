@@ -4,11 +4,11 @@ import axios from 'axios';
 const token = window.localStorage.getItem('auth');
 
 const instance = axios.create({
-  baseURL: "https://medicappaee.herokuapp.com/api"
+  baseURL: "https://medicappp.herokuapp.com/api"
 });
 
 // https://medicappae.com/api
-// https://medicappaee.herokuapp.com/api
+// https://medicappp.herokuapp.com/
 // http://localhost:8080/api
 
 instance.interceptors.response.use(function (response) {
