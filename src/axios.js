@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 // https://medicappae.com/api
-// https://medicappp.herokuapp.com/
+// https://medicappp.herokuapp.com/api
 // http://localhost:8080/api
 
 instance.interceptors.response.use(function (response) {

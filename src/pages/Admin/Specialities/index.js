@@ -39,6 +39,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                                         <h5 className="mt-0">{spec.name}</h5>
                                     </div>
                                     </div>
+                                    <p style={{ textAlign: 'center' }}>{spec?.tags}</p>
                                 </div>
                                 <div className="dropdown">
                                     <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

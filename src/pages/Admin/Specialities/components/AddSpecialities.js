@@ -49,7 +49,7 @@ function AddSpecialities({ createSpeciality }) {
         
                 formData.append("image", uploadedImage[0]);
                 formData.append("name", values.name);
-                formData.append("tags", "," + values.tags + ",");
+                formData.append("tags", values.tags);
                 axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
