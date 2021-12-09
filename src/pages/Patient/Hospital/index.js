@@ -16,6 +16,7 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
         if(localStorage.getItem('hospitalSearchText')){
             // We have searched at the time of clicking the search button on previous screen
             setSearchText(localStorage.getItem('hospitalSearchText'))
+            
             localStorage.removeItem('hospitalSearchText');
         } else if (
             checkedCategories.length === 0 &&
