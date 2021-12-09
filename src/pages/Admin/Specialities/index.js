@@ -29,7 +29,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                     </div>
                 </div>
                 <div className="row list-block">
-                    { allSpecialities?.map((spec, key) => (
+                    {allSpecialities?.length > 0 ? allSpecialities?.map((spec, key) => (
                         <div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                             <div className="card">
                                 <div className="card-body">
@@ -50,7 +50,9 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) : (
+                        <p>No specialities added yet</p>
+                    )}
                 </div>
                 {/* Add Doctor Modal */}
                 <AddSpecialities />
