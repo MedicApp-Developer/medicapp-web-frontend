@@ -31,7 +31,7 @@ function DoctorsAppointments({ getAppointments, appointments }) {
                                                 <div class="media">
                                                     <img src={DOCTOR_IMAGE} alt="doctor"/>
                                                     <div class="media-body">
-                                                        <h5 class="mt-0">Dr. {appointment?.doctorId.firstName + " " + appointment?.doctorId.lastName}</h5>
+                                                        <h5 class="mt-0">Dr. {appointment?.doctorId?.firstName + " " + appointment?.doctorId?.lastName}</h5>
                                                         <p>Dentist</p>
                                                     </div>
                                                 </div>

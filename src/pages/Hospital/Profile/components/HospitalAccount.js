@@ -15,11 +15,11 @@ function HospitalAccount({ hospitalId, hospital }) {
 
    const formik = useFormik({
       initialValues: {
-        name: hospital?.name,
-        tradeLicenseNo: hospital?.tradeLicenseNo,
-        location: hospital?.location,
-        phoneNo: hospital?.phoneNo,
-        email: hospital?.email,
+        name: hospital?.hospital?.name,
+        tradeLicenseNo: hospital?.hospital?.tradeLicenseNo,
+        location: hospital?.hospital?.location,
+        phoneNo: hospital?.hospital?.phoneNo,
+        email: hospital?.hospital?.email,
         tradeLicenseFile: "",
         password: ""
       },

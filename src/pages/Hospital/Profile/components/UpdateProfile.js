@@ -29,13 +29,13 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
       <>
         <Formik
           initialValues={{
-            openingTime: hospital?.openingTime,
-            closingTime: hospital?.closingTime,
-            PCRDPI: hospital?.PCRDPI,
-            about: hospital?.about,
-            services: hospital?.services[0],
-            type: hospital?.type,
-            category: hospital?.category
+            openingTime: hospital?.hospital?.openingTime,
+            closingTime: hospital?.hospital?.closingTime,
+            PCRDPI: hospital?.hospital?.PCRDPI,
+            about: hospital?.hospital?.about,
+            services: hospital?.hospital?.services[0],
+            type: hospital?.hospital?.type,
+            category: hospital?.hospital?.category
           }}
           validationSchema={Yup.object({
             openingTime: Yup.string().required('Required'),

@@ -52,7 +52,7 @@ function HospitalInfo({ hospital }) {
                 </div>
                 </div>
                 <div className="row mt-2">
-                {images.length > 0 && images.map(img => (
+                {images?.length > 0 && images?.map(img => (
                     <div className="col-md-3">
                         <img className="img-fluid" src={img} alt="hospital" />
                     </div>
