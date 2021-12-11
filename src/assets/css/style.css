@@ -498,6 +498,10 @@ header .dropdown-menu {
 	margin-bottom: 0;
 }
 
+.text-right-aligned {
+	text-align: end;
+}
+
 .scrollbar {
 	height: 528px;
 	overflow-y: scroll;
@@ -1660,3 +1664,62 @@ footer .media i {
 		text-align: left;
 	}
 }
+
+/* Map Styles */
+.map-heading {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	color: #281414;
+	z-index: 10;
+	margin: 0;
+	padding: 0;
+  }
+  
+.map-search {
+	position: absolute;
+	top: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 400px;
+	z-index: 10;
+  }
+  
+.hospital-profile-map-search {
+	position: absolute;
+	top: 12.7rem;
+	left: 60%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 400px;
+	z-index: 10;
+}
+
+.map-locate {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	z-index: 10;
+  }
+
+.hospital-profile-map-locate {
+	position: absolute;
+	top: 12.7rem;
+	right: 3rem;
+	background: none;
+	border: none;
+	z-index: 10;
+  }
+
+.hospital-profile-map-locate img {
+	width: 40px;
+	cursor: pointer;
+  }
+  
+.map-locate img {
+	width: 40px;
+	cursor: pointer;
+  }

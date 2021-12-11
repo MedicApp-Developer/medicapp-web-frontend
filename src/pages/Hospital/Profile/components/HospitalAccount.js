@@ -8,32 +8,22 @@ import { toast } from 'react-toastify';
 import HospitalApi from '../../../../api/Hospital';
 import { useHistory } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../../constants/Redirects';
+import ShowMap from './ShowMap';
 
 function HospitalAccount({ hospitalId, hospital }) {
-
    const history = useHistory();
 
    const formik = useFormik({
       initialValues: {
         name: hospital?.hospital?.name,
         tradeLicenseNo: hospital?.hospital?.tradeLicenseNo,
-        location: hospital?.hospital?.location,
+        address: hospital?.hospital?.address,
         phoneNo: hospital?.hospital?.phoneNo,
         email: hospital?.hospital?.email,
-        tradeLicenseFile: "",
         password: ""
       },
       validationSchema: Yup.object({}),
       onSubmit: async values => {
-         //  let formData = new FormData();
-         //  formData.append("name", values.name);
-         //  formData.append("tradeLicenseNo", values.tradeLicenseNo);
-         //  formData.append("location", values.location);
-         //  formData.append("phoneNo", values.phoneNo);
-         //  formData.append("email", values.email);
-         //  formData.append("password", values.password);
-         // TODO: Update tradeLicenseFile
-         //  formData.append('tradeLicenseFile', file);
          const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
          if(!response.error){
             toast.success("Hospital profile updated");
@@ -47,7 +37,7 @@ function HospitalAccount({ hospitalId, hospital }) {
       },
       enableReinitialize: true
     });
-   
+
     return (
         <>
             <div className="row patient-profile">
@@ -59,7 +49,7 @@ function HospitalAccount({ hospitalId, hospital }) {
                </div>
                <div className="col-md-9 col-lg-9 col-xl-8">
                   <h4 className="mb-3">Hospital Details</h4>
-                  <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+                  <form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">
                      <div className="row">
                         <div className="col-sm-6">
                            <div className="form-group">
@@ -81,27 +71,19 @@ function HospitalAccount({ hospitalId, hospital }) {
                      <div className="row">
                         <div className="col-sm-6">
                            <div className="form-group">
-                              <input type="text" {...formik.getFieldProps('location')} class={ (formik.touched.location && formik.errors.location) ? "form-control is-invalid" : "form-control"} placeholder="Address" /> 
-                                {formik.touched.location && formik.errors.location ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.location}</div>
+                              <input type="text" {...formik.getFieldProps('address')} class={ (formik.touched.address && formik.errors.address) ? "form-control is-invalid" : "form-control"} placeholder="Address" /> 
+                                {formik.touched.address && formik.errors.address ? (
+                                    <div class="invalid-feedback text-right-aligned">{formik.errors.address}</div>
                               ) : null}
                            </div>
                         </div>
-                        <div className="col-sm-6">
+                        {/* <div className="col-sm-6">
                            <div className="form-group position-relative">
                               <input type="file" className="form-control custom-file-input" id="validatedCustomFile" />
                               <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Upload Trade License</label>
                            </div>
-                        </div>
+                        </div> */}
                      </div>
-                     {/* TODO: Map Set Location */}
-                     {/* <div className="row">
-                        <div className="col-sm-12">         
-                           <div className="map-bg" style={{ backgroundImage: `url(${mapImage})` }}>
-                              <button type="button" className="btn btn-primary px-4">UPDATE MAP LOCATION</button>
-                           </div>
-                        </div>
-                     </div> */}
                      <h4 className="mb-4 mt-4">Contact Details</h4>
                      <div className="row">
                         <div className="col-sm-6">
@@ -129,6 +111,7 @@ function HospitalAccount({ hospitalId, hospital }) {
                            </div>
                         </div>
                      </div>
+
                      <div className="form-group text-center">
                         <button type="submit" className="btn btn-primary mt-2">Update</button>
                      </div>

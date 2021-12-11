@@ -9,10 +9,11 @@ import HospitalApi from '../../../api/Hospital';
 import { RootContext } from '../../../contextApi/index';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import ShowMap from './components/ShowMap';
 
 function HospitalProfile() {
 
-    const [accountTabSelected, setAccountTabSelected] = useState(true);
+    const [tabSelected, setTabSelected] = useState("Account");
     const [hospital, setHospital] = useState(null);
     const { user } = useContext(RootContext);
 
@@ -26,6 +27,16 @@ function HospitalProfile() {
         }
     }, [user]);
 
+    let returnedComponent = null;
+
+    if(tabSelected === "Account") {
+        returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} />
+    } else if(tabSelected === "Profile") {
+        returnedComponent = <HospitalInfo hospital={hospital} />
+    } else if(tabSelected === "Location") {
+        returnedComponent = <ShowMap hospitalId={user.referenceId} lat={hospital?.hospital?.location?.coordinates[0]} lng={hospital?.hospital?.location?.coordinates[1]} />
+    }
+
     return (
         <>
             <DashboardLayout>
@@ -33,19 +44,18 @@ function HospitalProfile() {
                 <div className="col-md-12">
                     <ul className="nav justify-content-center">
                         <li className="nav-item">
-                            <a className={classNames('nav-link', { 'active': !accountTabSelected })} href={href} onClick={(e) => {e.preventDefault(); setAccountTabSelected(false)}}>Hospital Profile</a>
+                            <a className={classNames('nav-link', { 'active': tabSelected === "Profile" })} href={href} onClick={(e) => {e.preventDefault(); setTabSelected("Profile")}}>Hospital Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className={classNames('nav-link', { 'active': accountTabSelected })} href={href} onClick={(e) => { e.preventDefault(); setAccountTabSelected(true)}}>Account</a>
+                            <a className={classNames('nav-link', { 'active': tabSelected === "Account" })} href={href} onClick={(e) => { e.preventDefault(); setTabSelected("Account")}}>Account</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className={classNames('nav-link', { 'active': tabSelected === "Location" })} href={href} onClick={(e) => { e.preventDefault(); setTabSelected("Location")}}>Location</a>
                         </li>
                     </ul>
                 </div>
                 </div>
-                {accountTabSelected ? 
-                    <HospitalAccount hospitalId={user.referenceId} hospital={hospital} />
-                    : 
-                    <HospitalInfo hospital={hospital} />
-                }
+                {returnedComponent}
                 <UpdateHospitalProfile hospitalId={user.referenceId} hospital={hospital} />
             </DashboardLayout>
         </>

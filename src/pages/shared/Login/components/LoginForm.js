@@ -11,6 +11,8 @@ import { selectNav } from '../../../../Utills/selectNav';
 import { Link } from 'react-router-dom';
 import { SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects';
 import instance from '../../../../axios';
+import { usePromiseTracker } from "react-promise-tracker";
+import HashLoader from "react-spinners/HashLoader";
 
  const LoginForm = () => {
   
@@ -21,6 +23,8 @@ import instance from '../../../../axios';
       history.push(redirectTo(user?.role));
     }
    }, []);
+
+   const { promiseInProgress } = usePromiseTracker();
 
    const history = useHistory();
    const formik = useFormik({
@@ -68,7 +72,13 @@ import instance from '../../../../axios';
     
        <a href={href} class="forgot-pass">Forgot Password?</a>
             <div class="form-group mt-4">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" disabled={promiseInProgress} style={promiseInProgress ? { padding: '20px' } : {}} class="btn btn-primary">
+                {promiseInProgress ? (
+                    <HashLoader color="#fff" loading={true} size={15} />
+                  ) : (
+                    <>Sign in</> 
+                )}
+                </button>
             </div>
             <p>Don’t have an account? <Link to={SELECT_REGISTERATION_TYPE_ROUTE}>Register Here</Link></p>
      </form>
