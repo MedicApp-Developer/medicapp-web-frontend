@@ -3,9 +3,10 @@ import LOCATION_IMAGE from '../../../../assets/images/location.png'
 
 function LocateMap({ panTo, component }) {
     return (
-        <button 
+        <a 
           className={ component === "HospitalProfile" ? "hospital-profile-map-locate" : "map-locate"} 
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             navigator.geolocation.getCurrentPosition(
               (position) => {
                 panTo({
@@ -16,7 +17,7 @@ function LocateMap({ panTo, component }) {
           }}
         > 
           <img src={LOCATION_IMAGE} alt="locate me" /> 
-        </button>
+        </a>
       )
 }
 
