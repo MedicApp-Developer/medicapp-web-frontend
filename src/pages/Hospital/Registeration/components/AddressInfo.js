@@ -4,10 +4,8 @@ import * as Yup from 'yup';
 import {
     GoogleMap, 
     useLoadScript,
-    Marker,
-    InfoWindow
+    Marker
   } from '@react-google-maps/api'
-import mapStyles from '../../../../assets/js/mapStyles';
 import SearchMap from './SearchMap';
 import LocateMap from './LocateMap';
 import HOSPITAL_LOCATION_IMAGE from '../../../../assets/images/hospital-location.png'
@@ -27,12 +25,11 @@ const center = {
 }
 
 const options = {
-  styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true
 }
 
-function AddressInfo({ onSecondFormSubmit }) {
+function AddressInfo({ onSecondFormSubmit, setStep }) {
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries
@@ -130,7 +127,8 @@ function AddressInfo({ onSecondFormSubmit }) {
                                         </>
                                     )}
                                 </div>
-                                <button type="submit" disabled={promiseInProgress} style={promiseInProgress ? { padding: '20px' } : {}} class="btn btn-primary mt-2">
+                                <button type="button" disabled={promiseInProgress} class="btn btn-secondary mt-2 mr-2" onClick={() => { setStep(1) }} >Back</button>
+                                <button type="submit" disabled={promiseInProgress} style={promiseInProgress ? { padding: '20px' } : {}} class="btn btn-primary mt-2 ml-2">
                                 {promiseInProgress ? (
                                     <HashLoader color="#fff" loading={true} size={15} />
                                 ) : (

@@ -172,11 +172,11 @@ function HospitalRegisteration() {
                                         <div class="invalid-feedback text-right-aligned">{formik.errors.confirmPassword}</div>
                                     ) : null}
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-2">Register</button>
+                                <button type="submit" class="btn btn-primary mt-2">Next</button>
                             </form>
                         ) : (
                             <>
-                                <AddressInfo onSecondFormSubmit={onSecondFormSubmit} />
+                                <AddressInfo onSecondFormSubmit={onSecondFormSubmit} setStep={setStep} />
                             </>
                         )}
                         

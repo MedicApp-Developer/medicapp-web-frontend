@@ -4,7 +4,6 @@ import {
     useLoadScript,
     Marker
   } from '@react-google-maps/api'
-import mapStyles from '../../../../assets/js/mapStyles';
 import HOSPITAL_LOCATION_IMAGE from '../../../../assets/images/hospital-location.png'
 import { toast } from 'react-toastify';
 import SearchMap from '../../Registeration/components/SearchMap';
@@ -18,7 +17,6 @@ const mapContainerStyle = {
 }
 
 const options = {
-  styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true
 }
@@ -89,7 +87,7 @@ function ShowMap({ lat, lng, hospitalId }) {
                                                 <GoogleMap 
                                                     mapContainerStyle={mapContainerStyle}
                                                     zoom={8}
-                                                    center={center}
+                                                    center={markers ?? center}
                                                     options={options}
                                                     onClick={onMapClick}
                                                     onLoad={onMapLoad}
