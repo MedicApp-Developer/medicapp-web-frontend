@@ -42,3 +42,7 @@
   padding: 10px !important;
   margin-bottom: 15px;
 }
+
+.rbc-calendar {
+  min-height: 70vh;
+}

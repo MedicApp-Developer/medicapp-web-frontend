@@ -31,6 +31,7 @@ const options = {
 
 function AddressInfo({ onSecondFormSubmit, setStep }) {
     const { isLoaded, loadError } = useLoadScript({
+        id: process.env.REACT_APP_MAP_STYLE_ID,
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries
     });

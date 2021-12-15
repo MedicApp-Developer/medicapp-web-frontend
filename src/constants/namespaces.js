@@ -12,3 +12,4 @@ export const SPECIALITY_REQUEST_NAMESPACE = 'speciality';
 export const CATEGORY_REQUEST_NAMESPACE = 'categories';
 export const HOSPITAL_ADDON_SERVICES_NAMESPACE = 'hospitals/services';
 export const QR_PRESCRIPTION_NAMESPACE = 'qrprescription';
+export const SLOT_NAMESPACE = "slots";
