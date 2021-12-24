@@ -55,7 +55,7 @@ function BookAppointment({ doctorId, hospitalDetailPage }) {
         }
 
         if(moment(event.end).isAfter() && event.status === "BOOKED"){
-            style.backgroundColor = "grey";
+            style.backgroundColor = "green";
         }
 
         return {
