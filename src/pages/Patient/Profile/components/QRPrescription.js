@@ -4,7 +4,6 @@ import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png
 import GenerateQrCode from './GenerateQrCode';
 
 function QRPrescription({ prescriptions }) {
-   console.log("prescriptions => ", prescriptions);
 
    const [selectedQrPrescription, setSelectedQrPrescription] = useState({});
 
@@ -47,7 +46,6 @@ function QRPrescription({ prescriptions }) {
                               </div>
                               <div class="col-md-12 col-lg-5 text-center text-md-right mt-3 mt-md-0">
                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#qrCode" class="btn btn-primary px-3 py-2 mr-3" onClick={viewQrPrescription.bind(this, qr)}>VIEW QR</a>
-                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#requestNewqr" class="btn btn-primary px-3 py-2">REQUEST NEW QR</a>
                               </div>
                               <GenerateQrCode selectedResult={selectedQrPrescription} setSelectedResult={setSelectedQrPrescription} /> 
                            </div>

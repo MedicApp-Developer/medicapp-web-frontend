@@ -21,7 +21,7 @@ function UpdateVitals({ updatePatientVitals }) {
         <Formik
           initialValues={{
             bloodType: patient?.bloodType,
-            allergies: patient?.allergies,
+            allergies: patient?.allergies?.join(","),
             height: patient?.height,
             weight: patient?.weight,
             heartRate: patient?.heartRate,
@@ -39,6 +39,8 @@ function UpdateVitals({ updatePatientVitals }) {
           })}
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true);
+            const newPatient = JSON.parse(JSON.stringify(values));
+            newPatient.allergies = values.allergies.split(',')
             updatePatientVitals(id, values);
             setTimeout(() => {
                 window.location.reload();

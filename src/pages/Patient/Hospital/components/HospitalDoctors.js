@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import { selectDoctor } from '../../../../store/actions/doctorActions';
+import BookAppointment from '../../Doctor/components/BookAppointment';
 
 function HospitalDoctors({ doctors }) {
+
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
 
     return (
         <div class="tab-pane fade" id="pills-doctors" role="tabpanel" aria-labelledby="pills-doctors-tab">
@@ -36,12 +40,13 @@ function HospitalDoctors({ doctors }) {
                                                 </div>
                                             </div>
                                             <div class="col-md-5 text-center text-md-left">
-                                                <a href="javascript:void(0)" class="btn btn-primary px-4">Book Appointment</a>
+                                                <a href="javascript:void(0)" class="btn btn-primary px-4" data-toggle="modal" data-target="#patientbookAppointment" onClick={() => setSelectedDoctor(doctor._id)}>Book Appointment</a>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
+                            <BookAppointment doctorId={selectedDoctor} hospitalDetailPage={true} />
                         </div>
     )
 }

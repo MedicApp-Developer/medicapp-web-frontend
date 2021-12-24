@@ -36,7 +36,7 @@ function SetDoctorSchedule() {
                 const events = [];
                 res.data.data.forEach(slot => {
                     events.push({
-                        title: moment(slot.from).format('LL') + " - " + moment(slot.to).format("LL"),
+                        title: moment(slot.from).format("hh:mm:ss a") + " - " + moment(slot.to).format("hh:mm:ss a"),
                         start: slot.from,
                         end: slot.to
                     })
@@ -61,7 +61,7 @@ function SetDoctorSchedule() {
         }
         SlotApi.createSlot(slot).then(res => {
             setSlots([...slots, {
-                title: moment(startDate).format('LL') + " - " + moment(endDate).format("LL"),
+                title: moment(startDate).format("hh:mm:ss a") + " - " + moment(endDate).format("hh:mm:ss a"),
                 start: startDate,
                 end: endDate
             }]);

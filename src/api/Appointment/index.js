@@ -17,6 +17,15 @@ const AppointmentApi = {
     },
     getLabRequests(doctorId, pageNo, status) {
         return trackPromise(axios.get(`/${LAB_REQUEST_NAMESPACE}/${doctorId}?page=${pageNo}&status=${status}`));
+    },
+
+
+    // Updated Ones
+    createAppointment(data) {
+        return trackPromise(axios.post(`${APPOINTMENT_NAMESPACE}`, data));
+    },
+    cancelAppointment(slotId) {
+        return trackPromise(axios.delete(`${APPOINTMENT_NAMESPACE}/cancel/${slotId}`));
     }
 }
 

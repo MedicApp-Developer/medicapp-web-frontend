@@ -9,7 +9,7 @@ function CancelAppointment({ selectedAppointment, deletePatientAppointment }) {
     const { user } = useContext(RootContext);
 
     const cancelAppointmentHandler = () => {
-        deletePatientAppointment(selectedAppointment._id, user.referenceId).then(res => {
+        deletePatientAppointment(selectedAppointment._id, user._id).then(res => {
             toast.success("Appointment delete successfully");
         }).catch(err => {
             toast.error("Problem while deleting appointment");

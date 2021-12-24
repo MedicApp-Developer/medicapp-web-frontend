@@ -12,9 +12,9 @@ function Appointments({ appointments }) {
     let yesterday = new Date();
     yesterday.setDate(today.getDate() - 1);
 
-    const history = appointments.filter(appointment => moment(today).isAfter(new Date(appointment.date), 'day'));
+    const history = appointments.filter(appointment => moment(today).isAfter(new Date(appointment.to), 'day'));
 
-    const upcomming = appointments.filter(appointment => moment(new Date(appointment.date)).isAfter(yesterday));
+    const upcomming = appointments.filter(appointment => moment(new Date(appointment.to)).isAfter(yesterday));
 
     return (
         <>
@@ -31,7 +31,7 @@ function Appointments({ appointments }) {
                                             <ul>
                                                 <li>
                                                     <small class="d-block">Date & Time</small>
-                                                    {`${moment(item.date).format('LL')} - ( ${item.time} )`}
+                                                   {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                 </li>
                                                 <li class="media">
                                                     <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
@@ -41,7 +41,7 @@ function Appointments({ appointments }) {
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <small class="d-block">Hospital</small>
+                                                    <h6 class="mt-0 mb-1" style={{ fontWeight: 'bold' }}>Hospital</h6>
                                                     {item?.doctorId?.hospitalId?.name}
                                                 </li>
                                             </ul>
@@ -66,7 +66,7 @@ function Appointments({ appointments }) {
                                             <ul>
                                                 <li>
                                                     <small class="d-block">Date & Time</small>
-                                                    {`${moment(item.date).format('LL')} - (${ item.time })`}
+                                                    {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                 </li>
                                                 <li class="media">
                                                     <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
@@ -76,7 +76,7 @@ function Appointments({ appointments }) {
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <small class="d-block">Hospital</small>
+                                                <h6 class="mt-0 mb-1" style={{ fontWeight: 'bold' }}>Hospital</h6>
                                                     {item?.doctorId?.hospitalId?.name}
                                                 </li>
                                             </ul>

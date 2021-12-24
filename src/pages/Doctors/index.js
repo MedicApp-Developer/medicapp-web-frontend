@@ -5,11 +5,15 @@ import Appointments from "./Appointments";
 import DoctorLabResults from "./DoctorLabResults";
 import DoctorProfile from "./Profile";
 import HospitalPatientInfo from "../shared/Patient/components/HospitalPatientInfo";
+import SlotsCalendar from "./SlotsCalendar";
 
 const DoctorRouter = withRouter(({ match, ...props }) => {
     return (
         <Switch {...props}>
             <DoctorRoute exact path={`${match.path}`}>
+                <SlotsCalendar />
+            </DoctorRoute>
+            <DoctorRoute exact path={`${match.path}/appointment`}>
                 <Appointments />
             </DoctorRoute>
             <DoctorRoute exact path={`${match.path}/patient`}>

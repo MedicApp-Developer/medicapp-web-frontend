@@ -39,13 +39,6 @@ function PendingLabRequests({ getPendingLabRequests, deletePendingRequest, pendi
                                           {item.tests.map(test => test.test + ", ")}
                                        </li>
                                        <li class="media">
-                                          <img class="avatar-sm" src={DOCTOR_IMAGE} class="mr-3" alt="doctor" />
-                                          <div class="media-body">
-                                             <h5 class="mt-0 mb-1">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</h5>
-                                             <p>{item.doctorId.speciality}</p>
-                                          </div>
-                                       </li>
-                                       <li class="media">
                                           <img class="avatar-sm" src={PATIENT_IMAGE} class="mr-3" alt="patient" />
                                           <div class="media-body">
                                              <h5 class="mt-0 mb-1">{item.patientId.firstName + " " + item.patientId.lastName}</h5>

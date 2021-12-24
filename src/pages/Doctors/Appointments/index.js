@@ -11,6 +11,7 @@ import { getDoctorAppointments, deleteDoctorAppointment, setPageNumber } from '.
 import { connect } from 'react-redux';
 import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames'
+import moment from 'moment'
 
 function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber, deleteDoctorAppointment }) {
 
@@ -51,27 +52,26 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                                  <ul>
                                     <li>
                                        <small class="d-block">Time</small>
-                                       {appointment.time}
+                                       {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('HH.mm')} - ${moment(appointment.to).format('HH.mm')} )`}
                                     </li>
                                     <li class="media">
-                                       <img class="avatar-sm" src={DOCTOR_IMAGE} class="mr-3" alt="doctor" />
-                                       <div class="media-body">
-                                          <h5 class="mt-0 mb-1">Dr. {appointment.doctorId.firstName + " " + appointment.doctorId.lastName}</h5>
-                                          <p>{appointment.doctorId.speciality}</p>
-                                       </div>
-                                    </li>
-                                    <li class="media">
-                                       <img class="avatar-sm" src={PATIENT_IMAGE} class="mr-3" alt="patient" />
-                                       <div class="media-body">
-                                          <h5 class="mt-0 mb-1">{appointment.patientId.firstName + " " + appointment.patientId.lastName}</h5>
-                                          <p>Patient</p>
-                                       </div>
+                                       {appointment.patientId === null ? "NOT BOOKED" : (
+                                          <>
+                                             <img class="avatar-sm" src={PATIENT_IMAGE} class="mr-3" alt="patient" />
+                                             <div class="media-body">
+                                                <h5 class="mt-0 mb-1">{appointment?.patientId?.firstName + " " + appointment?.patientId?.lastName}</h5>
+                                                <p>Patient</p>
+                                             </div>
+                                          </>
+                                       )}
                                     </li>
                                  </ul>
                               </div>
-                              <div class="col-sm-12 col-md-3 col-lg-3 text-center text-lg-right mt-3 mt-md-0 pr-4">
-                                 <a href={href} data-toggle="modal" data-target="#startTreatment" class="btn btn-primary px-3 py-2" onClick={onStartTreatment.bind(this, appointment)}>Start Treatment</a>
-                              </div>
+                              {appointment.patientId !== null && (
+                                 <div class="col-sm-12 col-md-3 col-lg-3 text-center text-lg-right mt-3 mt-md-0 pr-4">
+                                    <a href={href} data-toggle="modal" data-target="#startTreatment" class="btn btn-primary px-3 py-2" onClick={onStartTreatment.bind(this, appointment)}>Start Treatment</a>
+                                 </div>
+                              )}
                            </div>
                            <div class="dropdown">
                               <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -28,7 +28,7 @@ function PatientRegisteration() {
             firstName: "",
             lastName: "",
             email: "",
-            // emiratesId: "",
+            emiratesId: "",
             birthday: "",
             gender: "",
             location: "",
@@ -40,7 +40,7 @@ function PatientRegisteration() {
             firstName:  Yup.string().required(),
             lastName: Yup.string().required(),
             email: Yup.string().required(),
-            // emiratesId: Yup.string().required(),
+            emiratesId: Yup.string().required(),
             birthday: Yup.string().required(),
             gender: Yup.string().required().nullable(),
             location: Yup.string().required(),
@@ -92,9 +92,9 @@ function PatientRegisteration() {
                                 <div class="form-group">
                                     <TextInput type="email" name="email" placeholder="Email" />
                                 </div>
-                                {/* <div class="form-group">
+                                <div class="form-group">
                                     <TextInput type="text" name="emiratesId" placeholder="Emirates ID" />
-                                </div> */}
+                                </div>
                                 <div class="form-group">
                                     <TextInput type="date" name="birthday" placeholder="Birthday" />
                                 </div>

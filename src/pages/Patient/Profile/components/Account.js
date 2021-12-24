@@ -13,7 +13,8 @@ function Account() {
    const [patient, setPatient] = useState({});
 
    useEffect(() => {
-      PatientApi.getSinglePatient(user.referenceId).then(patient => {
+      PatientApi.getSinglePatient(user._id).then(patient => {
+         console.log("patient => ", patient.data.data);
          setPatient(patient.data.data);
       })
    }, []);
@@ -28,7 +29,7 @@ function Account() {
             gender: patient?.gender,
             location: patient?.location,
             phone: patient?.phone,
-            password: ""
+            password: null
          }}
          validationSchema={Yup.object({
             firstName: Yup.string().required('Required'),
@@ -38,10 +39,10 @@ function Account() {
             gender:  Yup.string().required('Required'),
             location:  Yup.string().required('Required'),
             phone:  Yup.string().required('Required'),
-            password:  Yup.string().required('Required'),
+            password:  Yup.string().nullable(),
          })}
          onSubmit={async (values, { setSubmitting, resetForm }) => {
-            const response = await PatientApi.updatePatient(user.referenceId, values);
+            const response = await PatientApi.updatePatient(user._id, values);
             if(!response.error){
                   toast.success("Patient profile updated");
                   localStorage.clear();
@@ -66,7 +67,7 @@ function Account() {
                   </div>
                   <div class="col-md-9 col-lg-9 col-xl-8">
                      <h4 class="mb-3">Personal Details</h4>
-                     <Form>
+                     <Form autoComplete={false}>
                         <div class="row">
                            <div class="col-sm-6">
                               <div class="form-group">

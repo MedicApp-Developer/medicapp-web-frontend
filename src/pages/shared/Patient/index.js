@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 import AddPatient from './components/AddPatient';
 import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames';
-import CreateAnotherAppointment from './components/CreateAnotherAppointment';
-import { useState } from 'react';
 
 function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
 
@@ -20,7 +18,6 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
     const { user } = useContext(RootContext);
 
     const { pageNumber, numberOfPages, patients: allPatients } = patients && patients;
-    const [selectedPatient, setSelectedPatient] = useState(null);
 
     useEffect(() => {
       getPatients(pageNumber || 0);
@@ -38,8 +35,6 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
        case DOCTOR: redirectTo = DOCTOR_PATIENT_INFO_ROUTE; break;
        default: redirectTo = HOSPITAL_PATIENT_INFO_ROUTE;
     }
-
-
 
     const pages = getPagesArray(numberOfPages);
 
@@ -97,7 +92,6 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                               <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePatientHandler(patient?._id) }}>Delete</a>
                            </div>
                         </div>
-                        <a className="dropdown-item" style={{ backgroundColor: "#417EBF", color: "white" }} onClick={(e) => setSelectedPatient(patient)} href={href} data-toggle="modal" data-target="#addAnotherAppointment">Create Appointment</a>
                      </div>
                   </div>
                )) }
@@ -124,7 +118,6 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
             {user.role === NURSE && (
                <>
                   <AddPatient />
-                  <CreateAnotherAppointment selectedPatient={selectedPatient} />
                </>
             )}
         </DashboardLayout>

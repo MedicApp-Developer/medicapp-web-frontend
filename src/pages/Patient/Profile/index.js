@@ -18,7 +18,7 @@ function PatientProfile({ getPatientAccountInfo, patients }) {
     const { patient } = patients && patients;
 
     useEffect(() => {
-        getPatientAccountInfo(user?.referenceId);
+        getPatientAccountInfo(user?._id);
     }, [getPatientAccountInfo]);
 
     let componentToRender = null;

@@ -8,11 +8,15 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import HospitalDoctors from './HospitalDoctors';
 import HospitalServices from './HospitalServices';
+import { withScriptjs } from "react-google-maps";
+import  DirectionsMap from './directions/DirectionsMap';
 
 function HospitalDetails() {
     const [hospital, setHospital] = useState({});
     const [doctors, setDoctors] = useState([]);
     const { id } = useParams();
+    
+    const MapLoader = withScriptjs(DirectionsMap);
 
     useEffect(() => {
         HospitalApi.getSingleHospital(id).then(hospital => {
@@ -52,8 +56,14 @@ function HospitalDetails() {
                             <i class="text-warning fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </p>
-                        <p><span class="icon-map"></span> { hospital?.location } <a href="#">Get Direction</a></p>
+                        <p><span class="icon-map"></span> { hospital?.address } <a href="#">Get Direction</a></p>
                         <h6>Open now </h6>
+                        
+                        {/* Directions Map Here */}
+                        <MapLoader
+                            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`}
+                            loadingElement={<div style={{ height: `100%` }} />}
+                        />
                     </div>
                     </div>
                     <div class="row mt-2">

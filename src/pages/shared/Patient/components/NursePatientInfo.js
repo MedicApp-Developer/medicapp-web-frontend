@@ -54,7 +54,7 @@ function NursePatientInfo({ selectPatient, selectedPatient }) {
                                 <span>Blood Type:</span> {selectedPatient.bloodType}
                                 </li>
                                 <li>
-                                <span>Allergies:</span> {selectedPatient.allergies}
+                                <span>Allergies:</span> {selectedPatient.allergies?.join(",")}
                                 </li>
                                 <li>
                                 <span>Diseases:</span> {selectedPatient?.diseases || "-"}

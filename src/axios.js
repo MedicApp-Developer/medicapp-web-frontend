@@ -6,7 +6,7 @@ const token = window.localStorage.getItem('auth');
 const instance = axios.create({
   baseURL: "https://medicappp.herokuapp.com/api"
 });
-// https://medicappae.com/api
+
 // https://medicappp.herokuapp.com/api
 // http://localhost:8080/api
 

@@ -1,8 +1,13 @@
 export const DoctorsRoutes = [
     {
-        name: "Appointments",
+        name: "Calendar",
         icon: "icon-appointment",
         route: "/doctors"
+    },
+    {
+        name: "Appointments",
+        icon: "icon-appointment",
+        route: "/doctors/appointment"
     },
     {
         name: "Patients",
