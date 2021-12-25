@@ -34,7 +34,7 @@ function Appointments({ appointments }) {
                                                    {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                 </li>
                                                 <li class="media">
-                                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
+                                                    <img class="avatar-sm" src={item?.doctorId?.image ?? DOCTOR_IMAGE} alt="doctor" />
                                                     <div class="media-body">
                                                     <h5 class="mt-0 mb-1">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</h5>
                                                     <p>{item.doctorId?.specialityId?.name}</p>
@@ -69,7 +69,7 @@ function Appointments({ appointments }) {
                                                     {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                 </li>
                                                 <li class="media">
-                                                    <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />
+                                                    <img class="avatar-sm" src={item?.doctorId?.image ?? DOCTOR_IMAGE} alt="doctor" />
                                                     <div class="media-body">
                                                     <h5 class="mt-0 mb-1">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</h5>
                                                     <p>{item.doctorId?.specialityId?.name}</p>
