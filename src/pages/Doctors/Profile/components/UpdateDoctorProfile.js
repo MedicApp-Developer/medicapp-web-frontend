@@ -22,7 +22,7 @@ function UpdateDoctorProfile({ doctor, setDoctor }) {
        {Object.keys(doctor).length > 0 && (
           <Formik
             initialValues={{
-               specialityId: doctor.speciality,
+               specialityId: doctor.specialityId._id,
                experience: doctor.experience,
                about: doctor.about
             }}
@@ -34,7 +34,9 @@ function UpdateDoctorProfile({ doctor, setDoctor }) {
             onSubmit={(values, { setSubmitting, resetForm }) => {
                DoctorApi.updateDoctor(doctor._id, values).then(res => {
                   toast.success("Doctor profile updated");
-                  setDoctor({...doctor, ...values});
+                  setTimeout(() => {
+                     window.location.reload();
+                  }, 2000);
                }).catch(err => {
                   toast.error("Problem while updating doctor profile");
                })

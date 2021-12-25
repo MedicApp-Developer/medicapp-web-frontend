@@ -29,8 +29,8 @@ function SearchedDoctors({ allSearchedDoctors }) {
                                 <i class="text-warning fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </p>
-                            <p class="my-1"><i class="icon-phone"></i> {doctor.mobile} </p>
-                            <p class="my-1"><i class="icon-map"></i> Dubai, United Arab Emirates</p>
+                            {/* <p class="my-1"><i class="icon-phone"></i> {doctor.mobile} </p> */}
+                            <p class="my-1"><i class="icon-map"></i> {doctor?.hospitalId?.address}</p>
                     </div>
             </div>
         ))}
