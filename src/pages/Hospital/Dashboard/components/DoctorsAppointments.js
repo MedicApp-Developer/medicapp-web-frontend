@@ -4,6 +4,7 @@ import DOCTOR_IMAGE from '../../../../assets/images/doctor.png';
 import { RootContext } from '../../../../contextApi';
 import { connect } from 'react-redux';
 import { getAppointments } from '../../../../store/actions/appointmentActions';
+import moment from 'moment';
 
 function DoctorsAppointments({ getAppointments, appointments }) {
 
@@ -21,11 +22,15 @@ function DoctorsAppointments({ getAppointments, appointments }) {
                             <div class="table-responsive">
                                 <table class="table mb-md-0">
                                     <tbody>
-                                        {appointments?.map(appointment => (
+                                        {appointments.filter(app => app.patientId !== null)?.map(appointment => (
                                             <tr>
                                             <td>
                                                 <span>Time</span>
-                                                <p><strong>{appointment?.time}</strong></p>
+                                                <p>
+                                                    <strong>
+                                                        {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('HH.mm')} - ${moment(appointment.to).format('HH.mm')} )`}
+                                                    </strong>
+                                                </p>
                                             </td>
                                             <td>
                                                 <div class="media">

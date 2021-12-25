@@ -67,62 +67,6 @@ console.log("appppp => ", appointments);
                                  </div>
                               </div>
                            </div>
-                           {/* <div class="card patient-detail">
-                              <div class="card-body">
-                                 <h5>Weekly Schedule:</h5>
-                                 <div class="row my-3">
-                                    {selectedDoctor?.schedule?.monday?.startTime && selectedDoctor?.schedule?.monday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Monday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.monday?.startTime}  - {selectedDoctor?.schedule?.monday?.endTime} </small></span>
-                                       </div>
-                                    )}
-                                    
-                                    {selectedDoctor?.schedule?.tuesday?.startTime && selectedDoctor?.schedule?.tuesday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Tuesday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.tuesday?.startTime}  - {selectedDoctor?.schedule?.tuesday?.endTime} </small></span>
-                                       </div>
-                                    )}
-
-                                    {selectedDoctor?.schedule?.wednesday?.startTime && selectedDoctor?.schedule?.wednesday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Wednesday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.wednesday?.startTime}  - {selectedDoctor?.schedule?.wednesday?.endTime} </small></span>
-                                       </div>
-                                    )}
-
-                                    {selectedDoctor?.schedule?.thursday?.startTime && selectedDoctor?.schedule?.thursday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Thursday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.thursday?.startTime}  - {selectedDoctor?.schedule?.thursday?.endTime} </small></span>
-                                       </div>
-                                    )}
-
-                                    {selectedDoctor?.schedule?.friday?.startTime && selectedDoctor?.schedule?.friday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Friday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.friday?.startTime}  - {selectedDoctor?.schedule?.friday?.endTime} </small></span>
-                                       </div>
-                                    )}
-
-                                    {selectedDoctor?.schedule?.satureday?.startTime && selectedDoctor?.schedule?.satureday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Satureday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.satureday?.startTime}  - {selectedDoctor?.schedule?.satureday?.endTime} </small></span>
-                                       </div>
-                                    )}
-
-                                    {selectedDoctor?.schedule?.sunday?.startTime && selectedDoctor?.schedule?.sunday?.endTime && (
-                                       <div class="col-sm-6 col-lg-12 col-xl-6">
-                                          <span><strong>Sunday:</strong>
-                                          <small class="d-block">{selectedDoctor?.schedule?.sunday?.startTime}  - {selectedDoctor?.schedule?.sunday?.endTime} </small></span>
-                                       </div>
-                                    )}
-                                    
-                                 </div>
-                              </div>
-                           </div> */}
                            <div class="card patient-detail">
                               <div class="card-body">
                                  <h5>Information:</h5>
