@@ -13,7 +13,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
     return (
         <>
         {allSearchedDoctors?.length > 0 && allSearchedDoctors.map(doctor => (
-            <div class="media mb-0">
+            <div class="media mb-2">
                 <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/patient/doctor/${doctor._id}`)} />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">

@@ -196,7 +196,7 @@ function Doctor({ searchDoctorsByText, clearDoctorSearch, searchedDoctors, filte
                             <GenderFilters checkedGenders={checkedGenders} onGenderCheckboxChanged={onGenderCheckboxChanged} />
                         </form>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-9">
                         <div class="d-flex justify-content-between align-items-center mb-4 mt-4 mt-md-0">
                             <h5 class="text-primary mb-0">{allSearchedDoctors.length > 0 ? allSearchedDoctors.length : 0} Doctors</h5>
                             <select class="form-control">
@@ -206,9 +206,9 @@ function Doctor({ searchDoctorsByText, clearDoctorSearch, searchedDoctors, filte
                         {/* Searched Doctors */}
                         <SearchedDoctors allSearchedDoctors={allSearchedDoctors} />
                     </div>
-                    <div class="col-md-2 mt-4 mt-md-0">
+                    {/* <div class="col-md-2 mt-4 mt-md-0">
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />
-                    </div>
+                    </div> */}
                     </div>
                 </div>
             </section>

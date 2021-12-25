@@ -125,7 +125,7 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                             
                         </form>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-9">
                         <div class="d-flex justify-content-between align-items-center mb-4 mt-4 mt-md-0">
                             <h5 class="text-primary mb-0">{allSearchedHospitals.length} Hospitals</h5>
                             <select class="form-control">
@@ -135,9 +135,9 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                         {/* Searched Hospitals */}
                         <SearchedHospitals allSearchedHospitals={allSearchedHospitals} />
                     </div>
-                    <div class="col-md-2 mt-4 mt-md-0">
+                    {/* <div class="col-md-2 mt-4 mt-md-0">
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />
-                    </div>
+                    </div> */}
                     </div>
                 </div>
             </section>
