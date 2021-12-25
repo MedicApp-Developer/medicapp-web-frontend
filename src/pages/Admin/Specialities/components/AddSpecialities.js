@@ -46,7 +46,7 @@ function AddSpecialities({ createSpeciality }) {
                     toast.error("File too Big, please select a file less than 5mb")
                     return false;    
                 }
-        
+                
                 formData.append("image", uploadedImage[0]);
                 formData.append("name", values.name);
                 formData.append("tags", values.tags);

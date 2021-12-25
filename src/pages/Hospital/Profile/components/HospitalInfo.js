@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 function HospitalInfo({ hospital }) {
 
-    const { name, location, openingTime, closingTime, about, _id, images } = hospital;
+    const { name, address, openingTime, closingTime, about, _id, images } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
     const [image, setImage] = useState(null);
     
@@ -20,7 +20,7 @@ function HospitalInfo({ hospital }) {
     const uploadImage = () => {
         if(imageSrc && image){
             let formData = new FormData();
-            formData.append('video', image);
+            formData.append('image', image);
             HospitalApi.uploadHospitalImage(_id, formData).then(res => {
                 toast.success("Image Uploaded Successfully");
                 setImage(null);
@@ -44,7 +44,7 @@ function HospitalInfo({ hospital }) {
                         <i className="text-warning fa fa-star"></i>
                         <i className="fa fa-star"></i>
                     </p>
-                    <p><span className="icon-map"></span> { location } <a href="#">Get Direction</a></p>
+                    <p><span className="icon-map"></span> { address } <a href="#">Get Direction</a></p>
                     <h6> { (openingTime && closingTime) ? (openingTime + " - " + closingTime) : "Open Now" }  </h6>
                 </div>
                 <div className="col-6 text-right">

@@ -9,6 +9,7 @@ import AppointmentApi from '../../../../api/Appointment';
 import { selectDoctor } from '../../../../store/actions/doctorActions';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames'
+import moment from 'moment'
 
 function DoctorInfo({ selectedDoctor, selectDoctor }) {
 
@@ -24,7 +25,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
          setPatients(res?.data?.data?.appointments?.map(item => ( item.patientId )))
       });
    }, [id, selectDoctor]);
-
+console.log("appppp => ", appointments);
     return (
         <DashboardLayout>
             <div className="row nav-tab-link">
@@ -66,7 +67,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                  </div>
                               </div>
                            </div>
-                           <div class="card patient-detail">
+                           {/* <div class="card patient-detail">
                               <div class="card-body">
                                  <h5>Weekly Schedule:</h5>
                                  <div class="row my-3">
@@ -121,7 +122,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                     
                                  </div>
                               </div>
-                           </div>
+                           </div> */}
                            <div class="card patient-detail">
                               <div class="card-body">
                                  <h5>Information:</h5>
@@ -151,23 +152,29 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                        <table class="table mb-md-0">
                                           <tbody>
                                              <tr>
-                                                {appointments?.map(appointment => (
+                                                {appointments.filter(app => app.patientId !== null)?.map(appointment => {
+                                                   console.log("SHoo app => ", appointment);
+                                                   return (
                                                    <>
                                                       <td>
                                                          <span>Time</span>
-                                                         <p><strong>{appointment.time}</strong></p>
+                                                         <p>
+                                                            <strong>
+                                                               {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('HH.mm')} - ${moment(appointment.to).format('HH.mm')} )`}
+                                                            </strong>
+                                                         </p>
                                                       </td>
                                                       <td>
                                                          <div class="media">
                                                             <img src={PATIENT_IMAGE} alt="patient" />
                                                             <div class="media-body">
-                                                               <h5 class="mt-0">{appointment?.patientId?.name}</h5>
+                                                               <h5 class="mt-0">{appointment?.patientId?.firstName + " " + appointment?.patientId?.lastName}</h5>
                                                                <p>Patient</p>
                                                             </div>
                                                          </div>
                                                       </td>
                                                    </>
-                                                ))}
+                                                )})}
                                                 {appointments?.length === 0 && (
                                                    <p>No appointment found</p>
                                                 )}
@@ -199,20 +206,20 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                              </th>
                                           </thead>
                                           <tbody>
-                                             {patients?.map((patient => (
+                                             {patients.filter(patient => patient !== null)?.map((patient => (
                                                 <tr>
                                                    <td>
                                                       <div class="media">
                                                          <img class="avatar-sm" src={PATIENT_IMAGE} alt="patient"/>
                                                          <div class="media-body">
-                                                            <h5 class="mt-0">{patient.firstName + " " + patient.lastName}</h5>
-                                                            <p>{patient.email}</p>
+                                                            <h5 class="mt-0">{patient?.firstName + " " + patient?.lastName}</h5>
+                                                            <p>{patient?.email}</p>
                                                          </div>
                                                       </div>
                                                    </td>
-                                                   <td>{patient.bloodType}</td>
-                                                   <td>{patient.birthday}</td>
-                                                   <td>{patient.gender}</td>
+                                                   <td>{patient?.bloodType}</td>
+                                                   <td>{patient?.birthday}</td>
+                                                   <td>{patient?.gender}</td>
                                                 </tr>
                                              )))}
                                              {patients.length === 0 && (
