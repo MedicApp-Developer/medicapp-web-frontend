@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import { Calendar, momentLocalizer  } from 'react-big-calendar' 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { RootContext } from '../../../contextApi/index'
 import SlotApi from '../../../api/Slots/index';
 import moment from 'moment';
+import { href } from '../../../constants/extra';
+import AppointmentDetails from './components/AppointmentDetails';
 
 const localizer = momentLocalizer(moment)
 
@@ -12,9 +14,12 @@ function SlotsCalendar() {
 
     const [slots, setSlots] = useState([]);
     const { user } = useContext(RootContext);
+    const [selectedSlot, setSelectedSlot] = useState(null);
+    const buttonRef = useRef();
     
     useEffect(() => {
         SlotApi.getAllDoctorsSlots(user.referenceId).then(res => {
+            console.log("---> ", res.data.data);
             if(res.data.data && res.data.data.length > 0) {
                 const events = [];
                 res.data.data.forEach(slot => {
@@ -22,7 +27,10 @@ function SlotsCalendar() {
                         title: moment(slot.from).format("hh:mm:ss a") + " - " + moment(slot.to).format("hh:mm:ss a"),
                         start: slot.from,
                         end: slot.to,
-                        status: slot.status
+                        status: slot.status,
+                        description: slot.description,
+                        doctorId: slot.doctorId,
+                        patientId: slot.patientId
                     })
                 })
                 setSlots(events);
@@ -44,13 +52,25 @@ function SlotsCalendar() {
             style.backgroundColor = "#D22B2B"
         }
 
+        if(event.status === "AVAILABLE") {
+            style.pointerEvents = "none"
+        }
+
         return {
             style: style
         };
     }
 
+    const onSelectEvent = (slot) => {
+        setSelectedSlot(slot);
+        buttonRef.current.click();
+    }
+
     return (
         <DashboardLayout>
+            <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
+                <a ref={buttonRef} href={href} data-toggle="modal" data-target="#appointmentDetails" class="btn btn-primary px-3"></a>
+            </div>
             <div class="row align-items-center add-list">
                <div class="col-12">
                   <h4>Calendar Slots</h4>
@@ -62,12 +82,14 @@ function SlotsCalendar() {
                     localizer={localizer}
                     events={slots}
                     startAccessor="start"
+                    onSelectEvent={onSelectEvent}
                     views={['month']}
                     endAccessor="end"
                     selectable={true}
                     eventPropGetter={(eventStyleGetter)}
                 />
             </div>
+            <AppointmentDetails selectedSlot={selectedSlot} />
         </DashboardLayout>
     )
 }

@@ -68,7 +68,7 @@ function PatientDoctorProfile() {
                     </div>
                 </div>
             </section>
-            <BookAppointment />
+            <BookAppointment doctor={doctor} />
         </AppLayout>
     )
 }

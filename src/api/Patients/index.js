@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { PATIENT_NAMESPACE } from '../../constants/namespaces';
+import { FAMILY_NAMESPACE, PATIENT_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise} from 'react-promise-tracker';
 
 const PatientApi = {
@@ -23,6 +23,12 @@ const PatientApi = {
     },
     getPatientAccountInfo(patientId) {
         return trackPromise(axios.get(`/${PATIENT_NAMESPACE}/profile/${patientId}`));
+    },
+    createFamilyMembers(data) {
+        return trackPromise(axios.post(`/${FAMILY_NAMESPACE}`, data));
+    },
+    deleteFamilyMember(id) {
+        return trackPromise(axios.delete(`${FAMILY_NAMESPACE}/${id}`));
     }
 }
 

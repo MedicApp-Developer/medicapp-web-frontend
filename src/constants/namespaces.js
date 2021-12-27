@@ -5,6 +5,7 @@ export const NURSE_NAMESPACE = 'nurse';
 export const LABORATORY_NAMESPACE = 'labortories';
 export const CATEGORIES_NAMESPACE = 'categories';
 export const PATIENT_NAMESPACE = 'patients';
+export const FAMILY_NAMESPACE = 'family';
 export const APPOINTMENT_NAMESPACE = 'appointments';
 export const LAB_REQUEST_NAMESPACE = 'labRequests';
 export const PROMO_REQUEST_NAMESPACE = 'promos';

@@ -9,47 +9,45 @@ import {
 class DirectionsMap extends Component {
     state = {
         directions: null,
-
-
-};
+    };
 
 componentDidMount() {
     const directionsService = new google.maps.DirectionsService();
+    
+    let origin = {};
+    const that = this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+        origin.lat = position.coords.latitude;
+        origin.lng = position.coords.longitude;
+    
+        const destination = { lat: that.props.hospitalLocation?.coordinates[0], lng:  that.props.hospitalLocation?.coordinates[1]};
 
-    const origin = { lat: 31.5204, lng:  74.3587 };
-    const destination = { lat: 32.1877, lng:  74.1945};
-
-    directionsService.route(
-        {
-            origin: origin,
-            destination: destination,
-            travelMode: google.maps.TravelMode.DRIVING,
-            waypoints: [
-                {
-                    location: new google.maps.LatLng(6.4698,  3.5852)
-                },
-                {
-                    location: new google.maps.LatLng(6.6018,3.3515)
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING
+            },
+            (result, status) => {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    console.log(result)
+                    that.setState({
+                        directions: result
+                    });
+                } else {
+                    console.error(`error fetching directions ${result}`);
                 }
-            ]
-        },
-        (result, status) => {
-            if (status === google.maps.DirectionsStatus.OK) {
-                console.log(result)
-                this.setState({
-                    directions: result
-                });
-            } else {
-                console.error(`error fetching directions ${result}`);
             }
-        }
-    );
+        );
+    });
+    
+    
 }
 
 render() {
     const GoogleMapExample = withGoogleMap(props => (
         <GoogleMap
-            defaultCenter={{ lat: 6.5244, lng:  3.3792 }}
+            defaultCenter={{ lat: this.props.hospitalLocation?.coordinates[0], lng:  this.props.hospitalLocation?.coordinates[1] }}
             defaultZoom={13}
         >
             <DirectionsRenderer

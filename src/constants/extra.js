@@ -445,3 +445,12 @@ export const hospitalList = [
 	"HOSPITAL",
 	"CLINIC"
 ]
+export const familiesList = [
+	"FATHER",
+	"MOTHER",
+	"SON",
+	"DAUGHTER",
+	"SISTER",
+	"BROTHER",
+	"OTHER"
+]

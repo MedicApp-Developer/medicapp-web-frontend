@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment";
 import PatientApi from "../../api/Patients";
-import { ADD_PATIENT_BY_NURSE, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
+import { ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
 
 export const getPatients = (pageNo) => async (dispatch, getState) => {
     try {
@@ -28,6 +28,38 @@ export const deletePatientAppointment = (appointmentId, patientId) => async (dis
         return response;
     }catch(err) {
         toast.error("Problem while deleting appointment");
+    }
+}
+
+export const deleteFamilyMember = (memberId) => async (dispatch, getState) => {
+    try {
+        const response = await PatientApi.deleteFamilyMember(memberId);
+        
+        toast.success("Family Member Deleted Successfully")
+
+        dispatch({
+            type: DELETE_FAMILY_MEMBER,
+            payload: memberId
+        })
+        return response;
+    }catch(err) {
+        toast.error("Problem while deleting family member");
+    }
+}
+
+export const addFamilyMember = (data) => async (dispatch, getState) => {
+    try {
+        const response = await PatientApi.createFamilyMembers(data);
+
+        toast.success("Family Member Added Successfully")
+
+        dispatch({
+            type: ADD_FAMILY_MEMBER,
+            payload: response.data.data
+        })
+        return response;
+    }catch(err) {
+        toast.error("Problem while adding family member");
     }
 }
 

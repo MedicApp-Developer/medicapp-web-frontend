@@ -40,13 +40,13 @@ function HospitalDoctors({ doctors }) {
                                                 </div>
                                             </div>
                                             <div class="col-md-5 text-center text-md-left">
-                                                <a href="javascript:void(0)" class="btn btn-primary px-4" data-toggle="modal" data-target="#patientbookAppointment" onClick={() => setSelectedDoctor(doctor._id)}>Book Appointment</a>
+                                                <a href="javascript:void(0)" class="btn btn-primary px-4" data-toggle="modal" data-target="#patientbookAppointment" onClick={() => setSelectedDoctor(doctor)}>Book Appointment</a>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <BookAppointment doctorId={selectedDoctor} hospitalDetailPage={true} />
+                            <BookAppointment doctor={selectedDoctor} hospitalDetailPage={true} />
                         </div>
     )
 }

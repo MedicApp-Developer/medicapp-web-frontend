@@ -10,6 +10,7 @@ import HospitalDoctors from './HospitalDoctors';
 import HospitalServices from './HospitalServices';
 import { withScriptjs } from "react-google-maps";
 import  DirectionsMap from './directions/DirectionsMap';
+import LocateHospital from './directions/LocateHospital';
 
 function HospitalDetails() {
     const [hospital, setHospital] = useState({});
@@ -56,14 +57,36 @@ function HospitalDetails() {
                             <i class="text-warning fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </p>
-                        <p><span class="icon-map"></span> { hospital?.address } <a href="#">Get Direction</a></p>
+                        <p><span class="icon-map"></span> { hospital?.address } 
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#getDirections" style={{ marginLeft: '5px' }}> Get Direction</a>
+                        </p>
                         <h6>Open now </h6>
                         
+                        {hospital.location?.coordinates.length > 0 && (
+                            <LocateHospital lat={hospital?.location?.coordinates[0]} lng={hospital?.location?.coordinates[1]} />
+                        )}
+                        <div className="modal fade" id="getDirections" tabindex="-1" aria-labelledby="getDirectionsLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered modal-lg">
+                                    <div className="modal-content">
+                                    <div className="modal-body">
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span className="icon-close"></span>
+                                    </button>
+                                    <h4 className="text-center">Get Direction</h4>
                         {/* Directions Map Here */}
-                        <MapLoader
-                            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`}
-                            loadingElement={<div style={{ height: `100%` }} />}
-                        />
+                        {hospital.location?.coordinates.length > 0 && (
+                            
+                                    <MapLoader
+                                        hospitalLocation={hospital?.location}
+                                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`}
+                                        loadingElement={<div style={{ height: `100%` }} />}
+                                    />
+                                  
+                        )}
+                          </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     </div>
                     <div class="row mt-2">

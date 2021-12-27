@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION } from '../../../../constants/patientProfile'
+import { ACCOUNT, APPOINTMENTS, FAMILY_MEMBERS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION } from '../../../../constants/patientProfile'
 
 function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
 
@@ -14,6 +14,9 @@ function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
                         <ul class="nav justify-content-center">
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(MEDICAL_PROFILE) }} className={classNames('nav-link', { active: selectedTab === MEDICAL_PROFILE })} href={href}>Medical Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a onClick={(e) => { e.preventDefault(); setSelectedTab(FAMILY_MEMBERS) }} className={classNames('nav-link', { active: selectedTab === FAMILY_MEMBERS })} href={href}>Family Members</a>
                             </li>
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(APPOINTMENTS) }} className={classNames('nav-link', { active: selectedTab === APPOINTMENTS })} href={href}>Appointments</a>

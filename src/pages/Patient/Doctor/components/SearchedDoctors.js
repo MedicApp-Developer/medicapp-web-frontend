@@ -8,18 +8,18 @@ import BookAppointment from './BookAppointment';
 function SearchedDoctors({ allSearchedDoctors }) {
 
     const history = useHistory();
-    const [selectedDoctorId, setSelectedDoctorId] = useState(null);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
 
     return (
         <>
         {allSearchedDoctors?.length > 0 && allSearchedDoctors.map(doctor => (
-            <div class="media mb-2">
+            <div class="media mb-2 shadow-lg mb-2" style={{ padding: "0px 15px", boxShadow: "1px 1px 10px 2px lightgray" }}>
                 <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/patient/doctor/${doctor._id}`)} />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h5 class="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
                                 <span>
-                                    <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2" data-toggle="modal" data-target="#patientbookAppointment" onClick={() => { setSelectedDoctorId(doctor._id) }}>Book Appointment</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2" data-toggle="modal" data-target="#patientbookAppointment" onClick={() => { setSelectedDoctor(doctor) }}>Book Appointment</a>
                                 </span>
                         </div>
                             <p class="rating mb-0">
@@ -34,7 +34,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
                     </div>
             </div>
         ))}
-        <BookAppointment doctorId={selectedDoctorId} />
+        <BookAppointment doctor={selectedDoctor} />
         </>
     )
 }

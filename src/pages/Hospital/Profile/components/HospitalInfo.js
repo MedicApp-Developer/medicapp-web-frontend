@@ -44,7 +44,6 @@ function HospitalInfo({ hospital }) {
                         <i className="text-warning fa fa-star"></i>
                         <i className="fa fa-star"></i>
                     </p>
-                    <p><span className="icon-map"></span> { address } <a href="#">Get Direction</a></p>
                     <h6> { (openingTime && closingTime) ? (openingTime + " - " + closingTime) : "Open Now" }  </h6>
                 </div>
                 <div className="col-6 text-right">

@@ -10,7 +10,7 @@ import CreateAppointment from './CreateAppointment';
 
 const localizer = momentLocalizer(moment)
 
-function BookAppointment({ doctorId, hospitalDetailPage }) {
+function BookAppointment({ doctor, hospitalDetailPage }) {
 
     const [slots, setSlots] = useState([]);
     const { id } = useParams();
@@ -18,8 +18,8 @@ function BookAppointment({ doctorId, hospitalDetailPage }) {
     const buttonRef = useRef();
 
     useEffect(() => {
-        let selectedDoctorId = id ?? doctorId;
-        selectedDoctorId = hospitalDetailPage ? doctorId : selectedDoctorId
+        let selectedDoctorId = id ?? doctor?._id;
+        selectedDoctorId = hospitalDetailPage ? doctor?._id : selectedDoctorId
 
         SlotApi.getAllDoctorsSlots(selectedDoctorId).then(res => {
             if(res.data.data && res.data.data.length > 0) {
@@ -36,7 +36,7 @@ function BookAppointment({ doctorId, hospitalDetailPage }) {
                 setSlots(events);
             }
         })
-    }, [doctorId]);
+    }, [doctor]);
 
     const eventStyleGetter = (event, start, end, status) => {
         var backgroundColor = '#' + event.hexColor;
@@ -96,7 +96,7 @@ function BookAppointment({ doctorId, hospitalDetailPage }) {
                     </div>
                 </div>
             </div>
-            <CreateAppointment selectedSlot={selectedSlot} />
+            <CreateAppointment doctor={doctor} selectedSlot={selectedSlot} />
         </>
     )
 }
