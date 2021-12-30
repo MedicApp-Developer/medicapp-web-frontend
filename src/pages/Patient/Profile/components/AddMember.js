@@ -19,6 +19,7 @@ function AddMember({ familyMembers, addFamilyMember }) {
             lastName: "",
             relation: "",
             emiratesId: "",
+            phoneNo: "",
             patientId: user._id
           }}
           validationSchema={Yup.object({
@@ -26,6 +27,7 @@ function AddMember({ familyMembers, addFamilyMember }) {
             lastName: Yup.string().required('Required'),
             relation: Yup.string().required('Required'),
             emiratesId: Yup.string().required('Required'),
+            phoneNo: Yup.string().required("Required")
           })}
           onSubmit={(values, { resetForm }) => {
             addFamilyMember(values);
@@ -68,6 +70,13 @@ function AddMember({ familyMembers, addFamilyMember }) {
                                                     <option value={spec}>{spec}</option>
                                                 ))}
                                             </SelectInput> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <TextInput type="text" name="phoneNo" placeholder="Phone No" />
                                         </div>
                                     </div>
                                 </div>

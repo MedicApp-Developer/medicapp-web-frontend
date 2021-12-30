@@ -3,6 +3,8 @@ import AppLayout from '../../../../layout/AppLayout'
 import PLACEHOLDER_LARGE from '../../../../assets/images/placeholder-lg.png';
 import PLACEHOLDER_SMALL from '../../../../assets/images/placeholder-sm.png';
 import DENTAL_IMAGE from '../../../../assets/images/dental.png';
+import TESTS_IMAGE from '../../../../assets/images/tests.png';
+import VACCINATION_IMAGE from '../../../../assets/images/vaccination.png';
 import HospitalApi from '../../../../api/Hospital';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,6 +13,8 @@ import HospitalServices from './HospitalServices';
 import { withScriptjs } from "react-google-maps";
 import  DirectionsMap from './directions/DirectionsMap';
 import LocateHospital from './directions/LocateHospital';
+import BookTestHospitalAppointment from './appointment/BookTestHospitalAppointment';
+import BookVaccinationHospital from './appointment/BookVaccinationHospital';
 
 function HospitalDetails() {
     const [hospital, setHospital] = useState({});
@@ -130,27 +134,27 @@ function HospitalDetails() {
                                 <div class="row align-items-center mb-4">
                                 <div class="col-6 col-lg-3">
                                     <div class="media mb-0">
-                                        <img src={DENTAL_IMAGE} class="mr-3" alt="dental" />
+                                        <img src={TESTS_IMAGE} class="mr-3" alt="dental" />
                                         <div class="media-body">
-                                            <h5 class="mt-0">PCR</h5>
+                                            <h5 class="mt-0">PCR Test</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-3">
-                                    <a href="javascript:void(0)" class="btn btn-primary px-4">Book Appointment</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2" data-toggle="modal" data-target="#hospitalTestBookAppointment">Book Appointment</a>
                                 </div>
                                 </div>
                                 <div class="row align-items-center mb-4">
                                 <div class="col-6 col-lg-3">
                                     <div class="media mb-0">
-                                        <img src={DENTAL_IMAGE} class="mr-3" alt="dental" />
+                                        <img src={VACCINATION_IMAGE} class="mr-3" alt="dental" />
                                         <div class="media-body">
-                                            <h5 class="mt-0">PCR</h5>
+                                            <h5 class="mt-0">PCR Vaccination</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-3">
-                                    <a href="javascript:void(0)" class="btn btn-primary px-4">Book Appointment</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary px-3 py-1 mt-2" data-toggle="modal" data-target="#hospitalVaccinationBookAppointment">Book Appointment</a>
                                 </div>
                                 </div>
                             </div>
@@ -159,6 +163,8 @@ function HospitalDetails() {
                     </div>
                 </div>
             </section>
+                <BookVaccinationHospital hospital={hospital} />
+                <BookTestHospitalAppointment hospital={hospital} />
         </AppLayout>
     )
 }

@@ -2,6 +2,7 @@ import moment from 'moment';
 import React from 'react'
 
 function AppointmentDetails(selectedSlot) {
+    console.log("selected Slot => ", selectedSlot);
     return (
         <div className="modal fade" id="appointmentDetails" tabindex="-1" aria-labelledby="appointmentDetailsLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg" style={{ maxWidth: '90%' }}>
@@ -18,6 +19,7 @@ function AppointmentDetails(selectedSlot) {
                                         <td style={{border: '1px solid gray', padding: '7px', fontWeight: 'bold'}}>Patient Name</td>
                                         <td style={{border: '1px solid gray', padding: '7px', fontWeight: 'bold'}}>Date</td>
                                         <td style={{border: '1px solid gray', padding: '7px', fontWeight: 'bold'}}>Time</td>
+                                        <td style={{border: '1px solid gray', padding: '7px', fontWeight: 'bold'}}>Family Member</td>
                                         <td style={{border: '1px solid gray', padding: '7px', fontWeight: 'bold'}}>Description</td>
                                     </tr>
                                 </thead>
@@ -26,6 +28,7 @@ function AppointmentDetails(selectedSlot) {
                                         <td style={{border: '1px solid gray', padding: '7px'}}>{selectedSlot?.selectedSlot?.patientId?.firstName + " " + selectedSlot?.selectedSlot?.patientId?.lastName}</td>
                                         <td style={{border: '1px solid gray', padding: '7px'}}>{moment(selectedSlot?.selectedSlot?.patientId?.from).format("DD-MM-YY")}</td>
                                         <td style={{border: '1px solid gray', padding: '7px'}}>{selectedSlot?.selectedSlot?.title}</td>
+                                        <td style={{border: '1px solid gray', padding: '7px'}}>{selectedSlot?.selectedSlot?.familyMembers ? selectedSlot?.selectedSlot?.familyMembers.firstName + " " + selectedSlot?.selectedSlot?.familyMembers.lastName + " ( " + selectedSlot?.selectedSlot?.familyMembers.relation + " ) " : "No ( Patient's Own )" }</td>
                                         <td style={{border: '1px solid gray', padding: '7px'}}>{selectedSlot?.selectedSlot?.description}</td>
                                     </tr>
                                 </tbody>

@@ -39,6 +39,10 @@ function FamilyMembers({ familyMembers, deleteFamilyMember }) {
                                                     Emirates ID
                                                     <small class="d-block">{member?.emiratesId}</small>
                                                 </li>
+                                                <li>
+                                                    Phone No
+                                                    <small class="d-block">{member?.phoneNo ? member.phoneNo : "-"}</small>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">

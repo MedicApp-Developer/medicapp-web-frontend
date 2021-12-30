@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useContext } from 'react'
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -24,7 +25,7 @@ function CancelAppointment({ selectedAppointment, deletePatientAppointment }) {
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span class="icon-close"></span>
                   </button>
-                  <h5 class="text-center mb-4">Are you sure you want cancel your consultation?</h5>
+                  <h5 class="text-center mb-4">Are you sure you want { moment(selectedAppointment?.to).isBefore(new Date()) ? "delete" : "cancel"} your consultation?</h5>
                   <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2" onClick={cancelAppointmentHandler}>Yes</a>
                   <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2">No</a>
                </div>

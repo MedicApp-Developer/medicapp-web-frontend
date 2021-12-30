@@ -13,6 +13,7 @@ import { SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects
 import instance from '../../../../axios';
 import { usePromiseTracker } from "react-promise-tracker";
 import HashLoader from "react-spinners/HashLoader";
+import { HOSPITAL } from '../../../../constants/Roles';
 
  const LoginForm = () => {
   
@@ -39,13 +40,18 @@ import HashLoader from "react-spinners/HashLoader";
      onSubmit: async values => {
         await AuthApi.login(values).then(res => {
           toast.success("Logged In Successfully");
-          setUser(res?.data?.data?.user);
-        
+          if(res?.data?.data?.user.role === HOSPITAL) {
+            setUser({...res?.data?.data?.user, PCRDPI: res?.data?.data?.hospital.PCRDPI});
+          }else {
+            setUser(res?.data?.data?.user);
+          }
+          
           instance.defaults.headers.common['authorization'] = "Bearer" + " " +  res?.data?.data?.token;
 
           setSelectedNav(selectNav(res?.data?.data?.user?.role));
           localStorage.setItem("auth", res?.data?.data?.token);
-          localStorage.setItem('user', res?.data?.data?.user);
+          localStorage.setItem("user", res?.data?.data?.user);
+          localStorage.setItem("familyMembers", JSON.stringify(res?.data?.data?.familyMembers));
           history.push(redirectTo(res?.data?.data?.user?.role));
         }).catch(err => {
           console.log("Err => ", err);

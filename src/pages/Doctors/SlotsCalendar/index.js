@@ -30,7 +30,8 @@ function SlotsCalendar() {
                         status: slot.status,
                         description: slot.description,
                         doctorId: slot.doctorId,
-                        patientId: slot.patientId
+                        patientId: slot.patientId,
+                        familyMembers: slot.familyMemberId
                     })
                 })
                 setSlots(events);

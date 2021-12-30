@@ -7,7 +7,13 @@ const SlotApi = {
         return trackPromise(axios.post(`${SLOT_NAMESPACE}`, data));
     },
     getAllDoctorsSlots(doctorId) {
-        return trackPromise(axios.post(`${SLOT_NAMESPACE}/all/doctor/${doctorId}`))
+        return trackPromise(axios.post(`${SLOT_NAMESPACE}/all/doctor/${doctorId}`));
+    },
+    getHospitalPCRTestSlots(hospitalId) {
+        return trackPromise(axios.post(`${SLOT_NAMESPACE}/PCRTests/hospital/${hospitalId}`));
+    },
+    getHospitalPCRVaccinationSlots(hospitalId) {
+        return trackPromise(axios.post(`${SLOT_NAMESPACE}/PCRVaccination/hospital/${hospitalId}`));
     }
 }
 

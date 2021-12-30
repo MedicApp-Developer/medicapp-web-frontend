@@ -52,7 +52,10 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
             newValues.services = [newValues.services];
             HospitalApi.updateHospitalProfile(hospitalId, newValues).then(result => {
                 toast.success("Hospital Profile Updated");
-                window.location.reload();
+                setTimeout(() => {
+                    localStorage.clear();
+                    window.location.reload();
+                }, 2000)
             })
           }}
           enableReinitialize={true}
