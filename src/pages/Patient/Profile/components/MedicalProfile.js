@@ -129,10 +129,6 @@ function MedicalProfile({ patient }) {
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
-                                                    <span class="contact-info mr-3">
-                                                    <a class="mt-0" href="javascript:void(0)"><span class="fa fa-map"></span></a>
-                                                    <a class="mt-0" href="javascript:void(0)"><span class="icon-phone"></span></a>
-                                                    </span>
                                                     <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(appointment) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">CANCEL</a>
                                                 </div>
                                             </div>

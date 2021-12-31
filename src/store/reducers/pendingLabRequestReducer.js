@@ -1,4 +1,4 @@
-import { DELETE_REQUEST, GET_LAB_REQUESTS, SET_PAGE_NUMBER } from "../types/pendingLabRequests";
+import { DELETE_REQUEST, GET_LAB_REQUESTS, SET_DOCTOR_PENDING_LAB_REQUESTS_PAGE_NUMBER } from "../types/pendingLabRequests";
 
 const initialState = {
     pendinglabRequests: [],
@@ -20,7 +20,7 @@ export const pendingLabRequestReducer = (state = initialState, action) => {
                 pendinglabRequests: state.pendinglabRequests.filter(req => req._id !== action.payload)
             }
         }
-        case SET_PAGE_NUMBER: {
+        case SET_DOCTOR_PENDING_LAB_REQUESTS_PAGE_NUMBER: {
             return {
                 ...state,
                 pageNumber: action.payload

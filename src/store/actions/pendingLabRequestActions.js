@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment"
-import { GET_LAB_REQUESTS, DELETE_REQUEST , SET_PAGE_NUMBER } from "../types/pendingLabRequests"
+import { GET_LAB_REQUESTS, DELETE_REQUEST , SET_DOCTOR_PENDING_LAB_REQUESTS_PAGE_NUMBER } from "../types/pendingLabRequests"
 
 export const getPendingLabRequests = (doctorId, pageNo) => async (dispatch, getState) => {
     try {
@@ -31,6 +31,6 @@ export const deletePendingRequest = (id) => async (dispatch, getState) => {
 }
 
 export const setPageNumber = (pageNo) => ({
-    type: SET_PAGE_NUMBER,
+    type: SET_DOCTOR_PENDING_LAB_REQUESTS_PAGE_NUMBER,
     payload: pageNo
 })

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment";
 import PatientApi from "../../api/Patients";
-import { ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
+import { ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
 
 export const getPatients = (pageNo) => async (dispatch, getState) => {
     try {
@@ -136,7 +136,7 @@ export const selectPatient = (id) => async (dispatch, getState) => {
 }
 
 export const setPageNumber = (pageNo) => ({
-    type: SET_PAGE_NUMBER,
+    type: SET_PATIENT_PAGE_NUMBER,
     payload: pageNo
 })
 

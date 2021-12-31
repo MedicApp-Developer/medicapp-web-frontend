@@ -79,9 +79,23 @@ function Appointments({ appointments }) {
                                         </div>
                                         </div>
                                     </div>
-                        </div>
-
+                                </div>
                             ))}
+                            {upcomming.length === 0 && (
+                                <div class="card lab-result">
+                                <div class="card-body py-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12 col-lg-8">
+                                            <ul>
+                                                <li>
+                                                    No Upcomming Appointments
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         <h4 class="mb-4 mt-5">History</h4>
                        {history.map(item => (
                                   <div class="card lab-result">
@@ -141,6 +155,21 @@ function Appointments({ appointments }) {
                                       </div>
                           </div>
                             ))}
+                            {history.length === 0 && (
+                                <div class="card lab-result">
+                                <div class="card-body py-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12 col-lg-8">
+                                            <ul>
+                                                <li>
+                                                    No History Present
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     </div>

@@ -1,4 +1,4 @@
-import { ADD_FAMILY_MEMBER, ADD_PATIENT_BY_NURSE, CLEAR_SEARCH_RESULTS, DELETE_APPOINTMENT, DELETE_FAMILY_MEMBER, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PAGE_NUMBER, UPDATE_VITALS } from "../types/patientTypes";
+import { ADD_FAMILY_MEMBER, ADD_PATIENT_BY_NURSE, CLEAR_SEARCH_RESULTS, DELETE_APPOINTMENT, DELETE_FAMILY_MEMBER, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, UPDATE_VITALS } from "../types/patientTypes";
 
 const initialState = {
     patient: {},
@@ -75,7 +75,7 @@ export const patientReducer = (state = initialState, action) => {
                 selectedPatient: action.payload
             }
         }
-        case SET_PAGE_NUMBER: {
+        case SET_PATIENT_PAGE_NUMBER: {
             return {
                 ...state,
                 pageNumber: action.payload

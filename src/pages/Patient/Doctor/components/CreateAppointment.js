@@ -9,11 +9,11 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
     const [description, setDescription] = useState("");
     const [familyMemberId, setFamilyMemberId] = useState(null);
     const familyMembers = JSON.parse(localStorage.getItem("familyMembers")); 
-
+    
     const onConfirmAppointment = () => {
         
         if(moment(selectedSlot.end).isAfter() && selectedSlot.status === "BOOKED") {
-            AppointmentApi.cancelAppointment(selectedSlot._id).then(res => {
+            AppointmentApi.deletePatientAppointment(selectedSlot._id, user._id).then(res => {
                 toast.success("Your appointment cancelled successfully");
                 window.location.reload();
             }).catch(err => {
