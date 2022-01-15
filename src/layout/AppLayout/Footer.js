@@ -1,5 +1,6 @@
 import React from 'react'
 import FOOTER_LOGO from '../../assets/images/footer-logo.png';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -77,13 +78,13 @@ function Footer() {
                             <h4>Legal</h4>
                             <ul>
                             <li>
-                                <a href="javascript:void(0)">Terms & Conditions</a>
+                                <Link to="/terms-of-use">Terms Of Use</Link>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">Cookies Policy</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)">Privacy</a>
+                                <Link to="/privacy-policy">Privacy Policy</Link>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">Regulatory</a>
