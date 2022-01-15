@@ -1,18 +1,29 @@
-import React, { useState } from 'react'
-import { countryList } from '../../../../../constants/extra';
+import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import LookupApi from '../../../../../api/lookups'
 
 function NationalityFilters({ onCountryCheckboxChanged, checkedNationalities }) {
-    
-    const [search, setSearch] = useState("");
-    const [list, setList] = useState(countryList?.slice(0, 5));
 
-    const href = "";
+    const [search, setSearch] = useState("")
+    const [fullList, setFullList] = useState([])
+    const [list, setList] = useState([])
+
+    const href = ""
 
     const onSearchLanguage = (e) => {
-        setSearch(e.target.value);
-        setList(countryList.filter(s => s.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())).slice(0, 5));
+        setSearch(e.target.value)
+        setList(fullList.filter(s => s.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())).slice(0, 5))
     }
-    
+
+    useEffect(() => {
+        LookupApi.getCountries().then(res => {
+            setFullList(res.data.data)
+            setList(res.data.data.slice(0, 5))
+        }).catch(err => {
+            toast.error("Problem while fetching lookups")
+        })
+    }, [])
+
     return (
         <div class="custom-checkbox">
             <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
@@ -24,8 +35,8 @@ function NationalityFilters({ onCountryCheckboxChanged, checkedNationalities }) 
                 </form>
                 {list?.map(spec => (
                     <div class="form-group form-check">
-                        <input type="checkbox" checked={checkedNationalities.includes(spec)} onChange={onCountryCheckboxChanged.bind(this, spec)} class="form-check-input" id={spec} />
-                        <label class="form-check-label" for={spec}>{spec}</label>
+                        <input type="checkbox" checked={checkedNationalities.includes(spec._id)} onChange={onCountryCheckboxChanged.bind(this, spec._id)} class="form-check-input" id={spec._id} />
+                        <label class="form-check-label" for={spec._id}>{spec.name}</label>
                     </div>
                 ))}
             </div>
