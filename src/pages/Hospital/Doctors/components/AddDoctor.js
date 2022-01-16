@@ -8,6 +8,7 @@ import DoctorApi from '../../../../api/Doctors'
 import TextInput from '../../../../components/forms/TextInput'
 import { countryList, genderList, languagesList } from '../../../../constants/extra'
 import LookupApi from '../../../../api/lookups'
+import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
 function AddDoctor({ addDoctor }) {
 
@@ -89,7 +90,11 @@ function AddDoctor({ addDoctor }) {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <TextInput type="text" name="mobile" placeholder="Mobile" />
+                                            <NumberFormatInput
+                                                format={"+971-## ### ####"}
+                                                mask={"_"}
+                                                name="mobile" placeholder="Mobile"
+                                            />
                                         </div>
                                     </div>
                                 </div>
