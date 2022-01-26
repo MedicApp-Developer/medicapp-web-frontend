@@ -1,16 +1,18 @@
-import { Switch, withRouter } from "react-router-dom";
-import PatientRoute from "../../ProtectedRoutes/PatientRoute";
-import Home from "./Home";
-import Hospital from "./Hospital";
-import Doctor from './Doctor';
-import Pharmacy from "./Pharmacy";
-import Insurance from "./Insurance";
-import Promos from "./Promos";
-import BookAppointment from "./Doctor/components/PatientDoctorProfile";
-import HospitalDetails from "./Hospital/components/HospitalDetails";
-import PatientProfile from "./Profile";
-import Getaqoute from "./Getaqoute";
-import PatientDoctorProfile from "./Doctor/components/PatientDoctorProfile";
+import { Switch, withRouter } from "react-router-dom"
+import PatientRoute from "../../ProtectedRoutes/PatientRoute"
+import Home from "./Home"
+import Hospital from "./Hospital"
+import Doctor from './Doctor'
+import Pharmacy from "./Pharmacy"
+import Insurance from "./Insurance"
+import Promos from "./Promos"
+import HospitalDetails from "./Hospital/components/HospitalDetails"
+import PatientProfile from "./Profile"
+import Getaqoute from "./Getaqoute"
+import PatientDoctorProfile from "./Doctor/components/PatientDoctorProfile"
+import BookAppointment from "./Doctor/components/BookAppointment"
+import BookVaccinationHospital from './Hospital/components/appointment/BookVaccinationHospital'
+import BookTestHospitalAppointment from './Hospital/components/appointment/BookTestHospitalAppointment'
 
 const PatientRouter = withRouter(({ match, ...props }) => {
     return (
@@ -45,8 +47,17 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             <PatientRoute exact path={`${match.path}/get-qoute`}>
                 <Getaqoute />
             </PatientRoute>
+            <PatientRoute exact path={`${match.path}/book-appointment`}>
+                <BookAppointment />
+            </PatientRoute>
+            <PatientRoute exact path={`${match.path}/book-vaccination-appointment`}>
+                <BookVaccinationHospital />
+            </PatientRoute>
+            <PatientRoute exact path={`${match.path}/book-pcr-appointment`}>
+                <BookTestHospitalAppointment />
+            </PatientRoute>
         </Switch>
     )
-});
+})
 
-export default PatientRouter;
+export default PatientRouter

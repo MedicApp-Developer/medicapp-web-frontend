@@ -160,7 +160,7 @@ function Appointments({ appointments }) {
                                                     </div>
 
                                                 </span>
-                                                <a style={{ marginRight: '1rem' }} href="javascript:void(0)" class="btn btn-secondary px-3">Slip</a>
+                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">Slip</a>
                                                 <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">DELETE</a>
                                             </div>
                                         </div>

@@ -1,15 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ACCOUNT, APPOINTMENTS, FAMILY_MEMBERS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION } from '../../../../constants/patientProfile'
+import { ACCOUNT, APPOINTMENTS, FAMILY_MEMBERS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, SICK_LEAVES } from '../../../../constants/patientProfile'
 
 function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
 
-    const href = "";
+    const href = ""
 
     return (
         <section class="nav-tab-section">
-                <div class="container-fluid">
-                    <div class="row nav-tab-link">
+            <div class="container-fluid">
+                <div class="row nav-tab-link">
                     <div class="col-md-12">
                         <ul class="nav justify-content-center">
                             <li class="nav-item">
@@ -22,6 +22,9 @@ function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(APPOINTMENTS) }} className={classNames('nav-link', { active: selectedTab === APPOINTMENTS })} href={href}>Appointments</a>
                             </li>
                             <li class="nav-item">
+                                <a onClick={(e) => { e.preventDefault(); setSelectedTab(SICK_LEAVES) }} className={classNames('nav-link', { active: selectedTab === SICK_LEAVES })} href={href}>Sick Leaves</a>
+                            </li>
+                            <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(QR_PRESCRIPTION) }} className={classNames('nav-link', { active: selectedTab === QR_PRESCRIPTION })} href={href}>QR Prescription</a>
                             </li>
                             <li class="nav-item">
@@ -32,9 +35,9 @@ function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
                             </li>
                         </ul>
                     </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
     )
 }
 

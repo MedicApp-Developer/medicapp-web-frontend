@@ -15,3 +15,4 @@ export const HOSPITAL_ADDON_SERVICES_NAMESPACE = 'hospitals/services'
 export const QR_PRESCRIPTION_NAMESPACE = 'qrprescription'
 export const SLOT_NAMESPACE = "slots"
 export const LOOKUPS_NAMESPACE = "lookups"
+export const SICKLEAVES_NAMESPACE = "leaves"
