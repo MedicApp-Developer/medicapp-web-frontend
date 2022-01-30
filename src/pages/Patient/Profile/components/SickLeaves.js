@@ -40,8 +40,12 @@ function SickLeaves() {
 												{leave?.doctorId?.firstName + " " + leave?.doctorId?.lastName}
 											</li>
 											<li>
-												<small class="d-block">Days</small>
-												{leave?.days}
+												<small class="d-block">From</small>
+												{moment(leave?.from).format("LL")}
+											</li>
+											<li>
+												<small class="d-block">To</small>
+												{moment(leave?.to).format("LL")}
 											</li>
 											<li>
 												<small class="d-block">Issue Date</small>

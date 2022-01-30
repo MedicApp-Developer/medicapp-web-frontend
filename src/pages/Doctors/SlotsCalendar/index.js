@@ -19,7 +19,6 @@ function SlotsCalendar() {
 
     useEffect(() => {
         SlotApi.getAllDoctorsSlots(user.referenceId).then(res => {
-            console.log("---> ", res.data.data)
             if (res.data.data && res.data.data.length > 0) {
                 const events = []
                 res.data.data.forEach(slot => {

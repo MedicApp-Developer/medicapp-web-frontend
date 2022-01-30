@@ -6,28 +6,36 @@ import { RootContext } from '../../../../contextApi'
 import * as Yup from 'yup'
 import TextInput from '../../../../components/forms/TextInput'
 import TextArea from '../../../../components/forms/TextArea'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
+import { useState } from 'react'
 
 function CreateSickLeave({ patientId }) {
 	const { user } = useContext(RootContext)
+	const [from, setFrom] = useState(new Date())
+	const [to, setTo] = useState(new Date())
+	const [fromError, setFromError] = useState(false)
+	const [toError, setToError] = useState(false)
+
 	return (
 		<Formik
 			initialValues={{
-				days: "",
 				description: ""
 			}}
 			validationSchema={Yup.object({
-				days: Yup.string().required('Required'),
 				description: Yup.string().required('Required'),
 			})}
 			onSubmit={(values, { resetForm }) => {
 				const leave = {
 					doctorId: user.referenceId,
 					patientId,
-					days: values.days,
+					to,
+					from,
 					description: values.description
 				}
 				DoctorApi.createSickLeave(leave).then(res => {
 					toast.success("Sick Leave Approval")
+					resetForm()
 				}).catch(err => {
 					toast.error("Problem while creating sick leave")
 				})
@@ -46,10 +54,31 @@ function CreateSickLeave({ patientId }) {
 								<div className="row">
 									<div className="col-md-6">
 										<div className="form-group">
-											<TextInput type="text" name="days" placeholder="Days Of Sick Leaves" />
+											<DatePicker
+												id="from"
+												className="form-control"
+												placeholderText="From Date"
+												selected={from}
+												onChange={(date) => setFrom(date)}
+												minDate={new Date()}
+												dateFormat="MMMM d, yyyy h:mm aa"
+											/>
 										</div>
 									</div>
 									<div className="col-md-6">
+										<div className="form-group">
+											<DatePicker
+												id="to"
+												className="form-control"
+												placeholderText="To Date"
+												selected={to}
+												onChange={(date) => setTo(date)}
+												minDate={new Date()}
+												dateFormat="MMMM d, yyyy h:mm aa"
+											/>
+										</div>
+									</div>
+									<div className="col-md-12">
 										<div className="form-group">
 											<TextArea name="description" rows="5" placeholder="Comments" />
 										</div>

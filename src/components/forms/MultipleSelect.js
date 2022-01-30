@@ -1,15 +1,29 @@
 import React from 'react'
-import { useField } from 'formik'
-import classNames from 'classnames'
+import { MultiSelect } from "react-multi-select-component"
 
-function MultipleSelect(props) {
-	const [field, meta] = useField(props)
+function MultipleSelect({ options, value, changeHandler, label, hasError, errorMessage, defaultValue }) {
+
 	return (
-		<div>
-			{meta.touched && meta.error ? (
-				<div className="invalid-feedback text-right-aligned">{meta.error}</div>
+		<>
+			<div>
+				<MultiSelect
+					options={options}
+					hasSelectAll={true}
+					isLoading={false}
+					shouldToggleOnHover={false}
+					disableSearch={false}
+					defaultValue={defaultValue}
+					value={value}
+					disabled={false}
+					onChange={changeHandler}
+					labelledBy={label}
+					className={hasError ? "multi-select error-border" : "multi-select"}
+				/>
+			</div>
+			{hasError ? (
+				<div className="multiselect-error-message">{errorMessage}</div>
 			) : null}
-		</div>
+		</>
 	)
 }
 

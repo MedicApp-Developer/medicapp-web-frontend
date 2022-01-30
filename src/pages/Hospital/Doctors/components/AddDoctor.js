@@ -9,6 +9,7 @@ import TextInput from '../../../../components/forms/TextInput'
 import { countryList, genderList, languagesList } from '../../../../constants/extra'
 import LookupApi from '../../../../api/lookups'
 import NumberFormatInput from '../../../../components/forms/NumberFormat'
+import MultipleSelect from '../../../../components/forms/MultipleSelect'
 
 function AddDoctor({ addDoctor }) {
 
@@ -16,10 +17,20 @@ function AddDoctor({ addDoctor }) {
     const [countries, setCountries] = useState([])
     const [genders, setGenders] = useState([])
     const [languages, setLanguages] = useState([])
+    const [selectedSpeciality, setSelectedSpeciality] = useState([])
+    const [specialityError, setSpecialityError] = useState(false)
 
     useEffect(() => {
         DoctorApi.getAllSpecialities("undefined").then(res => {
-            setAllSpecialities(res.data.data)
+            const data = []
+
+            res.data.data.map(item => {
+                data.push({
+                    label: item.name,
+                    value: item._id
+                })
+            })
+            setAllSpecialities(data)
         })
         LookupApi.getCountries().then(res => {
             setCountries(res.data.data)
@@ -39,7 +50,6 @@ function AddDoctor({ addDoctor }) {
                 email: "",
                 mobile: "",
                 experience: "",
-                specialityId: "",
                 gender: "",
                 country: "",
                 language: ""
@@ -50,14 +60,25 @@ function AddDoctor({ addDoctor }) {
                 email: Yup.string().required('Required').email(),
                 mobile: Yup.string().required('Required'),
                 experience: Yup.string().required('Required'),
-                specialityId: Yup.string().required('Required'),
                 gender: Yup.string().required('Required'),
                 country: Yup.string().required('Required'),
                 language: Yup.string().required('Required')
             })}
             onSubmit={(values, { resetForm }) => {
-                addDoctor(values)
-                resetForm()
+                if (selectedSpeciality.length === 0) {
+                    setSpecialityError(true)
+                } else {
+                    setSpecialityError(false)
+
+                    const specialityIds = []
+                    selectedSpeciality.map(item => {
+                        specialityIds.push(item.value)
+                    })
+
+                    addDoctor({ ...values, specialityId: specialityIds })
+                    resetForm()
+                }
+
             }}
             enableReinitialize={true}
         >
@@ -106,12 +127,14 @@ function AddDoctor({ addDoctor }) {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <SelectInput name="specialityId">
-                                                <option value="">Select Speciality</option>
-                                                {allSpecialities?.map(spec => (
-                                                    <option value={spec._id}>{spec.name}</option>
-                                                ))}
-                                            </SelectInput>
+                                            <MultipleSelect
+                                                options={allSpecialities}
+                                                value={selectedSpeciality}
+                                                changeHandler={(e) => { setSelectedSpeciality(e); e.length > 0 ? setSpecialityError(false) : setSpecialityError(true) }}
+                                                hasError={specialityError}
+                                                label={"Select Speciality"}
+                                                errorMessage={"Speciality is required"}
+                                            />
                                         </div>
                                     </div>
                                 </div>
