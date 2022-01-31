@@ -74,7 +74,6 @@ function DoctorInfo({ doctor }) {
             </div>
             <div class="col-md-8">
                <h4 class="mb-0"><strong>Dr. {doctor.firstName + " " + doctor.lastName}</strong></h4>
-               <small>{doctor?.specialityId?.name.toUpperCase()}</small>
                <p class="mt-2 mb-2"><i class="icon-hospital"></i> {doctor.hospitalId.name}</p>
                <p>{doctor.about || "lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem"}</p>
                <h5><strong>Speciality</strong></h5>
