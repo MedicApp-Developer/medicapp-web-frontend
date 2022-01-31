@@ -11,54 +11,13 @@ import MultipleSelect from '../../../../components/forms/MultipleSelect'
 // import MultiSelect from 'react-multiple-select-dropdown-lite'
 // import 'react-multiple-select-dropdown-lite/dist/index.css'
 
-const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
+const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories, services, setServices }) => {
 
-    const [services, setServices] = useState([])
-    const [categories, setCategories] = useState([])
-    const [value, setvalue] = useState('')
-    const [selectedCategories, setSelectedCategories] = useState([])
     const [categoriesError, setCategoriesError] = useState(false)
-    const [valueChanged, setValueChanged] = useState(false)
-
-    useEffect(() => {
-        HospitalApi.getAllHospitalServices().then(res => {
-            setServices(res.data.data)
-        })
-
-        HospitalApi.getAllHospitalCategories().then(res => {
-            const categoryOptions = []
-
-            res.data.data.map(category => {
-                categoryOptions.push({
-                    label: category.name,
-                    value: category._id
-                })
-            })
-            setCategories(categoryOptions)
-            if (hospital?.hospital?.category?.length > 0) {
-                const prevCategories = []
-                categoryOptions.map(outerItem => {
-                    hospital?.hospital?.category?.map(innerItem => {
-                        if (outerItem.value === innerItem) {
-                            prevCategories.push(outerItem)
-                        }
-                    })
-                })
-                setSelectedCategories(prevCategories)
-                setValueChanged(true)
-            } else {
-                setValueChanged(true)
-            }
-
-        })
-    }, [])
+    const [servicesError, setServicesError] = useState(false)
 
     const timesArray = getTimesArray()
 
-    const handleOnchange = val => {
-        setvalue(val)
-    }
-    valueChanged && console.log("selectedCategories =>>>>>>>> ", selectedCategories)
     return (
         <>
             <Formik
@@ -67,35 +26,41 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
                     closingTime: hospital?.hospital?.closingTime,
                     PCRDPI: hospital?.hospital?.PCRDPI,
                     about: hospital?.hospital?.about,
-                    services: hospital?.hospital?.services[0],
-                    type: hospital?.hospital?.type,
-                    // category: hospital?.hospital?.category
+                    type: hospital?.hospital?.type
                 }}
                 validationSchema={Yup.object({
                     openingTime: Yup.string().required('Required'),
                     closingTime: Yup.string().required('Required'),
                     PCRDPI: Yup.boolean().required('Required'),
-                    services: Yup.string().required('Required'),
                     about: Yup.string().required('Required'),
-                    type: Yup.string().required('Required'),
-                    // category: Yup.string().required('Required').nullable(),
+                    type: Yup.string().required('Required')
                 })}
                 onSubmit={(values, { setSubmitting }) => {
 
-                    if (selectedCategories.length === 0) {
+                    if (categories.selectedCategories.length === 0) {
                         setCategoriesError(true)
+                    } if (services.selectedServices.length === 0) {
+                        setServicesError(true)
                     } else {
                         setSubmitting(true)
                         setCategoriesError(false)
+                        setServicesError(false)
+
                         const newValues = JSON.parse(JSON.stringify(values))
-                        newValues.services = [newValues.services]
 
                         const categoriesId = []
 
-                        selectedCategories.map(item => {
+                        categories.selectedCategories.map(item => {
                             categoriesId.push(item.value)
                         })
 
+                        const servicesId = []
+
+                        services.selectedServices.map(item => {
+                            servicesId.push(item.value)
+                        })
+
+                        newValues.services = servicesId
                         newValues.category = categoriesId
                         HospitalApi.updateHospitalProfile(hospitalId, newValues).then(result => {
                             toast.success("Hospital Profile Updated")
@@ -131,19 +96,25 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                {
-                                                    valueChanged && (
-                                                        <MultipleSelect
-                                                            options={categories}
-                                                            value={selectedCategories}
-                                                            defaultValue={selectedCategories}
-                                                            changeHandler={(e) => { setSelectedCategories(e); e.length > 0 ? setCategoriesError(false) : setCategoriesError(true) }}
-                                                            hasError={categoriesError}
-                                                            label={"Select Categories"}
-                                                            errorMessage={"Category is required"}
-                                                        />
-                                                    )
-                                                }
+                                                {categories.selectedCategories.length > 0 ? (
+                                                    <MultipleSelect
+                                                        options={categories.categories}
+                                                        value={categories.selectedCategories}
+                                                        changeHandler={(e) => { setCategories({ ...categories, selectedCategories: e }); e.length > 0 ? setCategoriesError(false) : setCategoriesError(true) }}
+                                                        hasError={categoriesError}
+                                                        label={"Select Categories"}
+                                                        errorMessage={"Category is required"}
+                                                    />
+                                                ) : (
+                                                    <MultipleSelect
+                                                        options={categories.categories}
+                                                        value={categories.selectedCategories}
+                                                        changeHandler={(e) => { setCategories({ ...categories, selectedCategories: e }); e.length > 0 ? setCategoriesError(false) : setCategoriesError(true) }}
+                                                        hasError={categoriesError}
+                                                        label={"Select Categories"}
+                                                        errorMessage={"Category is required"}
+                                                    />
+                                                )}
                                             </div>
                                         </div>
 
@@ -170,12 +141,25 @@ const UpdateHospitalProfile = ({ hospitalId, hospital }) => {
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="services">
-                                                    <option value="">Services</option>
-                                                    {services?.map(item => (
-                                                        <option value={item._id}>{item.name}</option>
-                                                    ))}
-                                                </SelectInput>
+                                                {services.selectedServices.length > 0 ? (
+                                                    <MultipleSelect
+                                                        options={services.services}
+                                                        value={services.selectedServices}
+                                                        changeHandler={(e) => { setServices({ ...services, selectedServices: e }); e.length > 0 ? setServicesError(false) : setServicesError(true) }}
+                                                        hasError={servicesError}
+                                                        label={"Select Services"}
+                                                        errorMessage={"Services are required"}
+                                                    />
+                                                ) : (
+                                                    <MultipleSelect
+                                                        options={services.services}
+                                                        value={services.selectedServices}
+                                                        changeHandler={(e) => { setServices({ ...services, selectedServices: e }); e.length > 0 ? setServicesError(false) : setServicesError(true) }}
+                                                        hasError={servicesError}
+                                                        label={"Select Services"}
+                                                        errorMessage={"Services are required"}
+                                                    />
+                                                )}
                                             </div>
                                         </div>
                                         <div className="col-md-6">
