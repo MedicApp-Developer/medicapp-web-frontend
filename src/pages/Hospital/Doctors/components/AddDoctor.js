@@ -26,7 +26,7 @@ function AddDoctor({ addDoctor }) {
 
             res.data.data.map(item => {
                 data.push({
-                    label: item.name,
+                    label: item.name_en,
                     value: item._id
                 })
             })
@@ -144,7 +144,7 @@ function AddDoctor({ addDoctor }) {
                                             <SelectInput name="gender">
                                                 <option value="">Select Gender</option>
                                                 {genders?.map(gender => (
-                                                    <option value={gender._id}>{gender.name}</option>
+                                                    <option value={gender._id}>{gender.name_en}</option>
                                                 ))}
                                             </SelectInput>
                                         </div>
@@ -154,7 +154,7 @@ function AddDoctor({ addDoctor }) {
                                             <SelectInput name="country">
                                                 <option value="">Select Country</option>
                                                 {countries?.map(country => (
-                                                    <option value={country._id}>{country.name}</option>
+                                                    <option value={country._id}>{country.name_en}</option>
                                                 ))}
                                             </SelectInput>
                                         </div>
@@ -166,7 +166,7 @@ function AddDoctor({ addDoctor }) {
                                             <SelectInput name="language">
                                                 <option value="">Select Language</option>
                                                 {languages?.map(lang => (
-                                                    <option value={lang._id}>{lang.name}</option>
+                                                    <option value={lang._id}>{lang.name_en}</option>
                                                 ))}
                                             </SelectInput>
                                         </div>

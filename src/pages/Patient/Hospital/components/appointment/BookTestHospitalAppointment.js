@@ -8,6 +8,7 @@ import { href } from '../../../../../constants/extra'
 import { useParams } from 'react-router-dom'
 import CreateAppointment from '../../../Doctor/components/CreateAppointment'
 import AppLayout from '../../../../../layout/AppLayout'
+import { useTranslation } from "react-i18next"
 
 const localizer = momentLocalizer(moment)
 
@@ -19,6 +20,7 @@ function BookTestHospitalAppointment() {
     const buttonRef = useRef()
     const { user } = useContext(RootContext)
     const slotRef = useRef()
+    const { t } = useTranslation()
 
     useEffect(() => {
         SlotApi.getHospitalPCRTestSlots(hospital?._id).then(res => {
@@ -80,7 +82,7 @@ function BookTestHospitalAppointment() {
                     <a ref={buttonRef} href={href} data-toggle="modal" data-target="#setAppointment" class="btn btn-primary px-3"></a>
                 </div>
 
-                <h4 className="text-center"><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{hospital?.name}'s</span> Available Slots</h4>
+                <h4 className="text-center"><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{hospital?.name}'s</span> {t("available_slots")}</h4>
                 <Calendar
                     popup
                     localizer={localizer}

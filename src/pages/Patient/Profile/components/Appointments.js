@@ -6,11 +6,13 @@ import { useState } from 'react'
 import { href } from '../../../../constants/extra'
 import SlotApi from '../../../../api/Slots'
 import { saveAs } from 'file-saver'
+import { useTranslation } from "react-i18next"
 
 function Appointments({ appointments }) {
 
     const [selectedAppointment, setSelectedAppointment] = useState(null)
-    console.log("appointments => ", appointments)
+    const { t } = useTranslation()
+
     let today = new Date()
     let yesterday = new Date()
     yesterday.setDate(today.getDate() - 1)
@@ -32,7 +34,7 @@ function Appointments({ appointments }) {
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-xl-12 pb-5">
-                            <h4 class="mb-4">Upcoming</h4>
+                            <h4 class="mb-4">{t("upcoming")}</h4>
                             {upcomming?.map(item => (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
@@ -40,7 +42,7 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-8">
                                                 <ul>
                                                     <li>
-                                                        <small class="d-block">Date & Time</small>
+                                                        <small class="d-block">{t("date")} & {t("time")}</small>
                                                         {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                     </li>
                                                     <li class="media">
@@ -57,7 +59,7 @@ function Appointments({ appointments }) {
                                                                 ) : (
                                                                     <>
                                                                         <div class="media-body">
-                                                                            <small class="d-block">Appointment Type</small>
+                                                                            <small class="d-block">{t("appointment_type")}</small>
                                                                             <p>{item?.type.replace(/_/g, ' ')}</p>
                                                                         </div>
                                                                     </>
@@ -66,7 +68,7 @@ function Appointments({ appointments }) {
 
                                                     </li>
                                                     <li>
-                                                        <small class="d-block" >Hospital</small>
+                                                        <small class="d-block" >{t("hospital")}</small>
                                                         {item?.doctorId ? (
                                                             item?.doctorId?.hospitalId?.name
                                                         ) : (
@@ -78,15 +80,15 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
                                                 <span class="contact-info mr-4" style={{ float: 'left' }}>
                                                     <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
-                                                        <small class="d-block" style={{ float: 'left' }}>Family</small>
+                                                        <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
                                                         <div>
-                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : "Mine"}
+                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
                                                         </div>
                                                     </div>
 
                                                 </span>
-                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">Slip</a>
-                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">CANCEL</a>
+                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
+                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("CANCEL")}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +101,7 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-8">
                                                 <ul>
                                                     <li>
-                                                        No Upcomming Appointments
+                                                        {t("no_upcoming_appointments")}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -107,7 +109,7 @@ function Appointments({ appointments }) {
                                     </div>
                                 </div>
                             )}
-                            <h4 class="mb-4 mt-5">History</h4>
+                            <h4 class="mb-4 mt-5">{t("history")}</h4>
                             {history.map(item => (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
@@ -115,7 +117,7 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-8">
                                                 <ul>
                                                     <li>
-                                                        <small class="d-block">Date & Time</small>
+                                                        <small class="d-block">{t("date")} & {t("time")}</small>
                                                         {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
                                                     </li>
                                                     <li class="media">
@@ -132,7 +134,7 @@ function Appointments({ appointments }) {
                                                                 ) : (
                                                                     <>
                                                                         <div class="media-body">
-                                                                            <small class="d-block">Appointment Type</small>
+                                                                            <small class="d-block">{t("appointment_type")}</small>
                                                                             <p>{item?.type.replace(/_/g, ' ')}</p>
                                                                         </div>
                                                                     </>
@@ -141,7 +143,7 @@ function Appointments({ appointments }) {
 
                                                     </li>
                                                     <li>
-                                                        <small class="d-block" >Hospital</small>
+                                                        <small class="d-block" >{t("hospital")}</small>
                                                         {item?.doctorId ? (
                                                             item?.doctorId?.hospitalId?.name
                                                         ) : (
@@ -153,15 +155,15 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
                                                 <span class="contact-info mr-4" style={{ float: 'left' }}>
                                                     <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
-                                                        <small class="d-block" style={{ float: 'left' }}>Family</small>
+                                                        <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
                                                         <div>
-                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : "Mine"}
+                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
                                                         </div>
                                                     </div>
 
                                                 </span>
-                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">Slip</a>
-                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">DELETE</a>
+                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
+                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">{t("DELETE")}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +176,7 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-8">
                                                 <ul>
                                                     <li>
-                                                        No History Present
+                                                        {t("no_history_present")}
                                                     </li>
                                                 </ul>
                                             </div>

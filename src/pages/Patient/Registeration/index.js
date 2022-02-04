@@ -11,8 +11,10 @@ import SelectInput from '../../../components/forms/SelectInput'
 import TextInput from '../../../components/forms/TextInput'
 import PatientApi from '../../../api/Patients'
 import NumberFormatInput from '../../../components/forms/NumberFormat'
+import { useTranslation } from "react-i18next"
 
 function PatientRegisteration() {
+    const { t } = useTranslation()
 
     const [file, setFile] = useState(null)
     const [submited, setSubmited] = useState(false)
@@ -38,26 +40,26 @@ function PatientRegisteration() {
                 confirmPassword: ""
             }}
             validationSchema={Yup.object({
-                firstName: Yup.string().required(),
-                lastName: Yup.string().required(),
-                email: Yup.string().required(),
-                emiratesId: Yup.string().required(),
-                birthday: Yup.string().required(),
-                gender: Yup.string().required().nullable(),
-                location: Yup.string().required(),
-                phone: Yup.string().required(),
-                password: Yup.string().required(),
-                confirmPassword: Yup.string().required().when("password", {
+                firstName: Yup.string().required(t('required')),
+                lastName: Yup.string().required(t('required')),
+                email: Yup.string().required(t('required')),
+                emiratesId: Yup.string().required(t('required')),
+                birthday: Yup.string().required(t('required')),
+                gender: Yup.string().required(t('required')).nullable(),
+                location: Yup.string().required(t('required')),
+                phone: Yup.string().required(t('required')),
+                password: Yup.string().required(t('required')),
+                confirmPassword: Yup.string().required(t('required')).when("password", {
                     is: val => (val && val.length > 0 ? true : false),
                     then: Yup.string().oneOf(
                         [Yup.ref("password")],
-                        "Both password need to be the same"
+                        t("both_password_need_to_be_the_same")
                     )
                 })
             })}
             onSubmit={async (values, { setSubmitting }) => {
                 PatientApi.registerPatient(values).then(res => {
-                    toast.success("Patient Registered Successfully")
+                    toast.success(t("patient_registered_successfully"))
                     history.push(LOGIN_ROUTE)
                 }).catch(err => {
                     toast.error(err.response.data.message)
@@ -76,45 +78,45 @@ function PatientRegisteration() {
                     <div class="row justify-content-center align-items-center">
                         <div class="col-sm-9 col-md-7 col-lg-5 text-center">
                             <img class="logo" src={LOGO} alt="logo" />
-                            <h3 class="mb-4">Patient Registration</h3>
+                            <h3 class="mb-4">{t("patient_registration")}</h3>
                             <Form encType="multipart/form-data">
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <TextInput type="text" name="firstName" placeholder="First Name" />
+                                            <TextInput type="text" name="firstName" placeholder={t("first_name")} />
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <TextInput type="text" name="lastName" placeholder="Last Name" />
+                                            <TextInput type="text" name="lastName" placeholder={t("last_name")} />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="email" name="email" placeholder="Email" />
+                                    <TextInput type="email" name="email" placeholder={t("email")} />
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="text" name="emiratesId" placeholder="Emirates ID" />
+                                    <TextInput type="text" name="emiratesId" placeholder={t("emirates_id")} />
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="date" name="birthday" placeholder="Birthday" />
+                                    <TextInput type="date" name="birthday" placeholder={t("birthday")} />
                                 </div>
                                 <div class="form-group">
                                     <SelectInput name="gender">
-                                        <option value="">Gender</option>
-                                        <option value={MALE}>Male</option>
-                                        <option value={FEMALE}>Female</option>
-                                        <option value={OTHER}>Other</option>
+                                        <option value="">{t("gender")}</option>
+                                        <option value={MALE}>{t("male")}</option>
+                                        <option value={FEMALE}>{t("female")}</option>
+                                        <option value={OTHER}>{t("other")}</option>
                                     </SelectInput>
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="text" name="location" placeholder="Location" />
+                                    <TextInput type="text" name="location" placeholder={t("location")} />
                                 </div>
                                 <div class="form-group">
                                     <NumberFormatInput
                                         format={"+971-## ### ####"}
                                         mask={"_"}
-                                        name="phone" placeholder="Phone"
+                                        name="phone" placeholder={t("phone")}
                                     />
                                 </div>
                                 {/* <div class="form-group">
@@ -125,12 +127,12 @@ function PatientRegisteration() {
                                     ) : null}
                                 </div> */}
                                 <div class="form-group">
-                                    <TextInput type="password" name="password" placeholder="Password" />
+                                    <TextInput type="password" name="password" placeholder={t("password")} />
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="password" name="confirmPassword" placeholder="Confirm Password" />
+                                    <TextInput type="password" name="confirmPassword" placeholder={t("confirm_password")} />
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-2">Register</button>
+                                <button type="submit" class="btn btn-primary mt-2">{t("register")}</button>
                             </Form>
                         </div>
                     </div>

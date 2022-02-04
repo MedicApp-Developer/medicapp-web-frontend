@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import DOCTOR_IMAGE from '../../../../assets/images/doctor.png';
-import { getDoctors } from '../../../../store/actions/doctorActions';
-import { connect } from 'react-redux';
+import DOCTOR_IMAGE from '../../../../assets/images/doctor.png'
+import { getDoctors } from '../../../../store/actions/doctorActions'
+import { connect } from 'react-redux'
 
-function TopDoctors({doctors, getDoctors}) {
-    const { doctors: allDoctors } = doctors && doctors;
-    
+function TopDoctors({ doctors, getDoctors }) {
+    const { doctors: allDoctors } = doctors && doctors
+
     useEffect(() => {
-        getDoctors(0);
-    }, [getDoctors]);
-    
+        getDoctors(0)
+    }, [getDoctors])
+
     return (
         <>
             <div class="row">
@@ -18,15 +18,15 @@ function TopDoctors({doctors, getDoctors}) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
-                                <img src={DOCTOR_IMAGE} alt="doctor"/>
-                                <div class="media-body">
-                                    <h5 class="mt-0">Dr. {doc.firstName + "  " + doc.lastName}</h5>
-                                    <p>Dentist</p>
-                                </div>
+                                    <img src={DOCTOR_IMAGE} alt="doctor" />
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Dr. {doc.firstName + "  " + doc.lastName}</h5>
+                                        <p>{doc.specialityId?.map(item => item['name_en'] + ", ")}</p>
+                                    </div>
                                 </div>
                                 <div class="contact-info">
-                                <a href="javascript:void(0)"><span class="icon-email"></span></a>
-                                <a href="javascript:void(0)"><span class="icon-phone"></span></a>
+                                    <a href="javascript:void(0)"><span class="icon-email"></span></a>
+                                    <a href="javascript:void(0)"><span class="icon-phone"></span></a>
                                 </div>
                             </div>
                         </div>
@@ -48,4 +48,4 @@ const mapDispatchToProps = {
     getDoctors
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopDoctors);
+export default connect(mapStateToProps, mapDispatchToProps)(TopDoctors)

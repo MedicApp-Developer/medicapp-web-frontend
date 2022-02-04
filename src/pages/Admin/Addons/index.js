@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
-import { href } from '../../../constants/extra';
+import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import AddAddons from './components/AddAddons';
-import { getAddons, deleteAddon } from '../../../store/actions/addonActions';
-import { connect } from 'react-redux';
-import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png';
+import AddAddons from './components/AddAddons'
+import { getAddons, deleteAddon } from '../../../store/actions/addonActions'
+import { connect } from 'react-redux'
+import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png'
 
 function Addons({ getAddons, addons, deleteAddon }) {
-    const { addons: allAddons } = addons && addons;
+    const { addons: allAddons } = addons && addons
 
     useEffect(() => {
-        getAddons();
-    }, [getAddons]);
+        getAddons()
+    }, [getAddons])
 
     const deleteAddonHandler = (addon) => {
-        deleteAddon(addon._id);
+        deleteAddon(addon._id)
     }
 
     return (
@@ -29,15 +29,16 @@ function Addons({ getAddons, addons, deleteAddon }) {
                     </div>
                 </div>
                 <div className="row list-block">
-                    { allAddons?.map((cat, key) => (
+                    {allAddons?.map((cat, key) => (
                         <div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="media">
-                                    <img className="pointer" src={CATEGORY_PLACEHOLDER_IMAGE} alt="Addons" />
-                                    <div className="media-body">
-                                        <h5 className="mt-0">{cat.name}</h5>
-                                    </div>
+                                        <img className="pointer" src={CATEGORY_PLACEHOLDER_IMAGE} alt="Addons" />
+                                        <div className="media-body">
+                                            <h5 className="mt-0">{cat.name_en}</h5>
+                                            <p className="mt-0">{cat.name_ar}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="dropdown">
@@ -45,7 +46,7 @@ function Addons({ getAddons, addons, deleteAddon }) {
                                         <span className="icon-dots"></span>
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteAddonHandler(cat)}}>Delete</a>
+                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteAddonHandler(cat) }}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -69,4 +70,4 @@ const mapDispatchToProps = {
     deleteAddon,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Addons);
+export default connect(mapStateToProps, mapDispatchToProps)(Addons)

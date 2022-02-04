@@ -85,3 +85,9 @@
 .rmsc .gray {
   color: black !important;
 }
+
+.language-change-buttons{
+  position:absolute;
+  top:0;
+  right:0;
+ }

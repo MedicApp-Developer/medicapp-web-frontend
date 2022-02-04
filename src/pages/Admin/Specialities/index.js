@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from 'react'
-import { href } from '../../../constants/extra';
+import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PLACEHOLDER_DOCTOR_IMAGE from '../../../assets/images/doctor_placeholder.png'
-import AddSpecialities from './components/AddSpecialities';
-import { getSpecialities, deleteSpeciality } from '../../../store/actions/specialitiesActions';
-import { connect } from 'react-redux';
+import AddSpecialities from './components/AddSpecialities'
+import { getSpecialities, deleteSpeciality } from '../../../store/actions/specialitiesActions'
+import { connect } from 'react-redux'
 
 function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
-    const { specialities: allSpecialities } = specialities && specialities;
+    const { specialities: allSpecialities } = specialities && specialities
 
     useEffect(() => {
-        getSpecialities();
-    }, [getSpecialities]);
+        getSpecialities()
+    }, [getSpecialities])
 
     const deleteSpecialityHandler = (speciality) => {
-        deleteSpeciality(speciality._id);
+        deleteSpeciality(speciality._id)
     }
 
     return (
@@ -34,10 +34,11 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="media">
-                                    <img className="pointer" src={spec?.logo ? spec?.logo : PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
-                                    <div className="media-body">
-                                        <h5 className="mt-0">{spec.name}</h5>
-                                    </div>
+                                        <img className="pointer" src={spec?.logo ? spec?.logo : PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
+                                        <div className="media-body">
+                                            <h5 className="mt-0">{spec.name_en}</h5>
+                                            <p className="mt-0">{spec.name_ar}</p>
+                                        </div>
                                     </div>
                                     <p style={{ textAlign: 'center' }}>{spec?.tags}</p>
                                 </div>
@@ -46,7 +47,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                                         <span className="icon-dots"></span>
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteSpecialityHandler(spec)}}>Delete</a>
+                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteSpecialityHandler(spec) }}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -72,4 +73,4 @@ const mapDispatchToProps = {
     deleteSpeciality,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialities);
+export default connect(mapStateToProps, mapDispatchToProps)(Specialities)

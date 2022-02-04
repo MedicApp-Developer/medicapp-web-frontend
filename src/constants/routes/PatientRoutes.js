@@ -1,16 +1,19 @@
 export const PatientRoutes = [
     {
-        name: "Home",
+        name_en: "Home",
+        name_ar: "الصفحة الرئيسية",
         icon: "icon-hospital",
         route: "/patient"
     },
     {
-        name: "Hospital",
+        name_en: "Hospital",
+        name_ar: "مستشفى",
         icon: "icon-hospital",
         route: "/patient/hospital"
     },
     {
-        name: "Doctor",
+        name_en: "Doctor",
+        name_ar: "طبيب",
         icon: "icon-qr-code",
         route: "/patient/doctor"
     },

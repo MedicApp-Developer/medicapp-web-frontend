@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
-import moment from 'moment';
-import SendResults from '../../../Doctors/DoctorLabResults/components/SendResults';
+import moment from 'moment'
+import SendResults from '../../../Doctors/DoctorLabResults/components/SendResults'
+import { useTranslation } from "react-i18next"
 
 function LabResults({ results }) {
+   const { t } = useTranslation()
 
-   const [selectedLabResult, setSelectedLabResult] = useState(null);
+   const [selectedLabResult, setSelectedLabResult] = useState(null)
 
-    return (
-        <section class="user-dashboard">
+   return (
+      <section class="user-dashboard">
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-md-12 col-xl-10 pb-5">
@@ -19,11 +21,11 @@ function LabResults({ results }) {
                               <div class="col-md-9">
                                  <ul>
                                     <li>
-                                       <small class="d-block">Date</small>
+                                       <small class="d-block">{t("date")}</small>
                                        {moment(result.date).format('LL')}
                                     </li>
                                     <li>
-                                       <small class="d-block">Report</small>
+                                       <small class="d-block">{t("report")}</small>
                                        {result?.tests?.map(test => test.test + ", ")}
                                     </li>
                                     <li class="media">
@@ -36,7 +38,7 @@ function LabResults({ results }) {
                                  </ul>
                               </div>
                               <div class="col-md-3 text-center text-md-right mt-3 mt-md-0">
-                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#labResults" onClick={(e) => { e.preventDefault(); setSelectedLabResult(result) }} class="btn btn-primary px-3 py-2" style={result?.status === "pending" ? { pointerEvents: 'none' } : {}} >{result?.status === "pending" ? "Pending" : "View Result"}</a>
+                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#labResults" onClick={(e) => { e.preventDefault(); setSelectedLabResult(result) }} class="btn btn-primary px-3 py-2" style={result?.status === "pending" ? { pointerEvents: 'none' } : {}} >{result?.status === "pending" ? t("pending") : t("view_result")}</a>
                               </div>
                            </div>
                         </div>
@@ -47,7 +49,7 @@ function LabResults({ results }) {
             </div>
          </div>
       </section>
-    )
+   )
 }
 
 export default LabResults

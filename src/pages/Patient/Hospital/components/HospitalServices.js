@@ -1,5 +1,5 @@
 import React from 'react'
-import MEDOR_LOGO from '../../../../assets/images/medeor_logo.png';
+import MEDOR_LOGO from '../../../../assets/images/medeor_logo.png'
 
 function HospitalServices({ services }) {
     return (

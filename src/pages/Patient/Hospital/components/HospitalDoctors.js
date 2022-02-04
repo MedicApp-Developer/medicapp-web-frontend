@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import { useTranslation } from "react-i18next"
 
 function HospitalDoctors({ doctors }) {
+    const { t } = useTranslation()
 
     return (
         <div class="tab-pane fade" id="pills-doctors" role="tabpanel" aria-labelledby="pills-doctors-tab">
@@ -10,7 +12,7 @@ function HospitalDoctors({ doctors }) {
                 <div class="col-md-3">
                     <div class="form-group">
                         <select class="form-control">
-                            <option>Date</option>
+                            <option> {t("date")}</option>
                         </select>
                     </div>
                 </div>
@@ -37,7 +39,7 @@ function HospitalDoctors({ doctors }) {
                                 </div>
                             </div>
                             <div class="col-md-5 text-center text-md-left">
-                                <Link to="/patient/book-appointment" class="btn btn-primary px-4" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", true) }}>Book Appointment</Link>
+                                <Link to="/patient/book-appointment" class="btn btn-primary px-4" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", true) }}>{t("book_appointment")}</Link>
                             </div>
                         </div>
                     </div>

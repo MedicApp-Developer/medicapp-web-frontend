@@ -4,8 +4,10 @@ import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png
 import GenerateQrCode from './GenerateQrCode'
 import QrPrescriptionApi from '../../../../api/QrPrescription'
 import { saveAs } from 'file-saver'
+import { useTranslation } from "react-i18next"
 
 function QRPrescription({ prescriptions }) {
+   const { t } = useTranslation()
 
    const [selectedQrPrescription, setSelectedQrPrescription] = useState({})
 
@@ -25,7 +27,7 @@ function QRPrescription({ prescriptions }) {
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-md-12 col-xl-10 pb-5">
-                  <h4 class="mb-4">QR Prescriptions</h4>
+                  <h4 class="mb-4">{t("QR_Prescriprion")}</h4>
                   {prescriptions.map((qr, index) => (
                      <div key={index} class="card lab-result">
                         <div class="card-body py-md-2">
@@ -33,7 +35,7 @@ function QRPrescription({ prescriptions }) {
                               <div class="col-md-12 col-lg-7">
                                  <ul>
                                     <li>
-                                       <small class="d-block">Date</small>
+                                       <small class="d-block">{t("date")}</small>
                                        {moment(qr.date).format('LL')}
                                     </li>
                                     <li class="media">
@@ -46,8 +48,8 @@ function QRPrescription({ prescriptions }) {
                                  </ul>
                               </div>
                               <div class="col-md-12 col-lg-5 text-center text-md-right mt-3 mt-md-0">
-                                 <a href="javascript:void(0)" class="btn btn-primary px-3 py-2 mr-3" onClick={downloadQrPrescription.bind(this, qr)}>Download</a>
-                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#qrCode" class="btn btn-primary px-3 py-2 mr-3" onClick={viewQrPrescription.bind(this, qr)}>VIEW QR</a>
+                                 <a href="javascript:void(0)" class="btn btn-primary px-3 py-2 mr-3" onClick={downloadQrPrescription.bind(this, qr)}>{t("download")}</a>
+                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#qrCode" class="btn btn-primary px-3 py-2 mr-3" onClick={viewQrPrescription.bind(this, qr)}>{t("VIEW_QR")}</a>
                               </div>
                               <GenerateQrCode selectedResult={selectedQrPrescription} setSelectedResult={setSelectedQrPrescription} />
                            </div>

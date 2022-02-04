@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
-import { href } from '../../../constants/extra';
+import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import AddCategories from './components/AddCategory';
-import { getCategories, deleteCategory } from '../../../store/actions/categoriesActions';
-import { connect } from 'react-redux';
-import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png';
+import AddCategories from './components/AddCategory'
+import { getCategories, deleteCategory } from '../../../store/actions/categoriesActions'
+import { connect } from 'react-redux'
+import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png'
 
 function Categories({ getCategories, categories, deleteCategory }) {
-    const { categories: allCategories } = categories && categories;
+    const { categories: allCategories } = categories && categories
 
     useEffect(() => {
-        getCategories();
-    }, [getCategories]);
+        getCategories()
+    }, [getCategories])
 
     const deleteCategoryHandler = (category) => {
-        deleteCategory(category._id);
+        deleteCategory(category._id)
     }
 
     return (
@@ -29,15 +29,16 @@ function Categories({ getCategories, categories, deleteCategory }) {
                     </div>
                 </div>
                 <div className="row list-block">
-                    { allCategories?.map((cat, key) => (
+                    {allCategories?.map((cat, key) => (
                         <div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="media">
-                                    <img className="pointer" src={CATEGORY_PLACEHOLDER_IMAGE} alt="Category" />
-                                    <div className="media-body">
-                                        <h5 className="mt-0">{cat.name}</h5>
-                                    </div>
+                                        <img className="pointer" src={CATEGORY_PLACEHOLDER_IMAGE} alt="Category" />
+                                        <div className="media-body">
+                                            <h5 className="mt-0">{cat.name_en}</h5>
+                                            <p className="mt-0">{cat.name_ar}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="dropdown">
@@ -45,7 +46,7 @@ function Categories({ getCategories, categories, deleteCategory }) {
                                         <span className="icon-dots"></span>
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteCategoryHandler(cat)}}>Delete</a>
+                                        <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteCategoryHandler(cat) }}>Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -69,4 +70,4 @@ const mapDispatchToProps = {
     deleteCategory,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)

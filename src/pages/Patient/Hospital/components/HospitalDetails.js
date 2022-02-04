@@ -13,13 +13,13 @@ import HospitalServices from './HospitalServices'
 import { withScriptjs } from "react-google-maps"
 import DirectionsMap from './directions/DirectionsMap'
 import LocateHospital from './directions/LocateHospital'
-import BookTestHospitalAppointment from './appointment/BookTestHospitalAppointment'
-import BookVaccinationHospital from './appointment/BookVaccinationHospital'
+import { useTranslation } from "react-i18next"
 
 function HospitalDetails() {
     const [hospital, setHospital] = useState({})
     const [doctors, setDoctors] = useState([])
     const { id } = useParams()
+    const { t } = useTranslation()
 
     const MapLoader = withScriptjs(DirectionsMap)
 
@@ -40,9 +40,9 @@ function HospitalDetails() {
                         <div class="col-md-12">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:viod(0)">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Hospital</li>
-                                    <li class="breadcrumb-item active" aria-current="page">{Object.keys(hospital).length > 0 ? hospital?.name : "Loading..."}</li>
+                                    <li class="breadcrumb-item"><a href="javascript:viod(0)">{t("home")}</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{t("hospital")}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{Object.keys(hospital).length > 0 ? hospital?.name : `${t("loading")}...`}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -62,9 +62,9 @@ function HospitalDetails() {
                                 <i class="fa fa-star"></i>
                             </p>
                             <p><span class="icon-map"></span> {hospital?.address}
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#getDirections" style={{ marginLeft: '5px' }}> Get Direction</a>
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#getDirections" style={{ marginLeft: '5px' }}> {t("get_direction")}</a>
                             </p>
-                            <h6>Open now </h6>
+                            <h6> {t("open_now")} </h6>
 
                             {hospital.location?.coordinates.length > 0 && (
                                 <LocateHospital lat={hospital?.location?.coordinates[0]} lng={hospital?.location?.coordinates[1]} />
@@ -76,7 +76,7 @@ function HospitalDetails() {
                                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                                 <span className="icon-close"></span>
                                             </button>
-                                            <h4 className="text-center">Get Direction</h4>
+                                            <h4 className="text-center">{t("get_direction")}</h4>
                                             {/* Directions Map Here */}
                                             {hospital.location?.coordinates.length > 0 && (
 

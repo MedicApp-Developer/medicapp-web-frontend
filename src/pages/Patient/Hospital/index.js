@@ -7,10 +7,12 @@ import CategoriesFilter from './components/filters/CategoriesFilters'
 import AddonsFilter from './components/filters/AddonsFilters'
 import { connect } from 'react-redux'
 import { filterHospitals, categoriesFilter, hospitalTypesFilter, addonsFilter, clearHospitalSearch, searchHospitalByText } from '../../../store/actions/patient/searchedHospitalsActions'
+import { useTranslation } from "react-i18next"
 
 function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals, filterHospitals, categoriesFilter, hospitalTypesFilter, addonsFilter }) {
     const { searchedHospitals: allSearchedHospitals, filters: { checkedCategories, hospitalTypes, checkedAddons } } = searchedHospitals && searchedHospitals
     const [searchText, setSearchText] = useState("")
+    const { t } = useTranslation()
 
     useEffect(() => {
         if (localStorage.getItem('hospitalSearchText')) {
@@ -111,8 +113,8 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                     <div class="row pb-5">
                         <div class="col-md-3 search-filter">
                             <div class="d-flex justify-content-between">
-                                <h5 class="mb-2">Filters</h5>
-                                <p class="text-gray mb-2" style={{ cursor: "pointer" }} onClick={clearHospitalSearch}>Reset filters</p>
+                                <h5 class="mb-2">{t('filters')} </h5>
+                                <p class="text-gray mb-2" style={{ cursor: "pointer" }} onClick={clearHospitalSearch}>{t('reset_filters')}</p>
                             </div>
                             <hr class="mt-0" />
                             <form>
@@ -127,9 +129,9 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                         </div>
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between align-items-center mb-4 mt-4 mt-md-0">
-                                <h5 class="text-primary mb-0">{allSearchedHospitals.length} Hospitals</h5>
+                                <h5 class="text-primary mb-0">{allSearchedHospitals.length} {t("hospitals")}</h5>
                                 <select class="form-control">
-                                    <option>Sort by: Recomendation</option>
+                                    <option>{t("sort_by")}: {t("recomendation")}</option>
                                 </select>
                             </div>
                             {/* Searched Hospitals */}

@@ -9,6 +9,7 @@ import { href } from '../../../../constants/extra'
 import CreateAppointment from './CreateAppointment'
 import AppLayout from '../../../../layout/AppLayout'
 import { SELECTED_DOCTOR_OR_HOSPITAL } from '../../../../constants/Slots'
+import { useTranslation } from "react-i18next"
 
 const localizer = momentLocalizer(moment)
 
@@ -16,6 +17,7 @@ function BookAppointment() {
 
     const doctor = JSON.parse(localStorage.getItem(SELECTED_DOCTOR_OR_HOSPITAL))
     const hospitalDetailPage = parseFloat(localStorage.getItem("hospitalDetailPage"))
+    const { t } = useTranslation()
 
     const [slots, setSlots] = useState([])
     const { id } = useParams()
@@ -83,7 +85,7 @@ function BookAppointment() {
             </div>
             <div className="col-md-12 mb-3">
                 <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>
-                    <h4><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{selectedDoctorName}'s</span> Available Slots</h4>
+                    <h4><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{selectedDoctorName}'s</span> {t("available_slots")}</h4>
                 </div>
                 <Calendar
                     popup

@@ -12,8 +12,10 @@ import GenerateQrCode from './GenerateQrCode'
 import { href } from '../../../../constants/extra'
 import CancelAppointment from './CancelAppointment'
 import UpdateProfile from './UpdateProfile'
+import { useTranslation } from "react-i18next"
 
 function MedicalProfile({ patient }) {
+    const { t } = useTranslation()
 
     const [selectedResult, setSelectedResult] = useState(null)
     const [selectedAAppointment, setSelectedAppointment] = useState({})
@@ -24,7 +26,7 @@ function MedicalProfile({ patient }) {
                 <div class="container">
                     <div class="row align-items-center add-list">
                         <div class="col-12">
-                            <h4>Current Medical Record</h4>
+                            <h4>{t("current_medical_record")}</h4>
                         </div>
                     </div>
                     <div class="row pb-5">
@@ -35,39 +37,39 @@ function MedicalProfile({ patient }) {
                                         <img class="avatar-lg mr-0" src={PATIENT_IMAGE} alt="patient" />
                                         <div class="media-body">
                                             <h5 class="mt-3 mb-2">{patient?.patient?.firstName + " " + patient?.patient?.lastName}</h5>
-                                            <h6>Age: {getAge(patient?.patient?.birthday)}</h6>
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#updateVitals" class="btn btn-primary px-3 py-1">Update</a>
+                                            <h6>{t("age")}: {getAge(patient?.patient?.birthday)}</h6>
+                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#updateVitals" class="btn btn-primary px-3 py-1">{t("update")}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card patient-detail">
                                 <div class="card-body">
-                                    <h5>Information:</h5>
+                                    <h5>{t("information")}:</h5>
                                     <ul>
                                         <li>
-                                            <span>Gender:</span> {patient?.patient?.gender}
+                                            <span>{t("gender")}:</span> {patient?.patient?.gender}
                                         </li>
                                         <li>
-                                            <span>Blood Type:</span> {patient?.patient?.bloodType}
+                                            <span>{t("blood_type")}:</span> {patient?.patient?.bloodType}
                                         </li>
                                         <li>
-                                            <span>Allergies:</span> {patient?.patient?.allergies ?? "TODO"}
+                                            <span>{t("allergies")}:</span> {patient?.patient?.allergies ?? "TODO"}
                                         </li>
                                         <li>
-                                            <span>Diseases:</span> {patient?.patient?.diseases ?? "TODO"}
+                                            <span>{t("diseases")}:</span> {patient?.patient?.diseases ?? "TODO"}
                                         </li>
                                         <li>
-                                            <span>Height:</span> {patient?.patient?.height + "m"}
+                                            <span>{t("height")}:</span> {patient?.patient?.height + "m"}
                                         </li>
                                         <li>
-                                            <span>Weight:</span> {patient?.patient?.weight + "kg"}
+                                            <span>{t("weight")}:</span> {patient?.patient?.weight + "kg"}
                                         </li>
                                         <li>
-                                            <span>Patient ID:</span> {patient?.patient?._id}
+                                            <span>{t("patient_ID")}:</span> {patient?.patient?._id}
                                         </li>
                                         <li>
-                                            <span>Last Visit:</span> {"TODO"}
+                                            <span>{t("last_visit")}:</span> {"TODO"}
                                         </li>
                                     </ul>
                                 </div>
@@ -79,7 +81,7 @@ function MedicalProfile({ patient }) {
                                     <div class="card">
                                         <div class="card-body">
                                             <img class="my-2" src={HEART_IMAGE} alt="heart" />
-                                            <p>Heart Rate</p>
+                                            <p>{t("heart_rate")}</p>
                                             <h4>{patient?.patient?.heartRate}bpm</h4>
                                         </div>
                                     </div>
@@ -88,7 +90,7 @@ function MedicalProfile({ patient }) {
                                     <div class="card">
                                         <div class="card-body">
                                             <img src={TEMP_IMAGE} alt="temp" />
-                                            <p>Body Temperature</p>
+                                            <p>{t("body_temperature")}</p>
                                             <h4>{patient?.patient?.temprature} <sup>o</sup>c</h4>
                                         </div>
                                     </div>
@@ -97,7 +99,7 @@ function MedicalProfile({ patient }) {
                                     <div class="card">
                                         <div class="card-body">
                                             <img src={GLOCOSE_IMAGE} alt="glucose" />
-                                            <p>Glucose</p>
+                                            <p>{t("glucose")}</p>
                                             <h4>{patient?.patient?.glucose} <span>mg/dl</span></h4>
                                         </div>
                                     </div>
@@ -107,13 +109,13 @@ function MedicalProfile({ patient }) {
                                 <div class="col-md-12">
                                     <div class="card lab-result">
                                         <div class="card-body">
-                                            <h5>Upcoming Appointment</h5>
+                                            <h5>{t("upcoming_appointment")}</h5>
                                             {patient?.upcommingAppointments?.map(appointment => (
                                                 <div class="row align-items-center">
                                                     <div class="col-md-12 col-lg-8 pr-0">
                                                         <ul>
                                                             <li>
-                                                                <small class="d-block">Date &amp; Time</small>
+                                                                <small class="d-block">{t("date")} &amp; {t("time")}</small>
                                                                 {appointment?.time}
                                                             </li>
                                                             <li class="media">
@@ -124,13 +126,13 @@ function MedicalProfile({ patient }) {
                                                                 </div>
                                                             </li>
                                                             <li>
-                                                                <small class="d-block">Hospital</small>
+                                                                <small class="d-block">{t("hospital")}</small>
                                                                 {appointment?.hospitalId?.name}
                                                             </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
-                                                        <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(appointment) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">CANCEL</a>
+                                                        <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(appointment) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("CANCEL")}</a>
                                                     </div>
                                                 </div>
                                             ))}
@@ -142,7 +144,7 @@ function MedicalProfile({ patient }) {
                                 <div class="col-md-12 col-lg-6 pr-lg-1">
                                     <div class="card lab-results">
                                         <div class="card-body">
-                                            <h5 class="mb-0">Lab Results</h5>
+                                            <h5 class="mb-0">{t("lab_results")}</h5>
                                             <div class="row">
                                                 {patient?.labResults?.map(labResult => (
                                                     <div class="col-sm-12 col-md-6">
@@ -162,7 +164,7 @@ function MedicalProfile({ patient }) {
                                 <div class="col-md-12 col-lg-6">
                                     <div class="card lab-results pb-1">
                                         <div class="card-body pb-4">
-                                            <h5 class="mb-0">QR Prescriprion</h5>
+                                            <h5 class="mb-0">{t("QR_Prescriprion")}</h5>
                                             <div class="row">
                                                 {patient?.qrPrescriptions?.map(prescription => (
                                                     <div class="col-md-12">
@@ -172,7 +174,7 @@ function MedicalProfile({ patient }) {
                                                                 <h5>{prescription?.doctorId?.firstName + " " + prescription?.doctorId?.lastName}</h5>
                                                                 <p>{moment(prescription?.date).format('LL')}</p>
                                                             </div>
-                                                            <a href={href} data-toggle="modal" data-target="#qrCode" onClick={(e) => { e.preventDefault(); setSelectedResult(prescription) }} class="btn btn-primary px-3 py-1">View</a>
+                                                            <a href={href} data-toggle="modal" data-target="#qrCode" onClick={(e) => { e.preventDefault(); setSelectedResult(prescription) }} class="btn btn-primary px-3 py-1">{t("view")}</a>
                                                         </div>
                                                     </div>
                                                 ))}

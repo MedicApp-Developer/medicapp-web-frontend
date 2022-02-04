@@ -43,7 +43,7 @@ function HospitalProfile() {
                 const categoryOptions = []
                 res.data.data.map(category => {
                     categoryOptions.push({
-                        label: category.name,
+                        label: category.name_en,
                         value: category._id
                     })
                 })
@@ -65,7 +65,7 @@ function HospitalProfile() {
                 const servicesOptions = []
                 res.data.data.map(service => {
                     servicesOptions.push({
-                        label: service.name,
+                        label: service.name_en,
                         value: service._id
                     })
                 })
