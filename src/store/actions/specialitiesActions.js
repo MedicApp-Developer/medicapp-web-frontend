@@ -11,7 +11,7 @@ export const getSpecialities = () => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting specialities");
     }
 }
@@ -25,7 +25,7 @@ export const getPaginatedSpecialities = (pageNo) => async (dispatch, getState) =
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting specialities");
     }
 }
@@ -39,19 +39,19 @@ export const deleteSpeciality = (id) => async (dispatch, getState) => {
             payload: id
         });
         toast.success("Speciality deleted successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
 
-export const createSpeciality = (data) => async (dispatch, getState) => {
+export const createSpeciality = (data, update) => async (dispatch, getState) => {
     try {
         dispatch({
             type: GET_SPECIALITIES,
             payload: data
         })
-        toast.success("Speciality created successfully");
-    }catch(err) {
+        toast.success(`Speciality ${update ? "updated" : "created"} successfully`);
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }

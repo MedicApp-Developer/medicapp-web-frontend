@@ -12,7 +12,7 @@ import axios from '../../../../axios'
 import { SPECIALITY_REQUEST_NAMESPACE } from '../../../../constants/namespaces'
 import { toast } from 'react-toastify'
 
-function AddSpecialities({ createSpeciality }) {
+function AddSpecialities({ createSpeciality, selectedSpeciality }) {
 
     const onDrop = useCallback(acceptedFiles => {
         setUploadedImage(acceptedFiles)
@@ -30,9 +30,9 @@ function AddSpecialities({ createSpeciality }) {
     return (
         <Formik
             initialValues={{
-                name_en: "",
-                name_ar: "",
-                tags: ""
+                name_en: selectedSpeciality?.name_en || "",
+                name_ar: selectedSpeciality?.name_ar || "",
+                tags: selectedSpeciality?.tags || ""
             }}
             validationSchema={Yup.object({
                 name_en: Yup.string().required('Required ( English )'),
@@ -53,24 +53,45 @@ function AddSpecialities({ createSpeciality }) {
                     formData.append("name_en", values.name_en)
                     formData.append("name_ar", values.name_ar)
                     formData.append("tags", values.tags)
-                    axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
-                        headers: {
-                            "Content-Type": "multipart/form-data"
-                        },
-                        onUploadProgress: (data) => {
-                            setProgress(Math.round((100 * data.loaded) / data.total))
-                        }
-                    }).then(async res => {
-                        setProgress(null)
-                        const response = await SpecialityApi.getAllSpecialities()
-                        createSpeciality(response.data.data)
-                        resetForm()
-                    }).catch(err => {
-                        setProgress(null)
-                        toast.error(err.response.data.error.message)
-                    })
+
+                    if (selectedSpeciality?.name_en === null) {
+                        axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                            onUploadProgress: (data) => {
+                                setProgress(Math.round((100 * data.loaded) / data.total))
+                            }
+                        }).then(async res => {
+                            setProgress(null)
+                            const response = await SpecialityApi.getAllSpecialities()
+                            createSpeciality(response.data.data, false)
+                            resetForm()
+                        }).catch(err => {
+                            setProgress(null)
+                            toast.error(err.response.data.error.message)
+                        })
+                    } else {
+                        axios.put(`/${SPECIALITY_REQUEST_NAMESPACE}/${selectedSpeciality._id}`, formData, {
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            },
+                            onUploadProgress: (data) => {
+                                setProgress(Math.round((100 * data.loaded) / data.total))
+                            }
+                        }).then(async res => {
+                            setProgress(null)
+                            const response = await SpecialityApi.getAllSpecialities()
+                            createSpeciality(response.data.data, true)
+                            resetForm()
+                        }).catch(err => {
+                            setProgress(null)
+                            toast.error(err.response.data.error.message)
+                        })
+                    }
+
                 } else {
-                    toast.error('Please select a video')
+                    toast.error('Please select an image')
                 }
             }}
             enableReinitialize={true}
@@ -82,7 +103,7 @@ function AddSpecialities({ createSpeciality }) {
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span className="icon-close"></span>
                             </button>
-                            <h4 className="text-center">Add Speciality</h4>
+                            <h4 className="text-center">{selectedSpeciality?.name_en ? "Update" : "Add"} Speciality</h4>
                             <Form>
                                 <div className="row">
                                     <div className="col-md-12">
@@ -116,7 +137,7 @@ function AddSpecialities({ createSpeciality }) {
                                     </div>
                                 </div>
                                 <div className="form-group text-center mb-0 mt-3">
-                                    <button type="submit" style={progress && { pointerEvents: "none" }} className="btn btn-primary">Confirm</button>
+                                    <button type="submit" style={progress && { pointerEvents: "none" }} className="btn btn-primary">{selectedSpeciality?.name_en ? "Update" : "Save"}</button>
                                 </div>
                             </Form>
                         </div>

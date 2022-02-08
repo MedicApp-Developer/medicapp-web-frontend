@@ -1,23 +1,27 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { createAddon } from '../../../../store/actions/addonActions'
+import { createAddon, updateAddon } from '../../../../store/actions/addonActions'
 import { connect } from 'react-redux'
 import TextInput from '../../../../components/forms/TextInput'
 
-function AddAddons({ createAddon }) {
+function AddAddons({ createAddon, selectedAddon, updateAddon }) {
     return (
         <Formik
             initialValues={{
-                name_en: "",
-                name_ar: ""
+                name_en: selectedAddon?.name_en || "",
+                name_ar: selectedAddon?.name_ar || ""
             }}
             validationSchema={Yup.object({
                 name_en: Yup.string().required('Required ( In English )'),
                 name_ar: Yup.string().required('Required ( In Arabic ) '),
             })}
             onSubmit={(values, { resetForm }) => {
-                createAddon(values)
+                if (selectedAddon === null) {
+                    createAddon(values)
+                } else {
+                    updateAddon(selectedAddon._id, values)
+                }
                 resetForm()
             }}
             enableReinitialize={true}
@@ -29,7 +33,7 @@ function AddAddons({ createAddon }) {
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span className="icon-close"></span>
                             </button>
-                            <h4 className="text-center">Add Addon</h4>
+                            <h4 className="text-center">{selectedAddon?.name_en ? "Update" : "Add"} Addon</h4>
                             <Form>
                                 <div className="row">
                                     <div className="col-md-12">
@@ -42,7 +46,7 @@ function AddAddons({ createAddon }) {
                                     </div>
                                 </div>
                                 <div className="form-group text-center mb-0 mt-3">
-                                    <button type="submit" className="btn btn-primary">Confirm</button>
+                                    <button type="submit" className="btn btn-primary">{selectedAddon?.name_en ? "Update" : "Save"}</button>
                                 </div>
                             </Form>
                         </div>
@@ -56,7 +60,8 @@ function AddAddons({ createAddon }) {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
-    createAddon
+    createAddon,
+    updateAddon
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAddons)

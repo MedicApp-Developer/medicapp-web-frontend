@@ -5,9 +5,11 @@ import AddCategories from './components/AddCategory'
 import { getCategories, deleteCategory } from '../../../store/actions/categoriesActions'
 import { connect } from 'react-redux'
 import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png'
+import { useState } from 'react'
 
 function Categories({ getCategories, categories, deleteCategory }) {
     const { categories: allCategories } = categories && categories
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
         getCategories()
@@ -25,7 +27,7 @@ function Categories({ getCategories, categories, deleteCategory }) {
                         <h4>Categories</h4>
                     </div>
                     <div className="col-6 text-right">
-                        <a href={href} data-toggle="modal" data-target="#addCategory" className="btn btn-primary px-3">+ ADD Category</a>
+                        <a href={href} data-toggle="modal" data-target="#addCategory" onClick={() => setSelectedCategory(null)} className="btn btn-primary px-3">+ ADD Category</a>
                     </div>
                 </div>
                 <div className="row list-block">
@@ -47,6 +49,7 @@ function Categories({ getCategories, categories, deleteCategory }) {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteCategoryHandler(cat) }}>Delete</a>
+                                        <a className="dropdown-item delete-item" style={{ backgroundColor: "#417EBF" }} href={href} onClick={(e) => { e.preventDefault(); setSelectedCategory(cat) }} data-toggle="modal" data-target="#addCategory">Update</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +57,7 @@ function Categories({ getCategories, categories, deleteCategory }) {
                     ))}
                 </div>
                 {/* Add Doctor Modal */}
-                <AddCategories />
+                <AddCategories selectedCategory={selectedCategory} />
                 {/* Set Doctor Schedule */}
             </DashboardLayout>
         </div>

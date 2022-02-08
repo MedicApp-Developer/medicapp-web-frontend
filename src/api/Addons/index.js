@@ -1,12 +1,12 @@
 import axios from '../../axios';
 import { HOSPITAL_ADDON_SERVICES_NAMESPACE } from '../../constants/namespaces';
-import { trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 
 const AddonsApi = {
     getAllAddons() {
         return trackPromise(axios.get(`/${HOSPITAL_ADDON_SERVICES_NAMESPACE}/all`));
     },
-    deleteAddon(id){
+    deleteAddon(id) {
         return trackPromise(axios.delete(`${HOSPITAL_ADDON_SERVICES_NAMESPACE}/${id}`));
     },
     getSingleAddon(id) {
@@ -14,6 +14,9 @@ const AddonsApi = {
     },
     createAddon(data) {
         return trackPromise(axios.post(`/${HOSPITAL_ADDON_SERVICES_NAMESPACE}`, data));
+    },
+    updateAddon(id, data) {
+        return trackPromise(axios.put(`/${HOSPITAL_ADDON_SERVICES_NAMESPACE}/${id}`, data));
     }
 }
 

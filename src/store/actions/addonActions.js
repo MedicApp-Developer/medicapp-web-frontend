@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import AddonsApi from "../../api/Addons";
-import { ADD_ADDON, DELETE_ADDON, GET_ADDONS } from "../types/addonsTypes";
+import { ADD_ADDON, DELETE_ADDON, GET_ADDONS, UPDATE_ADDON } from "../types/addonsTypes";
 
 export const getAddons = () => async (dispatch, getState) => {
     try {
@@ -11,7 +11,7 @@ export const getAddons = () => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting addons");
     }
 }
@@ -25,7 +25,7 @@ export const deleteAddon = (id) => async (dispatch, getState) => {
             payload: id
         });
         toast.success("Addon deleted successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
@@ -38,7 +38,23 @@ export const createAddon = (data) => async (dispatch, getState) => {
             payload: data
         })
         toast.success("Addon created successfully");
-    }catch(err) {
+    } catch (err) {
+        toast.error(err.response.data.message);
+    }
+}
+
+export const updateAddon = (id, data) => async (dispatch, getState) => {
+    try {
+        await AddonsApi.updateAddon(id, data);
+        dispatch({
+            type: UPDATE_ADDON,
+            payload: {
+                data,
+                id
+            }
+        })
+        toast.success("Addon update successfully");
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }

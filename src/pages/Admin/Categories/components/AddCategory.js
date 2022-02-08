@@ -1,23 +1,27 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
-import { createCategory } from '../../../../store/actions/categoriesActions'
+import { createCategory, updateCategory } from '../../../../store/actions/categoriesActions'
 import { connect } from 'react-redux'
 import TextInput from '../../../../components/forms/TextInput'
 
-function AddCategories({ createCategory }) {
+function AddCategories({ createCategory, selectedCategory, updateCategory }) {
     return (
         <Formik
             initialValues={{
-                name_en: "",
-                name_ar: ""
+                name_en: selectedCategory?.name_en || "",
+                name_ar: selectedCategory?.name_ar || ""
             }}
             validationSchema={Yup.object({
                 name_en: Yup.string().required('Required ( In English )'),
                 name_ar: Yup.string().required('Required ( In Arabic )'),
             })}
             onSubmit={(values, { resetForm }) => {
-                createCategory(values)
+                if (selectedCategory === null) {
+                    createCategory(values)
+                } else {
+                    updateCategory(selectedCategory._id, values)
+                }
                 resetForm()
             }}
             enableReinitialize={true}
@@ -29,7 +33,7 @@ function AddCategories({ createCategory }) {
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span className="icon-close"></span>
                             </button>
-                            <h4 className="text-center">Add Speciality</h4>
+                            <h4 className="text-center">{selectedCategory?.name_en ? "Update" : "Add"} Speciality</h4>
                             <Form>
                                 <div className="row">
                                     <div className="col-md-12">
@@ -42,7 +46,7 @@ function AddCategories({ createCategory }) {
                                     </div>
                                 </div>
                                 <div className="form-group text-center mb-0 mt-3">
-                                    <button type="submit" className="btn btn-primary">Confirm</button>
+                                    <button type="submit" className="btn btn-primary">{selectedCategory?.name_en ? "Update" : "Save"}</button>
                                 </div>
                             </Form>
                         </div>
@@ -56,7 +60,8 @@ function AddCategories({ createCategory }) {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
-    createCategory
+    createCategory,
+    updateCategory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCategories)

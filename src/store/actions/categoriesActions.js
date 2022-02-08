@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import CategoriesApi from "../../api/Categories";
-import { ADD_CATEGORY, DELETE_CATEGORY, GET_CATEGORIES } from "../types/categoryTypes";
+import { UPDATE_CATEGORY, ADD_CATEGORY, DELETE_CATEGORY, GET_CATEGORIES } from "../types/categoryTypes";
 
 export const getCategories = () => async (dispatch, getState) => {
     try {
@@ -11,7 +11,7 @@ export const getCategories = () => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting categories");
     }
 }
@@ -25,7 +25,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
             payload: id
         });
         toast.success("Category deleted successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
@@ -38,7 +38,22 @@ export const createCategory = (data) => async (dispatch, getState) => {
             payload: data
         })
         toast.success("Category created successfully");
-    }catch(err) {
+    } catch (err) {
+        toast.error(err.response.data.message);
+    }
+}
+
+export const updateCategory = (id, data) => async (dispatch, getState) => {
+    try {
+        await CategoriesApi.updateCategory(id, data);
+        dispatch({
+            type: UPDATE_CATEGORY,
+            payload: {
+                data, id
+            }
+        })
+        toast.success("Category updated successfully");
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }

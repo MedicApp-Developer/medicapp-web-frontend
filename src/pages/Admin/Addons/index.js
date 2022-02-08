@@ -5,9 +5,11 @@ import AddAddons from './components/AddAddons'
 import { getAddons, deleteAddon } from '../../../store/actions/addonActions'
 import { connect } from 'react-redux'
 import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png'
+import { useState } from 'react'
 
 function Addons({ getAddons, addons, deleteAddon }) {
     const { addons: allAddons } = addons && addons
+    const [selectedAddon, setSelectedAddon] = useState(null);
 
     useEffect(() => {
         getAddons()
@@ -25,7 +27,7 @@ function Addons({ getAddons, addons, deleteAddon }) {
                         <h4>Addon Services</h4>
                     </div>
                     <div className="col-6 text-right">
-                        <a href={href} data-toggle="modal" data-target="#addAddon" className="btn btn-primary px-3">+ ADD Addon</a>
+                        <a href={href} onClick={() => { setSelectedAddon(null) }} data-toggle="modal" data-target="#addAddon" className="btn btn-primary px-3">+ ADD Addon</a>
                     </div>
                 </div>
                 <div className="row list-block">
@@ -47,6 +49,7 @@ function Addons({ getAddons, addons, deleteAddon }) {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteAddonHandler(cat) }}>Delete</a>
+                                        <a className="dropdown-item delete-item" style={{ backgroundColor: "#417EBF" }} href={href} onClick={(e) => { e.preventDefault(); setSelectedAddon(cat) }} data-toggle="modal" data-target="#addAddon">Update</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +57,7 @@ function Addons({ getAddons, addons, deleteAddon }) {
                     ))}
                 </div>
                 {/* Add Doctor Modal */}
-                <AddAddons />
+                <AddAddons selectedAddon={selectedAddon} />
                 {/* Set Doctor Schedule */}
             </DashboardLayout>
         </div>

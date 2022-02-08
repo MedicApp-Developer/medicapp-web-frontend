@@ -5,9 +5,11 @@ import PLACEHOLDER_DOCTOR_IMAGE from '../../../assets/images/doctor_placeholder.
 import AddSpecialities from './components/AddSpecialities'
 import { getSpecialities, deleteSpeciality } from '../../../store/actions/specialitiesActions'
 import { connect } from 'react-redux'
+import { useState } from 'react'
 
 function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
     const { specialities: allSpecialities } = specialities && specialities
+    const [selectedSpeciality, setSelectedSpeciality] = useState(null);
 
     useEffect(() => {
         getSpecialities()
@@ -25,7 +27,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                         <h4>Specialities</h4>
                     </div>
                     <div className="col-6 text-right">
-                        <a href={href} data-toggle="modal" data-target="#addSpeciality" className="btn btn-primary px-3">+ ADD Speciality</a>
+                        <a href={href} data-toggle="modal" data-target="#addSpeciality" onClick={() => setSelectedSpeciality(null)} className="btn btn-primary px-3">+ ADD Speciality</a>
                     </div>
                 </div>
                 <div className="row list-block">
@@ -48,6 +50,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deleteSpecialityHandler(spec) }}>Delete</a>
+                                        <a className="dropdown-item delete-item" style={{ backgroundColor: "#417EBF" }} href={href} onClick={(e) => { e.preventDefault(); setSelectedSpeciality(spec) }} data-toggle="modal" data-target="#addSpeciality">Update</a>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +60,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
                     )}
                 </div>
                 {/* Add Doctor Modal */}
-                <AddSpecialities />
+                <AddSpecialities selectedSpeciality={selectedSpeciality} />
                 {/* Set Doctor Schedule */}
             </DashboardLayout>
         </div>
