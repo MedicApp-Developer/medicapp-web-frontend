@@ -22,6 +22,7 @@ import AdminRouter from './pages/Admin'
 import PatientRouter from './pages/Patient'
 import TermsOfUse from './pages/Others/TermsOfUse'
 import PrivacyPolicy from './pages/Others/PrivacyPolicy'
+import { useEffect } from 'react'
 
 function App() {
   return (

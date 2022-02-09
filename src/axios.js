@@ -4,11 +4,15 @@ import axios from 'axios'
 const token = window.localStorage.getItem('auth')
 
 const instance = axios.create({
-  baseURL: "https://medicappp.herokuapp.com/api"
+  baseURL: "http://localhost:8080/api"
 })
 
 // https://medicappp.herokuapp.com/api
 // http://localhost:8080/api
+
+if (token) {
+  instance.defaults.headers.common['authorization'] = "Bearer" + " " + token
+}
 
 instance.interceptors.response.use(function (response) {
   // Do something with response data
@@ -21,11 +25,6 @@ instance.interceptors.response.use(function (response) {
   }
   return Promise.reject(error)
 })
-
-if (token) {
-
-  instance.defaults.headers.common['authorization'] = "Bearer" + " " + token
-}
 
 instance.defaults.headers.post['Content-Type'] = 'application/json'
 

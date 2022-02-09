@@ -7,21 +7,21 @@ export default ({ children }) => {
 
   const prevSelectedNav = window.localStorage.getItem('selectedNav') || "";
   const prevUser = (window.localStorage.getItem('user') && JSON.parse(window.localStorage.getItem('user'))) || "";
-  
+
   const [selectedNav, setSelectedNav] = useState(prevSelectedNav);
   const [user, setUser] = useState(prevUser);
-  
+
   useEffect(
     () => {
-    
-      if (!selectedNav) localStorage.clear();
+
+      if (!selectedNav) console.log("");
       else window.localStorage.setItem('selectedNav', selectedNav);
-      
-      if (!user) localStorage.clear();
+
+      if (!user) console.log("");
       else window.localStorage.setItem('user', JSON.stringify(user));
 
     },
-    [ selectedNav, user ]
+    [selectedNav, user]
   );
 
   const defaultContext = {

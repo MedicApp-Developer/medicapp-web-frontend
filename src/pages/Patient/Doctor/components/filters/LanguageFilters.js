@@ -23,7 +23,7 @@ function LanguageFilters({ onLanguageCheckboxChanged, checkedLanguages }) {
 
     const onSearchLanguage = (e) => {
         setSearch(e.target.value)
-        setList(fullList.filter(s => s.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())).slice(0, 5))
+        setList(fullList.filter(s => s.name_en.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())).slice(0, 5))
     }
 
     return (
