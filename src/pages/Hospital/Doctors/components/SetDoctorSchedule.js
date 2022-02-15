@@ -74,7 +74,6 @@ function SetDoctorSchedule() {
     }
 
     const eventStyleGetter = (event, start, end, status) => {
-        console.log("-------> ", event)
         var backgroundColor = '#' + event.hexColor
         var style = {
             backgroundColor: backgroundColor,
@@ -98,7 +97,6 @@ function SetDoctorSchedule() {
             style: style
         }
     }
-
     return (
         <div className="col-md-12 mb-3">
             <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>

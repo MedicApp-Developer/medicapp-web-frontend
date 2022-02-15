@@ -9,26 +9,26 @@ import { PatientRoutes } from '../../constants/routes/PatientRoutes';
 
 export const getRoutes = (role) => {
     let routes = [];
-    switch(role){
-        case HOSPITAL: 
+    switch (role) {
+        case HOSPITAL:
             routes = HospitalRoutes;
             break;
-        case DOCTOR: 
+        case DOCTOR:
             routes = DoctorsRoutes;
             break;
-        case NURSE: 
+        case NURSE:
             routes = NurseRoutes;
             break;
-        case LABORTORY: 
+        case LABORTORY:
             routes = LabRoutes;
             break;
-        case PHARMACY: 
+        case PHARMACY:
             routes = PharmacyRoutes;
             break;
-        case ADMIN: 
+        case ADMIN:
             routes = AdminRoutes;
             break;
-        case PATIENT: 
+        case PATIENT:
             routes = PatientRoutes;
             break;
         default: routes = []

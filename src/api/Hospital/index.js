@@ -1,6 +1,6 @@
 import axios from '../../axios';
 import { CATEGORIES_NAMESPACE, HOSPITAL_NAMESPACE } from '../../constants/namespaces';
-import { trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 
 const HospitalApi = {
     getSingleHospital(id) {
@@ -26,6 +26,12 @@ const HospitalApi = {
     },
     getAllHospitals() {
         return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}`));
+    },
+    getHospitalFinance(id) {
+        return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/finance/${id}`));
+    },
+    getHospitalFinanceReport(data) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/report`, data, { responseType: 'blob' }))
     }
 }
 

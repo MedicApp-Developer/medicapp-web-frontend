@@ -18,5 +18,25 @@ export const AdminRoutes = [
         name: "Addons",
         icon: "icon-qr-code",
         route: "/admin/addons"
+    },
+    {
+        name: "Clinics",
+        icon: "icon-qr-code",
+        route: "/admin/clinics"
+    },
+    {
+        name: "PCR",
+        icon: "icon-qr-code",
+        route: "/admin/pcr"
+    },
+    {
+        name: "Expneses",
+        icon: "icon-qr-code",
+        route: "/admin/expenses"
+    },
+    {
+        name: "All Expneses",
+        icon: "icon-qr-code",
+        route: "/admin/allExpenses"
     }
 ]
