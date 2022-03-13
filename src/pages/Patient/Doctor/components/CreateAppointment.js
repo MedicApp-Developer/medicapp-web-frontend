@@ -14,7 +14,7 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
 
     const onConfirmAppointment = () => {
 
-        if (moment(selectedSlot.end).isAfter() && selectedSlot.status === "BOOKED") {
+        if (moment(selectedSlot.end).isAfter() && (selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED")) {
             AppointmentApi.deletePatientAppointment(selectedSlot._id, user._id).then(res => {
                 toast.success("Your appointment cancelled successfully")
                 window.location.reload()
@@ -30,10 +30,10 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
             }
 
             AppointmentApi.createAppointment(appoint).then(res => {
-                toast.success("Your appointment created successfully")
+                toast.success("Your appointment created successfully, You will recieve 20 points on your checkup")
                 setTimeout(() => {
                     window.location.reload()
-                }, 1000)
+                }, 3500)
             }).catch(err => {
                 toast.error("Problem while creating appointment")
             })
@@ -49,17 +49,17 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
                             <span class="icon-close"></span>
                         </button>
                         <h4 class="text-center"> {t('book_appointment')}</h4>
-                        {selectedSlot.status === "BOOKED" ? (
+                        {(selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED") ? (
                             <p>{`${t('Please confirm your appointment')} `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {t("cancellation")} </span> {t("with")} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> on <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
                         ) : (
                             <p>{`${t('Please confirm your appointment')} with `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> {t('on')} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
                         )}
                         <hr />
-                        {!(moment(selectedSlot.end).isAfter() && selectedSlot.status === "BOOKED") && (
+                        {!(moment(selectedSlot.end).isAfter() && (selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED")) && (
                             <form className="form-group">
                                 {familyMembers?.length > 0 && (
                                     <>
-                                        <label for="familyMember">${t('family_member')}</label>
+                                        <label for="familyMember">{t('family_member')}</label>
                                         <select value={familyMemberId} onChange={(e) => setFamilyMemberId(e.target.value)} style={{ width: '100%' }} className="form-control" id="familyMember">
                                             <option value={null}>{t('select_family_member')} ( {t('optional')} )</option>
                                             {familyMembers?.map(member => (
@@ -76,7 +76,7 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
                             </form>
                         )}
                         <div className="form-group text-center mb-0">
-                            <button className={`btn ${selectedSlot.status === "BOOKED" ? "btn-danger" : "btn-primary"}`} onClick={onConfirmAppointment}>{selectedSlot.status === "BOOKED" ? "Cancel" : "Book"}</button>
+                            <button className={`btn ${(selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED") ? "btn-danger" : "btn-primary"}`} onClick={onConfirmAppointment}>{(selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED") ? "Cancel" : "Book"}</button>
                         </div>
                     </div>
                 </div>

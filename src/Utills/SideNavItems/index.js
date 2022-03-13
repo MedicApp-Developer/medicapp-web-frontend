@@ -1,11 +1,12 @@
 import { HospitalRoutes } from "../../constants/routes/HospitalRoutes"
-import { DOCTOR, HOSPITAL, NURSE, LABORTORY, PHARMACY, ADMIN, PATIENT } from "../../constants/Roles"
+import { DOCTOR, HOSPITAL, NURSE, LABORTORY, PHARMACY, ADMIN, PATIENT, VENDOR } from "../../constants/Roles"
 import { DoctorsRoutes } from "../../constants/routes/DoctorRoutes";
 import { NurseRoutes } from "../../constants/routes/NurseRoutes";
 import { LabRoutes } from "../../constants/routes/LabRoutes";
 import { PharmacyRoutes } from "../../constants/routes/PharmacyRoutes";
 import { AdminRoutes } from "../../constants/routes/AdminRoutes";
 import { PatientRoutes } from '../../constants/routes/PatientRoutes';
+import { VendorRoutes } from '../../constants/routes/VendorRoutes';
 
 export const getRoutes = (role) => {
     let routes = [];
@@ -30,6 +31,9 @@ export const getRoutes = (role) => {
             break;
         case PATIENT:
             routes = PatientRoutes;
+            break;
+        case VENDOR:
+            routes = VendorRoutes;
             break;
         default: routes = []
     }

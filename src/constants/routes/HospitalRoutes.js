@@ -39,4 +39,9 @@ export const HospitalRoutes = [
         icon: "icon-patient",
         route: "/hospital/PCR/vaccination"
     },
+    {
+        name: "Appointment Approvals",
+        icon: "icon-patient",
+        route: "/hospital/appointment-approvals"
+    }
 ]

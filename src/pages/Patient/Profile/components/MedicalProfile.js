@@ -69,7 +69,7 @@ function MedicalProfile({ patient }) {
                                             <span>{t("patient_ID")}:</span> {patient?.patient?._id}
                                         </li>
                                         <li>
-                                            <span>{t("last_visit")}:</span> {"TODO"}
+                                            <span>{t("points")}:</span> {patient?.patient?.points}
                                         </li>
                                     </ul>
                                 </div>

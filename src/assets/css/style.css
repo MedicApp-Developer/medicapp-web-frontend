@@ -498,10 +498,6 @@ header .dropdown-menu {
 	margin-bottom: 0;
 }
 
-.text-right-aligned {
-	text-align: end;
-}
-
 .scrollbar {
 	height: 528px;
 	overflow-y: scroll;
@@ -1342,7 +1338,7 @@ header .dropdown-menu {
 }
 
 .hospital-tabs .nav-pills .nav-link {
-		border: 2px solid transparent;
+	border: 2px solid transparent;
 }
 
 .hospital-tabs .nav-pills .nav-link.active {
@@ -1354,11 +1350,11 @@ header .dropdown-menu {
 }
 
 .hospital-tabs .media img {
-	    background: #FFFFFF;
-    box-shadow: 1px 1px 10px 2px rgb(0 0 0 / 10%);
-    border-radius: 5px;
-    padding: 18px;
-    width: 80px;
+	background: #FFFFFF;
+	box-shadow: 1px 1px 10px 2px rgb(0 0 0 / 10%);
+	border-radius: 5px;
+	padding: 18px;
+	width: 80px;
 }
 
 .hospital-tabs .media {
@@ -1374,7 +1370,7 @@ header .dropdown-menu {
 }
 
 .nav-tab-section .nav-tab-link .nav .nav-link {
-	    border-bottom: 3px solid transparent;
+	border-bottom: 3px solid transparent;
 }
 
 .nav-tab-section  .nav-tab-link .nav .nav-link.active {
@@ -1404,12 +1400,10 @@ header .dropdown-menu {
 }
 
 .search-filter-section .media img {
-	/* border: 1px solid #000; */
-	/* padding: 15px 10px 15px 15px; */
+	border: 1px solid #000;
+	padding: 15px 10px 15px 15px;
 	width: 100px;
 	border-radius: 5px;
-	background-repeat: no-repeat;
-    background-size: 100% 100%;
 }
 
 
@@ -1418,310 +1412,495 @@ header .dropdown-menu {
 }
 
 .search-filter-section select {
-	    width: 180px;
-    font-size: 13px;
-    height: 35px;
-    box-shadow: none;
-    border: 1px
- solid #d7c8c8;
- padding: 5px 10px;
-    background: transparent;}
-
-/* Footer */
-
-footer {
-	background: #7F7F7F;
-	padding: 50px 0;
-	color: #fff;
-}
-
-footer a {
-	color: #fff;
-}
-
-footer a:hover {
-	color: #fff;
-}
-
-footer h4 {
-	font-size: 16px;
-	margin-bottom: 25px;
-}
-
-footer ul li {
-	padding: 3px 0;
-}
-
-footer ul li a {
+	width: 180px;
 	font-size: 13px;
-	font-weight: 100;
-}
+	height: 35px;
+	box-shadow: none;
+	border: 1px
+	solid #d7c8c8;
+	padding: 5px 10px;
+	background: transparent;}
 
-footer .media i {
-	font-size: 24px;
-}
+	/* Footer */
 
+	footer {
+		background: #7F7F7F;
+		padding: 50px 0;
+		color: #fff;
+	}
 
-/* Media Query */
+	footer a {
+		color: #fff;
+	}
 
-@media (min-width: 992px) {
-	#wrapper {
-		padding-left: 280px;
+	footer a:hover {
+		color: #fff;
 	}
-	#wrapper.toggled {
-		padding-left: 60px;
-	}
-	#sidebar-wrapper {
-		width: 280px;
-	}
-	#wrapper.toggled #sidebar-wrapper {
-		width: 0;
-	}
-	#wrapper.toggled #content-wrapper {
-		position: absolute;
-		margin-right: -190px;
-	}
-	#wrapper.toggled {
-		padding-left: 0px;
-	}
-	#content-wrapper {
-		position: relative;
-		top: 0;
-	}
-	#wrapper.toggled #content-wrapper {
-		position: relative;
-		margin-right: 60px;
-	}
-}
 
-@media (max-width: 1200px) {
-	#content-wrapper {
-		padding: 30px 30px 50px 30px;
-	}
-	.patient-detail ul li {
-		flex-wrap: wrap;
-	}
-}
-
-@media (max-width: 991px) {
-	#wrapper {
-		padding-left: 0;
-	}
-	#content-wrapper {
-		padding: 10px 15px 20px;
-	}
-	header .navbar {
-		margin-bottom: 15px;
-		padding: 0;
-	}
-	.sidebar-nav>li.active {
-		border-left: 5px solid #417EBF;
-		background: #FFFDFC;
-		border-right: none;
-	}
-	#sidebar-wrapper img {
-		max-width: 120px;
-		margin-bottom: 25px;
-		margin-top: 30px;
-	}
-	.sidebar-nav>li {
-		padding: 10px 20px;
-		border-left: 5px solid transparent;
-		border-right: none;
-		margin: 4px 0;
-	}
-	#sidebar-wrapper .search-form .form-control {
-		margin: 10px 15px 20px;
-	}
-	#sidebar-wrapper .icon-close {
-		position: absolute;
-		right: 15px;
-		font-size: 14px;
-		top: 15px;
-		color: #417EBF;
-	}
-	header .navbar-nav .dropdown-menu {
-		position: absolute;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-	#wrapper.toggled #content-wrapper {
-		position: absolute;
-		margin-right: -280px;
-	}
-	#content-wrapper {
-		position: relative;
-		top: 0;
-	}
-	#wrapper.toggled #content-wrapper {
-		position: relative;
-		margin-right: 280px;
-	}
-}
-
-@media (max-width: 767px) {
-	#wrapper {
-		padding-left: 0;
-	}
-	#sidebar-wrapper {
-		width: 0;
-	}
-	#wrapper.toggled #sidebar-wrapper {
-		width: 280px;
-		box-shadow: 0 0 11px #0000002e;
-	}
-	#wrapper.toggled #content-wrapper {
-		position: absolute;
-		margin-right: -280px;
-	}
-	#wrapper.toggled #content-wrapper {
-		position: relative;
-		margin-right: 280px;
-	}
-	.user-dashboard .table h5 {
-		font-size: 12px;
-	}
-	.upload-file {
-		height: auto;
-		margin-bottom: 20px;
-	}
 	footer h4 {
-		margin-bottom: 10px;
-		margin-top: 30px;
+		font-size: 16px;
+		margin-bottom: 25px;
 	}
-	.navabr-home .navbar-toggler {
-		border: none;
-		color: #417EBF;
-	}
-}
 
-@media (max-width: 576px) {
-	.form-group {
-		margin-bottom: 20px;
+	footer ul li {
+		padding: 3px 0;
 	}
-	.user-dashboard .welcome-block {
-		text-align: center;
+
+	footer ul li a {
+		font-size: 13px;
+		font-weight: 100;
 	}
-	.user-dashboard .welcome-block img {
-		margin-top: 20px;
-	}
-	.user-dashboard .card .card-body h2 {
-		font-size: 22px;
-	}
-	.user-dashboard .card h4 {
-		font-size: 18px;
-	}
-	.user-dashboard .table-responsive table {
-		width: 450px;
-	}
-	.user-account .action-icon span {
-		top: -20px;
-	}
-	.user-account h3 {
+
+	footer .media i {
 		font-size: 24px;
 	}
-	.modal .modal-body {
-		padding: 40px 20px;
-	}
-	.user-dashboard .page-item {
-		margin: 0 6px;
-	}
-	.user-dashboard .page-link {
-		width: 30px;
-		height: 30px;
-		line-height: 18px;
-		font-size: 13px;
-	}
-	.user-dashboard .page-item:first-child,
-	.user-dashboard .page-item:last-child {
-		font-size: 13px;
-	}
-	.add-list h4 {
-		font-size: 20px;
-	}
-	.add-list .btn {
-		font-size: 13px;
-		padding: 8px 10px;
-	}
-	.nav-tab-link .nav .nav-link {
-		color: #7F7F7F;
-		padding: 0.6em 0.6rem;
-	}
-	.app-icon {
-		max-width: 120px;
-	}
-	footer ul li a {
-		font-size: 12px;
-	}
-	footer ul li {
-		padding: 2px 0;
-	}
-	footer {
-		text-align: center;
-	}
-	footer .media {
-		width: 200px;
-		margin: 0px auto;
-		text-align: left;
-	}
-}
 
-/* Map Styles */
+	.popular-section {
+		padding: 30px 0;
+		background: #D7E7F9;
+	}
+
+	.popular-section  h1 {
+		font-weight: 600;
+		margin-bottom: 20px;
+		font-size: 34px;
+	}
+
+	.popular-section .card {
+		border: 0;
+		border-radius: 0;
+		margin-bottom: 30px;
+	}
+
+	.popular-section .card img {
+		border-radius: 0;
+
+	}
+
+	.popular-section .card-body {
+		padding: 12px 15px;
+	}
+
+	.popular-section .card  h3 {
+		color: #FF415B;
+		font-weight: 700;
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+
+
+	.popular-section .card  h5 {
+		font-weight: 600;
+		font-size: 20px;
+		margin-bottom: 5px;
+
+	}
+
+	.popular-section .card p {
+		font-weight: 500;
+		font-size: 18px;
+		margin-bottom: 0;
+	}
+
+	.popular-section .card .btn {
+		border-radius: 0;
+		font-weight: 500;
+		font-size: 18px;
+		padding: 10px 20px;
+	}
+
+	.popular-section.bg-gray {
+		background: #fcfeff;
+	}
+
+	.popular-section .owl-carousel.owl-drag .owl-item {
+		padding: 0;
+	}
+
+	.category-section {
+		padding: 30px 0;
+	}
+
+	.category-section h1 {
+		color: #417EBF;
+		font-weight: 600;
+		font-size: 34px;
+		margin-bottom: 20px;
+	}
+
+	.category-section ul {
+		display: grid;
+		align-items: center;
+		grid-gap: 15px;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+	}
+
+	.category-section ul li a {
+		background-position: center;
+		background-size: cover;
+		height: 120px;
+		width: 100%;
+		display: block;
+		color: #fff;
+		text-align: center;
+		padding-top: 50px;
+	}
+
+
+	.slide-section {
+		padding: 50px 0 20px;
+	}
+
+	.slide-section .card {
+		border: none;
+		background: 
+		#F2F2F2;
+		padding: 10px 20px;
+	}
+
+	.slide-section .card h4 {
+		font-weight: 600;
+		font-size: 18px;
+		margin-top: 15px;
+	}
+
+	.slide-section .btn {
+		border-radius: 0;
+		font-size: 14px;
+	}
+
+
+	.slide-section .text-danger {
+		color: 
+		#FF415B !important;
+	}
+
+
+	.carousel-control-next-icon,
+	.carousel-control-prev-icon {
+		background: none;
+	}
+
+	.carousel-control-next-icon:after ,
+	.carousel-control-prev-icon:after {
+		background: none;
+		content: "\f105";
+		display: inline-block;
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		color: #417EBF;
+		background: rgba(255, 255, 255, 0.67);
+		width: 40px;
+		height: 40px;
+		line-height: 38px;
+		border-radius: 50%;
+		font-size: 26px;
+		opacity: 1;
+	}
+
+	.carousel-control-prev-icon:after {
+		content: "\f104";
+	}
+
+
+	.carousel-control-next, .carousel-control-prev {
+		background: transparent;
+		border: none;
+		opacity: 1;
+
+	}
+
+	/* Media Query */
+
+	@media (min-width: 992px) {
+		#wrapper {
+			padding-left: 280px;
+		}
+		#wrapper.toggled {
+			padding-left: 60px;
+		}
+		#sidebar-wrapper {
+			width: 280px;
+		}
+		#wrapper.toggled #sidebar-wrapper {
+			width: 0;
+		}
+		#wrapper.toggled #content-wrapper {
+			position: absolute;
+			margin-right: -190px;
+		}
+		#wrapper.toggled {
+			padding-left: 0px;
+		}
+		#content-wrapper {
+			position: relative;
+			top: 0;
+		}
+		#wrapper.toggled #content-wrapper {
+			position: relative;
+			margin-right: 60px;
+		}
+	}
+
+	@media (max-width: 1200px) {
+		#content-wrapper {
+			padding: 30px 30px 50px 30px;
+		}
+		.patient-detail ul li {
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (max-width: 991px) {
+		#wrapper {
+			padding-left: 0;
+		}
+		#content-wrapper {
+			padding: 10px 15px 20px;
+		}
+		header .navbar {
+			margin-bottom: 15px;
+			padding: 0;
+		}
+		.sidebar-nav>li.active {
+			border-left: 5px solid #417EBF;
+			background: #FFFDFC;
+			border-right: none;
+		}
+		#sidebar-wrapper img {
+			max-width: 120px;
+			margin-bottom: 25px;
+			margin-top: 30px;
+		}
+		.sidebar-nav>li {
+			padding: 10px 20px;
+			border-left: 5px solid transparent;
+			border-right: none;
+			margin: 4px 0;
+		}
+		#sidebar-wrapper .search-form .form-control {
+			margin: 10px 15px 20px;
+		}
+		#sidebar-wrapper .icon-close {
+			position: absolute;
+			right: 15px;
+			font-size: 14px;
+			top: 15px;
+			color: #417EBF;
+		}
+		header .navbar-nav .dropdown-menu {
+			position: absolute;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 991px) {
+		#wrapper.toggled #content-wrapper {
+			position: absolute;
+			margin-right: -280px;
+		}
+		#content-wrapper {
+			position: relative;
+			top: 0;
+		}
+		#wrapper.toggled #content-wrapper {
+			position: relative;
+			margin-right: 280px;
+		}
+	}
+
+	@media (max-width: 767px) {
+		#wrapper {
+			padding-left: 0;
+		}
+		#sidebar-wrapper {
+			width: 0;
+		}
+		#wrapper.toggled #sidebar-wrapper {
+			width: 280px;
+			box-shadow: 0 0 11px #0000002e;
+		}
+		#wrapper.toggled #content-wrapper {
+			position: absolute;
+			margin-right: -280px;
+		}
+		#wrapper.toggled #content-wrapper {
+			position: relative;
+			margin-right: 280px;
+		}
+		.user-dashboard .table h5 {
+			font-size: 12px;
+		}
+		.upload-file {
+			height: auto;
+			margin-bottom: 20px;
+		}
+		footer h4 {
+			margin-bottom: 10px;
+			margin-top: 30px;
+		}
+		.navabr-home .navbar-toggler {
+			border: none;
+			color: #417EBF;
+		}
+	}
+
+	@media (max-width: 576px) {
+		.form-group {
+			margin-bottom: 20px;
+		}
+		.user-dashboard .welcome-block {
+			text-align: center;
+		}
+		.user-dashboard .welcome-block img {
+			margin-top: 20px;
+		}
+		.user-dashboard .card .card-body h2 {
+			font-size: 22px;
+		}
+		.user-dashboard .card h4 {
+			font-size: 18px;
+		}
+		.user-dashboard .table-responsive table {
+			width: 450px;
+		}
+		.user-account .action-icon span {
+			top: -20px;
+		}
+		.user-account h3 {
+			font-size: 24px;
+		}
+		.modal .modal-body {
+			padding: 40px 20px;
+		}
+		.user-dashboard .page-item {
+			margin: 0 6px;
+		}
+		.user-dashboard .page-link {
+			width: 30px;
+			height: 30px;
+			line-height: 18px;
+			font-size: 13px;
+		}
+		.user-dashboard .page-item:first-child,
+		.user-dashboard .page-item:last-child {
+			font-size: 13px;
+		}
+		.add-list h4 {
+			font-size: 20px;
+		}
+		.add-list .btn {
+			font-size: 13px;
+			padding: 8px 10px;
+		}
+		.nav-tab-link .nav .nav-link {
+			color: #7F7F7F;
+			padding: 0.6em 0.6rem;
+		}
+		.app-icon {
+			max-width: 120px;
+		}
+		footer ul li a {
+			font-size: 12px;
+		}
+		footer ul li {
+			padding: 2px 0;
+		}
+		footer {
+			text-align: center;
+		}
+		footer .media {
+			width: 200px;
+			margin: 0px auto;
+			text-align: left;
+		}
+
+		.category-section h1 {
+			font-size: 28px;
+		}
+
+		.popular-section h1 {
+			font-size: 28px;
+		}
+
+		.popular-section .card h3 {
+			font-size: 22px;
+		}
+		.popular-section .card h5 {
+			font-size: 18px;
+		}
+
+		.popular-section .card .btn {
+			font-size: 16px;
+		}
+
+		.category-section ul {
+			grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+		}
+
+		.slide-section {
+			padding: 30px 0;
+		}
+
+	}
+	
+	/* Map Styles */
 .map-heading {
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	color: #281414;
-	z-index: 10;
-	margin: 0;
-	padding: 0;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #281414;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
   }
   
 .map-search {
-	position: absolute;
-	top: 1rem;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 100%;
-	max-width: 400px;
-	z-index: 10;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
   }
   
 .hospital-profile-map-search {
-	position: absolute;
-	top: 12.7rem;
-	left: 60%;
-	transform: translateX(-50%);
-	width: 100%;
-	max-width: 400px;
-	z-index: 10;
+  position: absolute;
+  top: 12.7rem;
+  left: 60%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
 }
 
 .map-locate {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	background: none;
-	border: none;
-	z-index: 10;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 10;
   }
 
 .hospital-profile-map-locate {
-	position: absolute;
-	top: 12.7rem;
-	right: 3rem;
-	background: none;
-	border: none;
-	z-index: 10;
+  position: absolute;
+  top: 12.7rem;
+  right: 3rem;
+  background: none;
+  border: none;
+  z-index: 10;
   }
 
 .hospital-profile-map-locate img {
-	width: 40px;
-	cursor: pointer;
+  width: 40px;
+  cursor: pointer;
   }
   
 .map-locate img {
-	width: 40px;
-	cursor: pointer;
+  width: 40px;
+  cursor: pointer;
   }

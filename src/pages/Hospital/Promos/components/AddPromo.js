@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { createPromo } from '../../../../store/actions/promosActions';
-import {useDropzone} from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import PromoApi from '../../../../api/promos';
 import axios from '../../../../axios';
 import { PROMO_REQUEST_NAMESPACE } from '../../../../constants/namespaces';
@@ -10,32 +10,33 @@ import 'react-circular-progressbar/dist/styles.css';
 import { toast } from 'react-toastify';
 
 function AddPromo({ createPromo }) {
-    
+
     const onDrop = useCallback(acceptedFiles => {
         setUploadedVideo(acceptedFiles);
     }, [])
-    
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({ maxFiles: 1, accept: 'video/*', onDrop });
+
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ maxFiles: 1, accept: 'video/*', onDrop });
     const [uploadedVideo, setUploadedVideo] = useState([]);
     const [progress, setProgress] = useState();
 
     const files = acceptedFiles.map(file => (
         <li key={file.path}>
-          {file.path} - {file.size} bytes
+            {file.path} - {file.size} bytes
         </li>
     ));
 
     const onUploadVideo = async () => {
         const formData = new FormData();
-        
-        if(uploadedVideo[0]){
-            if(uploadedVideo[0].size > 20000000) {
+
+        if (uploadedVideo[0]) {
+            if (uploadedVideo[0].size > 20000000) {
                 toast.error("File too Big, please select a file less than 20mb")
-                return false;    
+                return false;
             }
-    
+
             formData.append("video", uploadedVideo[0]);
-            await axios.post(`/${PROMO_REQUEST_NAMESPACE}`, formData, {
+
+            axios.post(`/${PROMO_REQUEST_NAMESPACE}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },
@@ -50,28 +51,28 @@ function AddPromo({ createPromo }) {
                 setProgress(null);
                 toast.error(err.response.data.message);
             })
-        }else {
+        } else {
             toast.error('Please select a video');
         }
     }
 
     return (
-            <div class="modal fade" id="addPromo" tabindex="-1" aria-labelledby="addPromoLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
+        <div class="modal fade" id="addPromo" tabindex="-1" aria-labelledby="addPromoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
                     <div class="modal-body">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="icon-close"></span>
+                            <span class="icon-close"></span>
                         </button>
                         <h4 class="text-center">Add Promo Video</h4>
                         {progress ? (
                             <div style={{ width: 170, height: 170, margin: 'auto' }}>
                                 <CircularProgressbar value={progress} text={`${progress}%`} />
-                                <br/>
+                                <br />
                             </div>
                         ) : (
                             <section className="container">
-                                <div {...getRootProps({className: 'dropzone'})}>
+                                <div {...getRootProps({ className: 'dropzone' })}>
                                     <input {...getInputProps()} />
                                     <p>Drag 'n' drop video here, or click to select video</p>
                                     <em>(Only video file will be accepted)</em>
@@ -83,12 +84,12 @@ function AddPromo({ createPromo }) {
                             </section>
                         )}
                         <div class="col-12 text-right">
-                            <a href="javascript:void(0)" style={progress && { pointerEvents: "none" }} class="btn btn-primary px-3" onClick={onUploadVideo}>{progress ? "Uploading..." : "UPLOAD VIDEO" }</a>
+                            <a href="javascript:void(0)" style={progress && { pointerEvents: "none" }} class="btn btn-primary px-3" onClick={onUploadVideo}>{progress ? "Uploading..." : "UPLOAD VIDEO"}</a>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
+        </div>
     )
 }
 

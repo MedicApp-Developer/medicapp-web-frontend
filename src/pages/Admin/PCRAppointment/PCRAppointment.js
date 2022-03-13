@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import COPY_ICON from '../../../assets/images/copy.png'
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { saveAs } from 'file-saver'
+import moment from 'moment';
+import AppointmentApi from '../../../api/Appointment';
 
 function PCRAppointment() {
+
+	const [totalAppointments, setTotalAppointments] = useState(0);
+
+	useEffect(() => {
+		getData();
+	}, []);
+
+	const getData = () => {
+		AppointmentApi.getMedicappAppointments().then(res => {
+			setTotalAppointments(res.data.data.length);
+		})
+	}
+
 
 	const copyToClipboard = (text) => {
 		const elem = document.createElement('textarea');

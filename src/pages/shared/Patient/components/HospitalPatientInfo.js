@@ -24,7 +24,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
         <DashboardLayout>
             <div class="row align-items-center add-list">
                 <div class="col-12">
-                <h4>Patient Profile</h4>
+                    <h4>Patient Profile</h4>
                 </div>
             </div>
             <div class="row">
@@ -34,71 +34,68 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                             <div class="media">
                                 <img class="avatar-lg mr-0" src={PATIENT_IMAGE} alt="patient" />
                                 <div class="media-body">
-                                <h5 class="mt-3 mb-2">{selectedPatient.firstName}</h5>
-                                {/* TODO show age after calculating from birthday */}
-                                <h6>birthday: {selectedPatient.birthday}</h6>
+                                    <h5 class="mt-3 mb-2">{selectedPatient.firstName}</h5>
+                                    {/* TODO show age after calculating from birthday */}
+                                    <h6>birthday: {selectedPatient.birthday}</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card patient-detail">
-                    <div class="card-body">
+                        <div class="card-body">
                             <h5>Information:</h5>
                             <ul>
                                 <li>
-                                <span>Gender:</span> {selectedPatient.gender}
+                                    <span>Gender:</span> {selectedPatient.gender}
                                 </li>
                                 <li>
-                                <span>Blood Type:</span> {selectedPatient.bloodType}
+                                    <span>Blood Type:</span> {selectedPatient.bloodType}
                                 </li>
                                 <li>
-                                <span>Allergies:</span> {selectedPatient.allergies}
+                                    <span>Allergies:</span> {selectedPatient.allergies}
                                 </li>
                                 <li>
-                                <span>Diseases:</span> {selectedPatient?.diseases || "-"}
+                                    <span>Diseases:</span> {selectedPatient?.diseases || "-"}
                                 </li>
                                 <li>
-                                <span>Height:</span> {selectedPatient.height}m
+                                    <span>Height:</span> {selectedPatient.height}m
                                 </li>
                                 <li>
-                                <span>Weight:</span> {selectedPatient.weight}kg
+                                    <span>Weight:</span> {selectedPatient.weight}kg
                                 </li>
                                 <li>
-                                <span>Patient ID:</span> {selectedPatient._id}
-                                </li>
-                                <li>
-                                <span>Last Visit:</span> 10 Aug 2021
+                                    <span>Patient ID:</span> {selectedPatient._id}
                                 </li>
                             </ul>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row heart-rate">
                         <div class="col-sm-4 col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                <img class="my-2" src={HEART_IMAGE} alt="heart" />
-                                <p>Heart Rate</p>
-                                <h4>{selectedPatient?.heartRate}bpm</h4>
+                                    <img class="my-2" src={HEART_IMAGE} alt="heart" />
+                                    <p>Heart Rate</p>
+                                    <h4>{selectedPatient?.heartRate}bpm</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                <img src={TEMP_IMAGE} alt="temp" />
-                                <p>Body Temperature</p>
-                                <h4>{selectedPatient?.temprature} <sup>o</sup>c</h4>
+                                    <img src={TEMP_IMAGE} alt="temp" />
+                                    <p>Body Temperature</p>
+                                    <h4>{selectedPatient?.temprature} <sup>o</sup>c</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                <img src={GLOCOSE_IMAGE} alt="glucose" />
-                                <p>Glucose</p>
-                                <h4>{selectedPatient?.glucose} <span>mg/dl</span></h4>
+                                    <img src={GLOCOSE_IMAGE} alt="glucose" />
+                                    <p>Glucose</p>
+                                    <h4>{selectedPatient?.glucose} <span>mg/dl</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -107,20 +104,20 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                <h4>Doctors</h4>
-                                <div class="row">
-                                    {selectedPatient?.doctors?.map((doc) => (
-                                        <div class="col-sm-4">
-                                            <div class="media">
-                                                <img class="avatar-sm" src={DOCTOR_IMAGE} class="ml-3" alt="doctor" />
-                                                <div class="media-body">
-                                                <h5 class="mb-0">{doc.firstName + " " + doc.lastName}</h5>
-                                                <p>Dentist</p>
+                                    <h4>Doctors</h4>
+                                    <div class="row">
+                                        {selectedPatient?.doctors?.map((doc) => (
+                                            <div class="col-sm-4">
+                                                <div class="media">
+                                                    <img class="avatar-sm" src={DOCTOR_IMAGE} class="ml-3" alt="doctor" />
+                                                    <div class="media-body">
+                                                        <h5 class="mb-0">{doc.firstName + " " + doc.lastName}</h5>
+                                                        <p>Dentist</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -129,90 +126,90 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                         <div class="col-md-12">
                             <div class="card lab-results">
                                 <div class="card-body">
-                                <h4 class="mb-0">Lab Results</h4>
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab" /></span>
-                                            <div class="media-body">
-                                            <h5>Blood Test</h5>
-                                            <p>20 August 2021</p>
+                                    <h4 class="mb-0">Lab Results</h4>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>Blood Test</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>Body CT-Scan</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>Body CT-Scan</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>Fasting Blood Sugar</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>CBC</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>CBC</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>Liver Function Test</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>USG Abdomen Pelvis</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                                            <div class="media">
+                                                <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                <div class="media-body">
+                                                    <h5>USG Abdomen Pelvis</h5>
+                                                    <p>20 August 2021</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>Body CT-Scan</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>Body CT-Scan</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>Fasting Blood Sugar</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>CBC</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>CBC</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>Liver Function Test</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>USG Abdomen Pelvis</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-                                        <div class="media">
-                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
-                                            <div class="media-body">
-                                            <h5>USG Abdomen Pelvis</h5>
-                                            <p>20 August 2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>

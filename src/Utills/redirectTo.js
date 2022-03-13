@@ -1,9 +1,9 @@
-import { ADMIN_ROUTE, DOCTORS_ROUTE, HOSPITAL_ROUTE, LAB_ROUTE, NURSE_ROUTE, PHARMACY_ROUTE, PATIENT_ROUTE } from "../constants/Redirects"
-import { ADMIN, DOCTOR, HOSPITAL, LABORTORY, NURSE, PHARMACY, PATIENT } from "../constants/Roles"
+import { ADMIN_ROUTE, DOCTORS_ROUTE, HOSPITAL_ROUTE, LAB_ROUTE, NURSE_ROUTE, PHARMACY_ROUTE, PATIENT_ROUTE, VENDOR_ROUTE } from "../constants/Redirects"
+import { ADMIN, DOCTOR, HOSPITAL, LABORTORY, NURSE, PHARMACY, PATIENT, VENDOR } from "../constants/Roles"
 
 export const redirectTo = (role) => {
     let redirecTo = "/";
-    switch(role){
+    switch (role) {
         case HOSPITAL: redirecTo = HOSPITAL_ROUTE; break;
         case DOCTOR: redirecTo = DOCTORS_ROUTE; break;
         case NURSE: redirecTo = NURSE_ROUTE; break;
@@ -11,6 +11,7 @@ export const redirectTo = (role) => {
         case PHARMACY: redirecTo = PHARMACY_ROUTE; break;
         case ADMIN: redirecTo = ADMIN_ROUTE; break;
         case PATIENT: redirecTo = PATIENT_ROUTE; break;
+        case VENDOR: redirecTo = VENDOR_ROUTE; break;
         default: redirecTo = "/login"
     }
     return redirecTo;

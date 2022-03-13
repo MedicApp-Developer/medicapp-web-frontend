@@ -84,12 +84,12 @@ function SetDoctorSchedule() {
             display: 'block'
         }
 
-        if (event.status === "BOOKED" && moment(event.end).isSameOrBefore()) {
+        if ((event.status === "BOOKED" || event.status === "APPROVED") && moment(event.end).isSameOrBefore()) {
             style.backgroundColor = "#D22B2B"
             style.pointerEvents = 'none'
         }
 
-        if (moment(event.end).isAfter() && event.status === "BOOKED") {
+        if (moment(event.end).isAfter() && (event.status === "BOOKED" || event.status === "APPROVED")) {
             style.backgroundColor = "green"
         }
 
@@ -139,7 +139,7 @@ function SetDoctorSchedule() {
                                                 showTimeSelect
                                                 filterTime={filterPassedTime}
                                                 minDate={new Date(selectedDate)}
-                                                maxDate={new Date(selectedDate)}
+                                                // maxDate={new Date(selectedDate)}
                                                 dateFormat="MMMM d, yyyy h:mm aa"
                                             />
                                         </div>
@@ -156,7 +156,7 @@ function SetDoctorSchedule() {
                                                 showTimeSelect
                                                 filterTime={filterPassedTime}
                                                 minDate={new Date(selectedDate)}
-                                                maxDate={new Date(selectedDate)}
+                                                // maxDate={new Date(selectedDate)}
                                                 dateFormat="MMMM d, yyyy h:mm aa"
                                             />
                                         </div>

@@ -7,16 +7,16 @@ const initialState = {
 }
 
 export const doctorAppointmentReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case GET_APPOINTMENTS: 
-            return { 
+    switch (action.type) {
+        case GET_APPOINTMENTS:
+            return {
                 ...state,
                 appointments: action.payload.appointments,
-                numberOfPages: action.payload.totalPages 
+                numberOfPages: action.payload.totalPages
             };
         case DELETE_APPOINTMENT: {
             return {
-                ...state, 
+                ...state,
                 appointments: state.appointments.filter(appo => appo._id !== action.payload)
             }
         }
@@ -26,7 +26,7 @@ export const doctorAppointmentReducer = (state = initialState, action) => {
                 pageNumber: action.payload
             }
         }
-        default: 
+        default:
             return state;
     }
 };

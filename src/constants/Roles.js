@@ -4,6 +4,7 @@ export const NURSE = "NURSE";
 export const LABORTORY = "LABORTORY";
 export const PHARMACY = "PHARMACY";
 export const ADMIN = "ADMIN";
+export const VENDOR = "VENDOR";
 export const PATIENT = "PATIENT";
 
 // Hospital Types

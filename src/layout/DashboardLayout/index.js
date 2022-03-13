@@ -2,12 +2,12 @@ import React, { useState, useContext } from 'react'
 import SideNav from '../SideNav';
 import { RootContext } from '../../contextApi/index';
 import { useHistory } from 'react-router-dom';
-import { DOCTOR_PROFILE_ROUTE, HOSPITAL_PROFILE_ROUTE, LAB_PROFILE_ROUTE, LOGIN_ROUTE, NURSE_PROFILE_ROUTE, PHARMACY_PROFILE_ROUTE } from '../../constants/Redirects';
+import { DOCTOR_PROFILE_ROUTE, HOSPITAL_PROFILE_ROUTE, LAB_PROFILE_ROUTE, LOGIN_ROUTE, NURSE_PROFILE_ROUTE, PHARMACY_PROFILE_ROUTE, VENDOR_PROFILE_ROUTE } from '../../constants/Redirects';
 import { href } from '../../constants/extra';
 import LOGO from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { DOCTOR, HOSPITAL, LABORTORY, NURSE, PHARMACY } from '../../constants/Roles';
+import { DOCTOR, HOSPITAL, LABORTORY, NURSE, PHARMACY, VENDOR } from '../../constants/Roles';
 import { DOCTORS_NAV, NURSE_NAV, LABORATORY_NAV } from '../../constants/navs';
 import SearchDoctors from '../../pages/Hospital/Doctors/components/SearchDoctors';
 import HashLoader from "react-spinners/HashLoader";
@@ -39,17 +39,18 @@ function DashboardLayout({ children }) {
     }
 
     let redirectTo = null;
-    switch(user?.role){
+    switch (user?.role) {
         case NURSE: redirectTo = NURSE_PROFILE_ROUTE; break;
         case HOSPITAL: redirectTo = HOSPITAL_PROFILE_ROUTE; break;
         case LABORTORY: redirectTo = LAB_PROFILE_ROUTE; break;
         case DOCTOR: redirectTo = DOCTOR_PROFILE_ROUTE; break;
         case PHARMACY: redirectTo = PHARMACY_PROFILE_ROUTE; break;
+        case VENDOR: redirectTo = VENDOR_PROFILE_ROUTE; break;
         default: redirectTo = "/";
     }
 
     let searchComp = null;
-    switch(selectedNav) {
+    switch (selectedNav) {
         case DOCTORS_NAV: searchComp = <SearchDoctors />; break;
         case NURSE_NAV: searchComp = <SearchNurse />; break;
         case LABORATORY_NAV: searchComp = <SearchLab />; break;
@@ -67,26 +68,26 @@ function DashboardLayout({ children }) {
                         </a>
                     </div>
                     <form className="form-inline search-form d-lg-none">
-                        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                        <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
                         <span className="icon-search"></span>
                     </form>
                     <SideNav />
                 </aside>
                 <section id="content-wrapper" className="user-dashboard">
-                <header>
+                    <header>
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <a href={href} className="d-lg-none" id="sidebar-toggle" onClick={onOpenClick}><i className="fa fa-bars"></i></a>
                             {searchComp}
                             <ul className="navbar-nav ml-auto align-items-center">
                                 <li className="nav-item">
                                     <div className="dropdown">
-                                    <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
-                                    </a>
-                                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <Link className="dropdown-item" to={redirectTo}>Profile</Link>
-                                        <a className="dropdown-item" href={href} onClick={onLogout}>Logout</a>
-                                    </div>
+                                        <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
+                                        </a>
+                                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                            <Link className="dropdown-item" to={redirectTo}>Profile</Link>
+                                            <a className="dropdown-item" href={href} onClick={onLogout}>Logout</a>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -97,7 +98,7 @@ function DashboardLayout({ children }) {
                             <HashLoader color="#417EBF" loading={true} size={50} />
                         </div>
                     )}
-                    <div className={classNames({"fade-out": promiseInProgress, "fade-in": !promiseInProgress})}>
+                    <div className={classNames({ "fade-out": promiseInProgress, "fade-in": !promiseInProgress })}>
                         {children}
                     </div>
                 </section>

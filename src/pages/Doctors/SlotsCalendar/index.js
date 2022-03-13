@@ -18,7 +18,7 @@ function SlotsCalendar() {
     const buttonRef = useRef()
 
     useEffect(() => {
-        SlotApi.getAllDoctorsSlots(user.referenceId).then(res => {
+        SlotApi.getApprovedDoctorsSlots(user.referenceId).then(res => {
             if (res.data.data && res.data.data.length > 0) {
                 const events = []
                 res.data.data.forEach(slot => {
@@ -48,7 +48,7 @@ function SlotsCalendar() {
             border: '0px',
             display: 'block'
         }
-        if (event.status === "BOOKED") {
+        if (event.status === "BOOKED" || event.status === "APPROVED") {
             style.backgroundColor = "#D22B2B"
         }
 

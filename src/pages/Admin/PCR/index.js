@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import moment from 'moment'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import { useHistory } from 'react-router-dom'
+import AppointmentApi from '../../../api/Appointment'
 
 const localizer = momentLocalizer(moment)
 
@@ -10,6 +11,28 @@ function PCR() {
 	const [slots, setSlots] = useState([])
 	const [selectedDate, setSelectedDate] = useState(null)
 	const history = useHistory();
+
+	useEffect(() => {
+		getData();
+	}, []);
+
+	const getData = () => {
+		AppointmentApi.getMedicappAppointments().then(res => {
+			const appoints = [];
+
+			res.data.data.forEach(perDate => {
+				appoints.push({
+					start: moment(perDate.from).format('YYYY-MM-DD hh:mm A'),
+					end: moment(perDate.to).format('YYYY-MM-DD hh:mm A'),
+					title: moment(perDate.from).format('hh:mm A') + " - " + moment(perDate.to).format('hh:mm A'),
+					status: "BOOKED",
+					_id: perDate._id
+				})
+			})
+
+			setSlots(appoints);
+		})
+	}
 
 	const eventStyleGetter = (event, start, end, status) => {
 		var backgroundColor = '#' + event.hexColor
@@ -22,23 +45,19 @@ function PCR() {
 			display: 'block'
 		}
 
-		if (event.status === "BOOKED" && moment(event.end).isSameOrBefore()) {
+		if ((event.status === "BOOKED" || event.status === "APPROVED") && moment(event.end).isSameOrBefore()) {
 			style.backgroundColor = "#D22B2B"
 			style.pointerEvents = 'none'
 		}
 
-		if (moment(event.end).isAfter() && event.status === "BOOKED") {
-			style.backgroundColor = "green"
+		if (moment(event.end).isAfter() && (event.status === "BOOKED" || event.status === "APPROVED")) {
+			style.backgroundColor = "green";
+			style.pointerEvents = 'none';
 		}
 
 		return {
 			style: style
 		}
-	}
-
-	const onSelectSlot = (box) => {
-		setSelectedDate(box.start)
-		history.push(`/admin/pcr/${box.start}`)
 	}
 
 	return (
@@ -53,11 +72,12 @@ function PCR() {
 					events={slots}
 					startAccessor="start"
 					views={['month']}
-					onSelectSlot={onSelectSlot}
 					endAccessor="end"
 					selectable={true}
 					eventPropGetter={(eventStyleGetter)}
 				/>
+				<br />
+				<button className='btn btn-primary' style={{ float: 'right' }} onClick={() => { history.push("/admin/pcr/report") }}>See Reports</button>
 			</div>
 
 		</DashboardLayout>

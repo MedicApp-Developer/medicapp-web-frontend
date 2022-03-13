@@ -16,3 +16,6 @@ export const QR_PRESCRIPTION_NAMESPACE = 'qrprescription'
 export const SLOT_NAMESPACE = "slots"
 export const LOOKUPS_NAMESPACE = "lookups"
 export const SICKLEAVES_NAMESPACE = "leaves"
+export const VENDOR_NAMESPACE = "vendors"
+export const PACKAGE_NAMESPACE = "packages"
+export const REWARD_NAMESPACE = "rewards"

@@ -9,6 +9,9 @@ const SlotApi = {
     getAllDoctorsSlots(doctorId) {
         return trackPromise(axios.post(`${SLOT_NAMESPACE}/all/doctor/${doctorId}`))
     },
+    getApprovedDoctorsSlots(doctorId) {
+        return trackPromise(axios.get(`${SLOT_NAMESPACE}/approved/doctor/${doctorId}`))
+    },
     getHospitalPCRTestSlots(hospitalId) {
         return trackPromise(axios.post(`${SLOT_NAMESPACE}/PCRTests/hospital/${hospitalId}`))
     },

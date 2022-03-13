@@ -13,6 +13,9 @@ import PatientDoctorProfile from "./Doctor/components/PatientDoctorProfile"
 import BookAppointment from "./Doctor/components/BookAppointment"
 import BookVaccinationHospital from './Hospital/components/appointment/BookVaccinationHospital'
 import BookTestHospitalAppointment from './Hospital/components/appointment/BookTestHospitalAppointment'
+import PCRAppointments from './PCRAppointments'
+import Rewards from './Rewards'
+import Details from './Rewards/Details'
 
 const PatientRouter = withRouter(({ match, ...props }) => {
     return (
@@ -41,6 +44,12 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             <PatientRoute exact path={`${match.path}/promos`}>
                 <Promos />
             </PatientRoute>
+            <PatientRoute exact path={`${match.path}/rewards`}>
+                <Rewards />
+            </PatientRoute>
+            <PatientRoute exact path={`${match.path}/reward/:id`}>
+                <Details />
+            </PatientRoute>
             <PatientRoute exact path={`${match.path}/profile`}>
                 <PatientProfile />
             </PatientRoute>
@@ -55,6 +64,9 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             </PatientRoute>
             <PatientRoute exact path={`${match.path}/book-pcr-appointment`}>
                 <BookTestHospitalAppointment />
+            </PatientRoute>
+            <PatientRoute exact path={`${match.path}/book-medicapp-appointment`}>
+                <PCRAppointments />
             </PatientRoute>
         </Switch>
     )
