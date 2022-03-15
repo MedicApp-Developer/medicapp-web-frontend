@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, FAMILY_MEMBERS, SICK_LEAVES } from '../../../constants/patientProfile'
+import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, FAMILY_MEMBERS, SICK_LEAVES, REWARDS } from '../../../constants/patientProfile'
 import ProfileTopNavigation from './components/ProfileTopNavigation'
 import AppLayout from '../../../layout/AppLayout'
 import MedicalProfile from './components/MedicalProfile'
@@ -12,6 +12,7 @@ import { getPatientAccountInfo } from '../../../store/actions/patientActions'
 import { RootContext } from '../../../contextApi'
 import FamilyMembers from './components/FamilyMembers'
 import SickLeaves from './components/SickLeaves'
+import Rewards from './components/Rewards'
 
 function PatientProfile({ getPatientAccountInfo, patients }) {
     const [selectedTab, setSelectedTab] = useState(MEDICAL_PROFILE)
@@ -34,6 +35,8 @@ function PatientProfile({ getPatientAccountInfo, patients }) {
             componentToRender = <Appointments appointments={patient?.upcommingAppointments} />; break
         case SICK_LEAVES:
             componentToRender = <SickLeaves />; break
+        case REWARDS:
+            componentToRender = <Rewards />; break
         case QR_PRESCRIPTION:
             componentToRender = <QRPrescription prescriptions={patient?.qrPrescriptions} />; break
         case LAB_RESULTS:

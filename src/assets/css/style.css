@@ -1904,3 +1904,32 @@ header .dropdown-menu {
   width: 40px;
   cursor: pointer;
   }
+
+	.feed-section {
+		padding: 40px 0 60px;
+	}
+
+	.feed-section .card {
+		border: 1px solid #efe9e9;
+		border-radius: 8px;
+	}
+
+	.feed-section .card-body {
+		padding: 30px 25px;
+	}
+
+	.feed-section .card iframe {
+		width: 100%;
+		margin-bottom: 5px; 
+	}
+
+	.feed-section .card h4 {
+		margin-bottom: 15px;
+		font-weight: 600;
+		font-size: 22px;
+	}
+
+	.feed-section .card p {
+		margin-bottom: 20px;
+		font-size: 14px;
+	}

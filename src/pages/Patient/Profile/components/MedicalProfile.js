@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PATIENT_IMAGE from '../../../../assets/images/patient.png'
 import HEART_IMAGE from '../../../../assets/images/heart.png'
 import TEMP_IMAGE from '../../../../assets/images/temp.png'
@@ -13,10 +13,11 @@ import { href } from '../../../../constants/extra'
 import CancelAppointment from './CancelAppointment'
 import UpdateProfile from './UpdateProfile'
 import { useTranslation } from "react-i18next"
+import { RootContext } from '../../../../contextApi'
 
 function MedicalProfile({ patient }) {
     const { t } = useTranslation()
-
+    const { user } = useContext(RootContext);
     const [selectedResult, setSelectedResult] = useState(null)
     const [selectedAAppointment, setSelectedAppointment] = useState({})
 
@@ -69,7 +70,7 @@ function MedicalProfile({ patient }) {
                                             <span>{t("patient_ID")}:</span> {patient?.patient?._id}
                                         </li>
                                         <li>
-                                            <span>{t("points")}:</span> {patient?.patient?.points}
+                                            <span>{t("points")}:</span> {user?.points}
                                         </li>
                                     </ul>
                                 </div>

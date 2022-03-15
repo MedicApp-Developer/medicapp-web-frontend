@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ACCOUNT, APPOINTMENTS, FAMILY_MEMBERS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, SICK_LEAVES } from '../../../../constants/patientProfile'
+import { ACCOUNT, APPOINTMENTS, FAMILY_MEMBERS, REWARDS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, SICK_LEAVES } from '../../../../constants/patientProfile'
 import { useTranslation } from "react-i18next"
 
 function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
@@ -25,6 +25,9 @@ function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
                             </li>
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(SICK_LEAVES) }} className={classNames('nav-link', { active: selectedTab === SICK_LEAVES })} href={href}>{t("sick_leaves")}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a onClick={(e) => { e.preventDefault(); setSelectedTab(REWARDS) }} className={classNames('nav-link', { active: selectedTab === REWARDS })} href={href}>{t("rewards")}</a>
                             </li>
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(QR_PRESCRIPTION) }} className={classNames('nav-link', { active: selectedTab === QR_PRESCRIPTION })} href={href}>{t("QR_Prescriprion")}</a>

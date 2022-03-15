@@ -14,13 +14,15 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 				email: selectedVendor?.email || "",
 				lastName: selectedVendor?.lastName || "",
 				phoneNo: selectedVendor?.phoneNo || "",
-				about: selectedVendor?.about || ""
+				about: selectedVendor?.about || "",
+				address: selectedVendor?.address || ""
 			}}
 			validationSchema={Yup.object({
 				firstName: Yup.string().required('Required'),
 				email: Yup.string().required('Required'),
 				lastName: Yup.string().required('Required'),
 				phoneNo: Yup.string().required('Required'),
+				address: Yup.string().required('Required'),
 			})}
 			onSubmit={(values, { resetForm }) => {
 				if (selectedVendor === null) {
@@ -39,7 +41,7 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 								<span className="icon-close"></span>
 							</button>
-							<h4 className="text-center">{selectedVendor?.firstName ? "Update" : "Add"} Addon</h4>
+							<h4 className="text-center">{selectedVendor?.firstName ? "Update" : "Add"} Vendor</h4>
 							<Form>
 								<div className="row">
 									<div className="col-md-12">
@@ -51,6 +53,9 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 										</div>
 										<div className="form-group">
 											<TextInput type="email" name="email" placeholder="Email" />
+										</div>
+										<div className="form-group">
+											<TextInput type="text" name="address" placeholder="Address" />
 										</div>
 										<div className="form-group">
 											<TextInput type="text" name="phoneNo" placeholder="Mobile" />

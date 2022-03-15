@@ -146,5 +146,10 @@
 	"regulatory": "تنظيمية",
 	"profile": "الملف الشخصي",
 	"logout": "تسجيل خروج",
-	"points": "نتيجة"
+	"points": "نتيجة",
+	"rewards": "المكافآت",
+	"vendorName": "اسم البائع",
+	"package": "صفقة",
+	"code": "الشفرة",
+	"status": "الحالة"
 }

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 import AppLayout from '../../../layout/AppLayout'
 import MOBILE_IMG from '../../../assets/images/mobile.png';
 import CATEGORY_IMG from '../../../assets/images/category.png';
-import PACKAGE_IMG from '../../../assets/images/atlantis.png';
 import PackagesApi from '../../../api/Packages';
 import { ON_PERCENTAGE } from '../../../constants/package';
 import { Link } from 'react-router-dom';
@@ -11,6 +10,7 @@ import { RootContext } from '../../../contextApi';
 import { href } from '../../../constants/extra';
 import { toast } from 'react-toastify';
 import COPY_ICON from '../../../assets/images/copy.png';
+import PLACEHOLDER_IMG from '../../../assets/images/placeholder_img.jpeg'
 
 function Rewards() {
 	const [popularPackages, setPopularPackages] = useState([]);
@@ -124,22 +124,22 @@ function Rewards() {
 							<div className="row">
 								{popularPackages?.map(item => {
 
-									const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId === item._id).length === 0;
-									const subscribedBtn = rewards.filter(reward => reward.packageId === item._id).length !== 0;
+									const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId._id === item._id).length === 0;
+									const subscribedBtn = rewards.filter(reward => reward.packageId._id === item._id).length !== 0;
 									const insuficientPoints = item.points > user.points;
 
 									return (
 										<div className="col-md-4" key={item._id}>
 											<div class="item">
 												<div class="card">
-													<img src={item.vendorId.images[0] ? item.vendorId.images[0] : PACKAGE_IMG} class="card-img-top" alt="atlantis" />
+													<img src={item.images[0] ? item.images[0] : PLACEHOLDER_IMG} class="card-img-top" alt="atlantis" />
 													<div class="card-body">
 														<h3 class="card-title">{item.type === ON_PERCENTAGE ? `${item.off}% Discount` : `Buy ${item.buyQuantity}, Get ${item.getQuantity}`}</h3>
 														<h6 class="card-text">{item.vendorId.firstName + " " + item.vendorId.lastName}</h6>
 
 														{
 															subscribedBtn ? (
-																<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
+																<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId._id === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
 															) :
 																insuficientPoints ? (
 																	<p>{item.points} points</p>
@@ -177,22 +177,22 @@ function Rewards() {
 
 						{recommendedPackages?.map(item => {
 
-							const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId === item._id).length === 0;
-							const subscribedBtn = rewards.filter(reward => reward.packageId === item._id).length !== 0;
+							const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId._id === item._id).length === 0;
+							const subscribedBtn = rewards.filter(reward => reward.packageId._id === item._id).length !== 0;
 							const insuficientPoints = item.points > user.points;
 
 							return (
 								<div className="col-md-4" key={item._id}>
 									<div class="item">
 										<div class="card">
-											<img src={item.vendorId.images[0] ? item.vendorId.images[0] : PACKAGE_IMG} class="card-img-top" alt="atlantis" />
+											<img src={item.images[0] ? item.images[0] : PLACEHOLDER_IMG} class="card-img-top" alt="atlantis" />
 											<div class="card-body">
 												<h3 class="card-title">{item.type === ON_PERCENTAGE ? `${item.off}% Discount` : `Buy ${item.buyQuantity}, Get ${item.getQuantity}`}</h3>
 												<h6 class="card-text">{item.vendorId.firstName + " " + item.vendorId.lastName}</h6>
 
 												{
 													subscribedBtn ? (
-														<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
+														<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId._id === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
 													) :
 														insuficientPoints ? (
 															<p>{item.points} points</p>

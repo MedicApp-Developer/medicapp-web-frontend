@@ -140,9 +140,9 @@ function HospitalDetails() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-lg-3">
+                                        {/* <div class="col-6 col-lg-3">
                                             <Link to="/patient/book-pcr-appointment" class="btn btn-primary px-3 py-1 mt-2" onClick={() => { localStorage.setItem("HOSPITAL_PCR_APPOINTMENT", JSON.stringify(hospital)) }}>Book Appointment</Link>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div class="row align-items-center mb-4">
                                         <div class="col-6 col-lg-3">
@@ -153,9 +153,9 @@ function HospitalDetails() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-lg-3">
+                                        {/* <div class="col-6 col-lg-3">
                                             <Link to="/patient/book-vaccination-appointment" class="btn btn-primary px-3 py-1 mt-2" onClick={() => { localStorage.setItem("HOSPITAL_VACCINATION_APPOINTMENT", JSON.stringify(hospital)) }}>Book Appointment</Link>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import AppLayout from '../../../layout/AppLayout'
-import SLIDE_IMG from '../../../assets/images/slide.png'
-import PACKAGE_IMG from '../../../assets/images/atlantis.png';
 import PATIENT_IMG from '../../../assets/images/patient.png';
 import PackagesApi from '../../../api/Packages';
 import { Link, useParams } from 'react-router-dom';
@@ -12,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { href } from '../../../constants/extra';
 import COPY_ICON from '../../../assets/images/copy.png';
+import PLACEHOLDER_IMG from '../../../assets/images/placeholder_img.jpeg'
 
 function Details() {
 
@@ -37,7 +36,7 @@ function Details() {
 		RewardsApi.getPatientRewards(user._id).then(res => {
 			setRewards(res.data.data);
 		})
-	}, []);
+	}, [id]);
 
 	const openRecommendedPackage = (packageId) => {
 		PackagesApi.getSinglePackage(packageId).then(res => {
@@ -73,8 +72,8 @@ function Details() {
 		toast.success("Copied to clipboard")
 	}
 
-	const subscribeBtn = packge.points <= user.points && rewards.filter(reward => reward.packageId === packge._id).length === 0;
-	const subscribedBtn = rewards.filter(reward => reward.packageId === packge._id).length !== 0;
+	const subscribeBtn = packge.points <= user.points && rewards.filter(reward => reward.packageId._id === packge._id).length === 0;
+	const subscribedBtn = rewards.filter(reward => reward.packageId._id === packge._id).length !== 0;
 	const insuficientPoints = packge.points > user.points;
 
 	return (
@@ -84,14 +83,14 @@ function Details() {
 					<div class="row">
 						<div class="col-md-12 col-lg-8">
 							<h3><strong>{packge?.vendorId?.firstName + " " + packge?.vendorId?.lastName}</strong></h3>
-							<h6>Dubai</h6>
+							<h6>{packge?.vendorId?.address}</h6>
 							<h4 class="text-danger mb-2"><strong>{packge?.type === ON_PERCENTAGE ? `${packge?.off}% Discount` : `Buy ${packge?.buyQuantity}, Get ${packge?.getQuantity}`}</strong></h4>
 
 							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 								<div class="carousel-inner">
-									{packge.vendorId?.images?.length > 0 ? (
+									{packge.images?.length > 0 ? (
 										<>
-											{packge.vendorId.images.map((img, index) => (
+											{packge.images.map((img, index) => (
 												<div class={index === 0 ? "carousel-item active" : "carousel-item"}>
 													<img src={img} class="d-block w-100" alt="..." />
 												</div>
@@ -99,7 +98,7 @@ function Details() {
 										</>
 									) : (
 										<div class="carousel-item active">
-											<img src={SLIDE_IMG} class="d-block w-100" alt="..." />
+											<img src={PLACEHOLDER_IMG} class="d-block w-100" alt="..." />
 										</div>
 									)}
 								</div>
@@ -123,7 +122,7 @@ function Details() {
 								) : (
 									<>
 										<div class="col-4 col-md-3">
-											<img src={PACKAGE_IMG} class="img-fluid" alt="atlantis" />
+											<img src={PLACEHOLDER_IMG} class="img-fluid" alt="atlantis" />
 										</div>
 									</>
 								)}
@@ -136,7 +135,7 @@ function Details() {
 								<div class="card-body text-center">
 									<img width="80" src={PATIENT_IMG} alt="patient" />
 									<h4>{packge?.vendorId?.firstName + " " + packge?.vendorId?.lastName}</h4>
-									<h6>Dubai</h6>
+									<h6>{packge?.vendorId?.address}</h6>
 									<p>{packge?.vendorId?.about} </p>
 									<a
 										href={null}
@@ -170,22 +169,22 @@ function Details() {
 							<div className="row">
 								{popularPackages?.map(item => {
 
-									const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId === item._id).length === 0;
-									const subscribedBtn = rewards.filter(reward => reward.packageId === item._id).length !== 0;
+									const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId._id === item._id).length === 0;
+									const subscribedBtn = rewards.filter(reward => reward.packageId._id === item._id).length !== 0;
 									const insuficientPoints = item.points > user.points;
 
 									return (
 										<div className="col-md-4" key={item._id}>
 											<div class="item">
 												<div class="card">
-													<img src={PACKAGE_IMG} class="card-img-top" alt="atlantis" />
+													<img src={item?.images?.length === 0 ? PLACEHOLDER_IMG : item?.images[0]} class="card-img-top" alt="atlantis" />
 													<div class="card-body">
 														<h3 class="card-title">{item.type === ON_PERCENTAGE ? `${item.off}% Discount` : `Buy ${item.buyQuantity}, Get ${item.getQuantity}`}</h3>
 														<h6 class="card-text">{item.vendorId.firstName + " " + item.vendorId.lastName}</h6>
 
 														{
 															subscribedBtn ? (
-																<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
+																<a href={href} style={{ color: "gray", cursor: 'pointer' }} onClick={(e) => { e.preventDefault(); setPromoCode(rewards.filter(reward => reward.packageId._id === item._id)[0]?.code); buttonRef.current.click(); }}>See Promo Code</a>
 															) :
 																insuficientPoints ? (
 																	<p>{item.points} points</p>
@@ -195,7 +194,7 @@ function Details() {
 														}
 													</div>
 													<Link
-														to={`reward/${item._id}`}
+														to={`/patient/reward/${item._id}`}
 														className={subscribeBtn ? "btn btn-primary" : "disabled btn btn-secondary"}>
 														{subscribedBtn ? "Subscribed" : insuficientPoints ? "Insufficient Points" : "Subscribe"}
 													</Link>

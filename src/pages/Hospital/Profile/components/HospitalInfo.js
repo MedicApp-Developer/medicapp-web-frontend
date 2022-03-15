@@ -11,14 +11,14 @@ function HospitalInfo({ hospital }) {
     const { name, address, openingTime, closingTime, about, _id, images } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
     const [image, setImage] = useState(null);
-    
+
     const handleImageSelect = (e) => {
         setImage(e.target.files[0]);
         setImageSrc(URL.createObjectURL(e.target.files[0]))
     }
 
     const uploadImage = () => {
-        if(imageSrc && image){
+        if (imageSrc && image) {
             let formData = new FormData();
             formData.append('image', image);
             HospitalApi.uploadHospitalImage(_id, formData).then(res => {
@@ -36,7 +36,7 @@ function HospitalInfo({ hospital }) {
         <>
             <div className="row align-items-start add-list hospital-info">
                 <div className="col-6">
-                    <h4>{ name }</h4>
+                    <h4>{name}</h4>
                     <p className="rating mb-1">
                         <i className="text-warning fa fa-star"></i>
                         <i className="text-warning fa fa-star"></i>
@@ -44,13 +44,13 @@ function HospitalInfo({ hospital }) {
                         <i className="text-warning fa fa-star"></i>
                         <i className="fa fa-star"></i>
                     </p>
-                    <h6> { (openingTime && closingTime) ? (openingTime + " - " + closingTime) : "Open Now" }  </h6>
+                    <h6> {(openingTime && closingTime) ? (openingTime + " - " + closingTime) : "Open Now"}  </h6>
                 </div>
                 <div className="col-6 text-right">
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#updateHospital" className="btn btn-primary px-4">Update</a>
                 </div>
-                </div>
-                <div className="row mt-2">
+            </div>
+            <div className="row mt-2">
                 {images?.length > 0 && images?.map(img => (
                     <div className="col-md-3">
                         <img className="img-fluid" src={img} alt="hospital" />
@@ -63,7 +63,7 @@ function HospitalInfo({ hospital }) {
                         setImageSrc={setImageSrc}
                         style={{
                             width: '100%',
-                            height: '100%',
+                            height: '10rem',
                             background: '#417EBF',
                             textAlign: 'center',
                             display: 'flex',
@@ -80,9 +80,9 @@ function HospitalInfo({ hospital }) {
                         </span>
                     )}
                 </div>
-                </div>
-                <div className="row mt-4">
-                <div className="col-md-8" style={{marginTop: '20px'}} >
+            </div>
+            <div className="row mt-4">
+                <div className="col-md-8" style={{ marginTop: '20px' }} >
                     <h4>About the Hospital</h4>
                     <p>{about}</p>
                 </div>

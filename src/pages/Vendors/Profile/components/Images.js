@@ -46,7 +46,7 @@ function Images({ vendor }) {
 						setImageSrc={setImageSrc}
 						style={{
 							width: '100%',
-							height: '100%',
+							height: '10rem',
 							background: '#417EBF',
 							textAlign: 'center',
 							display: 'flex',

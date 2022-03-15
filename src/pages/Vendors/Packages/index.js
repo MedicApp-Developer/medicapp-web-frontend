@@ -59,6 +59,13 @@ function Packages({ getPackages, packages, deletePackage }) {
 							</div>
 						</div>
 					))}
+					{allPackages?.length === 0 && (
+						<div className="row align-items-center add-list">
+							<div className="col-12 ml-3">
+								<p>No Packages Yet.</p>
+							</div>
+						</div>
+					)}
 				</div>
 				{/* Add Doctor Modal */}
 				<AddPackage selectedPackage={selectedPackage} />

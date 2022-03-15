@@ -6,7 +6,7 @@ import moment from 'moment'
 import { useTranslation } from "react-i18next"
 
 function CreatePCRAppointment({ selectedSlot, slotRef, onSlotCalandarClose }) {
-	const { user } = useContext(RootContext)
+	const { user, setUser } = useContext(RootContext)
 	const [description, setDescription] = useState("")
 	const [familyMemberId, setFamilyMemberId] = useState(null)
 	const familyMembers = JSON.parse(localStorage.getItem("familyMembers"))
@@ -24,16 +24,18 @@ function CreatePCRAppointment({ selectedSlot, slotRef, onSlotCalandarClose }) {
 		if (selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED") {
 			AppointmentApi.cancelMedicappAppointment(selectedSlot._id).then(res => {
 				toast.success("Your appointment cancelled successfully")
+				setUser({ ...user, points: parseInt(user.points) - 20 })
 				setTimeout(() => {
 					window.location.reload()
 				}, 1000)
 			});
 		} else {
 			AppointmentApi.createMedicappAppointment(appoint).then(res => {
-				toast.success("Your appointment created successfully")
+				toast.success("Your appointment created successfully, You have recieved 20 points")
+				setUser({ ...user, points: user.points + 20 })
 				setTimeout(() => {
 					window.location.reload()
-				}, 1000)
+				}, 3500)
 			}).catch(err => {
 				toast.error("Problem while creating appointment")
 			})

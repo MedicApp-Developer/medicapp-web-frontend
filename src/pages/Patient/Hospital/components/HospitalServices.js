@@ -10,7 +10,7 @@ function HospitalServices({ services }) {
                         <div class="media">
                             <img src={MEDOR_LOGO} class="mr-3" alt="dental" />
                             <div class="media-body">
-                                <h5 class="mt-0">{service.name}</h5>
+                                <h5 class="mt-0">{service.name_en}</h5>
                             </div>
                         </div>
                     </div>

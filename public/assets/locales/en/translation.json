@@ -146,5 +146,11 @@
 	"regulatory": "Regulatory",
 	"profile": "Profile",
 	"logout": "Logout",
-	"points": "Points"
+	"points": "Points",
+	"rewards": "Rewards",
+	"no_rewards_yet": "No Rewards, Get Amazing rewards on booking appointment",
+	"vendorName": "Vendor Name",
+	"package": "Package",
+	"code": "Code",
+	"status": "Status"
 }
