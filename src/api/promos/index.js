@@ -15,8 +15,8 @@ const PromoApi = {
     createPromo(data) {
         return trackPromise(axios.post(`/${PROMO_REQUEST_NAMESPACE}`, data));
     },
-    likePromo(id) {
-        return trackPromise(axios.put(`/${PROMO_REQUEST_NAMESPACE}/like/${id}`));
+    likePromo(id, patientId) {
+        return trackPromise(axios.put(`/${PROMO_REQUEST_NAMESPACE}/like/${id}/${patientId}`));
     }
 }
 
