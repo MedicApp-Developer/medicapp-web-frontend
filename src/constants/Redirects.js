@@ -1,6 +1,7 @@
 export const HOSPITAL_ROUTE = "/hospital";
 export const DOCTORS_ROUTE = "/doctors";
 export const LOGIN_ROUTE = "/login";
+export const FORGET_PASSWORD_ROUTE = "/forget-password";
 export const HOSPITAL_REGISTERATION_ROUTE = "/register-hospital";
 export const PATIENT_REGISTERATION_ROUTE = "/register-patient";
 export const SELECT_REGISTERATION_TYPE_ROUTE = "/select-registeration-type";

@@ -23,6 +23,8 @@ import PatientRouter from './pages/Patient'
 import TermsOfUse from './pages/Others/TermsOfUse'
 import PrivacyPolicy from './pages/Others/PrivacyPolicy'
 import VendorRouter from './pages/Vendors'
+import ForgetPassword from './pages/shared/ForgetPassword'
+import ResetPassword from './pages/shared/ForgetPassword/components/ResetPassword'
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
             <PublicRoute exact path="/register-hospital" component={HospitalRegisteration} />
             <PublicRoute exact path="/register-patient" component={PatientRegisteration} />
             <PublicRoute exact path="/login" component={Login} />
+            <PublicRoute exact path="/forget-password" component={ForgetPassword} />
+            <PublicRoute exact path="/reset-password/:userToken" component={ResetPassword} />
             <Route path="/">
               <Redirect to="/login" />
             </Route>

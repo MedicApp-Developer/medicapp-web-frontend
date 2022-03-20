@@ -9,7 +9,7 @@ import { RootContext } from '../../../../contextApi/index';
 import { toast } from 'react-toastify';
 import { selectNav } from '../../../../Utills/selectNav';
 import { Link } from 'react-router-dom';
-import { SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects';
+import { FORGET_PASSWORD_ROUTE, SELECT_REGISTERATION_TYPE_ROUTE } from '../../../../constants/Redirects';
 import instance from '../../../../axios';
 import { usePromiseTracker } from "react-promise-tracker";
 import HashLoader from "react-spinners/HashLoader";
@@ -76,7 +76,7 @@ const LoginForm = () => {
         ) : null}
       </div>
 
-      <a href={href} class="forgot-pass">Forgot Password?</a>
+      <Link to={FORGET_PASSWORD_ROUTE} class="forgot-pass">Forgot Password?</Link>
       <div class="form-group mt-4">
         <button type="submit" disabled={promiseInProgress} style={promiseInProgress ? { padding: '20px' } : {}} class="btn btn-primary">
           {promiseInProgress ? (
