@@ -25,6 +25,11 @@ export const AdminRoutes = [
         route: "/admin/addons"
     },
     {
+        name: "Approve Hospitals",
+        icon: "icon-qr-code",
+        route: "/admin/approve-hospitals"
+    },
+    {
         name: "Clinics",
         icon: "icon-qr-code",
         route: "/admin/clinics"

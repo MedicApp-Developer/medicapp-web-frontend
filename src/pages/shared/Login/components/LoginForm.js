@@ -54,8 +54,7 @@ const LoginForm = () => {
         localStorage.setItem("familyMembers", JSON.stringify(res?.data?.data?.familyMembers));
         history.push(redirectTo(res?.data?.data?.user?.role));
       }).catch(err => {
-        console.log("Err => ", err);
-        toast.error("Invalid Credentials")
+        toast.error(err.response.data.message || "Invalid Credentials")
       })
     },
   });

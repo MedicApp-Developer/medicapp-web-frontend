@@ -4,6 +4,7 @@ import Addons from "./Addons";
 import AdminDashboard from "./AdminDashboard";
 import AllExpenses from './AllExpenses';
 import AllExpenseType from './AllExpenses/components/AllExpenseType';
+import ApprovalHospitals from './ApprovalHospitals';
 import Categories from "./Categories";
 import Clinics from './Clinics';
 import GenerateReport from './Clinics/components/GenerateReport';
@@ -32,6 +33,9 @@ const AdminRouter = withRouter(({ match, ...props }) => {
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/addons`} >
                 <Addons />
+            </AdminRoute>
+            <AdminRoute exact path={`${match.path}/approve-hospitals`} >
+                <ApprovalHospitals />
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/clinics`} >
                 <Clinics />
