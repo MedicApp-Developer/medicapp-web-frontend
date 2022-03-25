@@ -20,6 +20,18 @@ function ApprovalHospitals() {
 		});
 	}
 
+	const downloadFile = async (id, e) => {
+		e.preventDefault();
+		const result = await HospitalApi.getTradeLicenseFile(id)
+		console.log("result => ", result.data.data);
+		if (result.data.data.tradeLicenseFile) {
+			const newWindow = window.open(result.data.data.tradeLicenseFile, '_blank', 'noopener,noreferrer')
+			if (newWindow) newWindow.opener = null
+		} else {
+			toast.error("Don't have Trade License File")
+		}
+	}
+
 	return (
 		<DashboardLayout>
 			<div className="row align-items-center add-list">
@@ -34,6 +46,7 @@ function ApprovalHospitals() {
 										<td style={{ border: '1px solid gray', padding: '7px', fontWeight: 'bold' }}>Hospital Name</td>
 										<td style={{ border: '1px solid gray', padding: '7px', fontWeight: 'bold' }}>Email</td>
 										<td style={{ border: '1px solid gray', padding: '7px', fontWeight: 'bold' }}>Status</td>
+										<td style={{ border: '1px solid gray', padding: '7px', fontWeight: 'bold' }}>Trade License File</td>
 										<td style={{ border: '1px solid gray', padding: '7px', fontWeight: 'bold' }}>Actions</td>
 									</tr>
 								</thead>
@@ -43,6 +56,7 @@ function ApprovalHospitals() {
 											<td style={{ border: '1px solid gray', padding: '7px' }}>{hospital?.firstName + " " + hospital?.lastName}</td>
 											<td style={{ border: '1px solid gray', padding: '7px' }}>{hospital?.email}</td>
 											<td style={{ border: '1px solid gray', padding: '7px' }}>{hospital?.status}</td>
+											<td style={{ border: '1px solid gray', padding: '7px' }}><a href={""} onClick={downloadFile.bind(this, hospital.referenceId)}>See Attachment</a></td>
 											<td style={{ border: '1px solid gray', padding: '7px' }}>
 												<button className="btn btn-success" onClick={approveHospital.bind(this, hospital._id)}>APPROVE</button>
 											</td>

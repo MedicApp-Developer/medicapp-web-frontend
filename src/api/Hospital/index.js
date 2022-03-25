@@ -38,6 +38,9 @@ const HospitalApi = {
     },
     approveHospital(id) {
         return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/approveHospital/${id}`));
+    },
+    getTradeLicenseFile(id) {
+        return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/getTradeLicenseFile/${id}`));
     }
 }
 

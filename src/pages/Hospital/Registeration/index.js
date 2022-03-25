@@ -12,6 +12,7 @@ import NumberFormat from 'react-number-format'
 function HospitalRegisteration() {
 
     const [file, setFile] = useState(null)
+    const [fileError, setFileError] = useState("");
     const [submited, setSubmited] = useState(false)
     const [step, setStep] = useState(1)
     const [firstFormValues, setFirstFormValues] = useState({})
@@ -24,7 +25,7 @@ function HospitalRegisteration() {
             tradeLicenseNo: "",
             issueDate: "",
             expiryDate: "",
-            tradeLicenseFile: "",
+            tradeLicenseFile: null,
             phoneNo: "",
             email: "",
             password: "",
@@ -49,31 +50,24 @@ function HospitalRegisteration() {
             })
         }),
         onSubmit: async values => {
-            // setSubmited(true);
-            setStep(2)
-            setFirstFormValues(values)
-            // let formData = new FormData();
-            // formData.append("name", values.name);
-            // formData.append("tradeLicenseNo", values.tradeLicenseNo);
-            // formData.append("issueDate", values.issueDate);
-            // formData.append("expiryDate", values.expiryDate);
-            // formData.append("address", values.address);
-            // formData.append("phoneNo", values.phoneNo);
-            // formData.append("type", values.type);
-            // formData.append("email", values.email);
-            // formData.append("password", values.password);
-            // formData.append('video', file);
-            // await AuthApi.registerHospital(formData).then(res => {
-            //     toast.success("Hospital Registered Successfully");
-            //     history.push(LOGIN_ROUTE);
-            // }).catch(err => {
-            //     toast.error(err.response.data.message);
-            // })
+            setSubmited(true);
+            if (file) {
+                setStep(2)
+                setFirstFormValues(values)
+            } else {
+                setFileError("Trade License File Required");
+            }
         },
     })
 
     const onFileUpload = (e) => {
-        setFile(e.target.files[0])
+        var upld = e.target.files[0].type;
+        if (upld == "application/pdf") {
+            setFile(e.target.files[0]);
+            setFileError("");
+        } else {
+            setFileError("Only PDF Files Allowed");
+        }
     }
 
     const onSecondFormSubmit = async (values, marker) => {
@@ -83,11 +77,25 @@ function HospitalRegisteration() {
             })
         const finalSubmitValues = { ...firstFormValues, ...values, location }
 
-        await AuthApi.registerHospital(finalSubmitValues).then(res => {
+        let formData = new FormData();
+        formData.append("name", finalSubmitValues.name);
+        formData.append("tradeLicenseNo", finalSubmitValues.tradeLicenseNo);
+        formData.append("issueDate", finalSubmitValues.issueDate);
+        formData.append("expiryDate", finalSubmitValues.expiryDate);
+        formData.append("address", finalSubmitValues.address);
+        formData.append("location", JSON.stringify(finalSubmitValues.location));
+        formData.append("state", finalSubmitValues.state);
+        formData.append("phoneNo", finalSubmitValues.phoneNo);
+        formData.append("type", finalSubmitValues.type);
+        formData.append("email", finalSubmitValues.email);
+        formData.append("password", finalSubmitValues.password);
+        formData.append('tradeLicenseFile', file);
+
+        await AuthApi.registerHospital(formData).then(res => {
             toast.success("Hospital Registered Successfully")
             history.push(LOGIN_ROUTE)
         }).catch(err => {
-            toast.error(err.response.data.message)
+            toast.error("Problem while registeration of hospital")
         })
     }
 
@@ -142,13 +150,13 @@ function HospitalRegisteration() {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div class="form-group">
+                                <div class="form-group">
                                     <input type="file" class="form-control custom-file-input" id="validatedCustomFile" onChange={onFileUpload} />
                                     <label class="custom-file-label form-control" for="validatedCustomFile">{file ? file.name : "Upload Trade License"} </label>
-                                    {submited && !file ? (
-                                        <div class="invalid-feedback text-right-aligned">Trade License is required</div>
+                                    {submited && !file && fileError ? (
+                                        <div style={{ color: "red", float: 'right', paddingTop: '0.7rem', paddingBottom: '0.7rem', fontSize: "0.9rem" }}>{fileError}</div>
                                     ) : null}
-                                </div> */}
+                                </div>
                                 <div class="form-group">
                                     <NumberFormat
                                         format={"+971-## ### ####"}
