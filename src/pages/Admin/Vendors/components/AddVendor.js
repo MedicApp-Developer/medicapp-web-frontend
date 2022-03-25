@@ -15,7 +15,8 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 				lastName: selectedVendor?.lastName || "",
 				phoneNo: selectedVendor?.phoneNo || "",
 				about: selectedVendor?.about || "",
-				address: selectedVendor?.address || ""
+				address: selectedVendor?.address || "",
+				branch_name: selectedVendor?.branch_name || "",
 			}}
 			validationSchema={Yup.object({
 				firstName: Yup.string().required('Required'),
@@ -23,6 +24,7 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 				lastName: Yup.string().required('Required'),
 				phoneNo: Yup.string().required('Required'),
 				address: Yup.string().required('Required'),
+				branch_name: Yup.string().required('Required'),
 			})}
 			onSubmit={(values, { resetForm }) => {
 				if (selectedVendor === null) {
@@ -50,6 +52,9 @@ function AddVendors({ createVendor, selectedVendor, updateVendor }) {
 										</div>
 										<div className="form-group">
 											<TextInput type="text" name="lastName" placeholder="Last Name" />
+										</div>
+										<div className="form-group">
+											<TextInput type="text" name="branch_name" placeholder="Branch Name" />
 										</div>
 										<div className="form-group">
 											<TextInput type="email" name="email" placeholder="Email" />

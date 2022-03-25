@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import VendorApi from '../../../api/Vendor'
 import VendorAccount from './components/VendorAccount'
 import Images from './components/Images'
+import LocationMap from './components/LocationMap'
 
 function VendorProfile() {
 
@@ -30,6 +31,8 @@ function VendorProfile() {
 		returnedComponent = <VendorAccount vendorId={user.referenceId} vendor={vendor} />
 	} else if (tabSelected === "Images") {
 		returnedComponent = <Images vendor={vendor} />
+	} else if (tabSelected === "Location") {
+		returnedComponent = <LocationMap vendorId={user.referenceId} lat={vendor?.location?.coordinates[0]} lng={vendor?.location?.coordinates[1]} />
 	}
 
 	return (
@@ -43,6 +46,9 @@ function VendorProfile() {
 							</li>
 							<li className="nav-item">
 								<a className={classNames('nav-link', { 'active': tabSelected === "Images" })} href={href} onClick={(e) => { e.preventDefault(); setTabSelected("Images") }}>Images</a>
+							</li>
+							<li className="nav-item">
+								<a className={classNames('nav-link', { 'active': tabSelected === "Location" })} href={href} onClick={(e) => { e.preventDefault(); setTabSelected("Location") }}>Location</a>
 							</li>
 						</ul>
 					</div>

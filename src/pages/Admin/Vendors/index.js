@@ -40,7 +40,8 @@ function Vendors({ getVendors, vendors, deleteVendor }) {
 										<h3>{ven?.firstName + " " + ven?.lastName}</h3>
 										<div className="media-body">
 											<h5 className="mt-0">{ven.name}</h5>
-											<p className="mt-0">{ven.email}</p>
+											<p className="mt-0">Email: {ven.email}</p>
+											<p className="mt-0">Branch: {ven?.branch_name}</p>
 										</div>
 									</div>
 								</div>
