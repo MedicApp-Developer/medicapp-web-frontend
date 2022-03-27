@@ -51,12 +51,12 @@ function BookVaccinationHospital() {
             display: 'block'
         }
 
-        if ((event.status === "BOOKED" || event.status === "APPROVED") && moment(event.end).isSameOrBefore()) {
+        if ((event.status === "BOOKED") && moment(event.end).isSameOrBefore()) {
             style.backgroundColor = "#D22B2B"
             style.pointerEvents = 'none'
         }
 
-        if (moment(event.end).isAfter() && (event.status === "BOOKED" || event.status === "APPROVED")) {
+        if (moment(event.end).isAfter() && (event.status === "BOOKED")) {
             style.backgroundColor = "green"
         }
 

@@ -7,6 +7,7 @@ import { href } from '../../../../constants/extra'
 import SlotApi from '../../../../api/Slots'
 import { saveAs } from 'file-saver'
 import { useTranslation } from "react-i18next"
+import VerifyCode from './VerifyCode'
 
 function Appointments({ appointments }) {
 
@@ -39,7 +40,7 @@ function Appointments({ appointments }) {
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">
-                                            <div class="col-md-12 col-lg-8">
+                                            <div class="col-md-12 col-lg-6">
                                                 <ul>
                                                     <li>
                                                         <small class="d-block">{t("date")} & {t("time")}</small>
@@ -77,7 +78,7 @@ function Appointments({ appointments }) {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
+                                            <div class="col-md-12 col-lg-6 text-center text-md-right mt-3 mt-md-0">
                                                 <span class="contact-info mr-4" style={{ float: 'left' }}>
                                                     <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
                                                         <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
@@ -88,6 +89,7 @@ function Appointments({ appointments }) {
 
                                                 </span>
                                                 <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
+                                                <a style={{ marginRight: '1rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
                                                 <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("CANCEL")}</a>
                                             </div>
                                         </div>
@@ -114,7 +116,7 @@ function Appointments({ appointments }) {
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">
-                                            <div class="col-md-12 col-lg-8">
+                                            <div class="col-md-12 col-lg-6">
                                                 <ul>
                                                     <li>
                                                         <small class="d-block">{t("date")} & {t("time")}</small>
@@ -152,7 +154,7 @@ function Appointments({ appointments }) {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-12 col-lg-4 text-center text-md-right mt-3 mt-md-0">
+                                            <div class="col-md-12 col-lg-6 text-center text-md-right mt-3 mt-md-0">
                                                 <span class="contact-info mr-4" style={{ float: 'left' }}>
                                                     <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
                                                         <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
@@ -163,6 +165,7 @@ function Appointments({ appointments }) {
 
                                                 </span>
                                                 <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
+                                                <a style={{ marginRight: '1rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
                                                 <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">{t("DELETE")}</a>
                                             </div>
                                         </div>
@@ -188,6 +191,7 @@ function Appointments({ appointments }) {
                     </div>
                 </div>
                 <CancelAppointment selectedAppointment={selectedAppointment} />
+                <VerifyCode selectedAppointment={selectedAppointment} />
             </section>
         </>
     )

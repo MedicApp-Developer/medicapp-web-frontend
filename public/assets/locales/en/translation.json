@@ -33,7 +33,7 @@
 	"no_doctors_found": "No doctors Found",
 	"hospital": "Hospital",
 	"book_appointments": "Book Appointments",
-	"and_get_rewarded": "And Get Rewarded",
+	"and_get_rewarded": "Get Rewarded",
 	"book_on_mobile": "Book on Mobile",
 	"book_on_mobile_text": "Download the App and browse through hundreds of our trusted clinics. With a few taps, you can book your appointment online hassle-free!",
 	"download_the_app": "Download the app",
@@ -152,5 +152,8 @@
 	"vendorName": "Vendor Name",
 	"package": "Package",
 	"code": "Code",
-	"status": "Status"
+	"status": "Status",
+	"claim_code": "Claim Code",
+	"GET_POINTS": "GET POINTS",
+	"claim_code_content": "Get your code from hospital, and earn 20 points per appointment"
 }

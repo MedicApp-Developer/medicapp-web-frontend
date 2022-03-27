@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { REWARD_NAMESPACE, VENDOR_NAMESPACE } from '../../constants/namespaces';
+import { REWARD_NAMESPACE, VENDOR_NAMESPACE, PACKAGE_TYPE_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise } from 'react-promise-tracker';
 
 const VendorApi = {
@@ -23,6 +23,18 @@ const VendorApi = {
 	},
 	uploadVendorImage(id, data) {
 		return trackPromise(axios.put(`${VENDOR_NAMESPACE}/uploadImage/${id}`, data));
+	},
+	createPackageCategory(data) {
+		return trackPromise(axios.post(`/${PACKAGE_TYPE_NAMESPACE}`, data));
+	},
+	getAllPackageCategories() {
+		return trackPromise(axios.get(`/${PACKAGE_TYPE_NAMESPACE}`));
+	},
+	updatePackageCategory(id, data) {
+		return trackPromise(axios.put(`/${PACKAGE_TYPE_NAMESPACE}/${id}`, data));
+	},
+	deletePackageType(id) {
+		return trackPromise(axios.delete(`/${PACKAGE_TYPE_NAMESPACE}/${id}`));
 	},
 }
 

@@ -11,7 +11,7 @@ import HospitalProfile from "./Profile";
 import Promos from "./Promos";
 import PCRTests from "./PCR/PCRTests";
 import PCRVaccination from "./PCR/PCRVaccination";
-import AppointmentApprovals from './AppointmentApprovals';
+import PatientPromoCode from './PatientPromoCode';
 
 const HospitalRouter = withRouter(({ match, ...props }) => {
     return (
@@ -43,14 +43,14 @@ const HospitalRouter = withRouter(({ match, ...props }) => {
             <HospitalRoute exact path={`${match.path}/patient-info/:id`} >
                 <HospitalPatientInfo />
             </HospitalRoute>
-            <HospitalRoute exact path={`${match.path}/PCR/tests`} >
+            {/* <HospitalRoute exact path={`${match.path}/PCR/tests`} >
                 <PCRTests />
             </HospitalRoute>
             <HospitalRoute exact path={`${match.path}/PCR/vaccination`} >
                 <PCRVaccination />
-            </HospitalRoute>
-            <HospitalRoute exact path={`${match.path}/appointment-approvals`} >
-                <AppointmentApprovals />
+            </HospitalRoute> */}
+            <HospitalRoute exact path={`${match.path}/patient-promo-codes`} >
+                <PatientPromoCode />
             </HospitalRoute>
         </Switch>
     )

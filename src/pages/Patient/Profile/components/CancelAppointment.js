@@ -8,11 +8,14 @@ import { useTranslation } from "react-i18next"
 
 function CancelAppointment({ selectedAppointment, deletePatientAppointment }) {
 
-    const { user } = useContext(RootContext)
+    const { user, setUser } = useContext(RootContext)
     const { t } = useTranslation()
 
     const cancelAppointmentHandler = () => {
         deletePatientAppointment(selectedAppointment._id, user._id).then(res => {
+            if (res.data.data.newPatient !== null) {
+                setUser({ ...user, points: user.points - 20 })
+            }
             toast.success(t("appointment_delete_successfully"))
         }).catch(err => {
             toast.error(t("problem_while_deleting_appointment"))

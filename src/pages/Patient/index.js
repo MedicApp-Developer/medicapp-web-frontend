@@ -41,9 +41,9 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             <PatientRoute exact path={`${match.path}/insurance`}>
                 <Insurance />
             </PatientRoute>
-            <PatientRoute exact path={`${match.path}/promos`}>
+            {/* <PatientRoute exact path={`${match.path}/promos`}>
                 <Promos />
-            </PatientRoute>
+            </PatientRoute> */}
             <PatientRoute exact path={`${match.path}/rewards`}>
                 <Rewards />
             </PatientRoute>
@@ -59,15 +59,15 @@ const PatientRouter = withRouter(({ match, ...props }) => {
             <PatientRoute exact path={`${match.path}/book-appointment`}>
                 <BookAppointment />
             </PatientRoute>
-            <PatientRoute exact path={`${match.path}/book-vaccination-appointment`}>
+            {/* <PatientRoute exact path={`${match.path}/book-vaccination-appointment`}>
                 <BookVaccinationHospital />
             </PatientRoute>
             <PatientRoute exact path={`${match.path}/book-pcr-appointment`}>
                 <BookTestHospitalAppointment />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}/book-medicapp-appointment`}>
+            </PatientRoute> */}
+            {/* <PatientRoute exact path={`${match.path}/book-medicapp-appointment`}>
                 <PCRAppointments />
-            </PatientRoute>
+            </PatientRoute> */}
         </Switch>
     )
 })

@@ -16,7 +16,6 @@ function GenerateReport() {
 	useEffect(() => {
 		HospitalApi.getHospitalFinance(id).then(res => {
 			setHospital(res.data.data.hospital[0]);
-			setAppointments(res.data.data.appointments)
 		});
 	}, []);
 
@@ -24,11 +23,6 @@ function GenerateReport() {
 
 		if (!fromDate || !toDate) {
 			toast.error("Select Start date and End date first");
-			return false;
-		}
-
-		if (appointments.length === 0) {
-			toast.error("There are no appointments booked yet!");
 			return false;
 		}
 
@@ -40,6 +34,9 @@ function GenerateReport() {
 		HospitalApi.getHospitalFinanceReport(data).then(res => {
 			const pdfBlob = new Blob([res.data], { type: 'application/pdf' })
 			saveAs(pdfBlob, 'Appointment Slip.pdf')
+		})
+		HospitalApi.getHospitalFinanceStatistics(data).then(res => {
+			setAppointments(res.data.data);
 		})
 	}
 
@@ -53,8 +50,30 @@ function GenerateReport() {
 		toast.success("Copied to clipboard")
 	}
 
+	const downloadFinanceData = () => {
+		if (!fromDate || !toDate) {
+			toast.error("Select Start date and End date first");
+			return false;
+		}
+
+		const data = {
+			hospitalId: id,
+			fromDate,
+			toDate
+		}
+
+		HospitalApi.getHospitalFinanceStatistics(data).then(res => {
+			setAppointments(res.data.data);
+		})
+	}
+
 	return (
 		<DashboardLayout>
+			<div class="row align-items-center add-list">
+				<div class="col-12">
+					<h4>Hospital Finance</h4>
+				</div>
+			</div>
 			<form onSubmit={() => { }} encType="multipart/form-data" autocomplete="off">
 				<div className="row">
 					<div className="col-sm-6">
@@ -115,7 +134,7 @@ function GenerateReport() {
 						<label class="sr-only" for="inlineFormInputGroup">Total Appointments</label>
 						<div className="form-group">
 							<label for="totalAppointments">Total Appointments</label>
-							<input id="totalAppointments" type="text" class={"form-control"} placeholder="To" value={appointments.filter(app => app.status === "BOOKED").length} />
+							<input id="totalAppointments" type="text" class={"form-control"} placeholder="To" value={appointments?.filter(app => app.status === "BOOKED").length} />
 						</div>
 					</div>
 				</div>
@@ -136,13 +155,14 @@ function GenerateReport() {
 						<label class="sr-only" for="inlineFormInputGroup">Total Amount</label>
 						<div className="form-group">
 							<label for="totalAppointments">Total Amount</label>
-							<input id="totalAppointments" type="text" class={"form-control"} placeholder="To" value={appointments.filter(app => app.status === "BOOKED").length * 21} />
+							<input id="totalAppointments" type="text" class={"form-control"} placeholder="Total Amount" value={appointments?.filter(app => app.status === "BOOKED").length * 21} />
 						</div>
 					</div>
 				</div>
 				<div className="form-group text-center">
 					<button type="button" className="btn btn-primary mt-2 mr-2" onClick={() => copyToClipboard(hospital.name + " " + hospital.tradeLicenseNo + " " + hospital.phoneNo + " " + hospital.email)}>Copy All</button>
 					<button type="button" className="btn btn-primary mt-2 ml-2" onClick={downloadReport}>Download Report</button>
+					<button type="button" className="btn btn-primary mt-2 ml-2" onClick={downloadFinanceData}>Get Appointment Finance</button>
 				</div>
 			</form>
 		</DashboardLayout>

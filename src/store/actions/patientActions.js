@@ -12,7 +12,7 @@ export const getPatients = (pageNo) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting patients");
     }
 }
@@ -20,13 +20,13 @@ export const getPatients = (pageNo) => async (dispatch, getState) => {
 export const deletePatientAppointment = (appointmentId, patientId) => async (dispatch, getState) => {
     try {
         const response = await AppointmentApi.deletePatientAppointment(appointmentId, patientId);
-        
+
         dispatch({
             type: DELETE_APPOINTMENT,
-            payload: response.data.data
+            payload: response.data.data.upcommingAppointments
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while deleting appointment");
     }
 }
@@ -34,7 +34,7 @@ export const deletePatientAppointment = (appointmentId, patientId) => async (dis
 export const deleteFamilyMember = (memberId) => async (dispatch, getState) => {
     try {
         const response = await PatientApi.deleteFamilyMember(memberId);
-        
+
         toast.success("Family Member Deleted Successfully")
 
         dispatch({
@@ -42,7 +42,7 @@ export const deleteFamilyMember = (memberId) => async (dispatch, getState) => {
             payload: memberId
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while deleting family member");
     }
 }
@@ -58,7 +58,7 @@ export const addFamilyMember = (data) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while adding family member");
     }
 }
@@ -72,7 +72,7 @@ export const getPatientAccountInfo = (patientId) => async (dispatch, getState) =
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting patients");
     }
 }
@@ -86,7 +86,7 @@ export const deletePatient = (id) => async (dispatch, getState) => {
             payload: id
         });
         toast.success("Patient deleted successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
@@ -94,13 +94,13 @@ export const deletePatient = (id) => async (dispatch, getState) => {
 export const addPatientByNurse = (data) => async (dispatch, getState) => {
     try {
         const patient = await PatientApi.createPatientFromNurse(data);
-    
+
         dispatch({
             type: ADD_PATIENT_BY_NURSE,
             payload: patient?.data?.data
         });
         toast.success("Patient created successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
@@ -108,7 +108,7 @@ export const addPatientByNurse = (data) => async (dispatch, getState) => {
 export const updatePatientVitals = (id, data) => async (dispatch, getState) => {
     try {
         await PatientApi.updatePatient(id, data);
-    
+
         dispatch({
             type: ADD_PATIENT_BY_NURSE,
             payload: {
@@ -117,7 +117,7 @@ export const updatePatientVitals = (id, data) => async (dispatch, getState) => {
             }
         });
         toast.success("Patient created successfully");
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }
@@ -130,7 +130,7 @@ export const selectPatient = (id) => async (dispatch, getState) => {
             type: SELECT_PATIENT,
             payload: response.data.data
         });
-    }catch(err) {
+    } catch (err) {
         toast.error(err.response.data.message);
     }
 }

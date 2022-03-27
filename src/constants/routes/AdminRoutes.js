@@ -10,6 +10,11 @@ export const AdminRoutes = [
         route: "/admin/specialities"
     },
     {
+        name: "Package Category",
+        icon: "icon-qr-code",
+        route: "/admin/package-categories"
+    },
+    {
         name: "Vendors",
         icon: "icon-qr-code",
         route: "/admin/vendors"

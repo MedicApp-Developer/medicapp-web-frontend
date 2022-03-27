@@ -6,16 +6,23 @@ import { connect } from 'react-redux'
 import AddPackage from './components/AddPackage'
 import { BUY_SOME_GET_SOME } from '../../../constants/package'
 import { RootContext } from '../../../contextApi'
+import VendorApi from '../../../api/Vendor'
 
 
 function Packages({ getPackages, packages, deletePackage }) {
 	const { packages: allPackages } = packages && packages
 	const [selectedPackage, setSelectedPackage] = useState(null);
+	const [categories, setCategories] = useState([]);
 	const { user } = useContext(RootContext);
 
 	useEffect(() => {
 		if (allPackages.length === 0) {
 			getPackages(user.referenceId);
+		}
+		if (categories.length === 0) {
+			VendorApi.getAllPackageCategories().then(res => {
+				setCategories(res.data.data);
+			})
 		}
 	}, [getPackages])
 
@@ -42,7 +49,7 @@ function Packages({ getPackages, packages, deletePackage }) {
 									<div className="media">
 										<div className="media-body">
 											<h5 className="mt-0">{pack?.type === BUY_SOME_GET_SOME ? `Buy: ${pack.buyQuantity} - Get: ${pack.getQuantity}` : `${pack.off} % Off`}</h5>
-											<p className="mt-0">Category: {pack?.category}</p>
+											<p className="mt-0">Category: {pack?.category_id?.name_en}</p>
 											<p className="mt-0">Points: {pack?.points}</p>
 										</div>
 									</div>
@@ -68,7 +75,7 @@ function Packages({ getPackages, packages, deletePackage }) {
 					)}
 				</div>
 				{/* Add Doctor Modal */}
-				<AddPackage selectedPackage={selectedPackage} />
+				<AddPackage selectedPackage={selectedPackage} categories={categories} />
 				{/* Set Doctor Schedule */}
 			</DashboardLayout>
 		</div>

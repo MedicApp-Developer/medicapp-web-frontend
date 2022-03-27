@@ -33,6 +33,15 @@ const HospitalApi = {
     getHospitalFinanceReport(data) {
         return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/report`, data, { responseType: 'blob' }))
     },
+    getHospitalFinanceStatistics(data) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/statistics`, data))
+    },
+    getMedicappPCRFinanceReport(data) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/pcr/report`, data, { responseType: 'blob' }))
+    },
+    getMedicappPCRFinanceStatistics(data) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/pcr/statistics`, data))
+    },
     getPendingHospitals() {
         return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/get/pending`));
     },

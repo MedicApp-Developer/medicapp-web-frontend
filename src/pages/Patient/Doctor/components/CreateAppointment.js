@@ -6,7 +6,7 @@ import moment from 'moment'
 import { useTranslation } from "react-i18next"
 
 function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose }) {
-    const { user } = useContext(RootContext)
+    const { user, setUser } = useContext(RootContext)
     const [description, setDescription] = useState("")
     const [familyMemberId, setFamilyMemberId] = useState(null)
     const familyMembers = JSON.parse(localStorage.getItem("familyMembers"))
@@ -17,6 +17,9 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
         if (moment(selectedSlot.end).isAfter() && (selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED")) {
             AppointmentApi.deletePatientAppointment(selectedSlot._id, user._id).then(res => {
                 toast.success("Your appointment cancelled successfully")
+                if (res.data.data.newPatient !== null) {
+                    setUser({ ...user, points: user.points - 20 })
+                }
                 window.location.reload()
             }).catch(err => {
                 toast.error("Problem while creating appointment")
@@ -30,7 +33,7 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
             }
 
             AppointmentApi.createAppointment(appoint).then(res => {
-                toast.success("Your appointment created successfully, You will recieve 20 points on your checkup")
+                toast.success("Your appointment created successfully, You can get promo code from hospital admin to get 20 points")
                 setTimeout(() => {
                     window.location.reload()
                 }, 3500)

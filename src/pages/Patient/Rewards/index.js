@@ -11,6 +11,7 @@ import { href } from '../../../constants/extra';
 import { toast } from 'react-toastify';
 import COPY_ICON from '../../../assets/images/copy.png';
 import PLACEHOLDER_IMG from '../../../assets/images/placeholder_img.jpeg'
+import { useTranslation } from 'react-i18next';
 
 function Rewards() {
 	const [popularPackages, setPopularPackages] = useState([]);
@@ -23,6 +24,7 @@ function Rewards() {
 	const [promoCode, setPromoCode] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState("ALL");
 	const buttonRef = useRef()
+	const { i18n } = useTranslation()
 
 	useEffect(() => {
 		PackagesApi.getAllPackages().then(res => {
@@ -57,8 +59,8 @@ function Rewards() {
 			const pps = JSON.parse(JSON.stringify(allPopularPackages));
 			const rps = JSON.parse(JSON.stringify(allRecommendedPackages));
 
-			const filteredPps = pps.filter(pkg => pkg.category === category);
-			const filteredRps = rps.filter(pkg => pkg.category === category);
+			const filteredPps = pps.filter(pkg => pkg.category_id === category);
+			const filteredRps = rps.filter(pkg => pkg.category_id === category);
 
 			setPopularPackages(filteredPps);
 			setRecommendedPackages(filteredRps);
@@ -103,9 +105,9 @@ function Rewards() {
 									</a>
 								</li>
 								{categories?.map(cat => (
-									<li style={selectedCategory === cat ? { cursor: 'pointer', border: "5px solid gray" } : { cursor: 'pointer' }} onClick={categorySelected.bind(this, cat)}>
-										<a href={null} style={{ backgroundImage: `url(${CATEGORY_IMG})` }}>
-											<p style={{ color: "white" }}>{cat}</p>
+									<li style={selectedCategory === cat._id ? { cursor: 'pointer', border: "5px solid gray" } : { cursor: 'pointer' }} onClick={categorySelected.bind(this, cat._id)}>
+										<a href={null} style={{ backgroundImage: `url(${cat?.image})` }}>
+											<p style={{ color: "white" }}>{i18n.language === "ar" ? cat?.name_ar : cat?.name_en}</p>
 										</a>
 									</li>
 								))}
@@ -116,19 +118,21 @@ function Rewards() {
 			</section>
 
 			{/* Popular Section */}
-			<section class="popular-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<h1>Most Popular</h1>
-							<div className="row">
-								{popularPackages?.map(item => {
+			{popularPackages?.map(item => {
+				const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId._id === item._id).length === 0;
+				const subscribedBtn = rewards.filter(reward => reward.packageId._id === item._id).length !== 0;
+				const insuficientPoints = item.points > user.points;
 
-									const subscribeBtn = item.points <= user.points && rewards.filter(reward => reward.packageId._id === item._id).length === 0;
-									const subscribedBtn = rewards.filter(reward => reward.packageId._id === item._id).length !== 0;
-									const insuficientPoints = item.points > user.points;
+				return (
+					<section class="popular-section">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<h1>Most Popular</h1>
+									<div className="row">
 
-									return (
+
+
 										<div className="col-md-4" key={item._id}>
 											<div class="item">
 												<div class="card">
@@ -156,14 +160,14 @@ function Rewards() {
 												</div>
 											</div>
 										</div>
-									)
-								})}
-							</div>
+									</div>
 
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</section>
+					</section>
+				)
+			})}
 
 			{/* Recommended Section */}
 			<section class="popular-section bg-gray">

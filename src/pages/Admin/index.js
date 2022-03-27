@@ -15,6 +15,8 @@ import PCR from './PCR';
 import PCRAppointment from './PCRAppointment/PCRAppointment';
 import Specialities from "./Specialities";
 import Vendors from './Vendors';
+import VendorType from './PackageCategories';
+import PackageCategories from './PackageCategories';
 
 const AdminRouter = withRouter(({ match, ...props }) => {
     return (
@@ -24,6 +26,9 @@ const AdminRouter = withRouter(({ match, ...props }) => {
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/specialities`} >
                 <Specialities />
+            </AdminRoute>
+            <AdminRoute exact path={`${match.path}/package-categories`} >
+                <PackageCategories />
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/vendors`} >
                 <Vendors />

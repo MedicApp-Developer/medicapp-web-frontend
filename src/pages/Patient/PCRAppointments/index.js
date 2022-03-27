@@ -99,11 +99,11 @@ function PCRAppointments() {
 			display: 'block'
 		}
 
-		if ((event.status === "BOOKED" || event.status === "APPROVED")) {
+		if ((event.status === "BOOKED")) {
 			style.backgroundColor = "green"
 		}
 
-		if ((event.status === "BOOKED" || event.status === "APPROVED") && moment(event.end).isSameOrBefore()) {
+		if ((event.status === "BOOKED") && moment(event.end).isSameOrBefore()) {
 			style.backgroundColor = "#D22B2B"
 			style.pointerEvents = 'none'
 		}

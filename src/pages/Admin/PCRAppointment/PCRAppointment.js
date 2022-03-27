@@ -6,21 +6,34 @@ import { toast } from 'react-toastify';
 import { saveAs } from 'file-saver'
 import moment from 'moment';
 import AppointmentApi from '../../../api/Appointment';
+import HospitalApi from '../../../api/Hospital';
 
 function PCRAppointment() {
 
-	const [totalAppointments, setTotalAppointments] = useState(0);
+	const [appointments, setAppointments] = useState([]);
+	const [fromDate, setFromDate] = useState(null);
+	const [toDate, setToDate] = useState(null);
 
-	useEffect(() => {
-		getData();
-	}, []);
+	const downloadReport = () => {
 
-	const getData = () => {
-		AppointmentApi.getMedicappAppointments().then(res => {
-			setTotalAppointments(res.data.data.length);
+		if (!fromDate || !toDate) {
+			toast.error("Select Start date and End date first");
+			return false;
+		}
+
+		const data = {
+			fromDate,
+			toDate
+		}
+
+		HospitalApi.getMedicappPCRFinanceReport(data).then(res => {
+			const pdfBlob = new Blob([res.data], { type: 'application/pdf' })
+			saveAs(pdfBlob, 'Appointment Slip.pdf')
+		})
+		HospitalApi.getMedicappPCRFinanceStatistics(data).then(res => {
+			setAppointments(res.data.data);
 		})
 	}
-
 
 	const copyToClipboard = (text) => {
 		const elem = document.createElement('textarea');
@@ -30,6 +43,22 @@ function PCRAppointment() {
 		document.execCommand('copy');
 		document.body.removeChild(elem);
 		toast.success("Copied to clipboard")
+	}
+
+	const downloadFinanceData = () => {
+		if (!fromDate || !toDate) {
+			toast.error("Select Start date and End date first");
+			return false;
+		}
+
+		const data = {
+			fromDate,
+			toDate
+		}
+
+		HospitalApi.getMedicappPCRFinanceStatistics(data).then(res => {
+			setAppointments(res.data.data);
+		})
 	}
 
 	return (
@@ -52,7 +81,7 @@ function PCRAppointment() {
 						<label class="sr-only" for="inlineFormInputGroup">From</label>
 						<div className="form-group">
 							<label for="from">From</label>
-							<input id="from" type="date" class={"form-control"} placeholder="From" onChange={(e) => { }} />
+							<input id="from" type="date" class={"form-control"} placeholder="From" value={fromDate} onChange={(e) => { setFromDate(e.target.value) }} />
 						</div>
 					</div>
 				</div>
@@ -73,7 +102,7 @@ function PCRAppointment() {
 						<label class="sr-only" for="inlineFormInputGroup">To</label>
 						<div className="form-group">
 							<label for="to">To</label>
-							<input id="to" type="date" class={"form-control"} placeholder="To" onChange={(e) => { }} />
+							<input id="to" type="date" class={"form-control"} placeholder="To" value={toDate} onChange={(e) => { setToDate(e.target.value) }} />
 						</div>
 					</div>
 				</div>
@@ -94,7 +123,7 @@ function PCRAppointment() {
 						<label class="sr-only" for="inlineFormInputGroup">Total Appointments</label>
 						<div className="form-group">
 							<label for="totalAppointments">Total PCR Appointments</label>
-							<input id="totalAppointments" type="text" class={"form-control"} placeholder="PCR Appointments" />
+							<input id="totalAppointments" type="text" value={appointments?.filter(app => app.status === "BOOKED").length} class={"form-control"} placeholder="PCR Appointments" />
 						</div>
 					</div>
 				</div>
@@ -112,6 +141,13 @@ function PCRAppointment() {
 						</div>
 					</div>
 					<div className="col-sm-6">
+						<label class="sr-only" for="inlineFormInputGroup">Total Amount</label>
+						<div className="form-group">
+							<label for="totalAppointments">Total Amount</label>
+							<input id="totalAppointments" value={appointments?.filter(app => app.status === "BOOKED").length * 21} type="text" class={"form-control"} placeholder="To" />
+						</div>
+					</div>
+					<div className="col-sm-6">
 						<label for="name">Total Lab Fees</label>
 						<label class="sr-only" for="inlineFormInputGroup">Total Lab Fees</label>
 						<div class="input-group mb-2">
@@ -124,18 +160,9 @@ function PCRAppointment() {
 						</div>
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-sm-6">
-						<label class="sr-only" for="inlineFormInputGroup">Total Amount</label>
-						<div className="form-group">
-							<label for="totalAppointments">Total Amount</label>
-							<input id="totalAppointments" type="text" class={"form-control"} placeholder="To" />
-						</div>
-					</div>
-				</div>
 				<div className="form-group text-center">
-					<button type="button" className="btn btn-primary mt-2 mr-2" onClick={() => copyToClipboard("Text To Be Copied")}>Copy All</button>
-					<button type="button" className="btn btn-primary mt-2 ml-2" onClick={() => { }}>Download Report</button>
+					<button type="button" className="btn btn-primary mt-2 ml-2" onClick={downloadReport}>Download Report</button>
+					<button type="button" className="btn btn-primary mt-2 ml-2" onClick={downloadFinanceData}>Get Appointment Finance</button>
 				</div>
 			</form>
 		</DashboardLayout>

@@ -29,19 +29,19 @@ export const HospitalRoutes = [
         icon: "icon-patient",
         route: "/hospital/promos"
     },
+    // {
+    //     name: "PCR Test",
+    //     icon: "icon-patient",
+    //     route: "/hospital/PCR/tests"
+    // },
+    // {
+    //     name: "PCR Vaccination",
+    //     icon: "icon-patient",
+    //     route: "/hospital/PCR/vaccination"
+    // },
     {
-        name: "PCR Test",
+        name: "Patient Promo Code",
         icon: "icon-patient",
-        route: "/hospital/PCR/tests"
-    },
-    {
-        name: "PCR Vaccination",
-        icon: "icon-patient",
-        route: "/hospital/PCR/vaccination"
-    },
-    {
-        name: "Appointment Approvals",
-        icon: "icon-patient",
-        route: "/hospital/appointment-approvals"
+        route: "/hospital/patient-promo-codes"
     }
 ]

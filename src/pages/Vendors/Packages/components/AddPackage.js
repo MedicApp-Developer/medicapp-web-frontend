@@ -12,7 +12,7 @@ import { RootContext } from '../../../../contextApi'
 import ImageUpload from 'image-upload-react';
 import { toast } from 'react-toastify'
 
-function AddVendors({ createPackage, selectedPackage, updatePackage, vendors, getVendors }) {
+function AddVendors({ categories, createPackage, selectedPackage, updatePackage, vendors, getVendors }) {
 
 	const [imageSrc, setImageSrc] = useState(null);
 	const [image, setImage] = useState(null);
@@ -38,7 +38,7 @@ function AddVendors({ createPackage, selectedPackage, updatePackage, vendors, ge
 				buyQuantity: selectedPackage?.buyQuantity || "",
 				getQuantity: selectedPackage?.getQuantity || "",
 				off: selectedPackage?.off || "",
-				category: selectedPackage?.category || "",
+				category: selectedPackage?.category_id._id || "",
 				about: selectedPackage?.about || "",
 				termsAndConditions: selectedPackage?.termsAndConditions || ""
 			}}
@@ -66,7 +66,7 @@ function AddVendors({ createPackage, selectedPackage, updatePackage, vendors, ge
 						formData = new FormData();
 						formData.append('image', image);
 						formData.append('type', values.type);
-						formData.append('category', values.category);
+						formData.append('category_id', values.category);
 						formData.append('points', values.points);
 						formData.append('vendorId', user.referenceId);
 						if (values?.type === BUY_SOME_GET_SOME) {
@@ -88,7 +88,7 @@ function AddVendors({ createPackage, selectedPackage, updatePackage, vendors, ge
 					formData = new FormData();
 					imageSrc && image && formData.append('image', image);
 					formData.append('type', values.type);
-					formData.append('category', values.category);
+					formData.append('category_id', values.category);
 					formData.append('points', values.points);
 					formData.append('vendorId', user.referenceId);
 					if (values?.type === BUY_SOME_GET_SOME) {
@@ -136,10 +136,9 @@ function AddVendors({ createPackage, selectedPackage, updatePackage, vendors, ge
 											<div className="form-group">
 												<SelectInput name="category">
 													<option value="">Category</option>
-													<option value={RESTAURANT}>RESTAURANT</option>
-													<option value={RETAIL}>RETAIL</option>
-													<option value={WELLNESS}>WELLNESS</option>
-													<option value={HOTEL}>HOTEL</option>
+													{categories.map(item => (
+														<option key={item._id} value={item._id}>{item.name_en}</option>
+													))}
 												</SelectInput>
 											</div>
 											<div className="form-group">
