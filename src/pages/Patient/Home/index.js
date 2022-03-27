@@ -18,7 +18,7 @@ function Home() {
             <section class="hero-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 col-xl-3">
+                        <div class="col-md-12 col-xl-5">
                             <h1>{t('book_appointments')}</h1>
                             <h2 style={{ marginTop: '-15px' }}>{t('and_get_rewarded')}</h2>
                         </div>
