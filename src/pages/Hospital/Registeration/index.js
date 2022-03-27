@@ -105,7 +105,7 @@ function HospitalRegisteration() {
                 <div class="row">
                     <div class="col-md-12 action-icon">
                         <Link to={SELECT_REGISTERATION_TYPE_ROUTE}><span class="icon-angle-left"></span></Link>
-                        <Link to={SELECT_REGISTERATION_TYPE_ROUTE}><span class="icon-close"></span></Link>
+                        {/* <Link to={SELECT_REGISTERATION_TYPE_ROUTE}><span class="icon-close"></span></Link> */}
                     </div>
                 </div>
                 <div class="row justify-content-center align-items-center">
