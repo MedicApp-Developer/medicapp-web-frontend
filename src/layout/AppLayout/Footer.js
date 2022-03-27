@@ -36,44 +36,16 @@ function Footer() {
                                 <h4>{t("menu")}</h4>
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)">{t("hospital")}</a>
+                                        <Link to="/patient">{t("home")}</Link>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">{t("pharmacy")}</a>
+                                        <Link to="/patient/hospital">{t("hospital")}</Link>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">{t("insurance")}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <h4>{t("learn_more")}</h4>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("contact_us")}</a>
+                                        <Link to="/patient/doctor">{t("doctor")}</Link>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">{t("FAQs")}</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("responsibility_hub")}</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("blog")}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <h4>{t("careers")}</h4>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("work_with_us")}</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("culture")}</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("vacancies")}</a>
+                                        <Link to="/patient/rewards">{t("rewards")}</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -84,13 +56,7 @@ function Footer() {
                                         <Link to="/terms-of-use">{t("terms_of_use")}</Link>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">{t("cookies_policy")}</a>
-                                    </li>
-                                    <li>
                                         <Link to="/privacy-policy">{t("privacy_policy")}</Link>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">{t("regulatory")}</a>
                                     </li>
                                 </ul>
                             </div>
