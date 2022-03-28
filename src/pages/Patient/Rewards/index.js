@@ -59,8 +59,8 @@ function Rewards() {
 			const pps = JSON.parse(JSON.stringify(allPopularPackages));
 			const rps = JSON.parse(JSON.stringify(allRecommendedPackages));
 
-			const filteredPps = pps.filter(pkg => pkg.category_id === category);
-			const filteredRps = rps.filter(pkg => pkg.category_id === category);
+			const filteredPps = pps.filter(pkg => pkg.category_id._id === category);
+			const filteredRps = rps.filter(pkg => pkg.category_id._id === category);
 
 			setPopularPackages(filteredPps);
 			setRecommendedPackages(filteredRps);
