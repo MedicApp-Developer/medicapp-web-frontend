@@ -51,7 +51,7 @@ function TopNav() {
                             <Link to="/login" class="nav-link btn btn-primary px-4 py-2">{t("login")}</Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/select-registeration-type" class="nav-link btn btn-primary px-4 py-2">{t("register")}</Link>
+                            <Link to="/select-registeration-type" style={{ color: "white" }} class="nav-link btn btn-secondary px-4 py-2">{t("register")}</Link>
                         </li>
                     </>
 
