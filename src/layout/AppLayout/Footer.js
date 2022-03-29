@@ -15,8 +15,9 @@ function Footer() {
                         <div class="media align-items-center mb-3">
                             <i class="icon-phone mr-3"></i>
                             <div class="media-body">
-                                <p class="mb-0">+971 561 512 221 <br />
-                                    info@abc.com
+                                <p class="mb-0">
+                                    {/* +971 561 512 221 <br /> */}
+                                    collaborations@medicappae.com
                                 </p>
                             </div>
                         </div>
@@ -63,10 +64,10 @@ function Footer() {
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center text-md-right mt-4 pr-4">
-                                <a class="mx-2" href="javascript:void(0)"><i class="fa fa-facebook"></i></a>
-                                <a class="mx-2" href="javascript:void(0)"><i class="fa fa-twitter"></i></a>
-                                <a class="mx-2" href="javascript:void(0)"><i class="fa fa-instagram"></i></a>
-                                <a class="mx-2" href="javascript:void(0)"><i class="fa fa-linkedin"></i></a>
+                                {/* <a class="mx-2" href=""><i class="fa fa-facebook"></i></a> */}
+                                <a class="mx-2" target="_blank" href="https://twitter.com/medicappae?s=21"><i class="fa fa-twitter"></i></a>
+                                <a class="mx-2" target="_blank" href="https://instagram.com/medicapp.ae?utm_medium=copy_link"><i class="fa fa-instagram"></i></a>
+                                <a class="mx-2" target="_blank" href="https://www.snapchat.com/add/medicapp"><i class="fa fa-snapchat"></i></a>
                             </div>
                         </div>
                     </div>
