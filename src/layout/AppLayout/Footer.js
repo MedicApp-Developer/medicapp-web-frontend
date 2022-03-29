@@ -36,16 +36,16 @@ function Footer() {
                                 <h4>{t("menu")}</h4>
                                 <ul>
                                     <li>
-                                        <Link to="/patient">{t("home")}</Link>
+                                        <Link to="/">{t("home")}</Link>
                                     </li>
                                     <li>
-                                        <Link to="/patient/hospital">{t("hospital")}</Link>
+                                        <Link to="/hospitals">{t("hospital")}</Link>
                                     </li>
                                     <li>
-                                        <Link to="/patient/doctor">{t("doctor")}</Link>
+                                        <Link to="/doctor">{t("doctor")}</Link>
                                     </li>
                                     <li>
-                                        <Link to="/patient/rewards">{t("rewards")}</Link>
+                                        <Link to="/rewards">{t("rewards")}</Link>
                                     </li>
                                 </ul>
                             </div>

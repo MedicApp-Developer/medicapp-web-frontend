@@ -17,7 +17,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
         <>
             {allSearchedDoctors?.length > 0 && allSearchedDoctors.map(doctor => (
                 <div class="media mb-2 shadow-lg mb-2" style={{ padding: "0px 15px", boxShadow: "1px 1px 10px 2px lightgray" }}>
-                    <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/patient/doctor/${doctor._id}`)} />
+                    <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/doctor/${doctor._id}`)} />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h5 class="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>

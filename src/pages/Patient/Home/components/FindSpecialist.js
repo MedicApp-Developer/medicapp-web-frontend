@@ -21,7 +21,7 @@ function FindSpecialist({ specialityFilter, getPaginatedSpecialities, specialiti
 
     const searchDoctor = (speciality) => {
         specialityFilter([speciality._id])
-        history.push("/patient/doctor")
+        history.push("/doctor")
     }
 
     const pages = getPagesArray(numberOfPages)

@@ -38,7 +38,6 @@ function App() {
             <Route path="/laboratory" component={LabortoriesRouter} />
             <Route path="/pharmacy" component={PharmacyRouter} />
             <Route path="/admin" component={AdminRouter} />
-            <Route path="/patient" component={PatientRouter} />
             <Route path="/vendor" component={VendorRouter} />
             <Route path="/terms-of-use" component={TermsOfUse} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
@@ -48,9 +47,10 @@ function App() {
             <PublicRoute exact path="/login" component={Login} />
             <PublicRoute exact path="/forget-password" component={ForgetPassword} />
             <PublicRoute exact path="/reset-password/:userToken" component={ResetPassword} />
-            <Route path="/">
+            <Route path="/" component={PatientRouter} />
+            {/* <Route path="/">
               <Redirect to="/login" />
-            </Route>
+            </Route> */}
           </Switch>
         </Router>
         <ToastContainer />

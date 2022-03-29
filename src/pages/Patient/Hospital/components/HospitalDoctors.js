@@ -39,7 +39,7 @@ function HospitalDoctors({ doctors }) {
                                 </div>
                             </div>
                             <div class="col-md-5 text-center text-md-left">
-                                <Link to="/patient/book-appointment" class="btn btn-primary px-4" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", true) }}>{t("book_appointment")}</Link>
+                                <Link to="/book-appointment" class="btn btn-primary px-4" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", true) }}>{t("book_appointment")}</Link>
                             </div>
                         </div>
                     </div>

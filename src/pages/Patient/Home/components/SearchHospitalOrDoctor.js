@@ -19,13 +19,13 @@ function SearchHospitalOrDoctor({ searchDoctorsByText, searchHospitalByText }) {
             if (searchText !== "") {
                 searchHospitalByText(searchText)
                 localStorage.setItem("hospitalSearchText", searchText)
-                history.push("/patient/hospital")
+                history.push("/hospitals")
             }
         } else {
             if (searchText !== "") {
                 searchDoctorsByText(searchText)
                 localStorage.setItem("doctorSearchText", searchText)
-                history.push("/patient/doctor")
+                history.push("/doctor")
             }
         }
     }

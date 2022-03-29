@@ -40,7 +40,7 @@ function TopNav() {
                                 <span className="icon-user"></span> {user?.firstName + " " + user?.lastName}
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <Link className="dropdown-item" to="/patient/profile">{t("profile")}</Link>
+                                <Link className="dropdown-item" to="/profile">{t("profile")}</Link>
                                 <a className="dropdown-item" href={href} onClick={onLogout}>{t("logout")}</a>
                             </div>
                         </div>

@@ -194,7 +194,7 @@ function Details() {
 														}
 													</div>
 													<Link
-														to={`/patient/reward/${item._id}`}
+														to={`/reward/${item._id}`}
 														className={subscribeBtn ? "btn btn-primary" : "disabled btn btn-secondary"}>
 														{subscribedBtn ? "Subscribed" : insuficientPoints ? "Insufficient Points" : "Subscribe"}
 													</Link>
