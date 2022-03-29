@@ -6,6 +6,9 @@ const DoctorApi = {
     getAllDoctors(pageNo, referenceId, getAll = undefined) {
         return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}?page=${pageNo}&reference_id=${referenceId}&getAll=${getAll}`))
     },
+    getAllPatientDoctors() {
+        return trackPromise(axios.get(`/${DOCTOR_NAMESPACE}/all`))
+    },
     createDoctor(data) {
         return trackPromise(axios.post(`${DOCTOR_NAMESPACE}`, data))
     },

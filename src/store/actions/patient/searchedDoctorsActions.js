@@ -11,7 +11,7 @@ export const filterDoctors = (filters) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting doctors");
     }
 }
@@ -25,21 +25,21 @@ export const searchDoctorsByText = (text) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting doctors");
     }
 }
 
 export const clearDoctorSearch = () => async (dispatch, getState) => {
     try {
-        const response = await DoctorApi.getAllDoctors(undefined, undefined, true);
+        const response = await DoctorApi.getAllPatientDoctors();
 
         dispatch({
             type: CLEAR_DOCTORS_SEARCHED,
             payload: response.data.data.doctors
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting doctors");
     }
 }
