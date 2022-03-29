@@ -19,11 +19,11 @@ function TopNav() {
 
     const onLogout = () => {
         localStorage.clear()
-        // history.push(LOGIN_ROUTE);
-        window.location.reload()
+        history.push("/login");
+        // window.location.reload()
     }
 
-    const newRoutes = getRoutes(user?.role).length > 0 && getRoutes(user?.role)?.filter((item) => item.name !== "Home")
+    const newRoutes = getRoutes(user?.role || "PATIENT").length > 0 && getRoutes(user?.role || "PATIENT")?.filter((item) => item.name !== "Home")
 
     return (
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,9 +46,15 @@ function TopNav() {
                         </div>
                     </li>
                 ) : (
-                    <li class="nav-item">
-                        <Link to="/select-registeration-type" class="nav-link btn btn-primary px-4 py-2">{t("register")}</Link>
-                    </li>
+                    <>
+                        <li class="nav-item">
+                            <Link to="/login" class="nav-link btn btn-primary px-4 py-2">{t("login")}</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="/select-registeration-type" class="nav-link btn btn-primary px-4 py-2">{t("register")}</Link>
+                        </li>
+                    </>
+
                 )}
             </ul>
         </div>

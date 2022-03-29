@@ -1,4 +1,4 @@
-import { Switch, withRouter } from "react-router-dom"
+import { Route, Switch, withRouter } from "react-router-dom"
 import PatientRoute from "../../ProtectedRoutes/PatientRoute"
 import Home from "./Home"
 import Hospital from "./Hospital"
@@ -16,46 +16,47 @@ import BookTestHospitalAppointment from './Hospital/components/appointment/BookT
 import PCRAppointments from './PCRAppointments'
 import Rewards from './Rewards'
 import Details from './Rewards/Details'
+import PublicRoute from '../../ProtectedRoutes/PublicRoute'
 
 const PatientRouter = withRouter(({ match, ...props }) => {
     return (
         <Switch {...props}>
-            <PatientRoute exact path={`${match.path}`}>
+            <Route exact path={`${match.path}`}>
                 <Home />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}hospitals`}>
+            </Route>
+            <Route exact path={`${match.path}hospitals`}>
                 <Hospital />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}hospitals/:id`}>
+            </Route>
+            <Route exact path={`${match.path}hospitals/:id`}>
                 <HospitalDetails />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}doctor`}>
+            </Route>
+            <Route exact path={`${match.path}doctor`}>
                 <Doctor />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}doctor/:id`}>
+            </Route>
+            <Route exact path={`${match.path}doctor/:id`}>
                 <PatientDoctorProfile />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}pharmacy`}>
+            </Route>
+            <Route exact path={`${match.path}pharmacy`}>
                 <Pharmacy />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}insurance`}>
+            </Route>
+            <Route exact path={`${match.path}insurance`}>
                 <Insurance />
-            </PatientRoute>
+            </Route>
             {/* <PatientRoute exact path={`${match.path}/promos`}>
                 <Promos />
             </PatientRoute> */}
-            <PatientRoute exact path={`${match.path}rewards`}>
+            <Route exact path={`${match.path}rewards`}>
                 <Rewards />
-            </PatientRoute>
+            </Route>
             <PatientRoute exact path={`${match.path}reward/:id`}>
                 <Details />
             </PatientRoute>
-            <PatientRoute exact path={`${match.path}profile`}>
+            <Route exact path={`${match.path}profile`}>
                 <PatientProfile />
-            </PatientRoute>
-            <PatientRoute exact path={`${match.path}get-qoute`}>
+            </Route>
+            <Route exact path={`${match.path}get-qoute`}>
                 <Getaqoute />
-            </PatientRoute>
+            </Route>
             <PatientRoute exact path={`${match.path}book-appointment`}>
                 <BookAppointment />
             </PatientRoute>

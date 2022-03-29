@@ -22,7 +22,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h5 class="mt-0">Dr. {doctor.firstName + " " + doctor.lastName}</h5>
                             <span>
-                                <Link to="/patient/book-appointment" class="btn btn-primary px-3 py-1 mt-2" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", false) }}>{t('book_appointment')}</Link>
+                                <Link to="/book-appointment" class="btn btn-primary px-3 py-1 mt-2" onClick={() => { localStorage.setItem("SELECTED_DOCTOR_OR_HOSPITAL", JSON.stringify(doctor)); localStorage.setItem("hospitalDetailPage", false) }}>{t('book_appointment')}</Link>
                             </span>
                         </div>
                         <p class="rating mb-0">
