@@ -42,8 +42,8 @@ function Home() {
                             <h2>{t("book_on_mobile")}</h2>
                             <p>{t('book_on_mobile_text')}</p>
                             <h4>{t('download_the_app')}</h4>
-                            <img class="img-fluid mr-3 app-icon" src={APP_STORE_IMAGE} alt="app" />
-                            <img class="img-fluid app-icon" src={GOOGLE_APP_IMAGE} alt="play" />
+                            <a href={"https://apps.apple.com/us/app/medicapp-find-clinics-in-uae/id1601095044"} target="_blank"><img class="img-fluid mr-3 app-icon" src={APP_STORE_IMAGE} alt="app" /></a>
+                            <a href={"https://play.google.com/store/apps/details?id=com.medicappae.app"} target="_blank"><img class="img-fluid app-icon" src={GOOGLE_APP_IMAGE} alt="play" /></a>
                         </div>
                         <div class="col-md-4 col-lg-6 text-center order-1 order-md-2">
                             <img class="img-fluid mb-5 mb-md-0" src={APP_IMAGE} alt="app" />

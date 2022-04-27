@@ -17,7 +17,7 @@ function Footer() {
                             <div class="media-body">
                                 <p class="mb-0">
                                     {/* +971 561 512 221 <br /> */}
-                                    collaborations@medicappae.com
+                                    support@medicappae.com
                                 </p>
                             </div>
                         </div>

@@ -36,7 +36,7 @@ function SelectRegisterationType() {
                                         <img src={HOSPITAL_LOGO} alt="hospital" />
                                     </div>
                                 </div>
-                                <h6 class="mt-3">Hospital</h6>
+                                <h6 class="mt-3">Clinic/Hospital</h6>
                             </div>
                         </div>
                     </div>
