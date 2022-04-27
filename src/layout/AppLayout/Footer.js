@@ -13,7 +13,7 @@ function Footer() {
                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                         <img class="img-fluid mb-4" src={FOOTER_LOGO} alt="logo" />
                         <div class="media align-items-center mb-3">
-                            <i class="icon-phone mr-3"></i>
+                            <i class="icon-email mr-3"></i>
                             <div class="media-body">
                                 <p class="mb-0">
                                     {/* +971 561 512 221 <br /> */}
