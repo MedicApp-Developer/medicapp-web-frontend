@@ -29,12 +29,12 @@ export const PatientRoutes = [
     //     icon: "icon-qr-code",
     //     route: "/promos"
     // },
-    {
-        name_en: "Rewards",
-        name_ar: "المكافآت",
-        icon: "icon-qr-code",
-        route: "/rewards"
-    },
+    // {
+    //     name_en: "Rewards",
+    //     name_ar: "المكافآت",
+    //     icon: "icon-qr-code",
+    //     route: "/rewards"
+    // },
     // {
     //     name: "Pharmacy",
     //     icon: "icon-qr-code",
