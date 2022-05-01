@@ -9,117 +9,113 @@ import HospitalApi from '../../../../api/Hospital';
 import { useHistory } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../../constants/Redirects';
 import ShowMap from './ShowMap';
+import ProfilePicture from './ProfilePicture';
 
 function HospitalAccount({ hospitalId, hospital }) {
    const history = useHistory();
 
    const formik = useFormik({
       initialValues: {
-        name: hospital?.hospital?.name,
-        tradeLicenseNo: hospital?.hospital?.tradeLicenseNo,
-        address: hospital?.hospital?.address,
-        phoneNo: hospital?.hospital?.phoneNo,
-        email: hospital?.hospital?.email,
-        password: ""
+         name: hospital?.hospital?.name,
+         tradeLicenseNo: hospital?.hospital?.tradeLicenseNo,
+         address: hospital?.hospital?.address,
+         phoneNo: hospital?.hospital?.phoneNo,
+         email: hospital?.hospital?.email,
+         password: ""
       },
       validationSchema: Yup.object({}),
       onSubmit: async values => {
          const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
-         if(!response.error){
+         if (!response.error) {
             toast.success("Hospital profile updated");
             localStorage.clear();
             setTimeout(() => {
                window.location.reload();
             }, 2000);
-         }else {
+         } else {
             toast.error("Problem while updating the hospital");
          }
       },
       enableReinitialize: true
-    });
+   });
 
-    return (
-        <>
-            <div className="row patient-profile">
-               <div className="col-md-3 col-lg-3 col-xl-2">
-                  <div className="profile-image">
-                     <img src={PATIENT_IMAGE} alt="patient" />
-                     <a href={href}><span className="fa fa-pencil"></span></a>
-                  </div>
-               </div>
-               <div className="col-md-9 col-lg-9 col-xl-8">
-                  <h4 className="mb-3">Hospital Details</h4>
-                  <form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">
-                     <div className="row">
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                                 <input type="text" {...formik.getFieldProps('name')} class={ (formik.touched.name && formik.errors.name) ? "form-control is-invalid" : "form-control"} placeholder="Hospital Name" />
-                                 {formik.touched.name && formik.errors.name ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.name}</div>
-                                 ) : null}   
-                           </div>
-                        </div>
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                              <input type="text" {...formik.getFieldProps('tradeLicenseNo')} class={ (formik.touched.tradeLicenseNo && formik.errors.tradeLicenseNo) ? "form-control is-invalid" : "form-control"} placeholder="Trade License Number" />
-                                {formik.touched.tradeLicenseNo && formik.errors.tradeLicenseNo ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.tradeLicenseNo}</div>
-                              ) : null}
-                           </div>
+   return (
+      <>
+         <div className="row patient-profile">
+            <ProfilePicture hospital={hospital?.hospital} />
+            <div className="col-md-9 col-lg-9 col-xl-8">
+               <h4 className="mb-3">Hospital Details</h4>
+               <form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">
+                  <div className="row">
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="text" {...formik.getFieldProps('name')} class={(formik.touched.name && formik.errors.name) ? "form-control is-invalid" : "form-control"} placeholder="Hospital Name" />
+                           {formik.touched.name && formik.errors.name ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.name}</div>
+                           ) : null}
                         </div>
                      </div>
-                     <div className="row">
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                              <input type="text" {...formik.getFieldProps('address')} class={ (formik.touched.address && formik.errors.address) ? "form-control is-invalid" : "form-control"} placeholder="Address" /> 
-                                {formik.touched.address && formik.errors.address ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.address}</div>
-                              ) : null}
-                           </div>
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="text" {...formik.getFieldProps('tradeLicenseNo')} class={(formik.touched.tradeLicenseNo && formik.errors.tradeLicenseNo) ? "form-control is-invalid" : "form-control"} placeholder="Trade License Number" />
+                           {formik.touched.tradeLicenseNo && formik.errors.tradeLicenseNo ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.tradeLicenseNo}</div>
+                           ) : null}
                         </div>
-                        {/* <div className="col-sm-6">
+                     </div>
+                  </div>
+                  <div className="row">
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="text" {...formik.getFieldProps('address')} class={(formik.touched.address && formik.errors.address) ? "form-control is-invalid" : "form-control"} placeholder="Address" />
+                           {formik.touched.address && formik.errors.address ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.address}</div>
+                           ) : null}
+                        </div>
+                     </div>
+                     {/* <div className="col-sm-6">
                            <div className="form-group position-relative">
                               <input type="file" className="form-control custom-file-input" id="validatedCustomFile" />
                               <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Upload Trade License</label>
                            </div>
                         </div> */}
-                     </div>
-                     <h4 className="mb-4 mt-4">Contact Details</h4>
-                     <div className="row">
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                              <input type="email" {...formik.getFieldProps('email')} class={ (formik.touched.email && formik.errors.email) ? "form-control is-invalid" : "form-control"} placeholder="Email" /> 
-                                {formik.touched.email && formik.errors.email ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.email}</div>
-                              ) : null}   
-                           </div>
-                        </div>
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                              <input type="text" {...formik.getFieldProps('phoneNo')} class={ (formik.touched.phoneNo && formik.errors.phoneNo) ? "form-control is-invalid" : "form-control"} placeholder="Phone" /> 
-                                {formik.touched.phoneNo && formik.errors.phoneNo ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.phoneNo}</div>
-                              ) : null}
-                           </div>
-                        </div>
-                        <div className="col-sm-6">
-                           <div className="form-group">
-                              <input type="password" {...formik.getFieldProps('password')} class={ (formik.touched.password && formik.errors.password) ? "form-control is-invalid" : "form-control"} placeholder="Password" />
-                                {formik.touched.password && formik.errors.password ? (
-                                    <div class="invalid-feedback text-right-aligned">{formik.errors.password}</div>
-                              ) : null}
-                           </div>
+                  </div>
+                  <h4 className="mb-4 mt-4">Contact Details</h4>
+                  <div className="row">
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="email" {...formik.getFieldProps('email')} class={(formik.touched.email && formik.errors.email) ? "form-control is-invalid" : "form-control"} placeholder="Email" />
+                           {formik.touched.email && formik.errors.email ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.email}</div>
+                           ) : null}
                         </div>
                      </div>
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="text" {...formik.getFieldProps('phoneNo')} class={(formik.touched.phoneNo && formik.errors.phoneNo) ? "form-control is-invalid" : "form-control"} placeholder="Phone" />
+                           {formik.touched.phoneNo && formik.errors.phoneNo ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.phoneNo}</div>
+                           ) : null}
+                        </div>
+                     </div>
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="password" {...formik.getFieldProps('password')} autocomplete="false" class={(formik.touched.password && formik.errors.password) ? "form-control is-invalid" : "form-control"} placeholder="Password" />
+                           {formik.touched.password && formik.errors.password ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.password}</div>
+                           ) : null}
+                        </div>
+                     </div>
+                  </div>
 
-                     <div className="form-group text-center">
-                        <button type="submit" className="btn btn-primary mt-2">Update</button>
-                     </div>
-                  </form>
-               </div>
+                  <div className="form-group text-center">
+                     <button type="submit" className="btn btn-primary mt-2">Update</button>
+                  </div>
+               </form>
             </div>
-        </>
-    )
+         </div>
+      </>
+   )
 }
 
 export default HospitalAccount

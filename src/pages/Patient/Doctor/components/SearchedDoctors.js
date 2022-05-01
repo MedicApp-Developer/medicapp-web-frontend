@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import MEDOR_LOGO from '../../../../assets/images/medeor_logo.png'
 import { useHistory } from 'react-router'
 import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
-import BookAppointment from './BookAppointment'
 import { Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
 

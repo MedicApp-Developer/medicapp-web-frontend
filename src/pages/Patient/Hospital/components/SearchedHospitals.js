@@ -1,8 +1,5 @@
 import React from 'react'
-import PLACEHOLDER_LARGE from '../../../../assets/images/placeholder-lg.png';
-import PLACEHOLDER_SMALL from '../../../../assets/images/placeholder-sm.png';
-import MEDOR_LOGO from '../../../../assets/images/medeor_logo.png';
-import DENTAL_IMAGE from '../../../../assets/images/dental.png';
+import HOSPITAL_IMAGE from '../../../../assets/images/resgister-hospital.png';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -15,7 +12,7 @@ function SearchedHospitals({ searchedHospitals }) {
         <>
             {allSearchedHospitals.length > 0 && allSearchedHospitals?.map(hospital => (
                 <div class="media mb-2 shadow-lg mb-2" style={{ padding: "0px 15px", boxShadow: "1px 1px 10px 2px lightgray" }}>
-                    <img src={MEDOR_LOGO} style={{ cursor: "pointer" }} onClick={() => { history.push(`/hospitals/${hospital._id}`) }} class="mr-3 py-4" alt="medeor_logo" />
+                    <img src={hospital?.image ? hospital?.image : HOSPITAL_IMAGE} style={{ cursor: "pointer" }} onClick={() => { history.push(`/hospitals/${hospital._id}`) }} class="mr-3 py-4" alt="medeor_logo" />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <h5 class="mt-0">{hospital?.name}</h5>

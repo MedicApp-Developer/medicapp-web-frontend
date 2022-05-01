@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../../../layout/DashboardLayout'
-import DOCTOR_IMAGE from '../../../../assets/images/doctor.png'
+import PLACEHOLDER_DOCTOR_IMAGE from '../../../../assets/images/doctor_placeholder.png'
 import { href } from '../../../../constants/extra'
 import PATIENT_IMAGE from '../../../../assets/images/patient.png'
 import SetDoctorSchedule from './SetDoctorSchedule'
@@ -55,10 +55,10 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                      <div class="card profile-detail py-3">
                         <div class="card-body">
                            <div class="media">
-                              <img class="avatar-lg mr-0" src={DOCTOR_IMAGE} alt="doctor" />
+                              <img class="avatar-lg mr-0" src={PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
                               <div class="media-body">
                                  <h5 class="mt-3 mb-2">Dr. {selectedDoctor?.firstName + " " + selectedDoctor?.lastName}</h5>
-                                 <h6>Dentist</h6>
+                                 <p>{selectedDoctor?.specialityId?.map((item, index) => index === selectedDoctor?.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
                                  <div class="contact-info">
                                     <a href={`mailto:${selectedDoctor?.email}`}><span className="icon-email"></span></a>
                                     <a href={`tel:${selectedDoctor?.mobile}`}><span className="icon-phone"></span></a>
@@ -69,19 +69,19 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                      </div>
                      <div class="card patient-detail">
                         <div class="card-body">
-                           <h5>Information:</h5>
+                           <h5>Information: </h5>
                            <ul>
                               <li>
-                                 <span>Speciality:</span>
-                                 <p>{selectedDoctor?.specialityId?.map(item => item['name_en'] + ", ")}</p>
+                                 <span>Speciality: </span>
+                                 <p> {selectedDoctor?.specialityId?.map((item, index) => index === selectedDoctor?.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
                               </li>
                               <li>
-                                 <span>Experience:</span>
+                                 <span>Experience: </span>
                                  <p> {selectedDoctor?.experience || "-"}</p>
                               </li>
                               <li>
-                                 <span>Description:</span>
-                                 <p>{selectedDoctor?.about}</p>
+                                 <span>Description: </span>
+                                 <p> {selectedDoctor?.about}</p>
                               </li>
                            </ul>
                         </div>

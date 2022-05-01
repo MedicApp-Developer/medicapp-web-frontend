@@ -21,7 +21,7 @@ function TopDoctors({ doctors, getDoctors }) {
                                     <img src={DOCTOR_IMAGE} alt="doctor" />
                                     <div class="media-body">
                                         <h5 class="mt-0">Dr. {doc.firstName + "  " + doc.lastName}</h5>
-                                        <p>{doc.specialityId?.map(item => item['name_en'] + ", ")}</p>
+                                        <p>{doc.specialityId?.map((item, index) => index === doc.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
                                     </div>
                                 </div>
                                 <div class="contact-info">
