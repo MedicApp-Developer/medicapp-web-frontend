@@ -13,7 +13,7 @@ function TopNav() {
     const href = ""
 
     const onNavClick = (item) => {
-        setSelectedNav(item.name)
+        setSelectedNav(item.name_en)
         history.push(item.route)
     }
 
@@ -29,7 +29,7 @@ function TopNav() {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 {newRoutes.map((item, index) => (
-                    <li class={`nav-item ${selectedNav === item.name && "active"}`} key={index} onClick={onNavClick.bind(this, item)}>
+                    <li class={`nav-item ${selectedNav === item.name_en && "active-nav"}`} key={index} onClick={onNavClick.bind(this, item)}>
                         <a class="nav-link" href={href} onClick={(e) => e.preventDefault()}>{i18n.language === "ar" ? item.name_ar : item.name_en}</a>
                     </li>
                 ))}

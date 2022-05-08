@@ -160,3 +160,7 @@
 .search-filter-section .media img {
   border: none !important;
 }
+
+.active-nav {
+  border-bottom: 5px solid #417EBF;
+}
