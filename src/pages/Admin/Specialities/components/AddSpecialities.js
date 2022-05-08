@@ -32,66 +32,67 @@ function AddSpecialities({ createSpeciality, selectedSpeciality }) {
             initialValues={{
                 name_en: selectedSpeciality?.name_en || "",
                 name_ar: selectedSpeciality?.name_ar || "",
-                tags: selectedSpeciality?.tags || ""
+                tags: selectedSpeciality?.tags || "",
+                order: selectedSpeciality?.order || ""
             }}
             validationSchema={Yup.object({
                 name_en: Yup.string().required('Required ( English )'),
                 name_ar: Yup.string().required('Required ( Arabic )'),
                 tags: Yup.string().required('Required'),
+                order: Yup.number("Order must be a number").required('Required'),
             })}
             onSubmit={(values, { resetForm }) => {
 
                 const formData = new FormData()
 
-                if (uploadedImage[0]) {
-                    if (uploadedImage[0].size > 5242880) {
-                        toast.error("File too Big, please select a file less than 5mb")
-                        return false
-                    }
+                uploadedImage && uploadedImage.length > 0 && uploadedImage[0] && formData.append("image", uploadedImage[0])
+                formData.append("name_en", values.name_en)
+                formData.append("name_ar", values.name_ar)
+                formData.append("tags", values.tags)
+                formData.append("order", values.order)
 
-                    formData.append("image", uploadedImage[0])
-                    formData.append("name_en", values.name_en)
-                    formData.append("name_ar", values.name_ar)
-                    formData.append("tags", values.tags)
-
-                    if (selectedSpeciality?.name_en === null) {
-                        axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
-                            headers: {
-                                "Content-Type": "multipart/form-data"
-                            },
-                            onUploadProgress: (data) => {
-                                setProgress(Math.round((100 * data.loaded) / data.total))
-                            }
-                        }).then(async res => {
-                            setProgress(null)
-                            const response = await SpecialityApi.getAllSpecialities()
-                            createSpeciality(response.data.data, false)
-                            resetForm()
-                        }).catch(err => {
-                            setProgress(null)
-                            toast.error(err.response.data.error.message)
-                        })
+                if (selectedSpeciality === null || selectedSpeciality?.name_en === null) {
+                    if (uploadedImage[0]) {
+                        if (uploadedImage[0].size > 5242880) {
+                            toast.error("File too Big, please select a file less than 5mb")
+                            return false
+                        }
                     } else {
-                        axios.put(`/${SPECIALITY_REQUEST_NAMESPACE}/${selectedSpeciality._id}`, formData, {
-                            headers: {
-                                "Content-Type": "multipart/form-data"
-                            },
-                            onUploadProgress: (data) => {
-                                setProgress(Math.round((100 * data.loaded) / data.total))
-                            }
-                        }).then(async res => {
-                            setProgress(null)
-                            const response = await SpecialityApi.getAllSpecialities()
-                            createSpeciality(response.data.data, true)
-                            resetForm()
-                        }).catch(err => {
-                            setProgress(null)
-                            toast.error(err.response.data.error.message)
-                        })
+                        toast.error('Please select an image')
                     }
-
+                    axios.post(`/${SPECIALITY_REQUEST_NAMESPACE}`, formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        },
+                        onUploadProgress: (data) => {
+                            setProgress(Math.round((100 * data.loaded) / data.total))
+                        }
+                    }).then(async res => {
+                        setProgress(null)
+                        const response = await SpecialityApi.getAllSpecialities()
+                        createSpeciality(response.data.data, false)
+                        resetForm()
+                    }).catch(err => {
+                        setProgress(null)
+                        toast.error(err.response.data.error.message)
+                    })
                 } else {
-                    toast.error('Please select an image')
+                    axios.put(`/${SPECIALITY_REQUEST_NAMESPACE}/${selectedSpeciality._id}`, formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        },
+                        onUploadProgress: (data) => {
+                            setProgress(Math.round((100 * data.loaded) / data.total))
+                        }
+                    }).then(async res => {
+                        setProgress(null)
+                        const response = await SpecialityApi.getAllSpecialities()
+                        createSpeciality(response.data.data, true)
+                        resetForm()
+                    }).catch(err => {
+                        setProgress(null)
+                        toast.error(err.response.data.error.message)
+                    })
                 }
             }}
             enableReinitialize={true}
@@ -112,6 +113,9 @@ function AddSpecialities({ createSpeciality, selectedSpeciality }) {
                                         </div>
                                         <div className="form-group">
                                             <TextInput type="text" name="name_ar" placeholder="Name ( In Arabic )" />
+                                        </div>
+                                        <div className="form-group">
+                                            <TextInput type="text" name="order" placeholder="Order" />
                                         </div>
                                         <div className="form-group">
                                             <TextArea name="tags" rows="5" placeholder="Add Search Tags in comma seperated formate ( i.e: fever,blood pressure,sugar )" />
