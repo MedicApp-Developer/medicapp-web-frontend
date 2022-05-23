@@ -18,7 +18,7 @@ function SlotsCalendar() {
     const buttonRef = useRef()
 
     useEffect(() => {
-        SlotApi.getApprovedDoctorsSlots(user.referenceId).then(res => {
+        SlotApi.getAllDoctorsSlots(user.referenceId).then(res => {
             if (res.data.data && res.data.data.length > 0) {
                 const events = []
                 res.data.data.forEach(slot => {
@@ -63,8 +63,10 @@ function SlotsCalendar() {
     }
 
     const onSelectEvent = (slot) => {
-        setSelectedSlot(slot)
-        buttonRef.current.click()
+        if (slot.status === "BOOKED") {
+            setSelectedSlot(slot)
+            buttonRef.current.click()
+        }
     }
 
     return (
