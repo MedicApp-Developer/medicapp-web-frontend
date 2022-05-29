@@ -5,8 +5,9 @@ import 'image-upload-react/dist/index.css'
 import { href } from '../../../../constants/extra';
 import HospitalApi from '../../../../api/Hospital';
 import { toast } from 'react-toastify';
+import TRASH_IMG from '../../../../assets/images/trash-bin.png';
 
-function HospitalInfo({ hospital }) {
+function HospitalInfo({ hospital, setHospital }) {
 
     const { name, address, openingTime, closingTime, about, _id, images } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
@@ -32,8 +33,15 @@ function HospitalInfo({ hospital }) {
         }
     }
 
-    const deleteImage = (id) => {
-        
+    const deleteImage = (url) => {
+        const data = {
+            url,
+            hospitalId: _id
+        }
+        HospitalApi.deleteGalleryImage(data).then(res => {
+            console.log("---> updatedhospital", res.data.data);
+            setHospital({...hospital, hospital: res.data.data})
+        });
     }
 
     return (
@@ -58,7 +66,7 @@ function HospitalInfo({ hospital }) {
                 {images?.length > 0 && images?.map(img => (
                     <div className="col-md-3">
                         <img className="img-fluid" src={img} alt="hospital" />
-                        <button className="btn btn-danger mt-2" onClick={deleteImage.bind(this, img)}>Delete</button>
+                        <div style={{ textAlign: "center", marginTop: "10px" }} onClick={deleteImage.bind(this, img)}><img style={{ width: "2.2rem" }} src={TRASH_IMG} alt="Delete" /></div>
                     </div>
                 ))}
                 <div className="col-md-3">

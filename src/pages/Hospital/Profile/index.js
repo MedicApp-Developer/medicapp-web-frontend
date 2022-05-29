@@ -90,7 +90,7 @@ function HospitalProfile() {
     if (tabSelected === "Account") {
         returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} />
     } else if (tabSelected === "Profile") {
-        returnedComponent = <HospitalInfo hospital={hospital} />
+        returnedComponent = <HospitalInfo hospital={hospital} setHospital={setHospital} />
     } else if (tabSelected === "Location") {
         returnedComponent = <ShowMap hospitalId={user.referenceId} lat={hospital?.hospital?.location?.coordinates[0]} lng={hospital?.hospital?.location?.coordinates[1]} />
     }

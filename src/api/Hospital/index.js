@@ -54,8 +54,8 @@ const HospitalApi = {
     uploadProfilePic(id, data) {
         return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/uploadProfilePicture/${id}`, data));
     },
-    deleteGalleryImage(hospitalId, url) {
-        return trackPromise(axios.delete(`${HOSPITAL_NAMESPACE}/deleteGalleryImage/${hospitalId}/${url}`));
+    deleteGalleryImage(data) {
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/deleteGalleryImage`, data));
     }
 }
 
