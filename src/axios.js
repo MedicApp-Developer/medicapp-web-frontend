@@ -1,11 +1,13 @@
 import axios from 'axios'
 // import logOut from './services/utills/Logout'; 
 
+
 const token = window.localStorage.getItem('auth')
 
 const instance = axios.create({
   baseURL: "https://medicappp.herokuapp.com/api"
 })
+
 
 // https://medicappp.herokuapp.com/api
 // http://localhost:8080/api
