@@ -32,6 +32,10 @@ function HospitalInfo({ hospital }) {
         }
     }
 
+    const deleteImage = (id) => {
+        
+    }
+
     return (
         <>
             <div className="row align-items-start add-list hospital-info">
@@ -54,6 +58,7 @@ function HospitalInfo({ hospital }) {
                 {images?.length > 0 && images?.map(img => (
                     <div className="col-md-3">
                         <img className="img-fluid" src={img} alt="hospital" />
+                        <button className="btn btn-danger mt-2" onClick={deleteImage.bind(this, img)}>Delete</button>
                     </div>
                 ))}
                 <div className="col-md-3">

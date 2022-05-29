@@ -34,7 +34,7 @@ function DoctorsAppointments({ getAppointments, appointments }) {
                                     </td>
                                     <td>
                                         <div class="media">
-                                            <img src={DOCTOR_IMAGE} alt="doctor" />
+                                            <img src={appointment?.doctorId?.image ? appointment?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
                                             <div class="media-body">
                                                 <h5 class="mt-0">Dr. {appointment?.doctorId?.firstName + " " + appointment?.doctorId?.lastName}</h5>
                                                 <p>{appointment?.doctorId?.specialityId?.map((item, index) => index === appointment?.doctorId?.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
@@ -43,9 +43,9 @@ function DoctorsAppointments({ getAppointments, appointments }) {
                                     </td>
                                     <td>
                                         <div class="media">
-                                            <img src={PATIENT_IMAGE} alt="patient" />
+                                            <img src={appointment?.patientId?.image ? appointment?.patientId?.image : PATIENT_IMAGE} alt="patient" />
                                             <div class="media-body">
-                                                <h5 class="mt-0">Mr/Mrs. {appointment?.patientId.firstName + " " + appointment?.patientId.lastName}</h5>
+                                                <h5 class="mt-0">{appointment?.patientId.firstName + " " + appointment?.patientId.lastName}</h5>
                                                 <p>Patient</p>
                                             </div>
                                         </div>
