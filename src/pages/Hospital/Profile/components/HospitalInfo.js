@@ -33,7 +33,7 @@ function HospitalInfo({ hospital }) {
     }
 
     const deleteImage = (id) => {
-        
+
     }
 
     return (

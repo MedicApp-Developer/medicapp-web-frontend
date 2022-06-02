@@ -23,23 +23,23 @@ function Dashboard() {
 
     return (
         <DashboardLayout>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card welcome-block px-lg-3 py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card welcome-block px-lg-3 py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center">
                                 <div class="col-sm-6">
                                     <h2>Welcome to MedicApp</h2>
                                 </div>
                                 <div class="col-sm-6 text-sm-right">
-                                    <img width="120" src={hospital?.image ? hospital?.image : MEDEOR_IMAGE} alt="medeor-logo"/>
-                                </div>
+                                    <img width="120" src={hospital?.image ? hospital?.image : MEDEOR_IMAGE} alt="medeor-logo" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-6">
                     <div class="card">
                         <div class="card-body">
@@ -56,7 +56,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         </DashboardLayout>
     )
 }
