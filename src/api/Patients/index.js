@@ -6,6 +6,9 @@ const PatientApi = {
     getAllPatients(pageNo) {
         return trackPromise(axios.get(`/${PATIENT_NAMESPACE}?page=${pageNo}`))
     },
+    deactivePatient(id){
+        return trackPromise(axios.delete(`${PATIENT_NAMESPACE}/deactivateUser/${id}`))
+    },
     deletePatient(id) {
         return trackPromise(axios.delete(`${PATIENT_NAMESPACE}/${id}`))
     },

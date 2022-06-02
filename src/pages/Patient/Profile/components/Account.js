@@ -9,7 +9,7 @@ import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify'
 import { useTranslation } from "react-i18next"
 
-function Account() {
+function Account({ deactivePatient }) {
    const { user } = useContext(RootContext)
    const [patient, setPatient] = useState({})
    const { t } = useTranslation()
@@ -20,6 +20,12 @@ function Account() {
          setPatient(patient.data.data)
       })
    }, [])
+
+   const funDeactivePatient = async () => {
+      let nUser = await deactivePatient(patient._id);
+      setPatient(nUser)
+      console.log( 'nUser....', nUser );
+   }
 
    return (
       <Formik
@@ -136,6 +142,7 @@ function Account() {
                         </div>
                         <div class="form-group text-center">
                            <button type="submit" class="btn btn-primary mt-2">{t("update")}</button>
+                           <button type="button" onClick={funDeactivePatient} class="btn btn-danger mt-2 ml-3">{patient?.accountDeletionRequest ? t("cancelRequest") : t("deleteAccount")}</button>
                         </div>
                      </Form>
                   </div>

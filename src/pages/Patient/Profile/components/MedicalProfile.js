@@ -189,7 +189,7 @@ function MedicalProfile({ patient }) {
                     </div>
                 </div>
                 <CancelAppointment selectedAppointment={selectedAAppointment} />
-                <UpdateProfile patient={patient.patient} />
+                {/* <UpdateProfile patient={patient.patient} /> */}
             </section>
         </>
     )

@@ -164,3 +164,8 @@
 .active-nav {
   border-bottom: 5px solid #417EBF;
 }
+
+.user-dashboard .contact-info a {
+  width: 35px !important;
+  height: 33px !important;
+}

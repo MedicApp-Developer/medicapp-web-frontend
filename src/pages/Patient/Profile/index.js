@@ -8,16 +8,17 @@ import QRPrescription from './components/QRPrescription'
 import LabResults from './components/LabResults'
 import Account from './components/Account'
 import { connect } from 'react-redux'
-import { getPatientAccountInfo } from '../../../store/actions/patientActions'
+import { getPatientAccountInfo, deactivePatient } from '../../../store/actions/patientActions'
 import { RootContext } from '../../../contextApi'
 import FamilyMembers from './components/FamilyMembers'
 import SickLeaves from './components/SickLeaves'
 import Rewards from './components/Rewards'
+import AccountDelete from './components/AccountDelete'
 
-function PatientProfile({ getPatientAccountInfo, patients }) {
+function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
     const [selectedTab, setSelectedTab] = useState(MEDICAL_PROFILE)
     const { user } = useContext(RootContext)
-
+    
     const { patient } = patients && patients
 
     useEffect(() => {
@@ -42,13 +43,17 @@ function PatientProfile({ getPatientAccountInfo, patients }) {
         case LAB_RESULTS:
             componentToRender = <LabResults results={patient?.labResults} />; break
         case ACCOUNT:
-            componentToRender = <Account patient={patient} user={user} />; break
+            componentToRender = <Account deactivePatient={deactivePatient} patient={patient} user={user} />; break
         default:
             componentToRender = <MedicalProfile patient={patient?.patient} />
     }
-
+   
     return (
         <AppLayout>
+            {
+                patient?.patient?.accountDeletionRequest &&
+                <AccountDelete date={patient?.patient?.deletionDate} />
+            }
             <ProfileTopNavigation selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             {componentToRender}
         </AppLayout>
@@ -60,7 +65,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    getPatientAccountInfo
+    getPatientAccountInfo,
+    deactivePatient
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PatientProfile)

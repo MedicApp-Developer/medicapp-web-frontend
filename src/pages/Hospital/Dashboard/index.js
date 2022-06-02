@@ -2,9 +2,25 @@ import DashboardLayout from '../../../layout/DashboardLayout'
 import MEDEOR_IMAGE from '../../../assets/images/medeor_logo.png';
 import DoctorsAppointments from './components/DoctorsAppointments';
 import TopDoctors from './components/TopDoctors';
+import { useContext, useEffect, useState } from 'react'
+import { RootContext } from '../../../contextApi';
+import HospitalApi from '../../../api/Hospital';
 
 function Dashboard() {
-    
+
+    const { user } = useContext(RootContext);
+    const [hospital, setHospital] = useState();
+
+    useEffect(() => {
+        getHospital();
+    }, []);
+
+    const getHospital = () => {
+        HospitalApi.getSingleHospital(user.referenceId).then(res => {
+            setHospital(res.data.data.hospital);
+        })
+    }
+
     return (
         <DashboardLayout>
                 <div class="row">
@@ -16,7 +32,7 @@ function Dashboard() {
                                     <h2>Welcome to MedicApp</h2>
                                 </div>
                                 <div class="col-sm-6 text-sm-right">
-                                    <img width="120" src={MEDEOR_IMAGE} alt="medeor-logo"/>
+                                    <img width="120" src={hospital?.image ? hospital?.image : MEDEOR_IMAGE} alt="medeor-logo"/>
                                 </div>
                                 </div>
                             </div>

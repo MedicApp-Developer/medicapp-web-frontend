@@ -56,6 +56,8 @@
 	"email": "Email",
 	"change_password": "Change Password",
 	"update": "Update",
+	"deleteAccount": "Delete Account",
+	"cancelRequest": "Cancel Request",
 	"required": "Required",
 	"patient_profile_updated": "Patient profile updated",
 	"problem_while_updating_patient_profile": "Problem while updating patient profile",

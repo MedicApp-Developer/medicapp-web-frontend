@@ -56,7 +56,7 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                      <div className="card">
                         <div className="card-body">
                            <div className="media">
-                              <img src={PATIENT_IMAGE} className="pointer" alt="patient" onClick={(e) => { history.push(redirectTo + `/${patient._id}`) } } />
+                              <img src={patient?.image ? patient?.image : PATIENT_IMAGE} className="pointer" alt="patient" onClick={(e) => { history.push(redirectTo + `/${patient._id}`) } } />
                               <div className="media-body">
                                  <ul>
                                     <li>
@@ -84,14 +84,16 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                               </div>
                            </div>
                         </div>
-                        <div className="dropdown">
-                           <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <span className="icon-dots"></span>
-                           </a>
-                           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePatientHandler(patient?._id) }}>Delete</a>
+                        {user?.role !== DOCTOR && (
+                           <div className="dropdown">
+                              <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span className="icon-dots"></span>
+                              </a>
+                              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePatientHandler(patient?._id) }}>Delete</a>
+                              </div>
                            </div>
-                        </div>
+                        )}
                      </div>
                   </div>
                )) }

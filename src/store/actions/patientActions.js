@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment";
 import PatientApi from "../../api/Patients";
-import { ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
+import { DEACTIVATE_ACCOUNT, ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
 
 export const getPatients = (pageNo) => async (dispatch, getState) => {
     try {
@@ -12,6 +12,21 @@ export const getPatients = (pageNo) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
+    } catch (err) {
+        toast.error("Problem while getting patients");
+    }
+}
+
+export const deactivePatient = (id) => async (dispatch, getState) => {
+    try {
+        const response = await PatientApi.deactivePatient(id);
+        
+        dispatch({
+            type: DEACTIVATE_ACCOUNT, 
+            payload: response.data.data
+        })
+
+        return response.data.data;
     } catch (err) {
         toast.error("Problem while getting patients");
     }

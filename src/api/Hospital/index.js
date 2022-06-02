@@ -31,16 +31,16 @@ const HospitalApi = {
         return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/finance/${id}`));
     },
     getHospitalFinanceReport(data) {
-        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/report`, data, { responseType: 'blob' }))
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/report`, data, { responseType: 'blob' }));
     },
     getHospitalFinanceStatistics(data) {
-        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/statistics`, data))
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/statistics`, data));
     },
     getMedicappPCRFinanceReport(data) {
         return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/pcr/report`, data, { responseType: 'blob' }))
     },
     getMedicappPCRFinanceStatistics(data) {
-        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/pcr/statistics`, data))
+        return trackPromise(axios.post(`${HOSPITAL_NAMESPACE}/finance/pcr/statistics`, data));
     },
     getPendingHospitals() {
         return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/get/pending`));
@@ -52,8 +52,11 @@ const HospitalApi = {
         return trackPromise(axios.get(`${HOSPITAL_NAMESPACE}/getTradeLicenseFile/${id}`));
     },
     uploadProfilePic(id, data) {
-        return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/uploadProfilePicture/${id}`, data))
+        return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/uploadProfilePicture/${id}`, data));
     },
+    deleteGalleryImage(hospitalId, url) {
+        return trackPromise(axios.delete(`${HOSPITAL_NAMESPACE}/deleteGalleryImage/${hospitalId}/${url}`));
+    }
 }
 
 export default HospitalApi;
