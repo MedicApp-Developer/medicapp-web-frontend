@@ -38,6 +38,7 @@ const LoginForm = () => {
       password: Yup.string().required("Required")
     }),
     onSubmit: async values => {
+      console.log( 'values: ', values )
       await AuthApi.login(values).then(res => {
         toast.success("Logged In Successfully");
         if (res?.data?.data?.user.role === HOSPITAL) {

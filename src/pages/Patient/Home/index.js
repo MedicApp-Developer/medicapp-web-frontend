@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import AppLayout from '../../../layout/AppLayout'
 import APP_STORE_IMAGE from '../../../assets/images/app-store.png'
 import GOOGLE_APP_IMAGE from '../../../assets/images/google-play.png'
@@ -9,6 +9,8 @@ import SearchHospitalOrDoctor from './components/SearchHospitalOrDoctor'
 import { useTranslation } from "react-i18next"
 
 function Home() {
+
+   
 
     const href = ""
     const { t } = useTranslation()

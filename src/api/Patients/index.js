@@ -38,6 +38,9 @@ const PatientApi = {
     },
     downloadSickLeave(id) {
         return trackPromise(axios.get(`${SICKLEAVES_NAMESPACE}/downloadSickLeave/${id}`, { responseType: 'blob' }))
+    },
+    updateFcToken(data) {
+        return trackPromise(axios.put(`${PATIENT_NAMESPACE}/webfcToken`, data))
     }
 }
 

@@ -4,7 +4,9 @@ import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom"
+} from "react-router-dom";
+// import { expgetToken, onMessageListener } from "./firebase";
+// import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import HospitalRegisteration from './pages/Hospital/Registeration'
 import HospitalRouter from './pages/Hospital'
 import RootContext from "./contextApi/index"
@@ -25,10 +27,19 @@ import PrivacyPolicy from './pages/Others/PrivacyPolicy'
 import VendorRouter from './pages/Vendors'
 import ForgetPassword from './pages/shared/ForgetPassword'
 import ResetPassword from './pages/shared/ForgetPassword/components/ResetPassword'
+import { useEffect, useState } from 'react';
 
 function App() {
+ 
+ 
   return (
     <>
+    {/* <div>
+      { isTokenFound ? "Notification Pression Enabled": 'Notification Preission denied' }
+      { show && notification?.title  }
+      { show && notification?.body  }
+
+    </div> */}
       <RootContext>
         <Router>
           <Switch>

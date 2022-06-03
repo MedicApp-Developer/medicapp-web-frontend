@@ -1,3 +1,4 @@
+import {  useEffect, useState, useContext } from "react";
 import { Route, Switch, withRouter } from "react-router-dom"
 import PatientRoute from "../../ProtectedRoutes/PatientRoute"
 import Home from "./Home"
@@ -17,8 +18,53 @@ import PCRAppointments from './PCRAppointments'
 import Rewards from './Rewards'
 import Details from './Rewards/Details'
 import PublicRoute from '../../ProtectedRoutes/PublicRoute'
-
+import { expgetToken, onMessageListener } from "../../firebase";
+import PatientApi from '../../api/Patients';
+import { RootContext } from '../../contextApi'
+import { useHistory } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { LOGIN_ROUTE } from "../../constants/Redirects";
 const PatientRouter = withRouter(({ match, ...props }) => {
+
+    const { user, setUser } = useContext(RootContext)
+    const history = useHistory();
+
+    const [show, setShow] = useState(false);
+    const [notification, setNotification] = useState({title: '', body: ''});
+    const [isTokenFound, setTokenFound] = useState(false);
+    useEffect(() => {
+        expgetToken(setTokenFound);
+    }, [])
+
+    useEffect(()=>{
+        if( isTokenFound && user ){
+            console.log( { 
+                token: isTokenFound,
+                id: user._id
+            } ) 
+            PatientApi.updateFcToken({ 
+                token: isTokenFound,
+                id: user._id
+            })
+            .then( res => {
+                console.log("data", res.data )
+            } )
+        }
+    }, [isTokenFound, user])
+    
+    onMessageListener().then(payload => {
+        setShow(true);
+        // setNotification({title: payload.notification.title, body: payload.notification.body})
+        toast.success(payload.notification.title);
+        setTimeout(() => {
+        // setNotification({title: '', body: ''})
+            setShow(false);
+            localStorage.clear();
+            setUser(false)
+            history.push(LOGIN_ROUTE);
+        }, 1500);
+    }).catch(err => console.log('failed: ', err));
+
     return (
         <Switch {...props}>
             <Route exact path={`${match.path}`}>
