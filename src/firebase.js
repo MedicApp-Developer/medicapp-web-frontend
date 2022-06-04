@@ -8,13 +8,13 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDyJvfMoA2Oo2qSZwAApbKv4u13XSo5HtI",
-  authDomain: "fir-app-11c19.firebaseapp.com",
-  projectId: "fir-app-11c19",
-  storageBucket: "fir-app-11c19.appspot.com",
-  messagingSenderId: "540665251754",
-  appId: "1:540665251754:web:0bd8f6cfc2ee923e0f0dd3",
-  measurementId: "G-Y0XL13PHWH"
+  apiKey: "AIzaSyDF1TYRiYh_LYqNrvzj9Jfqvr6kSvagdIM",
+  authDomain: "medicapp-find-doctors.firebaseapp.com",
+  projectId: "medicapp-find-doctors",
+  storageBucket: "medicapp-find-doctors.appspot.com",
+  messagingSenderId: "650333018935",
+  appId: "1:650333018935:web:07343d60843fcd00dbd8b2",
+  measurementId: "G-6276G70V0B"
 };
 
 // Initialize Firebase
@@ -25,7 +25,9 @@ const messaging = getMessaging(firebaseApp);
 // const messaging = getMessaging(firebaseApp);
 
 export const expgetToken = (setTokenFound) => {
-    return getToken(messaging, {vapidKey: 'BEqbCWm15gSkLSHeGz9Srk2ftgc_gG6g80vUvcik7TtMKp1XHwszZzH85Wd1pN6xB3RQIU4OFpzJataAJQhW5zg'}).then((currentToken) => {
+    return getToken(messaging, {
+      vapidKey: 'BJpZo2W-QHMsdGP1v0XExDEssfMVnBAmau1zMTGBK3bTA2BaVjEBsoP_aLsdfkhlSyq8pdqlmg4xaDdqvflzq88'
+    }).then((currentToken) => {
       if (currentToken) {
         console.log('current token for client: ', currentToken);
         setTokenFound(currentToken);
