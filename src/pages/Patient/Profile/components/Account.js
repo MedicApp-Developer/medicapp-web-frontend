@@ -8,11 +8,13 @@ import PatientApi from '../../../../api/Patients'
 import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify'
 import { useTranslation } from "react-i18next"
+import { useHistory } from 'react-router-dom'
 
 function Account({ deactivePatient }) {
    const { user } = useContext(RootContext)
    const [patient, setPatient] = useState({})
    const { t } = useTranslation()
+   const history = useHistory()
 
    useEffect(() => {
       PatientApi.getSinglePatient(user._id).then(patient => {
@@ -24,7 +26,10 @@ function Account({ deactivePatient }) {
    const funDeactivePatient = async () => {
       let nUser = await deactivePatient(patient._id);
       setPatient(nUser)
-      console.log( 'nUser....', nUser );
+      if (nUser.accountDeletionRequest) {
+         localStorage.clear()
+         window.location.href = "/"
+      }
    }
 
    return (
