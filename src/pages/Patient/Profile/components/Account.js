@@ -9,6 +9,7 @@ import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify'
 import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router-dom'
+import AccountDelete from './AccountDelete'
 
 function Account({ deactivePatient }) {
    const { user } = useContext(RootContext)
@@ -58,9 +59,9 @@ function Account({ deactivePatient }) {
             const response = await PatientApi.updatePatient(user._id, values)
             if (!response.error) {
                toast.success(t("patient_profile_updated"))
-               localStorage.clear()
                setTimeout(() => {
-                  window.location.reload()
+                  localStorage.clear()
+                  window.location.href = "/"
                }, 2000)
             } else {
                toast.error(t("problem_while_updating_patient_profile"))
@@ -147,12 +148,13 @@ function Account({ deactivePatient }) {
                         </div>
                         <div class="form-group text-center">
                            <button type="submit" class="btn btn-primary mt-2">{t("update")}</button>
-                           <button type="button" onClick={funDeactivePatient} class="btn btn-danger mt-2 ml-3">{patient?.accountDeletionRequest ? t("cancelRequest") : t("deleteAccount")}</button>
+                           <a href="javascript:void(0)" data-toggle="modal" data-target="#deleteAccount" class="btn btn-danger ml-3 mt-2">{patient?.accountDeletionRequest ? t("cancelRequest") : t("deleteAccount")}</a>
                         </div>
                      </Form>
                   </div>
                </div>
             </div>
+            <AccountDelete funDeactiveAccount={funDeactivePatient} />
          </section>
       </Formik>
    )

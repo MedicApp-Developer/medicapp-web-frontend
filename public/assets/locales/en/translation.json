@@ -157,5 +157,7 @@
 	"status": "Status",
 	"claim_code": "Claim Code",
 	"GET_POINTS": "GET POINTS",
-	"claim_code_content": "Get your code from hospital, and earn 20 points per appointment"
+	"claim_code_content": "Get your code from hospital, and earn 20 points per appointment",
+	"accountDelete": "Are you sure you want to permanently delete your account?",
+	"accountDeleteDate": "Your Account Will be deleted on: "
 }

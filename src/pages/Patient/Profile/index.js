@@ -18,7 +18,7 @@ import AccountDelete from './components/AccountDelete'
 function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
     const [selectedTab, setSelectedTab] = useState(MEDICAL_PROFILE)
     const { user } = useContext(RootContext)
-    
+
     const { patient } = patients && patients
 
     useEffect(() => {
@@ -47,13 +47,9 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
         default:
             componentToRender = <MedicalProfile patient={patient?.patient} />
     }
-   
+
     return (
         <AppLayout>
-            {
-                patient?.patient?.accountDeletionRequest &&
-                <AccountDelete date={patient?.patient?.deletionDate} />
-            }
             <ProfileTopNavigation selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             {componentToRender}
         </AppLayout>
