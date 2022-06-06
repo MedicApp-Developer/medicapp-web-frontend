@@ -28,13 +28,22 @@ import VendorRouter from './pages/Vendors'
 import ForgetPassword from './pages/shared/ForgetPassword'
 import ResetPassword from './pages/shared/ForgetPassword/components/ResetPassword'
 import { useEffect, useState } from 'react';
+import { requestFirebaseNotificationPermission } from './firebase';
 
 function App() {
- 
- 
+
+  requestFirebaseNotificationPermission()
+    .then((firebaseToken) => {
+      // eslint-disable-next-line no-console
+      console.log(firebaseToken);
+    })
+    .catch((err) => {
+      return err;
+    });
+
   return (
     <>
-    {/* <div>
+      {/* <div>
       { isTokenFound ? "Notification Pression Enabled": 'Notification Preission denied' }
       { show && notification?.title  }
       { show && notification?.body  }

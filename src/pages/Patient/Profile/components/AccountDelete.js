@@ -23,7 +23,6 @@ const AccountDelete = ({ date, funDeactiveAccount }) => {
               <span class="icon-close"></span>
             </button>
             <h5 class="text-center mb-4">{t("accountDelete")}</h5>
-            <p>{t("accountDeleteDate")} {countDownDate}</p>
             <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2" onClick={() => { closeBtnRef.current.click(); funDeactiveAccount() }}>{t("yes")}</a>
             <a href="javascript:void(0)" style={{ color: "white" }} onClick={() => closeBtnRef.current.click()} class="btn btn-primary px-5 mx-2">{t("no")}</a>
           </div>
