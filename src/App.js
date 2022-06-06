@@ -31,7 +31,6 @@ import { useEffect, useState } from 'react';
 import { requestFirebaseNotificationPermission } from './firebase';
 
 function App() {
-
   requestFirebaseNotificationPermission()
     .then((firebaseToken) => {
       // eslint-disable-next-line no-console

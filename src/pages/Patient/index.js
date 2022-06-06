@@ -1,4 +1,4 @@
-import {  useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Route, Switch, withRouter } from "react-router-dom"
 import PatientRoute from "../../ProtectedRoutes/PatientRoute"
 import Home from "./Home"
@@ -24,40 +24,70 @@ import { RootContext } from '../../contextApi'
 import { useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { LOGIN_ROUTE } from "../../constants/Redirects";
+import { PATIENT } from '../../constants/Roles';
 const PatientRouter = withRouter(({ match, ...props }) => {
 
     const { user, setUser } = useContext(RootContext)
+    const [tabHasFocus, setTabHasFocus] = useState(true);
+
     const history = useHistory();
 
     const [show, setShow] = useState(false);
-    const [notification, setNotification] = useState({title: '', body: ''});
+    const [notification, setNotification] = useState({ title: '', body: '' });
     const [isTokenFound, setTokenFound] = useState(false);
     useEffect(() => {
         expgetToken(setTokenFound);
     }, [])
 
-    useEffect(()=>{
-        if( isTokenFound && user ){
-            console.log( { 
-                token: isTokenFound,
-                id: user._id
-            } ) 
-            PatientApi.updateFcToken({ 
+    useEffect(() => {
+        const handleFocus = () => {
+            if (user.role === PATIENT) {
+                PatientApi.getSinglePatient(user._id).then(res => {
+                    if (res.data.data.accountDeletionRequest) {
+                        localStorage.clear();
+                        window.location.href = "/";
+                    }
+                })
+            }
+            setTabHasFocus(true);
+        };
+
+        const handleBlur = () => {
+            console.log('Tab lost focus');
+            setTabHasFocus(false);
+        };
+
+        window.addEventListener('focus', handleFocus);
+        window.addEventListener('blur', handleBlur);
+
+        return () => {
+            window.removeEventListener('focus', handleFocus);
+            window.removeEventListener('blur', handleBlur);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isTokenFound && user) {
+            console.log({
                 token: isTokenFound,
                 id: user._id
             })
-            .then( res => {
-                console.log("data", res.data )
-            } )
+            PatientApi.updateFcToken({
+                token: isTokenFound,
+                id: user._id
+            })
+                .then(res => {
+                    console.log("data", res.data)
+                })
         }
     }, [isTokenFound, user])
-    
+
     onMessageListener().then(payload => {
         setShow(true);
         // setNotification({title: payload.notification.title, body: payload.notification.body})
         toast.success(payload.notification.title);
         setTimeout(() => {
-        // setNotification({title: '', body: ''})
+            // setNotification({title: '', body: ''})
             setShow(false);
             localStorage.clear();
             setUser(false)
