@@ -6,7 +6,7 @@ const PatientApi = {
     getAllPatients(pageNo) {
         return trackPromise(axios.get(`/${PATIENT_NAMESPACE}?page=${pageNo}`))
     },
-    deactivePatient(id){
+    deactivePatient(id) {
         return trackPromise(axios.delete(`${PATIENT_NAMESPACE}/deactivateUser/${id}`))
     },
     deletePatient(id) {
@@ -41,6 +41,9 @@ const PatientApi = {
     },
     updateFcToken(data) {
         return trackPromise(axios.put(`${PATIENT_NAMESPACE}/webfcToken`, data))
+    },
+    getPatientLabResults(id) {
+        return trackPromise(axios.get(`${PATIENT_NAMESPACE}/labResults/${id}`))
     }
 }
 

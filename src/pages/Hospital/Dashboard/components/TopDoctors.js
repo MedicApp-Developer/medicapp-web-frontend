@@ -25,8 +25,8 @@ function TopDoctors({ doctors, getDoctors }) {
                                     </div>
                                 </div>
                                 <div class="contact-info">
-                                    <a href="javascript:void(0)"><span class="icon-email"></span></a>
-                                    <a href="javascript:void(0)"><span class="icon-phone"></span></a>
+                                    <a href={`mailto:${doc?.email}`}><span className="icon-email"></span></a>
+                                    <a href={`tel:${doc?.mobile}`}><span className="icon-phone"></span></a>
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ function PatientPromoCode() {
 		if (searchText === "") {
 			setSearchedHospitalCodes(hospitalCodes);
 		} else {
-			setSearchedHospitalCodes(hospitalCodes.filter(code => code.patientId.emiratesId.includes(searchText)))
+			setSearchedHospitalCodes(hospitalCodes.filter(code => code?.patientId?.emiratesId.includes(searchText)))
 		}
 	}
 
