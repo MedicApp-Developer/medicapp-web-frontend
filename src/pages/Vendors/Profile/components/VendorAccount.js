@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import VendorApi from '../../../../api/Vendor';
 import { toast } from 'react-toastify';
+import ProfilePicture from './ProfilePicture';
 
 function VendorAccount({ vendorId, vendor }) {
 
@@ -36,12 +37,7 @@ function VendorAccount({ vendorId, vendor }) {
 	return (
 		<>
 			<div className="row patient-profile">
-				<div className="col-md-3 col-lg-3 col-xl-2">
-					<div className="profile-image">
-						<img src={PATIENT_IMAGE} alt="patient" />
-						<a href={href}><span className="fa fa-pencil"></span></a>
-					</div>
-				</div>
+				<ProfilePicture vendor={vendor} />
 				<div className="col-md-9 col-lg-9 col-xl-8">
 					<h4 className="mb-3">Vendor Details</h4>
 					<form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">

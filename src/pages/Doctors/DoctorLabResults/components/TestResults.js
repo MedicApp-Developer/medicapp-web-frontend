@@ -15,67 +15,67 @@ function TestResults({ setSelectedLabResult, getCompletedLabRequests, deleteComp
 
    useEffect(() => {
       getCompletedLabRequests(user.referenceId, pageNumber || 0);
-  }, [getCompletedLabRequests, pageNumber, user.referenceId]);
+   }, [getCompletedLabRequests, pageNumber, user.referenceId]);
 
-  const pages = getPagesArray(numberOfPages);
+   const pages = getPagesArray(numberOfPages);
 
-    return (
-        <>
-            <div class="row">
-               <div class="col-md-12">
-                  {completedlabRequests?.map(item => {
-                     return (
-                        <div class="card lab-result">
-                           <div class="card-body">
-                              <div class="row align-items-center">
-                                 <div class="col-md-12 col-lg-9">
-                                    <ul>
-                                       <li>
-                                          <small class="d-block">Date</small>
-                                          {moment(item.date).format('LL')}
-                                       </li>
-                                       <li>
-                                          <small class="d-block">Report</small>
-                                          {item.tests.map(test => test.test + ", ")}
-                                       </li>
-                                       <li class="media">
-                                          <img class="avatar-sm" src={PATIENT_IMAGE} class="mr-3" alt="patient" />
-                                          <div class="media-body">
-                                             <h5 class="mt-0 mb-1">{item.patientId.firstName + " " + item.patientId.lastName}</h5>
-                                             <p>Patient</p>
-                                          </div>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-md-12 col-lg-3 text-center text-md-right mt-3 mt-md-0">
-                                    <a href={href} data-toggle="modal" data-target="#labResults"  class="btn btn-primary px-3 py-2" onClick={(e) => { setSelectedLabResult(item) }}>View Results</a>
-                                 </div>
+   return (
+      <>
+         <div class="row">
+            <div class="col-md-12">
+               {completedlabRequests?.map(item => {
+                  return (
+                     <div class="card lab-result">
+                        <div class="card-body">
+                           <div class="row align-items-center">
+                              <div class="col-md-12 col-lg-9">
+                                 <ul>
+                                    <li>
+                                       <small class="d-block">Date</small>
+                                       {moment(item.date).format('LL')}
+                                    </li>
+                                    <li>
+                                       <small class="d-block">Report</small>
+                                       {item.tests.map(test => test.test + ", ")}
+                                    </li>
+                                    <li class="media">
+                                       <img class="avatar-sm mr-3" src={item?.patientId?.image ? item?.patientId?.image : PATIENT_IMAGE} alt="patient" />
+                                       <div class="media-body">
+                                          <h5 class="mt-0 mb-1">{item.patientId.firstName + " " + item.patientId.lastName}</h5>
+                                          <p>Patient</p>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="col-md-12 col-lg-3 text-center text-md-right mt-3 mt-md-0">
+                                 <a href={href} data-toggle="modal" data-target="#labResults" class="btn btn-primary px-3 py-2" onClick={(e) => { setSelectedLabResult(item) }}>View Results</a>
                               </div>
                            </div>
                         </div>
-                     )
-                  })}
-               </div>
+                     </div>
+                  )
+               })}
             </div>
-            <div class="row">
-               <div class="col-md-12">
-                           {completedlabRequests?.length > 0 ? (
-                                <nav>
-                                    <ul className="pagination justify-content-center align-items-center my-md-2">
-                                        <li className="page-item" style={{ pointerEvents: +pageNumber <= 0 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber - 1)}}>Prev</a></li>
-                                        {pages.map((pageIndex) => (
-                                            <li className={classNames("page-item", { "active": +pageIndex === pageNumber })} key={pageIndex} onClick={() => setPageNumber(pageIndex)}><a className="page-link" href={href} onClick={(e) => e.preventDefault()}>{pageIndex + 1}</a></li>
-                                        ))}
-                                        <li className="page-item" style={{ pointerEvents: +pageNumber === +numberOfPages - 1 && "none"  }}><a href={href} onClick={(e) => {e.preventDefault(); setPageNumber(pageNumber + 1)}}>Next</a></li>
-                                    </ul>
-                                </nav>
-                            ): (
-                                <p>No Test Results Found</p>
-                            )}
-               </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               {completedlabRequests?.length > 0 ? (
+                  <nav>
+                     <ul className="pagination justify-content-center align-items-center my-md-2">
+                        <li className="page-item" style={{ pointerEvents: +pageNumber <= 0 && "none" }}><a href={href} onClick={(e) => { e.preventDefault(); setPageNumber(pageNumber - 1) }}>Prev</a></li>
+                        {pages.map((pageIndex) => (
+                           <li className={classNames("page-item", { "active": +pageIndex === pageNumber })} key={pageIndex} onClick={() => setPageNumber(pageIndex)}><a className="page-link" href={href} onClick={(e) => e.preventDefault()}>{pageIndex + 1}</a></li>
+                        ))}
+                        <li className="page-item" style={{ pointerEvents: +pageNumber === +numberOfPages - 1 && "none" }}><a href={href} onClick={(e) => { e.preventDefault(); setPageNumber(pageNumber + 1) }}>Next</a></li>
+                     </ul>
+                  </nav>
+               ) : (
+                  <p>No Test Results Found</p>
+               )}
             </div>
-        </>
-    )
+         </div>
+      </>
+   )
 }
 
 const mapStateToProps = (state) => ({

@@ -15,6 +15,9 @@ const VendorApi = {
 	createVendor(data) {
 		return trackPromise(axios.post(`/${VENDOR_NAMESPACE}`, data));
 	},
+	uploadVendorProfileImage(id, data) {
+		return trackPromise(axios.put(`${VENDOR_NAMESPACE}/uploadProfilePicture/${id}`, data));
+	},
 	updateVendor(id, data) {
 		return trackPromise(axios.put(`/${VENDOR_NAMESPACE}/${id}`, data));
 	},

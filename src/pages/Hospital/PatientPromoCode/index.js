@@ -55,7 +55,7 @@ function PatientPromoCode() {
 								{searchedHospitalCodes?.map(code => (
 									<tr key={code._id} style={{ border: '1px solid gray', padding: '7px' }}>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.patientId?.firstName + " " + code?.patientId?.lastName}</td>
-										<td style={{ border: '1px solid gray', padding: '7px' }}>{`${moment(code.slotId.from).format("DD-MM-YY")} - ( ${moment(code.slotId.from).format('HH.mm')} - ${moment(code.slotId.to).format('HH.mm')} )`}</td>
+										<td style={{ border: '1px solid gray', padding: '7px' }}>{`${moment(code?.slotId?.from).format("DD-MM-YY")} - ( ${moment(code?.slotId?.from).format('HH.mm')} - ${moment(code?.slotId?.to).format('HH.mm')} )`}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.patientId?.emiratesId}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code.slotId?.doctorId?.firstName + " " + code.slotId?.doctorId?.lastName}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.code}</td>

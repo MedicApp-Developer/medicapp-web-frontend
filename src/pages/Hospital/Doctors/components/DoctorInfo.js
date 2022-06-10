@@ -55,7 +55,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                      <div class="card profile-detail py-3">
                         <div class="card-body">
                            <div class="media">
-                              <img class="avatar-lg mr-0" src={PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
+                              <img class="avatar-lg mr-0" src={selectedDoctor?.image ? selectedDoctor?.image : PLACEHOLDER_DOCTOR_IMAGE} alt="doctor" />
                               <div class="media-body">
                                  <h5 class="mt-3 mb-2">Dr. {selectedDoctor?.firstName + " " + selectedDoctor?.lastName}</h5>
                                  <p>{selectedDoctor?.specialityId?.map((item, index) => index === selectedDoctor?.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
@@ -110,7 +110,7 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                                    </td>
                                                    <td>
                                                       <div class="media">
-                                                         <img src={PATIENT_IMAGE} alt="patient" />
+                                                         <img src={appointment?.patientId?.image ? appointment?.patientId?.image : PATIENT_IMAGE} alt="patient" />
                                                          <div class="media-body">
                                                             <h5 class="mt-0">{appointment?.patientId?.firstName + " " + appointment?.patientId?.lastName}</h5>
                                                             <p>Patient</p>
@@ -155,14 +155,14 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                                           <tr>
                                              <td>
                                                 <div class="media">
-                                                   <img class="avatar-sm" src={PATIENT_IMAGE} alt="patient" />
+                                                   <img class="avatar-sm" src={patient?.image ? patient?.image : PATIENT_IMAGE} alt="patient" />
                                                    <div class="media-body">
                                                       <h5 class="mt-0">{patient?.firstName + " " + patient?.lastName}</h5>
                                                       <p>{patient?.email}</p>
                                                    </div>
                                                 </div>
                                              </td>
-                                             <td>{patient?.bloodType}</td>
+                                             <td>{patient?.bloodType || "-"}</td>
                                              <td>{patient?.birthday}</td>
                                              <td>{patient?.gender}</td>
                                           </tr>
