@@ -49,7 +49,7 @@ function QRPrescription({ prescriptions }) {
                               </div>
                               <div class="col-md-12 col-lg-5 text-center text-md-right mt-3 mt-md-0">
                                  <a href="javascript:void(0)" class="btn btn-primary px-3 py-2 mr-3" onClick={downloadQrPrescription.bind(this, qr)}>{t("download")}</a>
-                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#qrCode" class="btn btn-primary px-3 py-2 mr-3" onClick={viewQrPrescription.bind(this, qr)}>{t("VIEW_QR")}</a>
+                                 {/* <a href="javascript:void(0)" data-toggle="modal" data-target="#qrCode" class="btn btn-primary px-3 py-2 mr-3" onClick={viewQrPrescription.bind(this, qr)}>{t("VIEW_QR")}</a> */}
                               </div>
                               <GenerateQrCode selectedResult={selectedQrPrescription} setSelectedResult={setSelectedQrPrescription} />
                            </div>

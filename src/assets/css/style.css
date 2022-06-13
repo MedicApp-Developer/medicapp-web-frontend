@@ -155,6 +155,7 @@ ul {
 .btn:focus,
 .btn:active {
 	box-shadow: none;
+	color: #fff;
 }
 
 .btn-primary {
@@ -456,7 +457,8 @@ header .dropdown-menu {
 .modal .media img {
 	margin-right: 15px;
 	border-radius: 50%;
-	max-width: 60px;
+	width: 75px;
+	height: 75px;
 }
 
 .user-dashboard .media h5,
@@ -491,7 +493,11 @@ header .dropdown-menu {
 }
 
 .user-dashboard .table .media img {
-	max-width: 40px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	-o-object-fit: cover;
 }
 
 .user-dashboard .table p {
@@ -533,7 +539,7 @@ header .dropdown-menu {
 	color: #000;
 }
 
-.user-dashboard .page-link {
+/* .user-dashboard .page-link {
 	border: none;
 	background: #FFFFFF;
 	box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.15);
@@ -543,7 +549,7 @@ header .dropdown-menu {
 	height: 35px;
 	line-height: 24px;
 	text-align: center;
-}
+} */
 
 .user-dashboard .page-item.active .page-link,
 .user-dashboard .page-item .page-link:hover {
@@ -929,7 +935,11 @@ header .dropdown-menu {
 }
 
 .avatar-sm {
-	max-width: 45px !important;
+	width: 50px !important;
+	height: 50px !important;
+	border-radius: 50%;
+	object-fit: cover;
+	-o-object-fit: cover;
 }
 
 .avatar-lg {
@@ -1419,6 +1429,15 @@ header .dropdown-menu {
 	border: 1px solid #d7c8c8;
 	padding: 5px 10px;
 	background: transparent;
+}
+
+
+.patient-profile-large {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	object-fit: cover;
+	-o-object-fit: cover;
 }
 
 /* Footer */

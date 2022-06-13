@@ -56,7 +56,7 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
                   <div className="card">
                      <div className="card-body">
                         <div className="media">
-                           <img src={patient?.image ? patient?.image : PATIENT_IMAGE} className="pointer" alt="patient" onClick={(e) => { history.push(redirectTo + `/${patient._id}`) }} />
+                           <img src={patient?.image ? patient?.image : PATIENT_IMAGE} className="patient-profile-large" alt="patient" onClick={(e) => { history.push(redirectTo + `/${patient._id}`) }} />
                            <div className="media-body">
                               <ul>
                                  <li>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="codexcoder">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/assets/images/favicon.ico">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css//icofont.min.css">
+  <link rel="stylesheet" href="/assets/css/lightcase.css">
+  <link rel="stylesheet" href="/assets/css/animate.css">
+  <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="/assets/css/style.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+  <title>metawings nft</title>
+
+</head>
+
+<body class="home-2">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+
+  </div>
+  <a href="#" class="scrollToTop"><i class="icofont-stylish-up"></i></a>
+
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/waypoints.min.js"></script>
+  <script src="/assets/js/lightcase.js"></script>
+  <script src="/assets/js/swiper-bundle.min.js"></script>
+  <script src="/assets/js/countdown.min.js"></script>
+  <script src="/assets/js/jquery.counterup.min.js"></script>
+  <script src="/assets/js/wow.min.js"></script>
+  <script src="/assets/js/isotope.pkgd.min.js"></script>
+  <script src="/assets/js/functions.js"></script>
+  <script src="/assets/js/slider.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#grid-five").hide()
+      $(".grid-larg").click(function () {
+        $("#grid-five").hide()
+        $("#grid-four").show()
+      })
+      $(".grid-th").click(function () {
+        $("#grid-four").hide()
+        $("#grid-five").show()
+      })
+
+      $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        items: 1,
+
+      });
+
+      $('body').on('click', '.close-cross', function () {
+        $(this).parent().remove();
+      });
+
+      $('body').on('click', '.clear-all', function () {
+        $('.cart-checkout').remove();
+        $(this).remove();
+      });
+    });
+  </script>
+  <script>
+
+    var modal = document.getElementById("myModal");
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function () {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    }
+    var span123 = document.getElementsByClassName("close123")[0];
+    span123.onclick = function () {
+      modal.style.display = "none";
+    }
+  </script>
+  <script>
+    $('.cart-method').hide();
+    $(document).ready(function () {
+      $('#cart-payment').click(function () {
+        $('.payment-method').hide();
+        $('.cart-method').show();
+      });
+      $('.cancel-payment-button').click(function () {
+        $('.payment-method').show();
+        $('.cart-method').hide();
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $(".button-btns").click(function () {
+
+        $("#exampleModal").modal('show');
+      });
+      $(".close").click(function () {
+
+        $("#exampleModal").modal('hide');
+      });
+    });
+  </script>
+<script src="/static/js/bundle.js"></script><script src="/static/js/0.chunk.js"></script><script src="/static/js/main.chunk.js"></script><script src="/main.b015102e7d7448a83cb8.hot-update.js"></script></body>
+
+</html>
