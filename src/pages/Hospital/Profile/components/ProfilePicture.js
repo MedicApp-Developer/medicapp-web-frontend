@@ -51,10 +51,9 @@ function ProfilePicture({ hospital }) {
 						// write your building UI
 						<>
 							<img
-								className="img-fluid"
 								src={imageList[0]?.data_url ? imageList[0]?.data_url : hospital?.image ?? HOSPITAL_IMAGE}
 								alt="doctor"
-								style={{ maxWidth: '200px', maxHeight: '230px' }}
+								style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', border: '1px solid #D3D3D3' }}
 								onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
 								{...dragProps}
 							/>

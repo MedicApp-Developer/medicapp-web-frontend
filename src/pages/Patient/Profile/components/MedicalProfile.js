@@ -150,7 +150,7 @@ function MedicalProfile({ patient }) {
                                                 {patient?.labResults?.map(labResult => (
                                                     <div class="col-sm-12 col-md-6">
                                                         <div class="media">
-                                                            <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
                                                             <div class="media-body">
                                                                 <h5>{labResult?.tests?.map(item => item.test + ", ")}</h5>
                                                                 <p>{moment(labResult?.date).format('LL')}</p>

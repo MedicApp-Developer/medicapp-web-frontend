@@ -29,10 +29,11 @@ function Dashboard() {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-sm-6">
-                                    <h2>Welcome to MedicApp</h2>
+                                    <h4 style={{ color: "#D3D3D3" }}>Welcome to MedicApp,</h4>
+                                    <h2>{hospital?.name}</h2>
                                 </div>
                                 <div class="col-sm-6 text-sm-right">
-                                    <img width="120" src={hospital?.image ? hospital?.image : MEDEOR_IMAGE} alt="medeor-logo" />
+                                    <img style={{ width: '125px', height: '125px', borderRadius: '10px', objectFit: 'cover', border: '1px solid #D3D3D3' }} src={hospital?.image ? hospital?.image : MEDEOR_IMAGE} alt="medeor-logo" />
                                 </div>
                             </div>
                         </div>
