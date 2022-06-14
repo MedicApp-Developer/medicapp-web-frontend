@@ -69,7 +69,7 @@ function AddressInfo({ onSecondFormSubmit, setStep }) {
         onSubmit: async values => {
             if(Object.values(markers).length === 0){
                 toast.error("Please select location of hospital");
-                return false;
+                return false; 
             }
             onSecondFormSubmit(values, markers);
         },
