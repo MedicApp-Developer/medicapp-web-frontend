@@ -43,8 +43,6 @@ function PCR() {
 		var style = {
 			backgroundColor: backgroundColor,
 			borderRadius: '0px',
-			fontSize: '14px',
-            textAlign: 'center',
 			opacity: 0.8,
 			color: 'white',
 			border: '0px',

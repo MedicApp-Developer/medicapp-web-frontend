@@ -56,7 +56,10 @@ const HospitalApi = {
     },
     deleteGalleryImage(hospitalId, url) {
         return trackPromise(axios.delete(`${HOSPITAL_NAMESPACE}/deleteGalleryImage/${hospitalId}/${url}`));
-    }
+    },
+    removeProfilePicture(hospitalId) {
+        return trackPromise(axios.delete(`${HOSPITAL_NAMESPACE}/deleteProfileImage/${hospitalId}`));
+    },
 }
 
 export default HospitalApi;

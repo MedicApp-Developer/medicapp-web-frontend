@@ -41,7 +41,10 @@ const DoctorApi = {
     },
     createSickLeave(data) {
         return trackPromise(axios.post(`${SICKLEAVES_NAMESPACE}`, data))
-    }
+    },
+    removeProfilePicture(id) {
+        return trackPromise(axios.delete(`${DOCTOR_NAMESPACE}/deleteProfileImage/${id}`));
+    },
 }
 
 export default DoctorApi

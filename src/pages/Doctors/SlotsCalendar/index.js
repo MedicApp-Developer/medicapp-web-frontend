@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
+import { useParams } from 'react-router-dom'
 import { toast } from "react-toastify"
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { RootContext } from '../../../contextApi/index'
 import SlotApi from '../../../api/Slots/index'
-import DoctorApi from '../../../api/Doctors/index'
 import moment from 'moment'
 import { href } from '../../../constants/extra'
 import DatePicker from 'react-datepicker'
 import AppointmentDetails from './components/AppointmentDetails'
-import DeleteSlot from './components/DeleteSlot'
 
 
 const localizer = momentLocalizer(moment)
 
 function SlotsCalendar() {
 
+    const { id } = useParams()
     const [selectedDate, setSelectedDate] = useState(null)
     const [startDate, setStartDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
     const [endDate, setEndDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
     const [slots, setSlots] = useState([])
     const { user } = useContext(RootContext)
     const [selectedSlot, setSelectedSlot] = useState(null)
-    const [hospitalId, setHospitalId] = useState(null)
     const buttonRef = useRef()
     const createSlotRef = useRef()
-    const deleteSlotRef = useRef()
 
     const filterPassedTime = (time) => {
         const currentDate = new Date()
@@ -36,20 +34,13 @@ function SlotsCalendar() {
     }
 
     useEffect(() => {
-        DoctorApi.getSingleDoctor(user.referenceId).then(res => {
-            if (res.data.data) {
-                setHospitalId(res.data.data.hospitalId._id);
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
+        console.log(user);
         SlotApi.getAllDoctorsSlots(user.referenceId).then(res => {
             if (res.data.data && res.data.data.length > 0) {
                 const events = []
                 res.data.data.forEach(slot => {
                     events.push({
-                        _id: slot._id,
-                        title: moment(slot.from).format("hh:mm a") + " - " + moment(slot.to).format("hh:mm a"),
+                        title: moment(slot.from).format("hh:mm") + " - " + moment(slot.to).format("hh:mm"),
                         start: slot.from,
                         end: slot.to,
                         status: slot.status,
@@ -69,8 +60,6 @@ function SlotsCalendar() {
         var style = {
             backgroundColor: backgroundColor,
             borderRadius: '0px',
-            fontSize: '14px',
-            textAlign: 'center',
             opacity: 0.8,
             color: 'white',
             border: '0px',
@@ -94,11 +83,6 @@ function SlotsCalendar() {
         if (slot.status === "BOOKED") {
             setSelectedSlot(slot)
             buttonRef.current.click()
-        } else {
-            if (moment(slot.start).isAfter()) {
-                setSelectedSlot(slot)
-                deleteSlotRef.current.click()
-            }
         }
     }
 
@@ -110,14 +94,13 @@ function SlotsCalendar() {
     const createSlot = (e) => {
         e.preventDefault()
         const slot = {
-            hospitalId: hospitalId,
+            hospitalId: user.id,
             doctorId: user.referenceId,
             from: startDate,
             to: endDate
         }
         SlotApi.createSlot(slot).then(res => {
             setSlots([...slots, {
-                _id: res.data.data._id,
                 title: moment(startDate).format("hh:mm") + " - " + moment(endDate).format("hh:mm"),
                 start: startDate,
                 end: endDate,
@@ -126,19 +109,14 @@ function SlotsCalendar() {
             createSlotRef.current.click()
         }).catch(err => {
             console.log(err);
-            toast.error("Problem while creating the slot")
+            toast.error("Problem while creating the slot" + err.toString())
         })
-    }
-
-    const deleteSuccessHandler = () => {
-        deleteSlotRef.current.click()
     }
 
     return (
         <DashboardLayout>
             <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
                 <a ref={buttonRef} href={href} data-toggle="modal" data-target="#appointmentDetails" class="btn btn-primary px-3"></a>
-                <a ref={deleteSlotRef} href={href} data-toggle="modal" data-target="#deleteSlot" class="btn btn-primary px-3"></a>
             </div>
             <div class="row align-items-center add-list">
                 <div class="col-12">
@@ -218,7 +196,6 @@ function SlotsCalendar() {
                 </div>
             </div>
             <AppointmentDetails selectedSlot={selectedSlot} />
-            <DeleteSlot selectedSlot={selectedSlot} deleteHandler={deleteSuccessHandler} />
         </DashboardLayout>
     )
 }

@@ -6,7 +6,7 @@ import {
     useLoadScript,
     Marker
   } from '@react-google-maps/api'
-import SearchMap from './SearchMap';
+import SearchMap from './SearchMap'; 
 import LocateMap from './LocateMap';
 import HOSPITAL_LOCATION_IMAGE from '../../../../assets/images/hospital-location.png'
 import { toast } from 'react-toastify';
@@ -69,7 +69,7 @@ function AddressInfo({ onSecondFormSubmit, setStep }) {
         onSubmit: async values => {
             if(Object.values(markers).length === 0){
                 toast.error("Please select location of hospital");
-                return false; 
+                return false;
             }
             onSecondFormSubmit(values, markers);
         },
