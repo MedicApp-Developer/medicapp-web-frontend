@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/doctor_placeholder.png'
 import { Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
 

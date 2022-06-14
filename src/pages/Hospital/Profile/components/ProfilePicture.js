@@ -1,5 +1,5 @@
 import React from 'react'
-import HOSPITAL_IMAGE from '../../../../assets/images/resgister-hospital.png';
+import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 import { href } from '../../../../constants/extra';
 import ImageUploading from "react-images-uploading"
 import HospitalApi from '../../../../api/Hospital'
@@ -33,7 +33,6 @@ function ProfilePicture({ hospital }) {
 
 			<div class="col-md-4">
 				<ImageUploading
-					multiple
 					value={images}
 					onChange={onChange}
 					maxNumber={maxNumber}

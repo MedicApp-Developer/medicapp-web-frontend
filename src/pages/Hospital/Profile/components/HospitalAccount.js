@@ -1,7 +1,7 @@
 import React from 'react'
 import { href } from '../../../../constants/extra'
 import mapImage from '../../../../assets/images/map.png';
-import PATIENT_IMAGE from '../../../../assets/images/patient.png';
+import PATIENT_IMAGE from '../../../../assets/images/medeor_logo.png';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';

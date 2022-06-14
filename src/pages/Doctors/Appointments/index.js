@@ -73,14 +73,14 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                               </div>
                            )}
                         </div>
-                        <div class="dropdown">
+                        {/* <div class="dropdown">
                            <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="icon-dots"></span>
                            </a>
                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item delete-item" href={null} style={{ cursor: 'pointer' }} onClick={onAppointmentDelete.bind(this, appointment._id)}>Delete</a>
                            </div>
-                        </div>
+                        </div> */}
                      </div>
                   </div>
                </div>

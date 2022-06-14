@@ -4,7 +4,7 @@ import axios from 'axios'
 const token = window.localStorage.getItem('auth')
 
 const instance = axios.create({
-  baseURL: 'https://medicappp.herokuapp.com/api'
+  baseURL: 'http://localhost:8080/api'
 })
 
 // https://medicappp.herokuapp.com/api
