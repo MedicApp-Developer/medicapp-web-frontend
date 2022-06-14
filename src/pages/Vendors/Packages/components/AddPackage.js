@@ -10,7 +10,7 @@ import { BUY_SOME_GET_SOME, HOTEL, ON_PERCENTAGE, RESTAURANT, RETAIL, WELLNESS }
 import SelectInput from '../../../../components/forms/SelectInput'
 import { RootContext } from '../../../../contextApi'
 import ImageUpload from 'image-upload-react';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify' 
 
 function AddVendors({ categories, createPackage, selectedPackage, updatePackage, vendors, getVendors }) {
 
@@ -162,6 +162,7 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 												<TextArea
 													name="termsAndConditions"
 													rows="5"
+													columns="10"
 													placeholder="Terms And Conditions"
 												/>
 											</div>

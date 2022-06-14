@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, FAMILY_MEMBERS, SICK_LEAVES, REWARDS } from '../../../constants/patientProfile'
+import { ACCOUNT, APPOINTMENTS, LAB_RESULTS, MEDICAL_PROFILE, QR_PRESCRIPTION, FAMILY_MEMBERS, SICK_LEAVES } from '../../../constants/patientProfile'
 import ProfileTopNavigation from './components/ProfileTopNavigation'
 import AppLayout from '../../../layout/AppLayout'
 import MedicalProfile from './components/MedicalProfile'
@@ -36,8 +36,8 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
             componentToRender = <Appointments appointments={patient?.upcommingAppointments} />; break
         case SICK_LEAVES:
             componentToRender = <SickLeaves />; break
-        case REWARDS:
-            componentToRender = <Rewards />; break
+        // case REWARDS:
+        //     componentToRender = <Rewards />; break
         case QR_PRESCRIPTION:
             componentToRender = <QRPrescription prescriptions={patient?.qrPrescriptions} />; break
         case LAB_RESULTS:

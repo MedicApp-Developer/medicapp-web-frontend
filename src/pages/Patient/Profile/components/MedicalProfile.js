@@ -150,7 +150,7 @@ function MedicalProfile({ patient }) {
                                                 {patient?.labResults?.map(labResult => (
                                                     <div class="col-sm-12 col-md-6">
                                                         <div class="media">
-                                                            <span> <img src={LAB_IMAGE} alt="lab"/></span>
+                                                            <span> <img src={LAB_IMAGE} style={{ width: "20px", height: "20px", borderRadius: "0px" }} alt="lab" /></span>
                                                             <div class="media-body">
                                                                 <h5>{labResult?.tests?.map(item => item.test + ", ")}</h5>
                                                                 <p>{moment(labResult?.date).format('LL')}</p>
@@ -170,7 +170,7 @@ function MedicalProfile({ patient }) {
                                                 {patient?.qrPrescriptions?.map(prescription => (
                                                     <div class="col-md-12">
                                                         <div class="media">
-                                                            <span class="bg-danger"> <img src={VIEW_QR_IMAGE} alt="view-qr" /></span>
+                                                            <span class="bg-danger"> <img src={VIEW_QR_IMAGE} style={{ width: "20px", height: "20px", borderRadius: "0px" }} alt="view-qr" /></span>
                                                             <div class="media-body">
                                                                 <h5>{prescription?.doctorId?.firstName + " " + prescription?.doctorId?.lastName}</h5>
                                                                 <p>{moment(prescription?.date).format('LL')}</p>
@@ -189,7 +189,7 @@ function MedicalProfile({ patient }) {
                     </div>
                 </div>
                 <CancelAppointment selectedAppointment={selectedAAppointment} />
-                {/* <UpdateProfile patient={patient.patient} /> */}
+                <UpdateProfile patient={patient.patient} />
             </section>
         </>
     )
