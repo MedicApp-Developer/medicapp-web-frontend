@@ -36,5 +36,4 @@ function DeleteSlot({ selectedSlot }) {
         </div>
     )
 }
-
 export default DeleteSlot
