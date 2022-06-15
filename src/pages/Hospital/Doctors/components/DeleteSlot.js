@@ -14,7 +14,7 @@ function DeleteSlot({ selectedSlot }) {
             }
 
         }).catch((err) => {
-            toast.success("Failed to delete slot")
+            toast.error("Failed to delete slot")
             console.log(err);
         });
     }

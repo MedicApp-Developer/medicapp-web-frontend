@@ -118,7 +118,7 @@ function SlotsCalendar() {
         SlotApi.createSlot(slot).then(res => {
             setSlots([...slots, {
                 _id: res.data.data._id,
-                title: moment(startDate).format("hh:mm") + " - " + moment(endDate).format("hh:mm"),
+                title: moment(startDate).format("hh:mm a") + " - " + moment(endDate).format("hh:mm a"),
                 start: startDate,
                 end: endDate,
             }])
