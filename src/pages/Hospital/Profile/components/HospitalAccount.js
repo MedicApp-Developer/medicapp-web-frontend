@@ -1,7 +1,7 @@
 import React from 'react'
 import { href } from '../../../../constants/extra'
 import mapImage from '../../../../assets/images/map.png';
-import PATIENT_IMAGE from '../../../../assets/images/medeor_logo.png';
+import PATIENT_IMAGE from '../../../../assets/images/patient.png';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -10,8 +10,10 @@ import { useHistory } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../../constants/Redirects';
 import ShowMap from './ShowMap';
 import ProfilePicture from './ProfilePicture';
+import HOSPITAL_IMAGE from '../../../../assets/images/resgister-hospital.png';
 
 function HospitalAccount({ hospitalId, hospital }) {
+   console.log('hospital?.hospital: ', hospital?.hospital)
    const history = useHistory();
 
    const formik = useFormik({
@@ -42,8 +44,15 @@ function HospitalAccount({ hospitalId, hospital }) {
    return (
       <>
          <div className="row patient-profile">
-            <ProfilePicture hospital={hospital?.hospital} />
-            <div className="col-md-9 col-lg-9 col-xl-8">
+            <div className="col-md-3 col-lg-3 col-xl-3">
+               <ProfilePicture 
+                  data={hospital?.hospital}
+                  updatePicture={HospitalApi.uploadProfilePic}
+                  removePicture={HospitalApi.removeProfilePicture}
+                  DEFAULTIMAGE={HOSPITAL_IMAGE}
+               />
+            </div>
+            <div className="col-md-9 col-lg-9 col-xl-9">
                <h4 className="mb-3">Hospital Details</h4>
                <form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">
                   <div className="row">

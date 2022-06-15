@@ -33,7 +33,7 @@ function BookAppointment() {
                 const events = []
                 res.data.data.forEach(slot => {
                     events.push({
-                        title: moment(slot.from).format("hh:mm a") + " - " + moment(slot.to).format("hh:mm a"),
+                        title: moment(slot.from).format("hh:mm") + " - " + moment(slot.to).format("hh:mm"),
                         start: slot.from,
                         end: slot.to,
                         status: slot.status,
@@ -50,8 +50,6 @@ function BookAppointment() {
         var style = {
             backgroundColor: backgroundColor,
             borderRadius: '0px',
-            fontSize: '14px',
-            textAlign: 'center',
             opacity: 0.8,
             color: 'white',
             border: '0px',

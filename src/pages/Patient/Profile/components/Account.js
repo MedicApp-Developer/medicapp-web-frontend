@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router-dom'
 import AccountDelete from './AccountDelete'
+import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture'
 
 function Account({ deactivePatient }) {
    const { user } = useContext(RootContext)
@@ -31,6 +32,10 @@ function Account({ deactivePatient }) {
          localStorage.clear()
          window.location.href = "/"
       }
+   }
+
+   const clickUpdateImage = () => {
+      console.log( 'clickUpdateImage' )
    }
 
    return (
@@ -73,11 +78,17 @@ function Account({ deactivePatient }) {
          <section class="user-dashboard">
             <div class="container">
                <div class="row patient-profile">
-                  <div class="col-md-3 col-lg-3 col-xl-2">
-                     <div class="profile-image">
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                     <ProfilePicture 
+                        data={patient}
+                        updatePicture={PatientApi.uploadProfilePic}
+                        removePicture={PatientApi.removeProfilePicture}
+                        DEFAULTIMAGE={PATIENT_IMAGE}
+                     />
+                     {/* <div class="profile-image">
                         <img src={PATIENT_IMAGE} alt="patient" />
-                        <a href="#"><span class="fa fa-pencil"></span></a>
-                     </div>
+                        <a href='#'><span class="fa fa-pencil"></span></a>
+                     </div> */}
                   </div>
                   <div class="col-md-9 col-lg-9 col-xl-8">
                      <h4 class="mb-3">{t("personal_details")}</h4>

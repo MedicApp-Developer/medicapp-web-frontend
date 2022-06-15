@@ -44,7 +44,14 @@ const PatientApi = {
     },
     getPatientLabResults(id) {
         return trackPromise(axios.get(`${PATIENT_NAMESPACE}/labResults/${id}`))
-    }
+    },
+    uploadProfilePic(id, data) {
+        return trackPromise(axios.put(`${PATIENT_NAMESPACE}/uploadProfilePicture/${id}`, data));
+    },
+    removeProfilePicture(id) {
+        return trackPromise(axios.delete(`${PATIENT_NAMESPACE}/deleteProfileImage/${id}`));
+    },
+
 }
 
 export default PatientApi
