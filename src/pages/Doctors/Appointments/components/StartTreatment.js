@@ -32,9 +32,9 @@ function StartTreatment({ QRCodeValue, setQRCodeValue, patientId, doctorId }) {
          dosageADay: values.dosageADay,
          consumptionDays: values.consumptionDays
       }).then(res => {
-         toast.success("QR Prescription Saved")
+         toast.success("Prescription sent")
       }).catch(err => {
-         toast.error("QR Prescription failed")
+         toast.error(" Failed to send prescription")
       })
    }
    return (
@@ -74,7 +74,7 @@ function StartTreatment({ QRCodeValue, setQRCodeValue, patientId, doctorId }) {
                            <div class="row">
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <SelectInput name="treatmentType">
+                                    <SelectInput name="treatmentType" style={{ height: "50px" }}>
                                        <option value="">Treatment Type</option>
                                        <option value="Medication">Medication</option>
                                        <option value="Skin Desease">Skin Desease</option>

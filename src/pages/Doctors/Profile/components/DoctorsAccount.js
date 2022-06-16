@@ -1,7 +1,7 @@
 import React from 'react'
 import DOCTOR_IMAGE from '../../../../assets/images/doctor.png'
 import { href } from '../../../../constants/extra'
-import { Form , Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
@@ -10,23 +10,31 @@ import DOCTOR_SHIFTING_IN_FRONT from '../../../../assets/images/empty_profile.pn
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
 function DoctorAccount({ doctor }) {
-    return (
-       <>
+   return (
+      <>
          {Object.keys(doctor).length > 0 && (
-               <Formik
+            <Formik
                initialValues={{
                   firstName: doctor.firstName,
                   lastName: doctor.lastName,
                   email: doctor.email,
                   mobile: doctor.mobile,
-                  password: ""
+                  password: "",
+                  confirmPassword: ""
                }}
                validationSchema={Yup.object({
                   firstName: Yup.string().required('Required'),
                   lastName: Yup.string().required('Required'),
                   email: Yup.string().required('Required').email(),
                   mobile: Yup.string().required('Required'),
-                  password: Yup.string().required('Required')
+                  password: Yup.string().required('Required'),
+                  confirmPassword: Yup.string().required("Required").when("password", {
+                     is: val => (val && val.length > 0 ? true : false),
+                     then: Yup.string().oneOf(
+                        [Yup.ref("password")],
+                        "Both password need to be the same"
+                     )
+                  })
                })}
                onSubmit={(values, { setSubmitting, resetForm }) => {
                   DoctorApi.updateDoctor(doctor._id, values).then(res => {
@@ -39,67 +47,69 @@ function DoctorAccount({ doctor }) {
                      toast.error("Problem while updating doctor profile");
                   })
                   resetForm();
-            }}
-         >
-            <>
-               <div class="row align-items-center add-list mb-5">
-                  <div class="col-12">
-                     <h4>Account</h4>
+               }}
+            >
+               <>
+                  <div class="row align-items-center add-list mb-5">
+                     <div class="col-12">
+                        <h4>Account</h4>
+                     </div>
                   </div>
-               </div>
-               <div class="row patient-profile">
-                  <div class="col-md-3 col-lg-3 col-xl-3">
-                     <ProfilePicture 
-                        data={doctor}
-                        updatePicture={DoctorApi.uploadProfilePic}
-                        removePicture={DoctorApi.removeProfilePicture}
-                        DEFAULTIMAGE={DOCTOR_IMAGE}
-                     />
+                  <div class="row patient-profile">
+                     <div class="col-md-3 col-lg-3 col-xl-2">
+                        <div class="profile-image">
+                           <img src={doctor?.image ? doctor?.image : DOCTOR_SHIFTING_IN_FRONT} alt="doctor" />
+                        </div>
+                     </div>
+                     <div class="col-md-9 col-lg-9 col-xl-8">
+                        <h4 class="mb-3">Doctor Details</h4>
+                        <Form>
+                           <div class="row">
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="text" name="firstName" placeholder="First Name" />
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="text" name="lastName" placeholder="Last Name" />
+                                 </div>
+                              </div>
+                           </div>
+                           <h4 class="my-3">Contact Details</h4>
+                           <div class="row">
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="text" name="email" placeholder="Email" />
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="text" name="mobile" placeholder="Mobile" />
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="password" name="password" placeholder="Change Password" />
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="password" name="confirmPassword" placeholder="Confirm Password" />
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group text-center">
+                              <button type="submit" class="btn btn-primary mt-2">Update</button>
+                           </div>
+                        </Form>
+                     </div>
                   </div>
-                  <div class="col-md-9 col-lg-9 col-xl-8">
-                     <h4 class="mb-3">Doctor Details</h4>
-                     <Form>
-                        <div class="row">
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <TextInput type="text" name="firstName" placeholder="First Name" />
-                              </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <TextInput type="text" name="lastName" placeholder="Last Name" />
-                              </div>
-                           </div>
-                        </div>
-                        <h4 class="my-3">Contact Details</h4>
-                        <div class="row">
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <TextInput type="text" name="email" placeholder="Email" />
-                              </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <TextInput type="text" name="mobile" placeholder="Mobile" />
-                              </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <TextInput type="password" name="password" placeholder="Change Password" />
-                              </div>
-                           </div>
-                        </div>
-                        <div class="form-group text-center">
-                           <button type="submit" class="btn btn-primary mt-2">Update</button>
-                        </div>
-                     </Form>
-                  </div>
-               </div>
                </>
-         </Formik>
+            </Formik>
          )}
-        </>
-    )
+      </>
+   )
 }
 
 export default DoctorAccount

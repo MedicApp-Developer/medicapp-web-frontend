@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import HospitalImage from '../../../../assets/images/hospital.png';
 import ImageUpload from 'image-upload-react';
 import 'image-upload-react/dist/index.css'
 import { href } from '../../../../constants/extra';
@@ -56,8 +55,8 @@ function HospitalInfo({ hospital }) {
             </div>
             <div className="row mt-2">
                 {images?.length > 0 && images?.map(img => (
-                    <div className="col-md-3">
-                        <img className="img-fluid" src={img} alt="hospital" />
+                    <div className="col-md-3" >
+                        <img className="banner-picture" src={img} alt="hospital" />
                         <button className="btn btn-danger mt-2" onClick={deleteImage.bind(this, img)}>Delete</button>
                     </div>
                 ))}

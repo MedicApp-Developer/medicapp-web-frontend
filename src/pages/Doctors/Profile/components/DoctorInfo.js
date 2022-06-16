@@ -77,7 +77,7 @@ function DoctorInfo({ doctor }) {
                <p class="mt-2 mb-2"><i class="icon-hospital"></i> {doctor.hospitalId.name}</p>
                <p>{doctor.about || "lorem Ipsem lorem Ipsem lorem Ipsem lorem Ipsem"}</p>
                <h5><strong>Speciality</strong></h5>
-               <p class="mb-1">{doctor?.specialityId?.map(item => item['name_en'] + ", ")}</p>
+               <p class="mb-1">{doctor?.specialityId?.map((item, index) => index === doctor?.specialityId.length - 1 ? item['name_en'] : item['name_en'] + ", ")}</p>
                <h5><strong>Experience</strong></h5>
                <p>{doctor.experience}</p>
             </div>

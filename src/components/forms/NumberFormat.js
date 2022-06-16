@@ -11,7 +11,7 @@ function NumberFormatInput(props) {
 			<NumberFormat
 				format={props.format}
 				mask={props.mask}
-				allowEmptyFormatting={true}
+				allowEmptyFormatting={false}
 				className={classNames("form-control", { "is-invalid": meta.touched && meta.error })} {...field} {...props}
 			/>
 			{meta.touched && meta.error ? (

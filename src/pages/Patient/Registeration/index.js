@@ -102,13 +102,18 @@ function PatientRegisteration() {
                                     <TextInput type="email" name="email" placeholder={t("email")} />
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="text" name="emiratesId" placeholder={t("emirates_id")} />
+                                    <NumberFormatInput
+                                        format={"###-####-#######-#"}
+                                        mask={"-"}
+                                        name="emiratesId"
+                                        defaultValue={t("emirates_id")}
+                                        placeholder={t("emirates_id")} />
                                 </div>
                                 <div class="form-group">
                                     <TextInput type="date" name="birthday" placeholder={t("birthday")} />
                                 </div>
                                 <div class="form-group">
-                                    <SelectInput name="gender">
+                                    <SelectInput name="gender" style={{ height: "50px" }}>
                                         <option value="">{t("gender")}</option>
                                         <option value={MALE}>{t("male")}</option>
                                         <option value={FEMALE}>{t("female")}</option>
@@ -121,7 +126,7 @@ function PatientRegisteration() {
                                 <div class="form-group">
                                     <NumberFormatInput
                                         format={"+971-## ### ####"}
-                                        mask={"_"}
+                                        mask={"-"}
                                         name="phone" placeholder={t("phone")}
                                     />
                                 </div>
@@ -141,8 +146,8 @@ function PatientRegisteration() {
                                 <button disabled={promiseInProgress} type="submit" class="btn btn-primary mt-2">
                                     <>
                                         {promiseInProgress &&
-                                        <HashLoader color="#fff" loading={true} size={15} />}
-                                        <span  className={promiseInProgress ? 'ml-4'  :  'ml-0'}>{t("register")}</span>
+                                            <HashLoader color="#fff" loading={true} size={15} />}
+                                        <span className={promiseInProgress ? 'ml-4' : 'ml-0'}>{t("register")}</span>
                                     </>
                                 </button>
                             </Form>

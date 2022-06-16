@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/doctor_placeholder.png'
 import moment from 'moment'
 import SendResults from '../../../Doctors/DoctorLabResults/components/SendResults'
 import { useTranslation } from "react-i18next"
@@ -26,7 +26,7 @@ function LabResults({ results }) {
                                     </li>
                                     <li>
                                        <small class="d-block">{t("report")}</small>
-                                       {result?.tests?.map(test => test.test + ", ")}
+                                       {result?.tests?.map((test, index) => index === result?.tests?.length - 1 ? test.test : test.test + ", ")}
                                     </li>
                                     <li class="media">
                                        <img class="avatar-sm" src={result?.doctorId?.image ? result?.doctorId?.image : EMPTY_IMAGE_PLACEHOLDER} alt="doctor" />

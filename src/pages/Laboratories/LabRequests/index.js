@@ -37,7 +37,7 @@ function LabRequests({ getPendingLabRequests, deletePendingRequest, pendingReque
                   <div class="card">
                      <div class="card-body">
                         <h5 class="mb-1"><strong>Test</strong></h5>
-                        <p>{req.tests.map(item => item.test + ", ")}</p>
+                        <p>{req.tests.map((item, index) => index === req.tests.length - 1 ? item.test : item.test + ", ")}</p>
                         <div class="media mb-3">
                            <img class="avatar-sm" src={PATIENT_IMAGE} alt="patient" />
                            <div class="media-body">

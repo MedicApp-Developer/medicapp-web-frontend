@@ -113,7 +113,7 @@ function AddDoctor({ addDoctor }) {
                                         <div className="form-group">
                                             <NumberFormatInput
                                                 format={"+971-## ### ####"}
-                                                mask={"_"}
+                                                mask={"-"}
                                                 name="mobile" placeholder="Mobile"
                                             />
                                         </div>
@@ -141,7 +141,7 @@ function AddDoctor({ addDoctor }) {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <SelectInput name="gender">
+                                            <SelectInput name="gender" style={{ height: "50px" }}>
                                                 <option value="">Select Gender</option>
                                                 {genders?.map(gender => (
                                                     <option value={gender._id}>{gender.name_en}</option>
@@ -151,7 +151,7 @@ function AddDoctor({ addDoctor }) {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <SelectInput name="country">
+                                            <SelectInput name="country" style={{ height: "50px" }}>
                                                 <option value="">Select Country</option>
                                                 {countries?.map(country => (
                                                     <option value={country._id}>{country.name_en}</option>
@@ -163,7 +163,7 @@ function AddDoctor({ addDoctor }) {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <div className="form-group">
-                                            <SelectInput name="language">
+                                            <SelectInput name="language" style={{ height: "50px" }}>
                                                 <option value="">Select Language</option>
                                                 {languages?.map(lang => (
                                                     <option value={lang._id}>{lang.name_en}</option>
