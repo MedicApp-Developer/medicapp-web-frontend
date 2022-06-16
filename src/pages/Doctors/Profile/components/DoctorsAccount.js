@@ -47,7 +47,7 @@ function DoctorAccount({ doctor }) {
                      </div>
                   </div>
                   <div class="row patient-profile">
-                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                         <ProfilePicture
                            data={doctor}
                            updatePicture={DoctorApi.uploadProfilePic}
@@ -55,7 +55,7 @@ function DoctorAccount({ doctor }) {
                            DEFAULTIMAGE={DOCTOR_IMAGE}
                         />
                      </div>
-                     <div class=" col-md-6 col-lg-8 col-xl-6">
+                     <div class="col-md-6 col-lg-8 col-xl-6">
                         <h4 class="mb-3">Doctor Details</h4>
                         <Form>
                            <div class="row">

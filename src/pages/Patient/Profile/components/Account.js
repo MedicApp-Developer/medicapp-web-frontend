@@ -35,7 +35,7 @@ function Account({ deactivePatient }) {
    }
 
    const clickUpdateImage = () => {
-      console.log( 'clickUpdateImage' )
+      console.log('clickUpdateImage')
    }
 
    return (
@@ -86,8 +86,8 @@ function Account({ deactivePatient }) {
          <section class="user-dashboard">
             <div class="container">
                <div class="row patient-profile">
-                  <div class="col-md-3 col-lg-3 col-xl-3">
-                     <ProfilePicture 
+                  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
+                     <ProfilePicture
                         data={patient}
                         updatePicture={PatientApi.uploadProfilePic}
                         removePicture={PatientApi.removeProfilePicture}
@@ -98,7 +98,7 @@ function Account({ deactivePatient }) {
                         <a href='#'><span class="fa fa-pencil"></span></a>
                      </div> */}
                   </div>
-                  <div class="col-md-9 col-lg-9 col-xl-8">
+                  <div class="col-md-8 col-lg-8 col-xl-8">
                      <h4 class="mb-3">{t("personal_details")}</h4>
                      <Form autoComplete={false}>
                         <div class="row">
