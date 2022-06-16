@@ -5,7 +5,7 @@ import DoctorApi from '../../../../api/Doctors'
 import { toast } from 'react-toastify'
 
 function DoctorInfo({ doctor }) {
-
+   console.log(doctor)
    const [images, setImages] = React.useState([])
    const maxNumber = 1
 
@@ -53,21 +53,21 @@ function DoctorInfo({ doctor }) {
                      dragProps
                   }) => (
                      // write your building UI
-                     <>
+                     <div class="profile-image">
                         <img
                            className="img-fluid"
-                           src={imageList[0]?.data_url ? imageList[0]?.data_url : doctor?.image ?? DOCTOR_SHIFTING_IN_FRONT}
+                           src={doctor?.image ? doctor?.image : DOCTOR_SHIFTING_IN_FRONT}
                            alt="doctor"
                            style={{ maxWidth: '200px', maxHeight: '230px' }}
-                           onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
+                           // onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
                            {...dragProps}
                         />
-                        <hr style={{ visibility: 'hidden' }} />
+                        {/* <hr style={{ visibility: 'hidden' }} />
                         <div>
                            <a href="" style={{ pointerEvents: imageList.length < 1 && 'none' }} onClick={(e) => { e.preventDefault(); onImageRemoveAll() }}>Remove</a>
                            <a href="" style={{ pointerEvents: imageList.length < 1 && 'none', marginLeft: "15px", border: '1px solid dodgerblue', padding: '5px', fontWeight: 'bold' }} onClick={(e) => { e.preventDefault(); uploadProfilePic() }}>Upload</a>
-                        </div>
-                     </>
+                        </div> */}
+                     </div>
                   )}
                </ImageUploading>
                {/* <img class="img-fluid" src={DOCTOR_SHIFTING_IN_FRONT} alt="doctor" /> */}
