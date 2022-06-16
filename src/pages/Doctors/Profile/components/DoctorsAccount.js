@@ -19,22 +19,14 @@ function DoctorAccount({ doctor }) {
                   lastName: doctor.lastName,
                   email: doctor.email,
                   mobile: doctor.mobile,
-                  password: "",
-                  confirmPassword: ""
+                  password: ""
                }}
                validationSchema={Yup.object({
                   firstName: Yup.string().required('Required'),
                   lastName: Yup.string().required('Required'),
                   email: Yup.string().required('Required').email(),
                   mobile: Yup.string().required('Required'),
-                  password: Yup.string().required('Required'),
-                  confirmPassword: Yup.string().required("Required").when("password", {
-                     is: val => (val && val.length > 0 ? true : false),
-                     then: Yup.string().oneOf(
-                        [Yup.ref("password")],
-                        "Both password need to be the same"
-                     )
-                  })
+                  password: Yup.string().required('Required')
                })}
                onSubmit={(values, { setSubmitting, resetForm }) => {
                   DoctorApi.updateDoctor(doctor._id, values).then(res => {
@@ -56,10 +48,13 @@ function DoctorAccount({ doctor }) {
                      </div>
                   </div>
                   <div class="row patient-profile">
-                     <div class="col-md-3 col-lg-3 col-xl-2">
-                        <div class="profile-image">
-                           <img src={doctor?.image ? doctor?.image : DOCTOR_SHIFTING_IN_FRONT} alt="doctor" />
-                        </div>
+                     <div class="col-md-3 col-lg-3 col-xl-3">
+                        <ProfilePicture
+                           data={doctor}
+                           updatePicture={DoctorApi.uploadProfilePic}
+                           removePicture={DoctorApi.removeProfilePicture}
+                           DEFAULTIMAGE={DOCTOR_IMAGE}
+                        />
                      </div>
                      <div class="col-md-9 col-lg-9 col-xl-8">
                         <h4 class="mb-3">Doctor Details</h4>
@@ -91,11 +86,6 @@ function DoctorAccount({ doctor }) {
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <TextInput type="password" name="password" placeholder="Change Password" />
-                                 </div>
-                              </div>
-                              <div class="col-sm-6">
-                                 <div class="form-group">
-                                    <TextInput type="password" name="confirmPassword" placeholder="Confirm Password" />
                                  </div>
                               </div>
                            </div>
