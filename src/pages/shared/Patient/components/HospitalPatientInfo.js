@@ -55,7 +55,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                             <div class="media">
                                 <img style={{ cursor: "pointer" }} className="patient-profile-large" src={selectedPatient?.image ? selectedPatient?.image : PATIENT_IMAGE} alt="patient" />
                                 <div class="media-body">
-                                    <h5 class="mt-3 mb-2">{selectedPatient.firstName}</h5>
+                                    <h5 class="mt-3 mb-2">{selectedPatient.firstName + " " + selectPatient.lastName}</h5>
                                     {/* TODO show age after calculating from birthday */}
                                     <h6>birthday: {selectedPatient.birthday}</h6>
                                 </div>
@@ -70,19 +70,19 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                                     <span>Gender:</span> {selectedPatient.gender}
                                 </li>
                                 <li>
-                                    <span>Blood Type:</span> {selectedPatient.bloodType}
+                                    <span>Blood Type:</span> {selectedPatient?.bloodType ?? '-'}
                                 </li>
                                 <li>
-                                    <span>Allergies:</span> {selectedPatient.allergies}
+                                    <span>Allergies:</span> {selectedPatient?.allergies?.length === 0 ? '-' : selectedPatient?.allergies?.map((allergy, index) => index === selectedPatient?.allergies?.length - 1 ? allergy : allergy + ', ')}
                                 </li>
                                 <li>
-                                    <span>Diseases:</span> {selectedPatient?.diseases || "-"}
+                                    <span>Diseases:</span> {selectedPatient?.diseases?.length === 0 ? '-' : selectedPatient?.diseases?.map((disease, index) => index === selectedPatient?.diseases?.length - 1 ? disease : disease + ', ')}
                                 </li>
                                 <li>
-                                    <span>Height:</span> {selectedPatient.height}m
+                                    <span>Height:</span> {selectedPatient?.height === null ? '-' : selectedPatient?.height + "m"}
                                 </li>
                                 <li>
-                                    <span>Weight:</span> {selectedPatient.weight}kg
+                                    <span>Weight:</span> {selectedPatient?.weight === null ? '-' : selectedPatient?.weight + "m"}k
                                 </li>
                                 <li>
                                     <span>Patient ID:</span> {selectedPatient._id}

@@ -801,13 +801,17 @@ header .dropdown-menu {
 
 .profile-image {
 	position: relative;
-	width: 130px;
+	width: 200px;
+	height: 200px;
 	margin: 0px auto 30px;
 }
 
 .profile-image img {
 	width: 100%;
-	border-radius: 50%
+	height: 100%;
+	object-fit: cover;
+	border: 1px solid #D3D3D3;
+	border-radius: 10px;
 }
 
 .profile-image a,

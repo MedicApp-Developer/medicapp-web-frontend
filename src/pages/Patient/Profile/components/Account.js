@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import PATIENT_IMAGE from '../../../../assets/images/patient.png'
+import PATIENT_IMAGE from '../../../../assets/images/doctor_placeholder.png'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import SelectInput from '../../../../components/forms/SelectInput'
@@ -81,10 +81,10 @@ function Account({ deactivePatient }) {
          <section class="user-dashboard">
             <div class="container">
                <div class="row patient-profile">
-                  <div class="col-md-3 col-lg-3 col-xl-2">
+                  <div class="col-md-3 col-lg-3 col-xl-3">
                      <div class="profile-image">
                         <img src={PATIENT_IMAGE} alt="patient" />
-                        <a href="#"><span class="fa fa-pencil"></span></a>
+                        {/* <a href="#"><span class="fa fa-pencil"></span></a> */}
                      </div>
                   </div>
                   <div class="col-md-9 col-lg-9 col-xl-8">

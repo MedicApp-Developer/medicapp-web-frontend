@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
 import { toast } from 'react-toastify';
-import DOCTOR_SHIFTING_IN_FRONT from '../../../../assets/images/empty_profile.png';
+import DOCTOR_SHIFTING_IN_FRONT from '../../../../assets/images/doctor_placeholder.png';
 
 function DoctorAccount({ doctor }) {
    return (
