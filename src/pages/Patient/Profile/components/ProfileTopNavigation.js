@@ -26,9 +26,9 @@ function ProfileTopNavigation({ selectedTab, setSelectedTab }) {
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(SICK_LEAVES) }} className={classNames('nav-link', { active: selectedTab === SICK_LEAVES })} href={href}>{t("sick_leaves")}</a>
                             </li>
-                            <li class="nav-item">
+                            {/* <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(REWARDS) }} className={classNames('nav-link', { active: selectedTab === REWARDS })} href={href}>{t("rewards")}</a>
-                            </li>
+                            </li> */}
                             <li class="nav-item">
                                 <a onClick={(e) => { e.preventDefault(); setSelectedTab(QR_PRESCRIPTION) }} className={classNames('nav-link', { active: selectedTab === QR_PRESCRIPTION })} href={href}>{t("QR_Prescriprion")}</a>
                             </li>

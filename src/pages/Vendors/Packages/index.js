@@ -45,7 +45,8 @@ function Packages({ getPackages, packages, deletePackage }) {
 					{allPackages?.map((pack, key) => (
 						<div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
 							<div className="card">
-								<div className="card-body">
+								<img src={pack.images[0]} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }} alt="pacjage_image" />
+								<div className="card-body" style={{ padding: "40px 20px 20px" }}>
 									<div className="media">
 										<div className="media-body">
 											<h5 className="mt-0">{pack?.type === BUY_SOME_GET_SOME ? `Buy: ${pack.buyQuantity} - Get: ${pack.getQuantity}` : `${pack.off} % Off`}</h5>
@@ -61,6 +62,11 @@ function Packages({ getPackages, packages, deletePackage }) {
 									<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePackageHandler(pack) }}>Delete</a>
 										<a className="dropdown-item delete-item" style={{ backgroundColor: "#417EBF" }} href={href} onClick={(e) => { e.preventDefault(); setSelectedPackage(pack) }} data-toggle="modal" data-target="#addPackage">Update</a>
+									</div>
+								</div>
+								<div className="media">
+									<div className="media-body">
+										<h5 className="mt-0" >Code: {pack?.voucherCode}</h5>
 									</div>
 								</div>
 							</div>

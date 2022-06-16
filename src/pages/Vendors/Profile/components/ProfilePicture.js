@@ -34,7 +34,6 @@ function ProfilePicture({ vendor }) {
 
 			<div class="col-md-4">
 				<ImageUploading
-					multiple
 					value={images}
 					onChange={onChange}
 					maxNumber={maxNumber}
@@ -52,10 +51,9 @@ function ProfilePicture({ vendor }) {
 						// write your building UI
 						<>
 							<img
-								className="img-fluid"
 								src={imageList[0]?.data_url ? imageList[0]?.data_url : vendor?.image ?? HOSPITAL_IMAGE}
 								alt="doctor"
-								style={{ maxWidth: '200px', maxHeight: '230px' }}
+								style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', border: '1px solid #D3D3D3' }}
 								onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
 								{...dragProps}
 							/>

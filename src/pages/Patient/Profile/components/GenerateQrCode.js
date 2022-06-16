@@ -28,7 +28,7 @@ function GenerateQrCode({ selectedResult, setSelectedResult }) {
                             </div>
                         )}
                     </div>
-                    <button className="btn btn-primary" onClick={(e) => setQrCode(!qrCode)}>{qrCode ? t("show_prescription") : t("generate_QR_code")}</button>
+                    {/* <button className="btn btn-primary" onClick={(e) => setQrCode(!qrCode)}>{qrCode ? t("show_prescription") : t("generate_QR_code")}</button> */}
                 </div>
             </div>
         </div>
