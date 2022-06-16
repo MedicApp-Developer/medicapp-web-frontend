@@ -18,7 +18,7 @@ function ProfilePicture({ vendor }) {
 	}
 
 	const uploadProfilePic = () => {
-		if (images.length > 0) {
+		if (images?.length > 0) {
 			let formData = new FormData()
 			formData.append('image', images[0].file);
 			VendorApi.uploadVendorProfileImage(vendor?._id, formData).then(res => {

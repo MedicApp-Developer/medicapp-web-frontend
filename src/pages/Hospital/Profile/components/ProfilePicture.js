@@ -16,7 +16,7 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 	}
 
 	const uploadProfilePic = () => {
-		if (images.length > 0) {
+		if (images?.length > 0) {
 			let formData = new FormData()
 			formData.append('image', images[0].file)
 			updatePicture(data._id, formData).then(res => {
@@ -36,11 +36,11 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 		}).catch(err => {
 			toast.error("Problem while uploading the picture")
 		})
-		
+
 	}
 
 
-	
+
 
 	return (
 		<div className="col-md-3 col-lg-3 col-xl-2">
@@ -64,29 +64,29 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 					}) => (
 						// write your building UI
 						<>
-						<div className='imageBox'  style={{width: '200px', height: '200px', border: '1px solid #D3D3D3',  borderRadius: '10px'}}>
-							<div style={{
-									width: '200px', height: '200px', position:'absolute', backgroundColor: '#fff', opacity:  0.4, zIndex: 99999, 
-									justifyContent: 'center', alignItems:  'center',
-									display:  'flex'
-								}} 
-								onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}>
-								<img style={{width: '55px', height: '32px', opacity: 1, color: '#fff'}} class="avatar-lg mr-0" src={CAMERA_IMAGE} alt="camera"  />
+							<div className='imageBox' style={{ width: '200px', height: '200px', border: '1px solid #D3D3D3', borderRadius: '10px' }}>
+								<div style={{
+									width: '200px', height: '200px', position: 'absolute', backgroundColor: '#fff', opacity: 0.4, zIndex: 99999,
+									justifyContent: 'center', alignItems: 'center',
+									display: 'flex'
+								}}
+									onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}>
+									<img style={{ width: '55px', height: '32px', opacity: 1, color: '#fff' }} class="avatar-lg mr-0" src={CAMERA_IMAGE} alt="camera" />
+								</div>
+								{
+									(imageList[0]?.data_url || data?.image) &&
+									<img
+										src={imageList[0]?.data_url ? imageList[0]?.data_url : data?.image ?? DEFAULTIMAGE}
+										alt="doctor"
+										style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', }} //border: '1px solid #D3D3D3'
+										// onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
+										{...dragProps}
+									/>
+								}
 							</div>
-							{
-								(imageList[0]?.data_url || data.image) &&
-								<img
-									src={imageList[0]?.data_url ? imageList[0]?.data_url  : data.image ??  DEFAULTIMAGE}
-									alt="doctor"
-									style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover',  }} //border: '1px solid #D3D3D3'
-									// onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
-									{...dragProps}
-								/>
-							}
-						</div>
 							<hr style={{ visibility: 'hidden' }} />
 							<div >
-								<a href=""  onClick={(e) => { e.preventDefault(); removeImage() }}>Remove</a>
+								<a href="" onClick={(e) => { e.preventDefault(); removeImage() }}>Remove</a>
 								<a href="" style={{ pointerEvents: imageList.length < 1 && 'none', marginLeft: "15px", border: '1px solid dodgerblue', padding: '5px', fontWeight: 'bold' }} onClick={(e) => { e.preventDefault(); uploadProfilePic() }}>Upload</a>
 							</div>
 						</>
