@@ -63,7 +63,7 @@ function MedicalProfile({ patient }) {
                                             <span>{t("height")}:</span> {patient?.patient?.height === null ? '-' : patient?.patient?.height + "m"}
                                         </li>
                                         <li>
-                                            <span>{t("weight")}:</span> {patient?.patient?.weight === null ? '-' : patient?.patient?.weight + "m"}
+                                            <span>{t("weight")}:</span> {patient?.patient?.weight === null ? '-' : patient?.patient?.weight + "kg"}
                                         </li>
                                         <li>
                                             <span>{t("patient_ID")}:</span> {patient?.patient?._id}
