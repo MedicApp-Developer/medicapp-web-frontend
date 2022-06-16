@@ -31,6 +31,7 @@ const HospitalRouter = withRouter(({ match, ...props }) => {
             <HospitalRoute exact path={`${match.path}/patient`}>
                 <Patient />
             </HospitalRoute>
+            
             <HospitalRoute exact path={`${match.path}/promos`}>
                 <Promos />
             </HospitalRoute>
