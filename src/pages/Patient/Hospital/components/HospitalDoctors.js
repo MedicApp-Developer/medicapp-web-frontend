@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/doctor_placeholder.png'
 import { useTranslation } from "react-i18next"
 
 function HospitalDoctors({ doctors }) {
@@ -8,7 +8,7 @@ function HospitalDoctors({ doctors }) {
 
     return (
         <div class="tab-pane fade" id="pills-doctors" role="tabpanel" aria-labelledby="pills-doctors-tab">
-            <div class="row mt-4">
+            {/* <div class="row mt-4">
                 <div class="col-md-3">
                     <div class="form-group">
                         <select class="form-control">
@@ -16,15 +16,15 @@ function HospitalDoctors({ doctors }) {
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div class="row">
                 {doctors.length > 0 && doctors.map(doctor => (
                     <div class="col-md-6">
                         <div class="row align-items-center mb-3">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="media mb-0">
-                                    <img src={doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER} class="mr-3 py-4" alt="medeor_logo" />
-                                    <div class="media-body">
+                                    <img src={doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER} class="mr-3" alt="doctor_image" />
+                                    <div class="media-body" >
                                         <h5 class="mt-0">Dr. {doctor?.firstName + " " + doctor?.lastName}</h5>
                                         <p class="rating mb-1">
                                             <i class="text-warning fa fa-star"></i>
@@ -33,7 +33,7 @@ function HospitalDoctors({ doctors }) {
                                             <i class="text-warning fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </p>
-                                        <p class="mt-2 mb-2"><i class="icon-phone"></i> {doctor?.mobile} </p>
+                                        {/* <p class="mt-2 mb-2"><i class="icon-phone"></i> {doctor?.mobile} </p> */}
                                         <p class="mt-2 mb-2"><i class="icon-hospital"></i> {doctor?.hospitalId.name}</p>
                                     </div>
                                 </div>

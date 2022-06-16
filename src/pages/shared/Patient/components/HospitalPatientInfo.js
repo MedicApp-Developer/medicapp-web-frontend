@@ -20,6 +20,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
     const { selectedPatient } = patients;
 
     useEffect(() => {
+        console.log(selectedPatient);
         selectPatient(id);
         getLabResult();
     }, []);
@@ -55,7 +56,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                             <div class="media">
                                 <img style={{ cursor: "pointer" }} className="patient-profile-large" src={selectedPatient?.image ? selectedPatient?.image : PATIENT_IMAGE} alt="patient" />
                                 <div class="media-body">
-                                    <h5 class="mt-3 mb-2">{selectedPatient.firstName + " " + selectPatient.lastName}</h5>
+                                    <h5 class="mt-3 mb-2">{selectedPatient.firstName + " " + selectedPatient.lastName}</h5>
                                     {/* TODO show age after calculating from birthday */}
                                     <h6>birthday: {selectedPatient.birthday}</h6>
                                 </div>
@@ -82,7 +83,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                                     <span>Height:</span> {selectedPatient?.height === null ? '-' : selectedPatient?.height + "m"}
                                 </li>
                                 <li>
-                                    <span>Weight:</span> {selectedPatient?.weight === null ? '-' : selectedPatient?.weight + "m"}k
+                                    <span>Weight:</span> {selectedPatient?.weight === null ? '-' : selectedPatient?.weight + "kg"}
                                 </li>
                                 <li>
                                     <span>Patient ID:</span> {selectedPatient._id}
@@ -133,7 +134,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                                                     <img class="avatar-sm ml-3" src={doc?.image ? doc?.image : DOCTOR_IMAGE} alt="doctor" />
                                                     <div class="media-body">
                                                         <h5 class="mb-0">{doc.firstName + " " + doc.lastName}</h5>
-                                                        <p>Dentist</p>
+                                                        {/* <p>{doc.specialityId}</p> */}
                                                     </div>
                                                 </div>
                                             </div>

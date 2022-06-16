@@ -51,7 +51,7 @@ function Appointments({ appointments }) {
                                                             item.doctorId ?
                                                                 (
                                                                     <>
-                                                                        <img class="rounded-circle" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
+                                                                        <img class="avatar-sm" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
                                                                         <div class="media-body">
                                                                             <small class="d-block">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</small>
                                                                             <p>{item.doctorId?.specialityId?.name}</p>
@@ -122,7 +122,7 @@ function Appointments({ appointments }) {
                                                             item.doctorId ?
                                                                 (
                                                                     <>
-                                                                        <img class="rounded-circle" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
+                                                                        <img class="avatar-sm" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
                                                                         <div class="media-body">
                                                                             <small class="d-block">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</small>
                                                                             <p>{item.doctorId?.specialityId?.name}</p>
@@ -156,7 +156,7 @@ function Appointments({ appointments }) {
                                             <div class="col-md-12 col-lg-6 text-center text-md-right mt-3 mt-md-0">
                                                 <a style={{ marginRight: '0.5rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
                                                 <a style={{ marginRight: '0.5rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
-                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">{t("DELETE")}</a>
+                                                <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("DELETE")}</a>
                                             </div>
                                         </div>
                                     </div>

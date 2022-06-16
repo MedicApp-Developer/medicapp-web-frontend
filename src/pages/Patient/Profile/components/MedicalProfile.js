@@ -63,7 +63,7 @@ function MedicalProfile({ patient }) {
                                             <span>{t("height")}:</span> {patient?.patient?.height === null ? '-' : patient?.patient?.height + "m"}
                                         </li>
                                         <li>
-                                            <span>{t("weight")}:</span> {patient?.patient?.weight === null ? '-' : patient?.patient?.weight + "kg"}
+                                            <span>{t("weight")}:</span> {patient?.patient?.height === null ? '-' : patient?.patient?.height + "kg"}
                                         </li>
                                         <li>
                                             <span>{t("patient_ID")}:</span> {patient?.patient?._id}
@@ -151,7 +151,7 @@ function MedicalProfile({ patient }) {
                                                         <div class="media">
                                                             <span> <img src={LAB_IMAGE} style={{ width: "20px", height: "20px", borderRadius: "0px" }} alt="lab" /></span>
                                                             <div class="media-body">
-                                                                <h5>{labResult?.tests?.map(item => item.test + ", ")}</h5>
+                                                                <h5>{labResult?.tests?.map((item, index) => index === labResult?.tests?.length - 1 ? item.test : item.test + ", ")}</h5>
                                                                 <p>{moment(labResult?.date).format('LL')}</p>
                                                             </div>
                                                         </div>

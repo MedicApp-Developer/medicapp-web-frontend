@@ -51,11 +51,17 @@ function CreateAppointment({ doctor, selectedSlot, slotRef, onSlotCalandarClose 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={onSlotCalandarClose}>
                             <span class="icon-close"></span>
                         </button>
-                        <h4 class="text-center"> {t('book_appointment')}</h4>
+
                         {(selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED") ? (
-                            <p>{`${t('Please confirm your appointment')} `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {t("cancellation")} </span> {t("with")} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> on <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
+                            <>
+                                <h4 class="text-center"> {t('cancel_appointment')}</h4>
+                                <p>{`${t('Please confirm your appointment')} `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {t("cancellation")} </span> {t("with")} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> on <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
+                            </>
                         ) : (
-                            <p>{`${t('Please confirm your appointment')} with `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> {t('on')} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
+                            <>
+                                <h4 class="text-center"> {t('book_appointment')}</h4>
+                                <p>{`${t('Please confirm your appointment')} with `} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}> {(doctor?.firstName ?? doctor?.name) + " " + (doctor?.lastName ?? "")} </span> {t('on')} <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{selectedSlot?.title}</span></p>
+                            </>
                         )}
                         <hr />
                         {!(moment(selectedSlot.end).isAfter() && (selectedSlot.status === "BOOKED" || selectedSlot.status === "APPROVED")) && (

@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { RootContext } from '../../../../contextApi/index'
 import SlotApi from '../../../../api/Slots'
+import DeleteSlot from './DeleteSlot'
 
 const localizer = momentLocalizer(moment)
 
@@ -16,12 +17,14 @@ function SetDoctorSchedule() {
 
     const { id } = useParams()
     const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedSlot, setSelectedSlot] = useState(null)
     const [startDate, setStartDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
     const [endDate, setEndDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
     const [slots, setSlots] = useState([])
 
     const { user } = useContext(RootContext)
     const buttonRef = useRef()
+    const deleteSlotRef = useRef()
 
     const filterPassedTime = (time) => {
         const currentDate = new Date()
@@ -36,7 +39,8 @@ function SetDoctorSchedule() {
                 const events = []
                 res.data.data.forEach(slot => {
                     events.push({
-                        title: moment(slot.from).format("hh:mm") + " - " + moment(slot.to).format("hh:mm"),
+                        _id: slot._id,
+                        title: moment(slot.from).format("hh:mm a") + " - " + moment(slot.to).format("hh:mm a"),
                         start: slot.from,
                         end: slot.to,
                         status: slot.status
@@ -52,6 +56,15 @@ function SetDoctorSchedule() {
         buttonRef.current.click()
     }
 
+    const onSelectEvent = (slot) => {
+        if (slot.status !== "BOOKED") {
+            if (moment(slot.start).isAfter()) {
+                setSelectedSlot(slot)
+                deleteSlotRef.current.click()
+            }
+        }
+    }
+
     const createSlot = (e) => {
         e.preventDefault()
         const slot = {
@@ -62,7 +75,8 @@ function SetDoctorSchedule() {
         }
         SlotApi.createSlot(slot).then(res => {
             setSlots([...slots, {
-                title: moment(startDate).format("hh:mm") + " - " + moment(endDate).format("hh:mm"),
+                _id: res.data.data._id,
+                title: moment(startDate).format("hh:mm a") + " - " + moment(endDate).format("hh:mm a"),
                 start: startDate,
                 end: endDate,
             }])
@@ -78,6 +92,8 @@ function SetDoctorSchedule() {
         var style = {
             backgroundColor: backgroundColor,
             borderRadius: '0px',
+            fontSize: '14px',
+            textAlign: 'center',
             opacity: 0.8,
             color: 'white',
             border: '0px',
@@ -98,79 +114,86 @@ function SetDoctorSchedule() {
         }
     }
     return (
-        <div className="col-md-12 mb-3">
-            <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>
-                <h4>Doctor Schedule</h4>
-            </div>
-            <Calendar
-                popup
-                localizer={localizer}
-                events={slots}
-                startAccessor="start"
-                views={['month']}
-                endAccessor="end"
-                selectable={true}
-                onSelectSlot={onSelectSlot}
-                eventPropGetter={(eventStyleGetter)}
-            />
+        <>
+            <div className="col-md-12 mb-3">
+                <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>
+                    <h4>Doctor Schedule</h4>
+                </div>
+                <Calendar
+                    popup
+                    localizer={localizer}
+                    events={slots}
+                    startAccessor="start"
+                    views={['month']}
+                    endAccessor="end"
+                    selectable={true}
+                    onSelectEvent={onSelectEvent}
+                    onSelectSlot={onSelectSlot}
+                    eventPropGetter={(eventStyleGetter)}
+                />
 
-            <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
-                <a ref={buttonRef} href={href} data-toggle="modal" data-target="#setSchedule" class="btn btn-primary px-3"></a>
-            </div>
-            <div class="modal fade" id="setSchedule" tabindex="-1" aria-labelledby="setScheduleLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span class="icon-close"></span>
-                            </button>
-                            <h4 class="text-center">Create Slots</h4>
-                            <form onSubmit={createSlot}>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label for="from">From</label>
-                                            <DatePicker
-                                                id="from"
-                                                className="form-control"
-                                                placeholderText="From Date"
-                                                selected={startDate}
-                                                onChange={(date) => setStartDate(date)}
-                                                showTimeSelect
-                                                filterTime={filterPassedTime}
-                                                minDate={new Date(selectedDate)}
-                                                // maxDate={new Date(selectedDate)}
-                                                dateFormat="MMMM d, yyyy h:mm aa"
-                                            />
+                <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
+                    <a ref={buttonRef} href={href} data-toggle="modal" data-target="#setSchedule" class="btn btn-primary px-3"></a>
+                    <a ref={deleteSlotRef} href={href} data-toggle="modal" data-target="#deleteSlot" class="btn btn-primary px-3"></a>
+                </div>
+                <div class="modal fade" id="setSchedule" tabindex="-1" aria-labelledby="setScheduleLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span class="icon-close"></span>
+                                </button>
+                                <h4 class="text-center">Create Slots</h4>
+                                <form onSubmit={createSlot}>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label for="from">From</label>
+                                                <DatePicker
+                                                    id="from"
+                                                    className="form-control"
+                                                    placeholderText="From Date"
+                                                    selected={startDate}
+                                                    onChange={(date) => setStartDate(date)}
+                                                    showTimeSelect
+                                                    autoComplete='off'
+                                                    filterTime={filterPassedTime}
+                                                    minDate={new Date(selectedDate)}
+                                                    // maxDate={new Date(selectedDate)}
+                                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label for="to">To</label>
+                                                <DatePicker
+                                                    id="to"
+                                                    className="form-control"
+                                                    placeholderText="To Date"
+                                                    selected={endDate}
+                                                    onChange={(date) => setEndDate(date)}
+                                                    showTimeSelect
+                                                    autoComplete='off'
+                                                    filterTime={filterPassedTime}
+                                                    minDate={new Date(selectedDate)}
+                                                    // maxDate={new Date(selectedDate)}
+                                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label for="to">To</label>
-                                            <DatePicker
-                                                id="to"
-                                                className="form-control"
-                                                placeholderText="To Date"
-                                                selected={endDate}
-                                                onChange={(date) => setEndDate(date)}
-                                                showTimeSelect
-                                                filterTime={filterPassedTime}
-                                                minDate={new Date(selectedDate)}
-                                                // maxDate={new Date(selectedDate)}
-                                                dateFormat="MMMM d, yyyy h:mm aa"
-                                            />
-                                        </div>
+                                    <div className="form-group text-center mb-0">
+                                        <button type="submit" className="btn btn-primary">Create</button>
                                     </div>
-                                </div>
-                                <div className="form-group text-center mb-0">
-                                    <button type="submit" className="btn btn-primary">Create</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <DeleteSlot selectedSlot={selectedSlot} />
+        </>
     )
 }
 

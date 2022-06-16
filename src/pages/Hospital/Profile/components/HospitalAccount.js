@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../../constants/Redirects';
 import ShowMap from './ShowMap';
 import ProfilePicture from './ProfilePicture';
-import HOSPITAL_IMAGE from '../../../../assets/images/resgister-hospital.png';
+import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 
 function HospitalAccount({ hospitalId, hospital }) {
    console.log('hospital?.hospital: ', hospital?.hospital)
@@ -27,6 +27,7 @@ function HospitalAccount({ hospitalId, hospital }) {
          confirmPassword: ""
       },
       validationSchema: Yup.object({
+         password: Yup.string().required("Required"),
          confirmPassword: Yup.string().required("Required").when("password", {
             is: val => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
@@ -54,7 +55,7 @@ function HospitalAccount({ hospitalId, hospital }) {
       <>
          <div className="row patient-profile">
             <div className="col-md-3 col-lg-3 col-xl-3">
-               <ProfilePicture 
+               <ProfilePicture
                   data={hospital?.hospital}
                   updatePicture={HospitalApi.uploadProfilePic}
                   removePicture={HospitalApi.removeProfilePicture}

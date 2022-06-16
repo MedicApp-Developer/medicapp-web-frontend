@@ -55,7 +55,7 @@ function UpdateDoctorProfile({ doctor, setDoctor }) {
                               <div class="row">
                                  <div class="col-sm-6">
                                     <div class="form-group">
-                                       <SelectInput name="specialityId">
+                                       <SelectInput name="specialityId" style={{ height: "50px" }}>
                                           <option value="">Select Speciality</option>
                                           {allSpecialities?.map(spec => (
                                              <option value={spec._id}>{spec.name_en}</option>

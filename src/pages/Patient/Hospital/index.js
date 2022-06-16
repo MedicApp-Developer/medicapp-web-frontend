@@ -130,9 +130,9 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between align-items-center mb-4 mt-4 mt-md-0">
                                 <h5 class="text-primary mb-0">{allSearchedHospitals.length} {t("hospitals")}</h5>
-                                <select class="form-control">
+                                {/* <select class="form-control">
                                     <option>{t("sort_by")}: {t("recomendation")}</option>
-                                </select>
+                                </select> */}
                             </div>
                             {/* Searched Hospitals */}
                             <SearchedHospitals allSearchedHospitals={allSearchedHospitals} />

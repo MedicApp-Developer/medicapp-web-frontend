@@ -64,7 +64,7 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 					}) => (
 						// write your building UI
 						<>
-							<div className='imageBox' style={{ width: '200px', height: '200px', border: '1px solid #D3D3D3', borderRadius: '10px' }}>
+							<div className='imageBox' style={{ width: '200px', height: '200px', border: '1px solid #D3D3D3', borderRadius: '10px', cursor: "pointer" }}>
 								<div style={{
 									width: '200px', height: '200px', position: 'absolute', backgroundColor: '#fff', opacity: 0.4, zIndex: 99999,
 									justifyContent: 'center', alignItems: 'center',
@@ -74,9 +74,8 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 									<img style={{ width: '55px', height: '32px', opacity: 1, color: '#fff' }} class="avatar-lg mr-0" src={CAMERA_IMAGE} alt="camera" />
 								</div>
 								{
-									(imageList[0]?.data_url || data?.image) &&
 									<img
-										src={imageList[0]?.data_url ? imageList[0]?.data_url : data?.image ?? DEFAULTIMAGE}
+										src={imageList[0]?.data_url ? imageList[0]?.data_url : data?.image ? data?.image : DEFAULTIMAGE}
 										alt="doctor"
 										style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', }} //border: '1px solid #D3D3D3'
 										// onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
