@@ -26,7 +26,13 @@ const LaboratoryApi = {
     },
     getSingleLab(id) {
         return trackPromise(axios.get(`${LABORATORY_NAMESPACE}/${id}`));
-    }
+    },
+    removeProfilePicture(labId) {
+        return trackPromise(axios.delete(`/${LABORATORY_NAMESPACE}/deleteProfileImage/${labId}`));
+    },
+    uploadProfilePic(id, data) {
+        return trackPromise(axios.put(`/${LABORATORY_NAMESPACE}/uploadProfilePicture/${id}`, data));
+    },
 }
 
 export default LaboratoryApi;

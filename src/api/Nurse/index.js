@@ -21,6 +21,12 @@ const NurseApi = {
     searchNurses(pageNo, searchedText) {
         return trackPromise(axios.get(`${NURSE_NAMESPACE}/search/${searchedText}?page=${pageNo}`));
     },
+    removeProfilePicture(nurseId) {
+        return trackPromise(axios.delete(`/${NURSE_NAMESPACE}/deleteProfileImage/${nurseId}`));
+    },
+    uploadProfilePic(id, data) {
+        return trackPromise(axios.put(`/${NURSE_NAMESPACE}/uploadProfilePicture/${id}`, data));
+    },
 }
 
 export default NurseApi;
