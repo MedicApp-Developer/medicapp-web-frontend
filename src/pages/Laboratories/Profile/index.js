@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import PATIENT_IMAGE from '../../../assets/images/patient.png';
+import LAB_IMAGE from '../../../assets/images/laboratory.png';
 import { toast } from 'react-toastify';
 import { Form , Formik } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../../../components/forms/TextInput';
 import LaboratoryApi from '../../../api/Laboratory';
 import { RootContext } from '../../../contextApi';
+import ProfilePicture from '../../Hospital/Profile/components/ProfilePicture';
 
 function LaboratoryProfile() {
    const { user } = useContext(RootContext);
@@ -26,11 +27,17 @@ function LaboratoryProfile() {
                </div>
             </div>
             <div class="row patient-profile">
-               <div class="col-md-3 col-lg-3 col-xl-2">
-                  <div class="profile-image">
-                     <img src={PATIENT_IMAGE} alt="patient" />
-                     <a href={href}><span class="fa fa-pencil"></span></a>
-                  </div>
+               <div class="col-md-3 col-lg-3 col-xl-3">
+                  {/* <div class="profile-image"> */}
+                     <ProfilePicture 
+                        data={lab}
+                        updatePicture={LaboratoryApi.uploadProfilePic}
+                        removePicture={LaboratoryApi.removeProfilePicture}
+                        DEFAULTIMAGE={LAB_IMAGE}
+                     />
+                     {/* <img src={PATIENT_IMAGE} alt="patient" />
+                     <a href={href}><span class="fa fa-pencil"></span></a> */}
+                  {/* </div> */}
                </div>
                <div class="col-md-9 col-lg-9 col-xl-8">
                   <h4 class="mb-3">Laboratory Details</h4>

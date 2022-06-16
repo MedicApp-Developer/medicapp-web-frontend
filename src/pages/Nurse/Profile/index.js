@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import PATIENT_IMAGE from '../../../assets/images/patient.png'
+import NURSE_IMAGE from '../../../assets/images/nurse_placeholder.png'
 import { RootContext } from '../../../contextApi'
 import NurseApi from '../../../api/Nurse';
 import { Form , Formik } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../../../components/forms/TextInput';
+import ProfilePicture from '../../Hospital/Profile/components/ProfilePicture';
 
 function NurseProfile() {
 
@@ -15,6 +16,7 @@ function NurseProfile() {
    useEffect(() => {
       NurseApi.getSingleNurse(user?.referenceId).then(res => {
          setNurse(res.data.data);
+         console.log (res.data.data)
       });
    }, [user?.referenceId]); 
 
@@ -51,11 +53,13 @@ function NurseProfile() {
                </div>
             </div>
             <div class="row patient-profile">
-               <div class="col-md-3 col-lg-3 col-xl-2">
-                  <div class="profile-image">
-                     <img src={PATIENT_IMAGE} alt="patient" />
-                     <a href="#"><span class="fa fa-pencil"></span></a>
-                  </div>
+               <div class="col-md-3 col-lg-3 col-xl-3">
+                     <ProfilePicture
+                        data={nurse}
+                        updatePicture={NurseApi.uploadProfilePic}
+                        removePicture={NurseApi.removeProfilePicture}
+                        DEFAULTIMAGE={NURSE_IMAGE}
+                     />
                </div>
                <div class="col-md-9 col-lg-9 col-xl-8">
                   <h4 class="mb-3">Nurse Details</h4>

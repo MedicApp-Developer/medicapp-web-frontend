@@ -74,9 +74,9 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 								<img style={{width: '55px', height: '32px', opacity: 1, color: '#fff'}} class="avatar-lg mr-0" src={CAMERA_IMAGE} alt="camera"  />
 							</div>
 							{
-								(imageList[0]?.data_url || data.image) &&
+								(imageList[0]?.data_url || data?.image) &&
 								<img
-									src={imageList[0]?.data_url ? imageList[0]?.data_url  : data.image ??  DEFAULTIMAGE}
+									src={imageList[0]?.data_url ? imageList[0]?.data_url  : data?.image ??  DEFAULTIMAGE}
 									alt="doctor"
 									style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover',  }} //border: '1px solid #D3D3D3'
 									// onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
