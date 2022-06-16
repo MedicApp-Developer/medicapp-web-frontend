@@ -20,7 +20,6 @@ function MedicalProfile({ patient }) {
     const { user } = useContext(RootContext);
     const [selectedResult, setSelectedResult] = useState(null)
     const [selectedAAppointment, setSelectedAppointment] = useState({})
-
     return (
         <>
             <section class="user-dashboard patient-account">
@@ -35,7 +34,7 @@ function MedicalProfile({ patient }) {
                             <div class="card profile-detail py-3">
                                 <div class="card-body">
                                     <div class="media">
-                                        <img class="avatar-lg mr-0" src={PATIENT_IMAGE} alt="patient" />
+                                        <img class="patient-profile-large mr-0" src={patient?.patient?.image ? patient?.patient?.image : PATIENT_IMAGE} alt="patient" />
                                         <div class="media-body">
                                             <h5 class="mt-3 mb-2">{patient?.patient?.firstName + " " + patient?.patient?.lastName}</h5>
                                             <h6>{t("age")}: {getAge(patient?.patient?.birthday)}</h6>
@@ -52,19 +51,19 @@ function MedicalProfile({ patient }) {
                                             <span>{t("gender")}:</span> {patient?.patient?.gender}
                                         </li>
                                         <li>
-                                            <span>{t("blood_type")}:</span> {patient?.patient?.bloodType}
+                                            <span>{t("blood_type")}:</span> {patient?.patient?.bloodType ?? '-'}
                                         </li>
                                         <li>
-                                            <span>{t("allergies")}:</span> {patient?.patient?.allergies ?? "TODO"}
+                                            <span>{t("allergies")}:</span> {patient?.patient?.allergies?.length === 0 ? '-' : patient?.patient?.allergies?.map((allergy, index) => index === patient?.patient?.allergies?.length - 1 ? allergy : allergy + ', ')}
                                         </li>
                                         <li>
-                                            <span>{t("diseases")}:</span> {patient?.patient?.diseases ?? "TODO"}
+                                            <span>{t("diseases")}:</span> {patient?.patient?.diseases?.length === 0 ? '-' : patient?.patient?.diseases?.map((disease, index) => index === patient?.patient?.diseases?.length - 1 ? disease : disease + ', ')}
                                         </li>
                                         <li>
-                                            <span>{t("height")}:</span> {patient?.patient?.height + "m"}
+                                            <span>{t("height")}:</span> {patient?.patient?.height === null ? '-' : patient?.patient?.height + "m"}
                                         </li>
                                         <li>
-                                            <span>{t("weight")}:</span> {patient?.patient?.weight + "kg"}
+                                            <span>{t("weight")}:</span> {patient?.patient?.weight === null ? '-' : patient?.patient?.weight + "m"}
                                         </li>
                                         <li>
                                             <span>{t("patient_ID")}:</span> {patient?.patient?._id}
@@ -117,7 +116,7 @@ function MedicalProfile({ patient }) {
                                                         <ul>
                                                             <li>
                                                                 <small class="d-block">{t("date")} &amp; {t("time")}</small>
-                                                                {appointment?.time}
+                                                                {`${moment(appointment?.from).format("DD-MM-YY")} - ( ${moment(appointment?.from).format('hh:mm a')} - ${moment(appointment?.to).format('hh:mm a')} )`}
                                                             </li>
                                                             <li class="media">
                                                                 <img class="avatar-sm" src={DOCTOR_IMAGE} alt="doctor" />

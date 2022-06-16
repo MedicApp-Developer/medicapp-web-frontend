@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/empty_profile.png'
+import EMPTY_IMAGE_PLACEHOLDER from '../../../../assets/images/doctor_placeholder.png'
 import GenerateQrCode from './GenerateQrCode'
 import QrPrescriptionApi from '../../../../api/QrPrescription'
 import { saveAs } from 'file-saver'

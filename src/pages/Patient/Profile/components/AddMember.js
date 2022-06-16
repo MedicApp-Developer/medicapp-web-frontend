@@ -9,6 +9,7 @@ import { RootContext } from '../../../../contextApi'
 import { addFamilyMember } from '../../../../store/actions/patientActions'
 import { connect } from 'react-redux'
 import { useTranslation } from "react-i18next"
+import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
 function AddMember({ familyMembers, addFamilyMember }) {
     const { user } = useContext(RootContext)
@@ -61,12 +62,15 @@ function AddMember({ familyMembers, addFamilyMember }) {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <TextInput type="text" name="emiratesId" placeholder={t("emirates_id")} />
+                                            <NumberFormatInput format={"###-####-#######-#"}
+                                                mask={"-"}
+                                                type="text"
+                                                name="emiratesId" placeholder={t("emirates_id")} />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <SelectInput name="relation">
+                                            <SelectInput name="relation" style={{ height: "50px" }}>
                                                 <option value="">{t("select_relation")}</option>
                                                 {familiesList?.map(spec => (
                                                     <option value={spec}>{spec}</option>
@@ -78,7 +82,11 @@ function AddMember({ familyMembers, addFamilyMember }) {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <TextInput type="text" name="phoneNo" placeholder={t("phone_no")} />
+                                            <NumberFormatInput format={"+971-## ### ####"}
+                                                mask={"-"}
+                                                type="text"
+                                                name="phoneNo"
+                                                placeholder={t("phone_no")} />
                                         </div>
                                     </div>
                                 </div>

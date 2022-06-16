@@ -12,6 +12,8 @@ import TextInput from '../../../components/forms/TextInput'
 import PatientApi from '../../../api/Patients'
 import NumberFormatInput from '../../../components/forms/NumberFormat'
 import { useTranslation } from "react-i18next"
+import { usePromiseTracker } from "react-promise-tracker";
+import HashLoader from "react-spinners/HashLoader";
 
 function PatientRegisteration() {
     const { t } = useTranslation()
@@ -24,6 +26,9 @@ function PatientRegisteration() {
     const onFileUpload = (e) => {
         setFile(e.target.files[0])
     }
+
+    const { promiseInProgress } = usePromiseTracker();
+    // const promiseInProgress = true;
 
     return (
         <Formik
@@ -62,6 +67,7 @@ function PatientRegisteration() {
                     toast.success(t("patient_registered_successfully"))
                     history.push(LOGIN_ROUTE)
                 }).catch(err => {
+                    console.log('err: ', err.response)
                     toast.error(err.response.data.message)
                 })
             }}
@@ -96,13 +102,18 @@ function PatientRegisteration() {
                                     <TextInput type="email" name="email" placeholder={t("email")} />
                                 </div>
                                 <div class="form-group">
-                                    <TextInput type="text" name="emiratesId" placeholder={t("emirates_id")} />
+                                    <NumberFormatInput
+                                        format={"###-####-#######-#"}
+                                        mask={"-"}
+                                        name="emiratesId"
+                                        defaultValue={t("emirates_id")}
+                                        placeholder={t("emirates_id")} />
                                 </div>
                                 <div class="form-group">
                                     <TextInput type="date" name="birthday" placeholder={t("birthday")} />
                                 </div>
                                 <div class="form-group">
-                                    <SelectInput name="gender">
+                                    <SelectInput name="gender" style={{ height: "50px" }}>
                                         <option value="">{t("gender")}</option>
                                         <option value={MALE}>{t("male")}</option>
                                         <option value={FEMALE}>{t("female")}</option>
@@ -115,7 +126,7 @@ function PatientRegisteration() {
                                 <div class="form-group">
                                     <NumberFormatInput
                                         format={"+971-## ### ####"}
-                                        mask={"_"}
+                                        mask={"-"}
                                         name="phone" placeholder={t("phone")}
                                     />
                                 </div>
@@ -132,7 +143,13 @@ function PatientRegisteration() {
                                 <div class="form-group">
                                     <TextInput type="password" name="confirmPassword" placeholder={t("confirm_password")} />
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-2">{t("register")}</button>
+                                <button disabled={promiseInProgress} type="submit" class="btn btn-primary mt-2">
+                                    <>
+                                        {promiseInProgress &&
+                                            <HashLoader color="#fff" loading={true} size={15} />}
+                                        <span className={promiseInProgress ? 'ml-4' : 'ml-0'}>{t("register")}</span>
+                                    </>
+                                </button>
                             </Form>
                         </div>
                     </div>

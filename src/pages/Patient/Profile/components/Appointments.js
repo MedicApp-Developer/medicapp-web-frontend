@@ -1,5 +1,5 @@
 import React from 'react'
-import DOCTOR_IMAGE from '../../../../assets/images/doctor.png'
+import DOCTOR_IMAGE from '../../../../assets/images/doctor_placeholder.png'
 import moment from 'moment'
 import CancelAppointment from './CancelAppointment'
 import { useState } from 'react'
@@ -44,14 +44,14 @@ function Appointments({ appointments }) {
                                                 <ul>
                                                     <li>
                                                         <small class="d-block">{t("date")} & {t("time")}</small>
-                                                        {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
+                                                        {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('hh.mm a')} - ${moment(item.to).format('hh:mm a')} )`}
                                                     </li>
                                                     <li class="media">
                                                         {
                                                             item.doctorId ?
                                                                 (
                                                                     <>
-                                                                        <img class="rounded-circle" src={item?.doctorId?.image ?? DOCTOR_IMAGE} alt="doctor" />
+                                                                        <img class="rounded-circle" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
                                                                         <div class="media-body">
                                                                             <small class="d-block">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</small>
                                                                             <p>{item.doctorId?.specialityId?.name}</p>
@@ -76,18 +76,13 @@ function Appointments({ appointments }) {
                                                             item?.hospitalId?.name
                                                         )}
                                                     </li>
+                                                    <li>
+                                                        <small class="d-block" >{t("family")}</small>
+                                                        {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-12 col-lg-6 text-center text-md-right mt-3 mt-md-0">
-                                                <span class="contact-info mr-4" style={{ float: 'left' }}>
-                                                    <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
-                                                        <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
-                                                        <div>
-                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
-                                                        </div>
-                                                    </div>
-
-                                                </span>
                                                 <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
                                                 <a style={{ marginRight: '1rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
                                                 <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("CANCEL")}</a>
@@ -120,14 +115,14 @@ function Appointments({ appointments }) {
                                                 <ul>
                                                     <li>
                                                         <small class="d-block">{t("date")} & {t("time")}</small>
-                                                        {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('HH.mm')} - ${moment(item.to).format('HH.mm')} )`}
+                                                        {`${moment(item.from).format("DD-MM-YY")} - ( ${moment(item.from).format('hh:mm a')} - ${moment(item.to).format('hh:mm a')} )`}
                                                     </li>
                                                     <li class="media">
                                                         {
                                                             item.doctorId ?
                                                                 (
                                                                     <>
-                                                                        <img class="rounded-circle" src={item?.doctorId?.image ?? DOCTOR_IMAGE} alt="doctor" />
+                                                                        <img class="rounded-circle" src={item?.doctorId?.image ? item?.doctorId?.image : DOCTOR_IMAGE} alt="doctor" />
                                                                         <div class="media-body">
                                                                             <small class="d-block">Dr. {item.doctorId.firstName + " " + item.doctorId.lastName}</small>
                                                                             <p>{item.doctorId?.specialityId?.name}</p>
@@ -152,20 +147,15 @@ function Appointments({ appointments }) {
                                                             item?.hospitalId?.name
                                                         )}
                                                     </li>
+                                                    <li>
+                                                        <small class="d-block" >{t("family")}</small>
+                                                        {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-12 col-lg-6 text-center text-md-right mt-3 mt-md-0">
-                                                <span class="contact-info mr-4" style={{ float: 'left' }}>
-                                                    <div style={{ display: 'flex', flexDirection: "column", alignItems: 'baseline' }}>
-                                                        <small class="d-block" style={{ float: 'left' }}>{t("family")}</small>
-                                                        <div>
-                                                            {item?.familyMemberId ? `${item?.familyMemberId?.firstName} ${item?.familyMemberId.lastName}` : t("mine")}
-                                                        </div>
-                                                    </div>
-
-                                                </span>
-                                                <a style={{ marginRight: '1rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
-                                                <a style={{ marginRight: '1rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
+                                                <a style={{ marginRight: '0.5rem' }} href={href} onClick={(e) => { e.preventDefault(); generateAppointmentSlip(item._id) }} class="btn btn-secondary px-3">{t("slip")}</a>
+                                                <a style={{ marginRight: '0.5rem' }} href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#verifyCode" class="btn btn-primary px-3">{t("GET_POINTS")}</a>
                                                 <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(item) }} data-toggle="modal" data-target="#cancel" class="btn btn-secondary px-3">{t("DELETE")}</a>
                                             </div>
                                         </div>

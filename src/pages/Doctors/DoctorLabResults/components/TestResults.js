@@ -36,7 +36,7 @@ function TestResults({ setSelectedLabResult, getCompletedLabRequests, deleteComp
                                     </li>
                                     <li>
                                        <small class="d-block">Report</small>
-                                       {item.tests.map(test => test.test + ", ")}
+                                       {item.tests.map((test, index) => index === item.tests.length - 1 ? test.test : test.test + ", ")}
                                     </li>
                                     <li class="media">
                                        <img class="avatar-sm mr-3" src={item?.patientId?.image ? item?.patientId?.image : PATIENT_IMAGE} alt="patient" />

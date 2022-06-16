@@ -1443,6 +1443,15 @@ header .dropdown-menu {
 	-o-object-fit: cover;
 }
 
+.banner-picture {
+	width: 250px;
+	height: 200px;
+	padding-right: 30px;
+	object-fit: cover;
+	border: 1px solid #D3D3D3;
+	border-radius: 10px;
+}
+
 /* Footer */
 
 footer {

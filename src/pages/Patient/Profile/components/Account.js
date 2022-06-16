@@ -43,7 +43,8 @@ function Account({ deactivePatient }) {
             gender: patient?.gender,
             location: patient?.location,
             phone: patient?.phone,
-            password: null
+            password: '',
+            confirmPassword: '',
          }}
          validationSchema={Yup.object({
             firstName: Yup.string().required(t('Required')),
@@ -53,7 +54,14 @@ function Account({ deactivePatient }) {
             gender: Yup.string().required(t('Required')),
             location: Yup.string().required(t('Required')),
             phone: Yup.string().required(t('Required')),
-            password: Yup.string().nullable(),
+            password: Yup.string().required(t('Required')),
+            confirmPassword: Yup.string().required(t('Required')).when("password", {
+               is: val => (val && val.length > 0 ? true : false),
+               then: Yup.string().oneOf(
+                  [Yup.ref("password")],
+                  t('both_password_need_to_be_the_same')
+               )
+            })
          })}
          onSubmit={async (values, { setSubmitting, resetForm }) => {
             const response = await PatientApi.updatePatient(user._id, values)
@@ -102,7 +110,7 @@ function Account({ deactivePatient }) {
                            </div>
                            <div class="col-sm-6">
                               <div class="form-group">
-                                 <SelectInput name="gender">
+                                 <SelectInput name="gender" style={{ height: "50px" }}>
                                     <option value="">{t('gender')}</option>
                                     <option value="male">{t('male')}</option>
                                     <option value="female">{t('female')}</option>
@@ -143,6 +151,11 @@ function Account({ deactivePatient }) {
                            <div class="col-sm-6">
                               <div class="form-group">
                                  <TextInput type="password" name="password" placeholder={t("change_password")} />
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 <TextInput type="password" name="confirmPassword" placeholder={t("confirm_password")} />
                               </div>
                            </div>
                         </div>

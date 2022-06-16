@@ -3,7 +3,7 @@ import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import PATIENT_IMAGE from '../../../assets/images/patient.png';
 import { toast } from 'react-toastify';
-import { Form , Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../../../components/forms/TextInput';
 import LaboratoryApi from '../../../api/Laboratory';
@@ -13,55 +13,63 @@ function LaboratoryProfile() {
    const { user } = useContext(RootContext);
    const [lab, setLab] = useState({});
 
-    useEffect(() => {
-        LaboratoryApi.getSingleLab(user.referenceId).then(res => {
-            setLab(res.data.data);
-        });
-    }, [user.referenceId]);
-    return (
-        <DashboardLayout>
-            <div class="row align-items-center add-list mb-5">
-               <div class="col-12">
-                  <h4>Account</h4>
+   useEffect(() => {
+      LaboratoryApi.getSingleLab(user.referenceId).then(res => {
+         setLab(res.data.data);
+      });
+   }, [user.referenceId]);
+   return (
+      <DashboardLayout>
+         <div class="row align-items-center add-list mb-5">
+            <div class="col-12">
+               <h4>Account</h4>
+            </div>
+         </div>
+         <div class="row patient-profile">
+            <div class="col-md-3 col-lg-3 col-xl-2">
+               <div class="profile-image">
+                  <img src={PATIENT_IMAGE} alt="patient" />
+                  <a href={href}><span class="fa fa-pencil"></span></a>
                </div>
             </div>
-            <div class="row patient-profile">
-               <div class="col-md-3 col-lg-3 col-xl-2">
-                  <div class="profile-image">
-                     <img src={PATIENT_IMAGE} alt="patient" />
-                     <a href={href}><span class="fa fa-pencil"></span></a>
-                  </div>
-               </div>
-               <div class="col-md-9 col-lg-9 col-xl-8">
-                  <h4 class="mb-3">Laboratory Details</h4>
-                     {Object.keys(lab).length > 0 && (
-                        <Formik
-                           initialValues={{
-                              firstName: lab.firstName,
-                              lastName: lab.lastName,
-                              email: lab.email,
-                              mobile: lab.mobile,
-                              password: ""
-                           }}
-                           validationSchema={Yup.object({
-                              firstName: Yup.string().required('Required'),
-                              lastName: Yup.string().required('Required'),
-                              email: Yup.string().required('Required').email(),
-                              mobile: Yup.string().required('Required'),
-                              password: Yup.string().required('Required')
-                           })}
-                           onSubmit={(values, { setSubmitting, resetForm }) => {
-                              LaboratoryApi.updateLab(lab._id, values).then(res => {
-                                 toast.success("Laboratory updated successfully");
-                                 localStorage.clear();
-                                 setTimeout(() => {
-                                    window.location.reload();
-                                 }, 2000);
-                              }).catch(err => {
-                                 toast.error("Problem updating laboratory profile");
-                              })
-                           }}
-                     >
+            <div class="col-md-9 col-lg-9 col-xl-8">
+               <h4 class="mb-3">Laboratory Details</h4>
+               {Object.keys(lab).length > 0 && (
+                  <Formik
+                     initialValues={{
+                        firstName: lab.firstName,
+                        lastName: lab.lastName,
+                        email: lab.email,
+                        mobile: lab.mobile,
+                        password: "",
+                        confirmPassword: ""
+                     }}
+                     validationSchema={Yup.object({
+                        firstName: Yup.string().required('Required'),
+                        lastName: Yup.string().required('Required'),
+                        email: Yup.string().required('Required').email(),
+                        mobile: Yup.string().required('Required'),
+                        password: Yup.string().required('Required'),
+                        confirmPassword: Yup.string().required("Required").when("password", {
+                           is: val => (val && val.length > 0 ? true : false),
+                           then: Yup.string().oneOf(
+                              [Yup.ref("password")],
+                              "Both password need to be the same"
+                           )
+                        })
+                     })}
+                     onSubmit={(values, { setSubmitting, resetForm }) => {
+                        LaboratoryApi.updateLab(lab._id, values).then(res => {
+                           toast.success("Laboratory updated successfully");
+                           localStorage.clear();
+                           setTimeout(() => {
+                              window.location.reload();
+                           }, 2000);
+                        }).catch(err => {
+                           toast.error("Problem updating laboratory profile");
+                        })
+                     }}
+                  >
                      <Form>
                         <div class="row">
                            <div class="col-sm-6">
@@ -75,7 +83,7 @@ function LaboratoryProfile() {
                               </div>
                            </div>
                         </div>
-                        
+
                         <h4 class="my-3">Contact Details</h4>
                         <div class="row">
                            <div class="col-sm-6">
@@ -93,17 +101,22 @@ function LaboratoryProfile() {
                                  <TextInput type="password" name="password" placeholder="Change Password" />
                               </div>
                            </div>
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 <TextInput type="password" name="confirmPassword" placeholder="Confirm Password" />
+                              </div>
+                           </div>
                         </div>
                         <div class="form-group text-center">
                            <button type="submit" class="btn btn-primary mt-2">Update</button>
                         </div>
                      </Form>
                   </Formik>
-                     )}
-               </div>
+               )}
             </div>
-        </DashboardLayout>
-    )
+         </div>
+      </DashboardLayout>
+   )
 }
 
 export default LaboratoryProfile

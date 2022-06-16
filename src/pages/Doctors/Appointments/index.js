@@ -52,7 +52,7 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                               <ul>
                                  <li>
                                     <small class="d-block">Time</small>
-                                    {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('HH.mm')} - ${moment(appointment.to).format('HH.mm')} )`}
+                                    {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('hh:mm a')} - ${moment(appointment.to).format('hh:mm a')} )`}
                                  </li>
                                  <li class="media">
                                     {appointment.patientId === null ? "NOT BOOKED" : (

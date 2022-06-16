@@ -21,9 +21,18 @@ function HospitalAccount({ hospitalId, hospital }) {
          address: hospital?.hospital?.address,
          phoneNo: hospital?.hospital?.phoneNo,
          email: hospital?.hospital?.email,
-         password: ""
+         password: "",
+         confirmPassword: ""
       },
-      validationSchema: Yup.object({}),
+      validationSchema: Yup.object({
+         confirmPassword: Yup.string().required("Required").when("password", {
+            is: val => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+               [Yup.ref("password")],
+               "Both password need to be the same"
+            )
+         })
+      }),
       onSubmit: async values => {
          const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
          if (!response.error) {
@@ -103,6 +112,14 @@ function HospitalAccount({ hospitalId, hospital }) {
                            <input type="password" {...formik.getFieldProps('password')} autocomplete="false" class={(formik.touched.password && formik.errors.password) ? "form-control is-invalid" : "form-control"} placeholder="Password" />
                            {formik.touched.password && formik.errors.password ? (
                               <div class="invalid-feedback text-right-aligned">{formik.errors.password}</div>
+                           ) : null}
+                        </div>
+                     </div>
+                     <div className="col-sm-6">
+                        <div className="form-group">
+                           <input type="password" {...formik.getFieldProps('confirmPassword')} autocomplete="false" class={(formik.touched.confirmPassword && formik.errors.confirmPassword) ? "form-control is-invalid" : "form-control"} placeholder="Confirm Password" />
+                           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                              <div class="invalid-feedback text-right-aligned">{formik.errors.confirmPassword}</div>
                            ) : null}
                         </div>
                      </div>

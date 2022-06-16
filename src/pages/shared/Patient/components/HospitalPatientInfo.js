@@ -53,7 +53,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                     <div class="card profile-detail py-3">
                         <div class="card-body">
                             <div class="media">
-                                <img class="avatar-lg mr-0" src={selectedPatient?.image ? selectedPatient?.image : PATIENT_IMAGE} alt="patient" />
+                                <img style={{ cursor: "pointer" }} className="patient-profile-large" src={selectedPatient?.image ? selectedPatient?.image : PATIENT_IMAGE} alt="patient" />
                                 <div class="media-body">
                                     <h5 class="mt-3 mb-2">{selectedPatient.firstName}</h5>
                                     {/* TODO show age after calculating from birthday */}
@@ -152,7 +152,7 @@ function HospitalPatientInfo({ selectPatient, patients }) {
                                         {results?.map(item => (
                                             <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
                                                 <div class="media">
-                                                    <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                    <span> <img style={{ width: "20px", height: "20px", borderRadius: "0px" }} src={LAB_IMAGE} alt="lab" /></span>
                                                     <div class="media-body">
                                                         <h5>{item.test}</h5>
                                                         <p>{item.result}</p>

@@ -95,35 +95,35 @@ function DoctorInfo({ selectedDoctor, selectDoctor }) {
                               <div class="table-responsive">
                                  <table class="table mb-md-0">
                                     <tbody>
-                                       <tr>
-                                          {appointments.filter(app => app.patientId !== null)?.map(appointment => {
-                                             console.log("SHoo app => ", appointment)
-                                             return (
-                                                <>
-                                                   <td>
-                                                      <span>Time</span>
-                                                      <p>
-                                                         <strong>
-                                                            {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('HH.mm')} - ${moment(appointment.to).format('HH.mm')} )`}
-                                                         </strong>
-                                                      </p>
-                                                   </td>
-                                                   <td>
-                                                      <div class="media">
-                                                         <img src={appointment?.patientId?.image ? appointment?.patientId?.image : PATIENT_IMAGE} alt="patient" />
-                                                         <div class="media-body">
-                                                            <h5 class="mt-0">{appointment?.patientId?.firstName + " " + appointment?.patientId?.lastName}</h5>
-                                                            <p>Patient</p>
-                                                         </div>
+
+                                       {appointments.filter(app => app.patientId !== null)?.map(appointment => {
+                                          console.log("SHoo app => ", appointment)
+                                          return (
+                                             <tr>
+                                                <td>
+                                                   <span>Time</span>
+                                                   <p>
+                                                      <strong>
+                                                         {`${moment(appointment.from).format("DD-MM-YY")} - ( ${moment(appointment.from).format('hh:mm a')} - ${moment(appointment.to).format('hh:mm a')} )`}
+                                                      </strong>
+                                                   </p>
+                                                </td>
+                                                <td>
+                                                   <div class="media">
+                                                      <img src={appointment?.patientId?.image ? appointment?.patientId?.image : PATIENT_IMAGE} alt="patient" />
+                                                      <div class="media-body">
+                                                         <h5 class="mt-0">{appointment?.patientId?.firstName + " " + appointment?.patientId?.lastName}</h5>
+                                                         <p>Patient</p>
                                                       </div>
-                                                   </td>
-                                                </>
-                                             )
-                                          })}
-                                          {appointments?.length === 0 && (
-                                             <p>No appointment found</p>
-                                          )}
-                                       </tr>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          )
+                                       })}
+                                       {appointments?.length === 0 && (
+                                          <p>No appointment found</p>
+                                       )}
+
                                     </tbody>
                                  </table>
                               </div>

@@ -18,7 +18,7 @@ function RequestToLab({ appointment }) {
       const allTests = JSON.parse(JSON.stringify(tests));
 
       allTests.forEach((item, i) => {
-         if(i === index){
+         if (i === index) {
             item.test = e.target.value
          }
       });
@@ -28,7 +28,7 @@ function RequestToLab({ appointment }) {
    const onSend = (e) => {
       e.preventDefault();
 
-      if(tests.length === 1 && tests[0].test === ""){
+      if (tests.length === 1 && tests[0].test === "") {
          toast.error("No tests entered");
          return false;
       }
@@ -55,20 +55,20 @@ function RequestToLab({ appointment }) {
       setTests(allTests);
    }
 
-    return (
-        <div class="modal fade" id="requestLaboratory" tabindex="-1" aria-labelledby="requestLaboratoryLabel" aria-hidden="true">
+   return (
+      <div class="modal fade" id="requestLaboratory" tabindex="-1" aria-labelledby="requestLaboratoryLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                <div class="modal-body">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span class="icon-close"></span>
+                     <span class="icon-close"></span>
                   </button>
                   <h4 class="text-center">Request for Laboratory</h4>
                   <form>
                      <div class="row align-items-end mb-4">
                         <div className="col-md-10">
                            <div className="form-group">
-                              <select className="form-control" placeholder="Choose Laboratory" onChange={(e) => setSelectedLab(e.target.value)}>
+                              <select className="form-control" placeholder="Choose Laboratory" style={{ height: "50px" }} onChange={(e) => setSelectedLab(e.target.value)}>
                                  <option value="">Choose Laboratory</option>
                                  {labs?.map(item => (
                                     <option value={item._id}>{item.firstName + " " + item.lastName}</option>
@@ -95,7 +95,7 @@ function RequestToLab({ appointment }) {
             </div>
          </div>
       </div>
-    )
+   )
 }
 
 export default RequestToLab
