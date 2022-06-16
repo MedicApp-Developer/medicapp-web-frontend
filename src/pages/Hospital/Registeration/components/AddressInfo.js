@@ -6,7 +6,7 @@ import {
     useLoadScript,
     Marker
   } from '@react-google-maps/api'
-import SearchMap from './SearchMap';
+import SearchMap from './SearchMap'; 
 import LocateMap from './LocateMap';
 import HOSPITAL_LOCATION_IMAGE from '../../../../assets/images/hospital-location.png'
 import { toast } from 'react-toastify';

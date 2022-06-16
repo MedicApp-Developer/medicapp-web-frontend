@@ -1414,13 +1414,10 @@ header .dropdown-menu {
 }
 
 .search-filter-section .media img {
-	border: 1px solid #D3D3D3 !important;
-	margin: 15px 10px 15px 15px;
-	width: 125px;
-	height: 125px;
-	object-fit: cover;
-	-o-object-fit: cover;
-	border-radius: 10px;
+	border: 1px solid #000;
+	padding: 15px 10px 15px 15px;
+	width: 100px;
+	border-radius: 5px;
 }
 
 
@@ -2014,4 +2011,8 @@ footer .media i {
 .feed-section .card p {
 	margin-bottom: 20px;
 	font-size: 14px;
+}
+
+.imageBox:hover {
+	cursor: pointer;
 }

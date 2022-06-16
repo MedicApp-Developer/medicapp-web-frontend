@@ -1,11 +1,11 @@
 import React from 'react'
 import { href } from '../../../../constants/extra'
-import PATIENT_IMAGE from '../../../../assets/images/patient.png';
+import VENDOR_IMAGE from '../../../../assets/images/patient.png';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import VendorApi from '../../../../api/Vendor';
 import { toast } from 'react-toastify';
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
 function VendorAccount({ vendorId, vendor }) {
 
@@ -37,7 +37,19 @@ function VendorAccount({ vendorId, vendor }) {
 	return (
 		<>
 			<div className="row patient-profile">
-				<ProfilePicture vendor={vendor} />
+				{/* <ProfilePicture vendor={vendor} /> */}
+				<div className="col-md-3 col-lg-3 col-xl-3">
+					{
+						vendor &&
+						<ProfilePicture
+								data={vendor}
+								updatePicture={VendorApi.uploadProfilePic}
+								removePicture={VendorApi.removeProfilePicture}
+								DEFAULTIMAGE={VENDOR_IMAGE}
+							/>
+
+					}
+				</div>
 				<div className="col-md-9 col-lg-9 col-xl-8">
 					<h4 className="mb-3">Vendor Details</h4>
 					<form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">

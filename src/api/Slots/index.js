@@ -6,9 +6,6 @@ const SlotApi = {
     createSlot(data) {
         return trackPromise(axios.post(`${SLOT_NAMESPACE}`, data))
     },
-    deleteSlot(id) {
-        return trackPromise(axios.delete(`${SLOT_NAMESPACE}/delete/${id}`))
-    },
     getAllDoctorsSlots(doctorId) {
         return trackPromise(axios.post(`${SLOT_NAMESPACE}/all/doctor/${doctorId}`))
     },

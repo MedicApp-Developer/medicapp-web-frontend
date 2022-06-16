@@ -7,6 +7,7 @@ import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
 import { toast } from 'react-toastify';
 import DOCTOR_SHIFTING_IN_FRONT from '../../../../assets/images/doctor_placeholder.png';
+import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
 function DoctorAccount({ doctor }) {
    return (
@@ -55,7 +56,7 @@ function DoctorAccount({ doctor }) {
                      </div>
                   </div>
                   <div class="row patient-profile">
-                     <div class="col-md-3 col-lg-3 col-xl-2">
+                     <div class="col-md-4 col-lg-4 col-xl-3">
                         <div class="profile-image">
                            <img src={doctor?.image ? doctor?.image : DOCTOR_SHIFTING_IN_FRONT} alt="doctor" />
                         </div>
