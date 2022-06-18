@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { href } from '../../../../constants/extra'
 import DashboardLayout from '../../../../layout/DashboardLayout'
-import PATIENT_IMAGE from '../../../../assets/images/patient.png';
+import PATIENT_IMAGE from '../../../../assets/images/doctor_placeholder.png';
 import HEART_IMAGE from '../../../../assets/images/heart.png'
 import TEMP_IMAGE from '../../../../assets/images/temp.png'
 import GLOCOSE_IMAGE from '../../../../assets/images/glucose.png'
@@ -56,7 +56,7 @@ function NursePatientInfo({ selectPatient, selectedPatient }) {
                     <div class="card profile-detail py-3">
                         <div class="card-body">
                             <div class="media">
-                                <img class="avatar-lg mr-0" src={PATIENT_IMAGE} alt="patient" />
+                                <img style={{ cursor: "pointer" }} className="patient-profile-large" src={selectedPatient?.image ? selectedPatient?.image : PATIENT_IMAGE} alt="patient" />
                                 <div class="media-body">
                                     <h5 class="mt-3 mb-2">{selectedPatient.firstName + " " + selectedPatient.lastName}</h5>
                                     <h6>birthday: {selectedPatient.birthday}</h6>
@@ -72,19 +72,19 @@ function NursePatientInfo({ selectPatient, selectedPatient }) {
                                     <span>Gender:</span> {selectedPatient.gender}
                                 </li>
                                 <li>
-                                    <span>Blood Type:</span> {selectedPatient.bloodType}
+                                    <span>Blood Type:</span> {selectedPatient?.bloodType ?? '-'}
                                 </li>
                                 <li>
-                                    <span>Allergies:</span> {selectedPatient.allergies?.join(",")}
+                                    <span>Allergies:</span> {selectedPatient?.allergies?.length === 0 ? '-' : selectedPatient?.allergies?.map((allergy, index) => index === selectedPatient?.allergies?.length - 1 ? allergy : allergy + ', ')}
                                 </li>
                                 <li>
-                                    <span>Diseases:</span> {selectedPatient?.diseases || "-"}
+                                    <span>Diseases:</span> {selectedPatient?.diseases?.length === 0 ? '-' : selectedPatient?.diseases?.map((disease, index) => index === selectedPatient?.diseases?.length - 1 ? disease : disease + ', ')}
                                 </li>
                                 <li>
-                                    <span>Height:</span> {selectedPatient.height}m
+                                    <span>Height:</span> {selectedPatient?.height === null ? '-' : selectedPatient?.height + "m"}
                                 </li>
                                 <li>
-                                    <span>Weight:</span> {selectedPatient.weight}kg
+                                    <span>Weight:</span> {selectedPatient?.weight === null ? '-' : selectedPatient?.weight + "kg"}
                                 </li>
                                 <li>
                                     <span>Patient ID:</span> {selectedPatient._id}
@@ -132,10 +132,10 @@ function NursePatientInfo({ selectPatient, selectedPatient }) {
                                         {selectedPatient?.doctors?.map((doc) => (
                                             <div class="col-sm-4">
                                                 <div class="media">
-                                                    <img class="avatar-sm ml-3" src={DOCTOR_IMAGE} alt="doctor" />
+                                                    <img class="avatar-sm ml-3" src={doc?.image ? doc?.image : DOCTOR_IMAGE} alt="doctor" />
                                                     <div class="media-body">
                                                         <h5 class="mb-0">{doc.firstName + " " + doc.lastName}</h5>
-                                                        <p>Dentist</p>
+                                                        {/* <p>{doc.specialityId}</p> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@ function NursePatientInfo({ selectPatient, selectedPatient }) {
                                         {results?.map(item => (
                                             <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
                                                 <div class="media">
-                                                    <span> <img src={LAB_IMAGE} alt="lab" /></span>
+                                                    <span> <img style={{ width: "20px", height: "20px", borderRadius: "0px" }} src={LAB_IMAGE} alt="lab" /></span>
                                                     <div class="media-body">
                                                         <h5>{item.test}</h5>
                                                         <p>{item.result}</p>

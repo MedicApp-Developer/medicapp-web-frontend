@@ -1,6 +1,6 @@
 import axios from '../../axios';
 import { LABORATORY_NAMESPACE, LAB_REQUEST_NAMESPACE } from '../../constants/namespaces';
-import { trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 
 const LaboratoryApi = {
     getAllLaboratories(pageNo, getAll, hospitalId) {
@@ -9,7 +9,7 @@ const LaboratoryApi = {
     createLaboratory(data) {
         return trackPromise(axios.post(`${LABORATORY_NAMESPACE}`, data));
     },
-    deleteLab(id){
+    deleteLab(id) {
         return trackPromise(axios.delete(`${LABORATORY_NAMESPACE}/${id}`));
     },
     searchLabs(pageNo, searchedText) {
@@ -18,8 +18,8 @@ const LaboratoryApi = {
     createLabRequest(data) {
         return trackPromise(axios.post(`${LAB_REQUEST_NAMESPACE}`, data));
     },
-    updateLabRequest(id, values) {
-        return trackPromise(axios.put(`${LAB_REQUEST_NAMESPACE}/${id}`, values));
+    updateLabRequest(data) {
+        return trackPromise(axios.post(`${LAB_REQUEST_NAMESPACE}/updateRequest`, data));
     },
     updateLab(id, values) {
         return trackPromise(axios.put(`${LABORATORY_NAMESPACE}/${id}`, values));

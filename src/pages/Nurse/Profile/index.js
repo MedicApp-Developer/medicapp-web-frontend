@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import NURSE_IMAGE from '../../../assets/images/nurse_placeholder.png'
+import NURSE_IMAGE from '../../../assets/images/doctor_placeholder.png'
 import { RootContext } from '../../../contextApi'
 import NurseApi from '../../../api/Nurse';
 import { Form, Formik } from 'formik';

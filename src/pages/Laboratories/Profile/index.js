@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import LAB_IMAGE from '../../../assets/images/laboratory.png';
+import LAB_IMAGE from '../../../assets/images/doctor_placeholder.png';
 import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';

@@ -1,6 +1,6 @@
 import React from 'react'
 import { href } from '../../../../constants/extra'
-import VENDOR_IMAGE from '../../../../assets/images/patient.png';
+import VENDOR_IMAGE from '../../../../assets/images/doctor_placeholder.png';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import VendorApi from '../../../../api/Vendor';
@@ -18,7 +18,16 @@ function VendorAccount({ vendorId, vendor }) {
 			about: vendor?.about,
 			password: ""
 		},
-		validationSchema: Yup.object({}),
+		validationSchema: Yup.object({
+			password: Yup.string().required('Required'),
+			confirmPassword: Yup.string().required("Required").when("password", {
+				is: val => (val && val.length > 0 ? true : false),
+				then: Yup.string().oneOf(
+					[Yup.ref("password")],
+					"Both password need to be the same"
+				)
+			})
+		}),
 		onSubmit: async values => {
 			const response = await VendorApi.updateVendor(vendorId, values);
 			if (!response.error) {
@@ -42,11 +51,11 @@ function VendorAccount({ vendorId, vendor }) {
 					{
 						vendor &&
 						<ProfilePicture
-								data={vendor}
-								updatePicture={VendorApi.uploadProfilePic}
-								removePicture={VendorApi.removeProfilePicture}
-								DEFAULTIMAGE={VENDOR_IMAGE}
-							/>
+							data={vendor}
+							updatePicture={VendorApi.uploadProfilePic}
+							removePicture={VendorApi.removeProfilePicture}
+							DEFAULTIMAGE={VENDOR_IMAGE}
+						/>
 
 					}
 				</div>
@@ -96,6 +105,14 @@ function VendorAccount({ vendorId, vendor }) {
 									<input type="password" {...formik.getFieldProps('password')} class={(formik.touched.password && formik.errors.password) ? "form-control is-invalid" : "form-control"} placeholder="Password" />
 									{formik.touched.password && formik.errors.password ? (
 										<div class="invalid-feedback text-right-aligned">{formik.errors.password}</div>
+									) : null}
+								</div>
+							</div>
+							<div className="col-sm-6">
+								<div className="form-group">
+									<input type="password" {...formik.getFieldProps('confirmPassword')} class={(formik.touched.confirmPassword && formik.errors.confirmPassword) ? "form-control is-invalid" : "form-control"} placeholder="Confirm Password" />
+									{formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+										<div class="invalid-feedback text-right-aligned">{formik.errors.confirmPassword}</div>
 									) : null}
 								</div>
 							</div>

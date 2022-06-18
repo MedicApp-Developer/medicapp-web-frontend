@@ -62,7 +62,7 @@ function HospitalAccount({ hospitalId, hospital }) {
                   DEFAULTIMAGE={HOSPITAL_IMAGE}
                />
             </div>
-            <div className="col-md-6 col-lg-8 col-xl-6">
+            <div className="col-md-6 col-lg-8 col-xl-7">
                <h4 className="mb-3">Hospital Details</h4>
                <form onSubmit={formik.handleSubmit} encType="multipart/form-data" autocomplete="off">
                   <div className="row">

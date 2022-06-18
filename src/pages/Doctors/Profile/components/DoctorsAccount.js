@@ -18,14 +18,22 @@ function DoctorAccount({ doctor }) {
                   lastName: doctor.lastName,
                   email: doctor.email,
                   mobile: doctor.mobile,
-                  password: ""
+                  password: "",
+                  confirmPassword: ""
                }}
                validationSchema={Yup.object({
                   firstName: Yup.string().required('Required'),
                   lastName: Yup.string().required('Required'),
                   email: Yup.string().required('Required').email(),
                   mobile: Yup.string().required('Required'),
-                  password: Yup.string().required('Required')
+                  password: Yup.string().required('Required'),
+                  confirmPassword: Yup.string().required("Required").when("password", {
+                     is: val => (val && val.length > 0 ? true : false),
+                     then: Yup.string().oneOf(
+                        [Yup.ref("password")],
+                        "Both password need to be the same"
+                     )
+                  })
                })}
                onSubmit={(values, { setSubmitting, resetForm }) => {
                   DoctorApi.updateDoctor(doctor._id, values).then(res => {
@@ -85,6 +93,11 @@ function DoctorAccount({ doctor }) {
                               <div class="col-sm-6">
                                  <div class="form-group">
                                     <TextInput type="password" name="password" placeholder="Change Password" />
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <TextInput type="password" name="confirmPassword" placeholder="Confirm Password" />
                                  </div>
                               </div>
                            </div>

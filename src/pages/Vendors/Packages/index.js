@@ -45,7 +45,7 @@ function Packages({ getPackages, packages, deletePackage }) {
 					{allPackages?.map((pack, key) => (
 						<div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
 							<div className="card">
-								<img src={pack.images[0]} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px" }} alt="pacjage_image" />
+								<img src={pack.images[0]} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px", objectFit: "cover", padding: "0px" }} alt="pacjage_image" />
 								<div className="card-body" style={{ padding: "40px 20px 20px" }}>
 									<div className="media">
 										<div className="media-body">

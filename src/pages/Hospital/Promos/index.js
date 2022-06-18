@@ -8,7 +8,7 @@ import { href } from '../../../constants/extra';
 import AddPromo from './components/AddPromo';
 import ShowVideo from './components/ShowVideo';
 import ReactPlayer from 'react-player';
-import LIKE_IMAGE from '../../../assets/images/like.png';
+import LIKE_IMAGE from '../../../assets/images/love.png';
 
 function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
 
@@ -51,7 +51,7 @@ function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
                                  <li>
                                     <h6>Name</h6>
                                     <p>{promo.name}</p>
-                                    <p style={{ fontSize: "1rem" }}>{promo?.likes} <span> <img style={{ paddingTop: '7px', paddingLeft: '2px' }} src={LIKE_IMAGE}></img> </span></p>
+                                    <p style={{ fontSize: "1rem" }}>{promo?.likes} <span> <img style={{ paddingTop: '7px', paddingLeft: '2px', width: "25px", height: "auto" }} src={LIKE_IMAGE}></img> </span></p>
                                  </li>
                               </ul>
                            </div>

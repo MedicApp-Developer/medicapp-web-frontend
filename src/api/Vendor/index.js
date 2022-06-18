@@ -40,11 +40,14 @@ const VendorApi = {
 		return trackPromise(axios.delete(`/${PACKAGE_TYPE_NAMESPACE}/${id}`));
 	},
 	removeProfilePicture(vendorId) {
-        return trackPromise(axios.delete(`/${VENDOR_NAMESPACE}/deleteProfileImage/${vendorId}`));
-    },
-    uploadProfilePic(id, data) {
-        return trackPromise(axios.put(`/${VENDOR_NAMESPACE}/uploadProfilePicture/${id}`, data));
-    },
+		return trackPromise(axios.delete(`/${VENDOR_NAMESPACE}/deleteProfileImage/${vendorId}`));
+	},
+	deleteGalleryImage(vendorId, url) {
+		return trackPromise(axios.delete(`${VENDOR_NAMESPACE}/deleteGalleryImage/${vendorId}/${url}`));
+	},
+	uploadProfilePic(id, data) {
+		return trackPromise(axios.put(`/${VENDOR_NAMESPACE}/uploadProfilePicture/${id}`, data));
+	},
 }
 
 export default VendorApi;

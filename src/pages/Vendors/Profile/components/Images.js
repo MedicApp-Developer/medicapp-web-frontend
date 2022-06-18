@@ -31,12 +31,29 @@ function Images({ vendor }) {
 		}
 	}
 
+	const deleteImage = (url) => {
+		const imagePublicId = url.split('\\').pop().split('/').pop().split('.')[0];
+		VendorApi.deleteGalleryImage(_id, imagePublicId).then(res => {
+			console.log(res);
+			toast.success("Hospital gallery image deleted");
+			setTimeout(() => {
+				window.location.reload();
+			}, 500);
+			//setHosp({ ...hospital, hospital: res.data.data })
+		}).catch(err => {
+			toast.error("Failed to delete image");
+			console.log(err);
+		});
+	}
+
+
 	return (
 		<>
 			<div className="row mt-2">
 				{images?.length > 0 && images?.map(img => (
-					<div className="col-md-3">
-						<img className="img-fluid" src={img} alt="hospital" />
+					<div className="col-xm-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 justify-content-center">
+						<img className="banner-picture" style={{ marginBottom: "20px" }} src={img} alt="hospital" />
+						<button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
 					</div>
 				))}
 				<div className="col-md-3">
@@ -45,8 +62,8 @@ function Images({ vendor }) {
 						imageSrc={imageSrc}
 						setImageSrc={setImageSrc}
 						style={{
-							width: '100%',
-							height: '10rem',
+							width: "250px",
+							height: "200px",
 							background: '#417EBF',
 							textAlign: 'center',
 							display: 'flex',

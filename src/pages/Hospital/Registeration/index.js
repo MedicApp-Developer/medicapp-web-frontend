@@ -115,7 +115,7 @@ function HospitalRegisteration() {
                         {step === 1 ? (
                             <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                                 <div class="form-group">
-                                    <select {...formik.getFieldProps('type')} className="form-control">
+                                    <select {...formik.getFieldProps('type')} className="form-control" style={{ height: "50px" }}>
                                         <option value="HOSPITAL">HOSPITAL</option>
                                         <option value="CLINIC">CLINIC</option>
                                     </select>

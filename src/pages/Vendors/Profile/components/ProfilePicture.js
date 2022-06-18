@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import HOSPITAL_IMAGE from '../../../../assets/images/doctor.png';
+import HOSPITAL_IMAGE from '../../../../assets/images/doctor_placeholder.png';
 import { href } from '../../../../constants/extra';
 import ImageUploading from "react-images-uploading"
 import HospitalApi from '../../../../api/Hospital'

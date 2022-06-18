@@ -159,5 +159,6 @@
 	"GET_POINTS": "الحصول على النقاط",
 	"claim_code_content": "احصل على الرمز الخاص بك من المستشفى ، واكسب 20 نقطة لكل موعد",
 	"accountDelete": "هل أنت متأكد بحذف حسابك بشكل نهائي؟",
-	"accountDeleteDate": "سيتم حذف حسابك في:"
+	"accountDeleteDate": "سيتم حذف حسابك في:",
+	"download_report": "تنزيل التقرير"
 }

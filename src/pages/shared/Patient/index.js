@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
-import PATIENT_IMAGE from '../../../assets/images/patient.png';
+import PATIENT_IMAGE from '../../../assets/images/doctor_placeholder.png';
 import { useHistory } from 'react-router-dom';
 import { HOSPITAL_PATIENT_INFO_ROUTE, NURSE_PATIENT_INFO_ROUTE, DOCTOR_PATIENT_INFO_ROUTE } from '../../../constants/Redirects';
 import { RootContext } from '../../../contextApi';

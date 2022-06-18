@@ -47,7 +47,6 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 
 			<div class="col-md-4">
 				<ImageUploading
-					multiple
 					value={images}
 					onChange={onChange}
 					maxNumber={maxNumber}

@@ -10,6 +10,7 @@ function HospitalInfo({ hospital }) {
     const { name, address, openingTime, closingTime, about, _id, images } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
     const [image, setImage] = useState(null);
+    const [hosp, setHosp] = useState(hospital.hospital);
 
     const handleImageSelect = (e) => {
         setImage(e.target.files[0]);
@@ -31,8 +32,19 @@ function HospitalInfo({ hospital }) {
         }
     }
 
-    const deleteImage = (id) => {
-
+    const deleteImage = (url) => {
+        const imagePublicId = url.split('\\').pop().split('/').pop().split('.')[0];
+        HospitalApi.deleteGalleryImage(_id, imagePublicId).then(res => {
+            console.log(res);
+            toast.success("Hospital gallery image deleted");
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+            //setHosp({ ...hospital, hospital: res.data.data })
+        }).catch(err => {
+            toast.error("Failed to delete image");
+            console.log(err);
+        });
     }
 
     return (
@@ -57,7 +69,7 @@ function HospitalInfo({ hospital }) {
                 {images?.length > 0 && images?.map(img => (
                     <div className="col-md-3" >
                         <img className="banner-picture" src={img} alt="hospital" />
-                        <button className="btn btn-danger mt-2" onClick={deleteImage.bind(this, img)}>Delete</button>
+                        <button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
                     </div>
                 ))}
                 <div className="col-md-3">
@@ -66,8 +78,8 @@ function HospitalInfo({ hospital }) {
                         imageSrc={imageSrc}
                         setImageSrc={setImageSrc}
                         style={{
-                            width: '100%',
-                            height: '10rem',
+                            width: "250px",
+                            height: "200px",
                             background: '#417EBF',
                             textAlign: 'center',
                             display: 'flex',

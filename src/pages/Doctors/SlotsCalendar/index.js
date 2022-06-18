@@ -103,8 +103,24 @@ function SlotsCalendar() {
     }
 
     const onSelectSlot = (box) => {
-        setSelectedDate(box.start)
-        createSlotRef.current.click()
+        if (isTodayOrFuture(moment(box.start))) {
+            setSelectedDate(box.start)
+            createSlotRef.current.click()
+        }
+    }
+
+    function isTodayOrFuture(date) {
+        date = stripTime(date);
+        return date.diff(stripTime(moment.now())) >= 0;
+    }
+
+    function stripTime(date) {
+        date = moment(date);
+        date.hours(0);
+        date.minutes(0);
+        date.seconds(0);
+        date.milliseconds(0);
+        return date;
     }
 
     const createSlot = (e) => {

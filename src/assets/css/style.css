@@ -660,6 +660,7 @@ header .dropdown-menu {
 
 .list-block .card {
 	margin-bottom: 30px;
+	width: 300px;
 }
 
 .list-block .card .card-body {
@@ -1451,7 +1452,7 @@ header .dropdown-menu {
 .banner-picture {
 	width: 250px;
 	height: 200px;
-	padding-right: 30px;
+	margin-right: 30px;
 	object-fit: cover;
 	border: 1px solid #D3D3D3;
 	border-radius: 10px;
