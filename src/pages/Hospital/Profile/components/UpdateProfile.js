@@ -87,7 +87,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="type">
+                                                <SelectInput name="type" style={{ height: "50px" }}>
                                                     <option value="">Hospital Type</option>
                                                     <option value={CLINIC}>Clinic</option>
                                                     <option value={HOSPITAL}>Hospital</option>
@@ -120,7 +120,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="openingTime">
+                                                <SelectInput name="openingTime" style={{ height: "50px" }}>
                                                     <option value="">Opening Time</option>
                                                     {timesArray?.map(time => (
                                                         <option value={time}>{time}</option>
@@ -130,7 +130,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="closingTime">
+                                                <SelectInput name="closingTime" style={{ height: "50px" }}>
                                                     <option value="">Closing Time</option>
                                                     {timesArray?.map(time => (
                                                         <option value={time}>{time}</option>
@@ -164,7 +164,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="PCRDPI">
+                                                <SelectInput name="PCRDPI" style={{ height: "50px" }}>
                                                     <option value="">PCR/DPI</option>
                                                     <option value={true}>Yes</option>
                                                     <option value={false}>No</option>

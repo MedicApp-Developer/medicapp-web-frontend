@@ -5,12 +5,12 @@ import { href } from '../../../../constants/extra';
 import HospitalApi from '../../../../api/Hospital';
 import { toast } from 'react-toastify';
 
-function HospitalInfo({ hospital }) {
+function HospitalInfo({ hospital, imageDeleted }) {
 
-    const { name, address, openingTime, closingTime, about, _id, images } = hospital.hospital;
+    const { name, address, openingTime, closingTime, about, _id } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
     const [image, setImage] = useState(null);
-    const [hosp, setHosp] = useState(hospital.hospital);
+    const [hospitalImages, setHospitalImages] = useState(hospital.hospital.images);
 
     const handleImageSelect = (e) => {
         setImage(e.target.files[0]);
@@ -34,13 +34,14 @@ function HospitalInfo({ hospital }) {
 
     const deleteImage = (url) => {
         const imagePublicId = url.split('\\').pop().split('/').pop().split('.')[0];
+        imageDeleted(url)
         HospitalApi.deleteGalleryImage(_id, imagePublicId).then(res => {
             console.log(res);
             toast.success("Hospital gallery image deleted");
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
-            //setHosp({ ...hospital, hospital: res.data.data })
+            const images = hospitalImages
+            const updatedImages = images.filter(item => item != url)
+            setHospitalImages(updatedImages)
+            imageDeleted(url)
         }).catch(err => {
             toast.error("Failed to delete image");
             console.log(err);
@@ -66,7 +67,7 @@ function HospitalInfo({ hospital }) {
                 </div>
             </div>
             <div className="row mt-2">
-                {images?.length > 0 && images?.map(img => (
+                {hospitalImages?.length > 0 && hospitalImages?.map(img => (
                     <div className="col-md-3" >
                         <img className="banner-picture" src={img} alt="hospital" />
                         <button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>

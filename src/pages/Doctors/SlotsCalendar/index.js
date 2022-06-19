@@ -109,6 +109,13 @@ function SlotsCalendar() {
         }
     }
 
+    const handleSlotDeleteCallback = (deletedSlot) => {
+        console.log('WOWWW Calback');
+        const updatedSlots = slots.filter(item => item._id !== deletedSlot._id)
+        setSlots(updatedSlots)
+        deleteSlotRef.current.click()
+    }
+
     function isTodayOrFuture(date) {
         date = stripTime(date);
         return date.diff(stripTime(moment.now())) >= 0;
@@ -144,10 +151,6 @@ function SlotsCalendar() {
             console.log(err);
             toast.error("Problem while creating the slot")
         })
-    }
-
-    const deleteSuccessHandler = () => {
-        deleteSlotRef.current.click()
     }
 
     return (
@@ -234,7 +237,7 @@ function SlotsCalendar() {
                 </div>
             </div>
             <AppointmentDetails selectedSlot={selectedSlot} />
-            <DeleteSlot selectedSlot={selectedSlot} deleteHandler={deleteSuccessHandler} />
+            <DeleteSlot selectedSlot={selectedSlot} slotDeletedCallback={handleSlotDeleteCallback} />
         </DashboardLayout>
     )
 }

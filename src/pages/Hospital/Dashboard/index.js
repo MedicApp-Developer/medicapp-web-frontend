@@ -18,6 +18,7 @@ function Dashboard() {
     const getHospital = () => {
         HospitalApi.getSingleHospital(user.referenceId).then(res => {
             setHospital(res.data.data.hospital);
+            console.log("Hospital 222", res.data.data.hospital.name);
         })
     }
 

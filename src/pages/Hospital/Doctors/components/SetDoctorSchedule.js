@@ -81,6 +81,14 @@ function SetDoctorSchedule() {
         }
     }
 
+    const handleSlotDeleteCallback = (deletedSlot) => {
+        console.log('WOWWW Calback');
+        const updatedSlots = slots.filter(item => item._id !== deletedSlot._id)
+        setSlots(updatedSlots)
+        deleteSlotRef.current.click()
+
+    }
+
     const createSlot = (e) => {
         e.preventDefault()
         const slot = {
@@ -208,7 +216,7 @@ function SetDoctorSchedule() {
                     </div>
                 </div>
             </div>
-            <DeleteSlot selectedSlot={selectedSlot} />
+            <DeleteSlot selectedSlot={selectedSlot} slotDeletedCallback={handleSlotDeleteCallback} />
         </>
     )
 }

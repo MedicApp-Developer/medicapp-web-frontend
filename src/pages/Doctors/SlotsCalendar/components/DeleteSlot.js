@@ -2,7 +2,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import SlotApi from '../../../../api/Slots/index'
 
-function DeleteSlot({ selectedSlot }) {
+function DeleteSlot({ selectedSlot, slotDeletedCallback }) {
 
 
     const deleteSlotHandler = () => {
@@ -11,6 +11,7 @@ function DeleteSlot({ selectedSlot }) {
         SlotApi.deleteSlot(selectedSlot._id).then(res => {
             if (res.status === 200 && res.data.data) {
                 toast.success("Slot delete successfully")
+                slotDeletedCallback(selectedSlot)
             }
 
         }).catch((err) => {

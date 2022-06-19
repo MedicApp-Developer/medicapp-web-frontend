@@ -85,12 +85,22 @@ function HospitalProfile() {
         }
     }, [hospital])
 
+    const imageDeletedHandler = (url) => {
+        console.log('Image Deleted', url);
+        const images = hospital.hospital.images
+        const updatedImages = images.filter(item => item != url)
+        hospital.hospital.images = updatedImages
+        console.log("Updated Images", hospital.hospital.images);
+        setHospital(hospital)
+
+    }
+
     let returnedComponent = null
 
     if (tabSelected === "Account") {
         returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} />
     } else if (tabSelected === "Profile") {
-        returnedComponent = <HospitalInfo hospital={hospital} />
+        returnedComponent = <HospitalInfo hospital={hospital} imageDeleted={imageDeletedHandler} />
     } else if (tabSelected === "Location") {
         returnedComponent = <ShowMap hospitalId={user.referenceId} lat={hospital?.hospital?.location?.coordinates[0]} lng={hospital?.hospital?.location?.coordinates[1]} />
     }
