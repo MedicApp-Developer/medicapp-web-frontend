@@ -10,7 +10,7 @@ import { BUY_SOME_GET_SOME, HOTEL, ON_PERCENTAGE, RESTAURANT, RETAIL, WELLNESS }
 import SelectInput from '../../../../components/forms/SelectInput'
 import { RootContext } from '../../../../contextApi'
 import ImageUpload from 'image-upload-react';
-import { toast } from 'react-toastify' 
+import { toast } from 'react-toastify'
 
 function AddVendors({ categories, createPackage, selectedPackage, updatePackage, vendors, getVendors }) {
 
@@ -127,14 +127,14 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 									<div className="row">
 										<div className="col-md-12">
 											<div className="form-group">
-												<SelectInput name="type">
+												<SelectInput name="type" style={{ height: "50px" }}>
 													<option value="">Type</option>
 													<option value={ON_PERCENTAGE}>On Percentage</option>
 													<option value={BUY_SOME_GET_SOME}>Buy Some, Get Some</option>
 												</SelectInput>
 											</div>
 											<div className="form-group">
-												<SelectInput name="category">
+												<SelectInput name="category" style={{ height: "50px" }}>
 													<option value="">Category</option>
 													{categories.map(item => (
 														<option key={item._id} value={item._id}>{item.name_en}</option>

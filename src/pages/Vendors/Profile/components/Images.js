@@ -76,7 +76,7 @@ function Images({ vendor }) {
 					/>
 					{imageSrc && image && (
 						<span onClick={(e) => { e.preventDefault(); uploadImage(); }}>
-							<a href={href} style={{ width: '100%', marginTop: '10px' }} className="btn btn-primary px-4">Upload</a>
+							<a href={href} style={{ width: '250px', marginTop: '10px' }} className="btn btn-primary px-4">Upload</a>
 						</span>
 					)}
 				</div>
