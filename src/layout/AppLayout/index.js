@@ -16,6 +16,8 @@ import Footer from './Footer'
 import { connect } from 'react-redux'
 import { clearDoctorsFiltersOnly } from '../../store/actions/patient/searchedDoctorsActions'
 import { clearHospitalsFiltersOnly } from '../../store/actions/patient/searchedHospitalsActions'
+import ARABIC_ICON from '../../assets/images/arabic.png'
+import ENGLISH_ICON from '../../assets/images/english.png'
 import i18next from 'i18next'
 
 function AppLayout({ children, clearDoctorsFiltersOnly, clearHospitalsFiltersOnly }) {
@@ -39,12 +41,13 @@ function AppLayout({ children, clearDoctorsFiltersOnly, clearHospitalsFiltersOnl
                         </button>
                         {/* Top Nav */}
                         <TopNav />
+                        <br />
+                        <img src={ENGLISH_ICON} style={{ marginLeft: "20px" }} onClick={() => { i18next.changeLanguage("en") }} />
+                        <img src={ARABIC_ICON} style={{ marginLeft: "20px" }} onClick={() => { i18next.changeLanguage("ar") }} />
+
                     </div>
                 </nav>
-                <div className='language-change-buttons'>
-                    <button className='btn' onClick={() => { i18next.changeLanguage("en") }}>English</button>
-                    <button className='btn' onClick={() => { i18next.changeLanguage("ar") }}>العربية</button>
-                </div>
+
             </header>
             <div style={promiseInProgress ? { opacity: '0.2' } : {}}>
                 {children}

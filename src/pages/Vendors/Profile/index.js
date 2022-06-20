@@ -25,12 +25,30 @@ function VendorProfile() {
 		}
 	}, [user])
 
+	const imageDeletedHandler = (url) => {
+		console.log('Image Deleted', url);
+		const images = vendor.images
+		const updatedImages = images.filter(item => item != url)
+		vendor.images = updatedImages
+		console.log("Updated Images", vendor.images);
+		setVendor(vendor)
+	}
+
+	const imageAddedHandler = (url) => {
+		console.log('Image Added', url);
+		const updatedImages = vendor.images
+		updatedImages.push(url)
+		vendor.images = updatedImages
+		console.log(vendor);
+		setVendor(vendor)
+	}
+
 	let returnedComponent = null
 
 	if (tabSelected === "Account") {
 		returnedComponent = <VendorAccount vendorId={user.referenceId} vendor={vendor} />
 	} else if (tabSelected === "Images") {
-		returnedComponent = <Images vendor={vendor} />
+		returnedComponent = <Images vendor={vendor} imageDeleted={imageDeletedHandler} imageAdded={imageAddedHandler} />
 	} else if (tabSelected === "Location") {
 		returnedComponent = <LocationMap vendorId={user.referenceId} lat={vendor?.location?.coordinates[0]} lng={vendor?.location?.coordinates[1]} />
 	}

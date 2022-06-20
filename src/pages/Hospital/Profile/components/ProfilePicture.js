@@ -19,24 +19,12 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 		if (images?.length > 0) {
 			let formData = new FormData()
 			formData.append('image', images[0].file)
-			updatePicture(data._id, formData).then(res => {
-				toast.success("Profile picture uploaded")
-			}).catch(err => {
-				toast.error("Problem while uploading the picture")
-			})
+			updatePicture(data._id, formData)
 		}
 	}
 	const removeImage = () => {
-		removePicture(data._id).then(res => {
-			toast.success("Profile Picture Removed")
-			setImages([])
-			setTimeout(() => {
-				window.location.reload()
-			}, 2000)
-		}).catch(err => {
-			toast.error("Problem while uploading the picture")
-		})
-
+		removePicture(data._id)
+		setImages([])
 	}
 
 

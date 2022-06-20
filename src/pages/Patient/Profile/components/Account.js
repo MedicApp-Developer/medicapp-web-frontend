@@ -11,19 +11,13 @@ import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router-dom'
 import AccountDelete from './AccountDelete'
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture'
+import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
-function Account({ deactivePatient }) {
-   const { user } = useContext(RootContext)
-   const [patient, setPatient] = useState({})
+function Account({ deactivePatient, currentPatient, profileUpdated }) {
+   const { user, setUser } = useContext(RootContext)
+   const [patient, setPatient] = useState(currentPatient)
    const { t } = useTranslation()
    const history = useHistory()
-
-   useEffect(() => {
-      PatientApi.getSinglePatient(user._id).then(patient => {
-         console.log("patient => ", patient.data.data)
-         setPatient(patient.data.data)
-      })
-   }, [])
 
    const funDeactivePatient = async () => {
       let nUser = await deactivePatient(patient._id);
@@ -33,9 +27,30 @@ function Account({ deactivePatient }) {
          window.location.href = "/"
       }
    }
+   const imageUpdateHandler = (id, formData) => {
+      // var updatedUser = user
+      // updatedUser.firstName = 'Bashiiir'
+      // localStorage.setItem("user", JSON.stringify(updatedUser));
+      // setUser(updatedUser)
+      PatientApi.uploadProfilePic(id, formData).then(res => {
+         toast.success("Profile picture updated");
+         setPatient(res.data.data)
+         profileUpdated(res.data.data)
+      }).catch(err => {
+         toast.error("Failed to update profile picture");
+         console.log(err);
+      });
+   }
 
-   const clickUpdateImage = () => {
-      console.log('clickUpdateImage')
+   const imageDeleteHandler = (id, formData) => {
+      PatientApi.removeProfilePicture(id).then(res => {
+         toast.success("Profile picture updated");
+         setPatient(res.data.data)
+         profileUpdated(res.data.data)
+      }).catch(err => {
+         toast.error("Failed to delete profile picture");
+         console.log(err);
+      });
    }
 
    return (
@@ -45,7 +60,7 @@ function Account({ deactivePatient }) {
             lastName: patient?.lastName,
             email: patient?.email,
             birthday: patient?.birthday,
-            gender: patient?.gender,
+            gender: patient?.gender?.toLowerCase(),
             location: patient?.location,
             phone: patient?.phone,
             password: '',
@@ -89,8 +104,8 @@ function Account({ deactivePatient }) {
                   <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                      <ProfilePicture
                         data={patient}
-                        updatePicture={PatientApi.uploadProfilePic}
-                        removePicture={PatientApi.removeProfilePicture}
+                        updatePicture={imageUpdateHandler}
+                        removePicture={imageDeleteHandler}
                         DEFAULTIMAGE={PATIENT_IMAGE}
                      />
                      {/* <div class="profile-image">
@@ -151,7 +166,12 @@ function Account({ deactivePatient }) {
                            </div>
                            <div class="col-sm-6">
                               <div class="form-group">
-                                 <TextInput type="text" name="phone" placeholder={t("phone")} />
+                                 <NumberFormatInput
+                                    format={"+971-## ### ####"}
+                                    mask={"-"}
+                                    name="phone"
+                                    defaultValue={t("phone")}
+                                    placeholder={t("phone")} />
                               </div>
                            </div>
                            <div class="col-sm-6">

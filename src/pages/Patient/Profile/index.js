@@ -8,7 +8,8 @@ import QRPrescription from './components/QRPrescription'
 import LabResults from './components/LabResults'
 import Account from './components/Account'
 import { connect } from 'react-redux'
-import { getPatientAccountInfo, deactivePatient } from '../../../store/actions/patientActions'
+import { getPatientAccountInfo, refreshPatientAccountInfo, deactivePatient } from '../../../store/actions/patientActions'
+import { GET_PATIENT } from '../../../store/types/patientTypes'
 import { RootContext } from '../../../contextApi'
 import FamilyMembers from './components/FamilyMembers'
 import SickLeaves from './components/SickLeaves'
@@ -24,6 +25,12 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
     useEffect(() => {
         getPatientAccountInfo(user?._id)
     }, [getPatientAccountInfo])
+
+    const profileUpdatedHandler = (updatedPatient) => {
+        patient.patient = updatedPatient
+        refreshPatientAccountInfo(patient)
+
+    }
 
     let componentToRender = null
 
@@ -43,7 +50,7 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
         case LAB_RESULTS:
             componentToRender = <LabResults results={patient?.labResults} />; break
         case ACCOUNT:
-            componentToRender = <Account deactivePatient={deactivePatient} patient={patient} user={user} />; break
+            componentToRender = <Account deactivePatient={deactivePatient} currentPatient={patient.patient} user={user} profileUpdated={profileUpdatedHandler} />; break
         default:
             componentToRender = <MedicalProfile patient={patient?.patient} />
     }

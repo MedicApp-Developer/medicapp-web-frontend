@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment";
 import PatientApi from "../../api/Patients";
-import { DEACTIVATE_ACCOUNT, ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
+import { DEACTIVATE_ACCOUNT, ADD_PATIENT_BY_NURSE, DELETE_FAMILY_MEMBER, ADD_FAMILY_MEMBER, CLEAR_SEARCH_RESULTS, DELETE_PATIENT, GET_PATIENT, REFRESH_PATIENT, GET_PATIENTS, SELECT_PATIENT, SET_PATIENT_PAGE_NUMBER, DELETE_APPOINTMENT } from "../types/patientTypes";
 
 export const getPatients = (pageNo) => async (dispatch, getState) => {
     try {
@@ -20,9 +20,9 @@ export const getPatients = (pageNo) => async (dispatch, getState) => {
 export const deactivePatient = (id) => async (dispatch, getState) => {
     try {
         const response = await PatientApi.deactivePatient(id);
-        
+
         dispatch({
-            type: DEACTIVATE_ACCOUNT, 
+            type: DEACTIVATE_ACCOUNT,
             payload: response.data.data
         })
 
@@ -90,6 +90,14 @@ export const getPatientAccountInfo = (patientId) => async (dispatch, getState) =
     } catch (err) {
         toast.error("Problem while getting patients");
     }
+}
+
+export const refreshPatientAccountInfo = (patients) => async (dispatch, getState) => {
+    dispatch({
+        type: REFRESH_PATIENT,
+        payload: patients
+    })
+    return patients;
 }
 
 export const deletePatient = (id) => async (dispatch, getState) => {

@@ -5,7 +5,7 @@ import { href } from '../../../../constants/extra';
 import HospitalApi from '../../../../api/Hospital';
 import { toast } from 'react-toastify';
 
-function HospitalInfo({ hospital, imageDeleted }) {
+function HospitalInfo({ hospital, imageDeleted, imageAdded }) {
 
     const { name, address, openingTime, closingTime, about, _id } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
@@ -22,19 +22,18 @@ function HospitalInfo({ hospital, imageDeleted }) {
             let formData = new FormData();
             formData.append('image', image);
             HospitalApi.uploadHospitalImage(_id, formData).then(res => {
+                console.log(res);
                 toast.success("Image Uploaded Successfully");
+                setHospitalImages([...hospitalImages, res.data.data.url])
+                imageAdded(res.data.data.url)
                 setImage(null);
                 setImageSrc(null);
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
             })
         }
     }
 
     const deleteImage = (url) => {
         const imagePublicId = url.split('\\').pop().split('/').pop().split('.')[0];
-        imageDeleted(url)
         HospitalApi.deleteGalleryImage(_id, imagePublicId).then(res => {
             console.log(res);
             toast.success("Hospital gallery image deleted");
@@ -69,7 +68,7 @@ function HospitalInfo({ hospital, imageDeleted }) {
             <div className="row mt-2">
                 {hospitalImages?.length > 0 && hospitalImages?.map(img => (
                     <div className="col-md-3" >
-                        <img className="banner-picture" src={img} alt="hospital" />
+                        <img className="banner-picture" style={{ marginBottom: "20px" }} src={img} alt="hospital" />
                         <button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
                     </div>
                 ))}
@@ -78,6 +77,7 @@ function HospitalInfo({ hospital, imageDeleted }) {
                         handleImageSelect={handleImageSelect}
                         imageSrc={imageSrc}
                         setImageSrc={setImageSrc}
+                        defaultDeleteIconColor={"#F44336"}
                         style={{
                             width: "250px",
                             height: "200px",
