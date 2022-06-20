@@ -7,7 +7,7 @@ import VendorApi from '../../../../api/Vendor';
 import { toast } from 'react-toastify';
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
-function VendorAccount({ vendorId, vendor }) {
+function VendorAccount({ vendorId, vendor, profilePictureUpdated }) {
 
 	const formik = useFormik({
 		initialValues: {
@@ -43,6 +43,15 @@ function VendorAccount({ vendorId, vendor }) {
 		enableReinitialize: true
 	});
 
+
+	const profilePictureUpdateHandler = (id, formData) => {
+		VendorApi.uploadProfilePic(id, formData).then(res => {
+
+		}).catch(err => {
+			toast.error("Failed to update profile picture")
+		})
+	}
+
 	return (
 		<>
 			<div className="row patient-profile">
@@ -52,7 +61,7 @@ function VendorAccount({ vendorId, vendor }) {
 						vendor &&
 						<ProfilePicture
 							data={vendor}
-							updatePicture={VendorApi.uploadProfilePic}
+							updatePicture={profilePictureUpdateHandler}
 							removePicture={VendorApi.removeProfilePicture}
 							DEFAULTIMAGE={VENDOR_IMAGE}
 						/>

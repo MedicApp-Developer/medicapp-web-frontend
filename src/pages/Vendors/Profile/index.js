@@ -43,10 +43,12 @@ function VendorProfile() {
 		setVendor(vendor)
 	}
 
+	const profilePictureUpdateHandler = (id, formData) => { }
+
 	let returnedComponent = null
 
 	if (tabSelected === "Account") {
-		returnedComponent = <VendorAccount vendorId={user.referenceId} vendor={vendor} />
+		returnedComponent = <VendorAccount vendorId={user.referenceId} vendor={vendor} profilePictureUpdated={profilePictureUpdateHandler} />
 	} else if (tabSelected === "Images") {
 		returnedComponent = <Images vendor={vendor} imageDeleted={imageDeletedHandler} imageAdded={imageAddedHandler} />
 	} else if (tabSelected === "Location") {
