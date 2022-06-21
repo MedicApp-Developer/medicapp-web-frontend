@@ -102,10 +102,16 @@ function HospitalProfile() {
         setHospital(hospital)
     }
 
+    const profilePictureUpdateHandler = (hospital) => {
+        console.log("UPDATED VENDOR", hospital);
+        hospital.hospital = hospital
+        setHospital(hospital)
+    }
+
     let returnedComponent = null
 
     if (tabSelected === "Account") {
-        returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} />
+        returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} profilePictureUpdated={profilePictureUpdateHandler} />
     } else if (tabSelected === "Profile") {
         returnedComponent = <HospitalInfo hospital={hospital} imageDeleted={imageDeletedHandler} imageAdded={imageAddedHandler} />
     } else if (tabSelected === "Location") {

@@ -20,7 +20,6 @@ function TopNav() {
     const onLogout = () => {
         localStorage.clear()
         history.push("/login");
-        // window.location.reload()
     }
 
     const newRoutes = getRoutes(user?.role || "PATIENT").length > 0 && getRoutes(user?.role || "PATIENT")?.filter((item) => item.name !== "Home")

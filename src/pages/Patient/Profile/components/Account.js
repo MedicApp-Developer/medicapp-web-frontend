@@ -28,10 +28,6 @@ function Account({ deactivePatient, currentPatient, profileUpdated }) {
       }
    }
    const imageUpdateHandler = (id, formData) => {
-      // var updatedUser = user
-      // updatedUser.firstName = 'Bashiiir'
-      // localStorage.setItem("user", JSON.stringify(updatedUser));
-      // setUser(updatedUser)
       PatientApi.uploadProfilePic(id, formData).then(res => {
          toast.success("Profile picture updated");
          setPatient(res.data.data)
@@ -42,9 +38,9 @@ function Account({ deactivePatient, currentPatient, profileUpdated }) {
       });
    }
 
-   const imageDeleteHandler = (id, formData) => {
+   const imageDeleteHandler = (id) => {
       PatientApi.removeProfilePicture(id).then(res => {
-         toast.success("Profile picture updated");
+         toast.success("Profile picture deleted");
          setPatient(res.data.data)
          profileUpdated(res.data.data)
       }).catch(err => {

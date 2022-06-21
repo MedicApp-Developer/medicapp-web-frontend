@@ -12,7 +12,7 @@ import ShowMap from './ShowMap';
 import ProfilePicture from './ProfilePicture';
 import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 
-function HospitalAccount({ hospitalId, hospital }) {
+function HospitalAccount({ hospitalId, hospital, profilePictureUpdated }) {
    console.log('hospital?.hospital: ', hospital?.hospital)
    const history = useHistory();
 
@@ -51,14 +51,34 @@ function HospitalAccount({ hospitalId, hospital }) {
       enableReinitialize: true
    });
 
+   const profilePictureUpdateHandler = (id, formData) => {
+      HospitalApi.uploadProfilePic(id, formData).then(res => {
+         toast.success("Profile picture updated");
+         profilePictureUpdated(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to update profile picture")
+      })
+   }
+
+   const profilePictureDeleteHandler = (id, formData) => {
+      HospitalApi.removeProfilePicture(id).then(res => {
+         toast.success("Profile picture deleted");
+         profilePictureUpdated(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to delete profile picture")
+      })
+   }
+
    return (
       <>
          <div className="row patient-profile">
             <div className="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                <ProfilePicture
                   data={hospital?.hospital}
-                  updatePicture={HospitalApi.uploadProfilePic}
-                  removePicture={HospitalApi.removeProfilePicture}
+                  updatePicture={profilePictureUpdateHandler}
+                  removePicture={profilePictureDeleteHandler}
                   DEFAULTIMAGE={HOSPITAL_IMAGE}
                />
             </div>

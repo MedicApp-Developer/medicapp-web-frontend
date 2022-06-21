@@ -8,7 +8,30 @@ import DoctorApi from '../../../../api/Doctors';
 import { toast } from 'react-toastify';
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
-function DoctorAccount({ doctor }) {
+function DoctorAccount({ doctor, profilePictureUpdated }) {
+
+   const profilePictureUpdateHandler = (id, formData) => {
+      DoctorApi.uploadProfilePic(id, formData).then(res => {
+         toast.success("Profile picture updated");
+
+         profilePictureUpdated(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to update profile picture")
+      })
+   }
+
+   const profilePictureDeleteHandler = (id) => {
+      DoctorApi.removeProfilePicture(id).then(res => {
+         toast.success("Profile picture deleted");
+         //setVendor(res.data.data)
+         profilePictureUpdated(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to delete profile picture")
+      })
+   }
+
    return (
       <>
          {Object.keys(doctor).length > 0 && (
@@ -58,8 +81,8 @@ function DoctorAccount({ doctor }) {
                      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                         <ProfilePicture
                            data={doctor}
-                           updatePicture={DoctorApi.uploadProfilePic}
-                           removePicture={DoctorApi.removeProfilePicture}
+                           updatePicture={profilePictureUpdateHandler}
+                           removePicture={profilePictureDeleteHandler}
                            DEFAULTIMAGE={DOCTOR_IMAGE}
                         />
                      </div>

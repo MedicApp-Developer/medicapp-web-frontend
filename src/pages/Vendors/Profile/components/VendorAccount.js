@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { href } from '../../../../constants/extra'
 import VENDOR_IMAGE from '../../../../assets/images/doctor_placeholder.png';
 import { useFormik } from 'formik';
@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
 function VendorAccount({ vendorId, vendor, profilePictureUpdated }) {
+
+	//const [vendor, setVendor] = useState(currentVendor)
 
 	const formik = useFormik({
 		initialValues: {
@@ -46,9 +48,23 @@ function VendorAccount({ vendorId, vendor, profilePictureUpdated }) {
 
 	const profilePictureUpdateHandler = (id, formData) => {
 		VendorApi.uploadProfilePic(id, formData).then(res => {
-
+			toast.success("Profile picture updated");
+			//setVendor(res.data.data)
+			profilePictureUpdated(res.data.data)
 		}).catch(err => {
+			console.log(err);
 			toast.error("Failed to update profile picture")
+		})
+	}
+
+	const profilePictureDeleteHandler = (id) => {
+		VendorApi.removeProfilePicture(id).then(res => {
+			toast.success("Profile picture deleted");
+			//setVendor(res.data.data)
+			profilePictureUpdated(res.data.data)
+		}).catch(err => {
+			console.log(err);
+			toast.error("Failed to delete profile picture")
 		})
 	}
 
@@ -62,7 +78,7 @@ function VendorAccount({ vendorId, vendor, profilePictureUpdated }) {
 						<ProfilePicture
 							data={vendor}
 							updatePicture={profilePictureUpdateHandler}
-							removePicture={VendorApi.removeProfilePicture}
+							removePicture={profilePictureDeleteHandler}
 							DEFAULTIMAGE={VENDOR_IMAGE}
 						/>
 

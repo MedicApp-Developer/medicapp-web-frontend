@@ -27,7 +27,6 @@ import PrivacyPolicy from './pages/Others/PrivacyPolicy'
 import VendorRouter from './pages/Vendors'
 import ForgetPassword from './pages/shared/ForgetPassword'
 import ResetPassword from './pages/shared/ForgetPassword/components/ResetPassword'
-import { useEffect, useState } from 'react';
 import { requestFirebaseNotificationPermission } from './firebase';
 
 function App() {

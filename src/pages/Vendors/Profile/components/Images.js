@@ -35,8 +35,7 @@ function Images({ vendor, imageDeleted, imageAdded }) {
 		const imagePublicId = url.split('\\').pop().split('/').pop().split('.')[0];
 		VendorApi.deleteGalleryImage(_id, imagePublicId).then(res => {
 			console.log(res);
-
-			toast.success("Hospital gallery image deleted");
+			toast.success("Vandor gallery image deleted");
 			const images = vendorImages
 			const updatedImages = images.filter(item => item != url)
 			setVendorImages(updatedImages)

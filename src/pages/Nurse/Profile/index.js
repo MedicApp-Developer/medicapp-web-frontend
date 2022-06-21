@@ -5,12 +5,13 @@ import { RootContext } from '../../../contextApi'
 import NurseApi from '../../../api/Nurse';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import TextInput from '../../../components/forms/TextInput';
 import ProfilePicture from '../../Hospital/Profile/components/ProfilePicture';
 
 function NurseProfile() {
 
-   const { user } = useContext(RootContext);
+   const { user, setUser } = useContext(RootContext);
    const [nurse, setNurse] = useState({});
 
    useEffect(() => {
@@ -19,6 +20,30 @@ function NurseProfile() {
          console.log(res.data.data)
       });
    }, [user?.referenceId]);
+
+   const profilePictureUpdateHandler = (id, formData) => {
+      NurseApi.uploadProfilePic(id, formData).then(res => {
+         toast.success("Profile picture updated");
+         setNurse(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to update profile picture")
+      })
+   }
+
+   const profilePictureDeleteHandler = (id) => {
+      // var updatedUser = user
+      // updatedUser.firstName = 'Bashiiir'
+      // window.localStorage.setItem("user", JSON.stringify(updatedUser));
+      // setUser(updatedUser);
+      NurseApi.removeProfilePicture(id).then(res => {
+         toast.success("Profile picture deleted");
+         setNurse(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to delete profile picture")
+      })
+   }
 
    return (
       <DashboardLayout>
@@ -65,8 +90,8 @@ function NurseProfile() {
                   <div class="col-md-3 col-lg-3 col-xl-3">
                      <ProfilePicture
                         data={nurse}
-                        updatePicture={NurseApi.uploadProfilePic}
-                        removePicture={NurseApi.removeProfilePicture}
+                        updatePicture={profilePictureUpdateHandler}
+                        removePicture={profilePictureDeleteHandler}
                         DEFAULTIMAGE={NURSE_IMAGE}
                      />
                   </div>

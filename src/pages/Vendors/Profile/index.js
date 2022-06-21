@@ -43,7 +43,10 @@ function VendorProfile() {
 		setVendor(vendor)
 	}
 
-	const profilePictureUpdateHandler = (id, formData) => { }
+	const profilePictureUpdateHandler = (vendor) => {
+		console.log("UPDATED VENDOR", vendor);
+		setVendor(vendor)
+	}
 
 	let returnedComponent = null
 

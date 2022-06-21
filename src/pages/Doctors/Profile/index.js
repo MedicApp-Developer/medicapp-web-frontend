@@ -19,24 +19,28 @@ function DoctorProfile() {
         });
     }, []);
 
+    const profilePictureUpdateHandler = (vendor) => {
+        setDoctor(vendor)
+    }
+
     return (
         <DashboardLayout>
             <div class="row nav-tab-link">
-               <div class="col-md-12">
-                  <ul class="nav justify-content-center">
+                <div class="col-md-12">
+                    <ul class="nav justify-content-center">
                         <li className="nav-item">
-                            <a className={classNames('nav-link', { 'active': !accountTabSelected })} href={href} onClick={(e) => {e.preventDefault(); setAccountTabSelected(false)}}>Doctor Profile</a>
+                            <a className={classNames('nav-link', { 'active': !accountTabSelected })} href={href} onClick={(e) => { e.preventDefault(); setAccountTabSelected(false) }}>Doctor Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className={classNames('nav-link', { 'active': accountTabSelected })} href={href} onClick={(e) => { e.preventDefault(); setAccountTabSelected(true)}}>Account</a>
+                            <a className={classNames('nav-link', { 'active': accountTabSelected })} href={href} onClick={(e) => { e.preventDefault(); setAccountTabSelected(true) }}>Account</a>
                         </li>
-                  </ul>
-               </div>
+                    </ul>
+                </div>
             </div>
-            {accountTabSelected ? 
-                    <DoctorAccount doctor={doctor} />
-                    : 
-                    <DoctorInfo doctor={doctor} />
+            {accountTabSelected ?
+                <DoctorAccount doctor={doctor} profilePictureUpdated={profilePictureUpdateHandler} />
+                :
+                <DoctorInfo doctor={doctor} />
             }
             <UpdateDoctorProfile doctor={doctor} setDoctor={setDoctor} />
         </DashboardLayout>

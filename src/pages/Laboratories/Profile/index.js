@@ -18,6 +18,27 @@ function LaboratoryProfile() {
          setLab(res.data.data);
       });
    }, [user.referenceId]);
+
+   const profilePictureUpdateHandler = (id, formData) => {
+      LaboratoryApi.uploadProfilePic(id, formData).then(res => {
+         toast.success("Profile picture updated");
+         setLab(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to update profile picture")
+      })
+   }
+
+   const profilePictureDeleteHandler = (id) => {
+      LaboratoryApi.removeProfilePicture(id).then(res => {
+         toast.success("Profile picture deleted");
+         setLab(res.data.data)
+      }).catch(err => {
+         console.log(err);
+         toast.error("Failed to delete profile picture")
+      })
+   }
+
    return (
       <DashboardLayout>
          <div class="row align-items-center add-list mb-5">
@@ -28,8 +49,8 @@ function LaboratoryProfile() {
                <div class="col-md-3 col-lg-3 col-xl-3">
                   <ProfilePicture
                      data={lab}
-                     updatePicture={LaboratoryApi.uploadProfilePic}
-                     removePicture={LaboratoryApi.removeProfilePicture}
+                     updatePicture={profilePictureUpdateHandler}
+                     removePicture={profilePictureDeleteHandler}
                      DEFAULTIMAGE={LAB_IMAGE}
                   />
                </div>
