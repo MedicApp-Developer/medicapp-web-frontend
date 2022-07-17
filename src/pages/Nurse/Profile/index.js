@@ -135,7 +135,7 @@ function NurseProfile() {
                            </div>
                         </div>
                         <div class="form-group text-center">
-                           <button type="submit" class="btn btn-primary mt-2">Update</button>
+                           <button type="submit" class="btn btn-primary mt-2">Upload</button>
                         </div>
                      </Form>
                   </div>

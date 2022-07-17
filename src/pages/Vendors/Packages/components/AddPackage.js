@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import * as Yup from 'yup'
 import { Formik, Form } from 'formik'
 import { createPackage, updatePackage } from '../../../../store/actions/packageActions'
@@ -11,6 +11,8 @@ import SelectInput from '../../../../components/forms/SelectInput'
 import { RootContext } from '../../../../contextApi'
 import ImageUpload from 'image-upload-react';
 import { toast } from 'react-toastify'
+import GalleryImgePicker from '../../../../components/GalleryImagePicker'
+import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png'
 
 function AddVendors({ categories, createPackage, selectedPackage, updatePackage, vendors, getVendors }) {
 
@@ -27,10 +29,26 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 
 	const handleImageSelect = (e) => {
 		setImage(e.target.files[0]);
-		setImageSrc(URL.createObjectURL(e.target.files[0]))
+		//setImageSrc(URL.createObjectURL(e.target.files[0]))
+	}
+
+	const profilePictureUpdateHandler = (file) => {
+		setImage(file);
+		setImageSrc(URL.createObjectURL(file))
+	}
+
+	const profilePictureDeleteHandler = (id, formData) => {
+		// HospitalApi.removeProfilePicture(id).then(res => {
+		//    toast.success("Profile picture deleted");
+		//    profilePictureUpdated(res.data.data)
+		// }).catch(err => {
+		//    console.log(err);
+		//    toast.error("Failed to delete profile picture")
+		// })
 	}
 
 	return (
+
 		<Formik
 			initialValues={{
 				type: selectedPackage?.type || "",
@@ -85,24 +103,28 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 						toast.error("Please select package image");
 					}
 				} else {
-					formData = new FormData();
-					imageSrc && image && formData.append('image', image);
-					formData.append('type', values.type);
-					formData.append('category_id', values.category);
-					formData.append('points', values.points);
-					formData.append('vendorId', user.referenceId);
-					if (values?.type === BUY_SOME_GET_SOME) {
-						formData.append('buyQuantity', values.buyQuantity);
-						formData.append('getQuantity', values.getQuantity);
+					if (imageSrc && image) {
+						formData = new FormData();
+						formData.append('image', image);
+						formData.append('type', values.type);
+						formData.append('category_id', values.category);
+						formData.append('points', values.points);
+						formData.append('vendorId', user.referenceId);
+						if (values?.type === BUY_SOME_GET_SOME) {
+							formData.append('buyQuantity', values.buyQuantity);
+							formData.append('getQuantity', values.getQuantity);
+						} else {
+							formData.append('off', values.off);
+						}
+
+						formData.append('termsAndConditions', values.termsAndConditions);
+						formData.append('about', values.about);
+
+						setImage(null);
+						setImageSrc(null);
 					} else {
-						formData.append('off', values.off);
+						toast.error("Please select package image");
 					}
-
-					formData.append('termsAndConditions', values.termsAndConditions);
-					formData.append('about', values.about);
-
-					setImage(null);
-					setImageSrc(null);
 				}
 
 				if (selectedPackage === null) {
@@ -116,6 +138,7 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 		>
 			{({ values }) => (
 				<div className="modal fade" id="addPackage" tabindex="-1" aria-labelledby="addDoctorLabel" aria-hidden="true">
+
 					<div className="modal-dialog modal-dialog-centered modal-lg">
 						<div className="modal-content">
 							<div className="modal-body">
@@ -173,37 +196,13 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 													placeholder="About Package"
 												/>
 											</div>
-											<div className='form-group'>
-												<div className="row mt-12">
-													{!imageSrc && (
-														<>
-															{selectedPackage?.images?.length > 0 && selectedPackage?.images?.map(img => (
-																<div className="col-md-12" style={{ marginBottom: "1.5rem" }}>
-																	<img className="img-fluid" style={{ width: "100%" }} src={img} alt="hospital" />
-																</div>
-															))}
-														</>
-													)}
-													<div className="col-md-12">
-														<ImageUpload
-															handleImageSelect={handleImageSelect}
-															imageSrc={imageSrc}
-															setImageSrc={setImageSrc}
-															style={{
-																width: '100%',
-																height: '10rem',
-																background: '#417EBF',
-																textAlign: 'center',
-																display: 'flex',
-																alignItems: 'center',
-																justifyContent: 'center',
-																flexDirection: 'column',
-																marginTop: "0",
-																cursor: 'pointer',
-															}}
-														/>
-													</div>
-												</div>
+											<div className="form-group text-center" style={{ marginBottom: "1.5rem" }}>
+												<GalleryImgePicker
+													image={selectedPackage?.images[0]}
+													updatePicture={profilePictureUpdateHandler}
+													removePicture={profilePictureDeleteHandler}
+													DEFAULTIMAGE={HOSPITAL_IMAGE}
+												/>
 											</div>
 										</div>
 									</div>
@@ -216,8 +215,8 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 					</div>
 				</div>
 			)}
-
 		</Formik >
+
 	)
 }
 

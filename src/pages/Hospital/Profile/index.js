@@ -29,6 +29,7 @@ function HospitalProfile() {
     useEffect(() => {
         if (user) {
             HospitalApi.getSingleHospital(user.referenceId).then(res => {
+                console.log("Hospital", res.data.data);
                 setHospital(res.data.data)
             }).catch(err => {
                 toast.error('Problem while fetching hospital profile')

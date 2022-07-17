@@ -21,7 +21,7 @@ function Vendors({ getVendors, vendors, deleteVendor }) {
 	}
 
 	return (
-		<div>
+		<>
 			<DashboardLayout>
 				<div className="row align-items-center add-list">
 					<div className="col-6">
@@ -31,10 +31,13 @@ function Vendors({ getVendors, vendors, deleteVendor }) {
 						<a href={href} onClick={() => { setSelectedVendor(null) }} data-toggle="modal" data-target="#addVendor" className="btn btn-primary px-3">+ ADD VENDOR</a>
 					</div>
 				</div>
-				<div className="row list-block">
+				<div className="row list-block patient-list">
 					{allVendors?.map((ven, key) => (
-						<div key={key} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
+						<div key={key} className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
 							<div className="card">
+								{ven?.image !== "" && (
+									<img src={ven?.image} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px", objectFit: "cover", padding: "0px" }} alt="package_image" />
+								)}
 								<div className="card-body">
 									<div className="media">
 										<h3>{ven?.firstName + " " + ven?.lastName}</h3>
@@ -62,7 +65,7 @@ function Vendors({ getVendors, vendors, deleteVendor }) {
 				<AddVendor selectedVendor={selectedVendor} />
 				{/* Set Doctor Schedule */}
 			</DashboardLayout>
-		</div>
+		</>
 	)
 }
 

@@ -11,6 +11,7 @@ import { pendingLabRequestReducer } from './reducers/pendingLabRequestReducer';
 import { completedLabRequestReducer } from './reducers/completedLabRequestReducer';
 import { promoReducer } from './reducers/promosReducer';
 import { specialitiesReducer } from './reducers/specialitiesReducer';
+import { insurancesReducer } from './reducers/insurancesReducer';
 import { categoriesReducer } from './reducers/categoriesReducer';
 import { addonsReducer } from './reducers/addonsReducer';
 import { searchedDoctorsReducer } from './reducers/patient/searchedDoctorReducer';
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     completedLabRequests: completedLabRequestReducer,
     promos: promoReducer,
     specialities: specialitiesReducer,
+    insurances: insurancesReducer,
     categories: categoriesReducer,
     addons: addonsReducer,
     searchedDoctors: searchedDoctorsReducer,

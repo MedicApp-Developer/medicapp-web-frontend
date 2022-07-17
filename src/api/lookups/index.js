@@ -12,6 +12,9 @@ const LookupApi = {
 	getLanguages() {
 		return trackPromise(axios.get(`/${LOOKUPS_NAMESPACE}/languages`))
 	},
+	getInsurances() {
+		return trackPromise(axios.get(`/${LOOKUPS_NAMESPACE}/insurances`))
+	},
 }
 
 export default LookupApi

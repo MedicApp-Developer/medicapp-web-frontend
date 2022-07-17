@@ -14,6 +14,7 @@ import ExpensePerType from './Expenses/components/ExpensePerType';
 import PCR from './PCR';
 import PCRAppointment from './PCRAppointment/PCRAppointment';
 import Specialities from "./Specialities";
+import Insurances from "./Insurances";
 import Vendors from './Vendors';
 import VendorType from './PackageCategories';
 import PackageCategories from './PackageCategories';
@@ -26,6 +27,9 @@ const AdminRouter = withRouter(({ match, ...props }) => {
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/specialities`} >
                 <Specialities />
+            </AdminRoute>
+            <AdminRoute exact path={`${match.path}/insurances`} >
+                <Insurances />
             </AdminRoute>
             <AdminRoute exact path={`${match.path}/package-categories`} >
                 <PackageCategories />

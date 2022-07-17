@@ -1,14 +1,14 @@
 import React from 'react'
 import { MultiSelect } from "react-multi-select-component"
 
-function MultipleSelect({ options, value, changeHandler, label, hasError, errorMessage, defaultValue }) {
+function MultipleSelect({ options, value, changeHandler, label, hasError, errorMessage, defaultValue, hasSelectAll }) {
 
 	return (
 		<>
 			<div>
 				<MultiSelect
 					options={options}
-					hasSelectAll={true}
+					hasSelectAll={hasSelectAll}
 					isLoading={false}
 					shouldToggleOnHover={false}
 					disableSearch={false}
@@ -17,7 +17,8 @@ function MultipleSelect({ options, value, changeHandler, label, hasError, errorM
 					disabled={false}
 					onChange={changeHandler}
 					labelledBy={label}
-					className={hasError ? "multi-select error-border" : "multi-select"}
+					overrideStrings={{ "selectSomeItems": label }}
+					className={hasError ? "multi-select error-border text-left" : "multi-select text-left"}
 				/>
 			</div>
 			{hasError ? (

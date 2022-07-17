@@ -12,6 +12,7 @@ function Specialities({ getSpecialities, specialities, deleteSpeciality }) {
     const [selectedSpeciality, setSelectedSpeciality] = useState(null);
 
     useEffect(() => {
+        console.log("SPECIALITIES", specialities);
         getSpecialities()
     }, [getSpecialities])
 

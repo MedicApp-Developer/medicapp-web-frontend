@@ -44,16 +44,16 @@ function Patient({ patients, getPatients, deletePatient, setPageNumber }) {
             <div class="col-6">
                <h4>Patient List</h4>
             </div>
-            {user.role === NURSE && (
+            {/* {user.role === NURSE && (
                <div class="col-6 text-right">
                   <a href="javascript:void(0)" data-toggle="modal" data-target="#addPatient" class="btn btn-primary px-3">+ ADD PATIENT</a>
                </div>
-            )}
+            )} */}
          </div>
-         <div className="row list-block patient-list">
+         <div className="row list-block patient-list ">
             {allPatients?.map(patient => (
-               <div key={patient?._id} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                  <div className="card">
+               <div key={patient?._id} className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                  <div className="card ">
                      <div className="card-body">
                         <div className="media">
                            <img src={patient?.image ? patient?.image : PATIENT_IMAGE} style={{ cursor: "pointer" }} className="patient-profile-large" alt="patient" onClick={(e) => { history.push(redirectTo + `/${patient._id}`) }} />

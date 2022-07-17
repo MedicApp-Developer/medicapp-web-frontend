@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import AuthApi from '../../../api/Auth'
@@ -8,6 +8,8 @@ import { LOGIN_ROUTE, SELECT_REGISTERATION_TYPE_ROUTE } from '../../../constants
 import LOGO from '../../../assets/images/logo.png'
 import AddressInfo from './components/AddressInfo'
 import NumberFormat from 'react-number-format'
+import LookupApi from '../../../api/lookups'
+import MultipleSelect from '../../../components/forms/MultipleSelect'
 
 function HospitalRegisteration() {
 
@@ -16,8 +18,25 @@ function HospitalRegisteration() {
     const [submited, setSubmited] = useState(false)
     const [step, setStep] = useState(1)
     const [firstFormValues, setFirstFormValues] = useState({})
+    const [allInsurances, setAllInsurances] = useState([])
+    const [selectedInsurances, setSelectedInsurances] = useState([])
+    const [insurancesError, setInsurancesError] = useState(false)
 
     const history = useHistory()
+
+
+    useEffect(() => {
+        LookupApi.getInsurances().then(res => {
+            const data = []
+            res.data.data.map(item => {
+                data.push({
+                    label: item.name_en,
+                    value: item._id
+                })
+            })
+            setAllInsurances(data)
+        })
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -91,10 +110,20 @@ function HospitalRegisteration() {
         formData.append("password", finalSubmitValues.password);
         formData.append('tradeLicenseFile', file);
 
+        // Adding insurances ids
+        const insurances = []
+        selectedInsurances.map(item => {
+            insurances.push(item.value)
+        })
+        for (let index = 0; index < insurances.length; index++) {
+            formData.append("insurances[]", insurances[index])
+        }
+
         await AuthApi.registerHospital(formData).then(res => {
             toast.success("Hospital Registered Successfully")
             history.push(LOGIN_ROUTE)
         }).catch(err => {
+            console.log("Error", err);
             toast.error("Problem while registeration of hospital")
         })
     }
@@ -156,6 +185,17 @@ function HospitalRegisteration() {
                                     {submited && !file && fileError ? (
                                         <div style={{ color: "red", float: 'right', paddingTop: '0.7rem', paddingBottom: '0.7rem', fontSize: "0.9rem" }}>{fileError}</div>
                                     ) : null}
+                                </div>
+                                <div class="form-group">
+                                    <MultipleSelect
+                                        options={allInsurances}
+                                        value={selectedInsurances}
+                                        changeHandler={(e) => { setSelectedInsurances(e); e.length > 0 ? setInsurancesError(false) : setInsurancesError(true) }}
+                                        //hasError={insurancesError}
+                                        hasSelectAll={false}
+                                        label={"Select supported insurances (optional)"}
+                                        errorMessage={"Speciality is required"}
+                                    />
                                 </div>
                                 <div class="form-group">
                                     <NumberFormat
