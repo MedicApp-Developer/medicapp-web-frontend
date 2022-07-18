@@ -26,6 +26,11 @@ function HospitalProfile() {
         selectedServices: []
     })
 
+    const [insurances, setInsurances] = useState({
+        insurances: [],
+        selectedInsurances: []
+    })
+
     useEffect(() => {
         if (user) {
             HospitalApi.getSingleHospital(user.referenceId).then(res => {
@@ -81,6 +86,29 @@ function HospitalProfile() {
                 setServices({
                     services: servicesOptions,
                     selectedServices: prevServices
+                })
+            })
+
+            HospitalApi.getAllInsurances().then(res => {
+                console.log("Insurances", res.data)
+                const insurancesOptions = []
+                res.data.data.map(service => {
+                    insurancesOptions.push({
+                        label: service.name_en,
+                        value: service._id
+                    })
+                })
+                const prevInsurances = []
+                insurancesOptions.map(outerItem => {
+                    hospital?.hospital?.insurances?.map(innerItem => {
+                        if (outerItem.value === innerItem._id) {
+                            prevInsurances.push(outerItem)
+                        }
+                    })
+                })
+                setInsurances({
+                    insurances: insurancesOptions,
+                    selectedInsurances: prevInsurances
                 })
             })
         }
@@ -139,7 +167,7 @@ function HospitalProfile() {
                 </div>
                 {returnedComponent}
                 {services?.services?.length > 0 && categories?.categories?.length > 0 && (
-                    <UpdateHospitalProfile hospitalId={user.referenceId} hospital={hospital} categories={categories} setCategories={setCategories} services={services} setServices={setServices} />
+                    <UpdateHospitalProfile hospitalId={user.referenceId} hospital={hospital} categories={categories} setCategories={setCategories} services={services} setServices={setServices} insurances={insurances} setInsurances={setInsurances} />
                 )}
             </DashboardLayout>
         </>

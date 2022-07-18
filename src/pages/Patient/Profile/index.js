@@ -15,6 +15,7 @@ import FamilyMembers from './components/FamilyMembers'
 import SickLeaves from './components/SickLeaves'
 import Rewards from './components/Rewards'
 import AccountDelete from './components/AccountDelete'
+import HospitalApi from '../../../api/Hospital'
 
 function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
     const [selectedTab, setSelectedTab] = useState(MEDICAL_PROFILE)
@@ -22,9 +23,41 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
 
     const { patient } = patients && patients
 
+    const [insurances, setInsurances] = useState({
+        insurances: [],
+        selectedInsurances: []
+    })
+
     useEffect(() => {
         getPatientAccountInfo(user?._id)
     }, [getPatientAccountInfo])
+
+    useEffect(() => {
+        if (patient) {
+            HospitalApi.getAllInsurances().then(res => {
+                console.log("Insurances", res.data)
+                const insurancesOptions = []
+                res.data.data.map(service => {
+                    insurancesOptions.push({
+                        label: service.name_en,
+                        value: service._id
+                    })
+                })
+                const prevInsurances = []
+                insurancesOptions.map(outerItem => {
+                    patient?.patient?.insurances?.map(innerItem => {
+                        if (outerItem.value === innerItem._id) {
+                            prevInsurances.push(outerItem)
+                        }
+                    })
+                })
+                setInsurances({
+                    insurances: insurancesOptions,
+                    selectedInsurances: prevInsurances
+                })
+            })
+        }
+    }, [patient])
 
     const profileUpdatedHandler = (updatedPatient) => {
         patient.patient = updatedPatient
@@ -50,7 +83,7 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
         case LAB_RESULTS:
             componentToRender = <LabResults results={patient?.labResults} />; break
         case ACCOUNT:
-            componentToRender = <Account deactivePatient={deactivePatient} currentPatient={patient.patient} user={user} profileUpdated={profileUpdatedHandler} />; break
+            componentToRender = <Account deactivePatient={deactivePatient} currentPatient={patient.patient} user={user} profileUpdated={profileUpdatedHandler} insurances={insurances} setInsurances={setInsurances} />; break
         default:
             componentToRender = <MedicalProfile patient={patient?.patient} />
     }

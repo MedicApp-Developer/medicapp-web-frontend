@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import AuthApi from '../../../api/Auth'
@@ -10,7 +10,9 @@ import { FEMALE, MALE, OTHER } from '../../../constants/Roles'
 import SelectInput from '../../../components/forms/SelectInput'
 import TextInput from '../../../components/forms/TextInput'
 import PatientApi from '../../../api/Patients'
+import LookupApi from '../../../api/lookups'
 import NumberFormatInput from '../../../components/forms/NumberFormat'
+import MultipleSelect from '../../../components/forms/MultipleSelect'
 import { useTranslation } from "react-i18next"
 import { usePromiseTracker } from "react-promise-tracker";
 import HashLoader from "react-spinners/HashLoader";
@@ -20,8 +22,23 @@ function PatientRegisteration() {
 
     const [file, setFile] = useState(null)
     const [submited, setSubmited] = useState(false)
+    const [allInsurances, setAllInsurances] = useState([])
+    const [selectedInsurances, setSelectedInsurances] = useState([])
 
     const history = useHistory()
+
+    useEffect(() => {
+        LookupApi.getInsurances().then(res => {
+            const data = []
+            res.data.data.map(item => {
+                data.push({
+                    label: item.name_en,
+                    value: item._id
+                })
+            })
+            setAllInsurances(data)
+        })
+    }, [])
 
     const onFileUpload = (e) => {
         setFile(e.target.files[0])
@@ -63,7 +80,14 @@ function PatientRegisteration() {
                 })
             })}
             onSubmit={async (values, { setSubmitting }) => {
-                PatientApi.registerPatient(values).then(res => {
+                const newValues = JSON.parse(JSON.stringify(values))
+                const insurancesId = []
+                selectedInsurances.map(item => {
+                    insurancesId.push(item.value)
+                })
+                newValues.insurances = insurancesId
+
+                PatientApi.registerPatient(newValues).then(res => {
                     toast.success(t("patient_registered_successfully"))
                     history.push(LOGIN_ROUTE)
                 }).catch(err => {
@@ -121,6 +145,16 @@ function PatientRegisteration() {
                                     </SelectInput>
                                 </div>
                                 <div class="form-group">
+                                    <MultipleSelect
+                                        options={allInsurances}
+                                        value={selectedInsurances}
+                                        changeHandler={(e) => { setSelectedInsurances(e) }}
+                                        hasSelectAll={false}
+                                        label={t("select_insurance")}
+                                        errorMessage={"Speciality is required"}
+                                    />
+                                </div>
+                                <div class="form-group">
                                     <TextInput type="text" name="location" placeholder={t("location")} />
                                 </div>
                                 <div class="form-group">
@@ -130,13 +164,7 @@ function PatientRegisteration() {
                                         name="phone" placeholder={t("phone")}
                                     />
                                 </div>
-                                {/* <div class="form-group">
-                                    <input type="file" class="form-control custom-file-input" id="validatedCustomFile" onChange={onFileUpload} />
-                                    <label class="custom-file-label form-control" for="validatedCustomFile">{file ? file.name : "Upload Emirates ID File"} </label>
-                                    {submited && !file ? (
-                                        <div class="invalid-feedback text-right-aligned">Trade License is required</div>
-                                    ) : null}
-                                </div> */}
+
                                 <div class="form-group">
                                     <TextInput type="password" name="password" placeholder={t("password")} />
                                 </div>

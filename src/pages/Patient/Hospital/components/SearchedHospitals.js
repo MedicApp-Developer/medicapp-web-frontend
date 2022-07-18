@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import classNames from 'classnames';
+import { RootContext } from '../../../../contextApi'
 
-function SearchedHospitals({ searchedHospitals }) {
+function SearchedHospitals({ patient, searchedHospitals }) {
 
     const { searchedHospitals: allSearchedHospitals } = searchedHospitals && searchedHospitals;
+    const { user, setUser } = useContext(RootContext)
     const history = useHistory();
+
+
+    const containsInsurance = (hospital) => {
+        console.log("FOUND PATIENT", user);
+        var includes = false
+        user.insurances.forEach(outerElement => {
+            hospital.insurances.forEach(element => {
+                if (outerElement._id === element._id) {
+                    includes = true
+                }
+            });
+        });
+        return includes
+    }
 
     return (
         <>
             {allSearchedHospitals.length > 0 && allSearchedHospitals?.map(hospital => (
-                <div class="media mb-2 shadow-lg mb-2" style={{ padding: "0px 15px", boxShadow: "1px 1px 10px 2px lightgray" }}>
+
+                <div className={classNames("media  mb-4", { "green-border": containsInsurance(hospital) })} style={{ padding: "0px 15px", boxShadow: "0px 0px 16px 0px rgba(202,202,202,0.75)", borderRadius: "8px" }}>
                     <img src={hospital?.image ? hospital?.image : HOSPITAL_IMAGE} style={{ width: '150px !important', height: '125px !important', borderRadius: '10px !important', objectFit: 'cover !important', border: '1px solid #D3D3D3 !important', cursor: 'pointer' }} onClick={() => { history.push(`/hospitals/${hospital._id}`) }} class="mr-3" alt="hospital_logo" />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">

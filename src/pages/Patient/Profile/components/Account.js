@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import SelectInput from '../../../../components/forms/SelectInput'
 import TextInput from '../../../../components/forms/TextInput'
+import MultipleSelect from '../../../../components/forms/MultipleSelect'
 import PatientApi from '../../../../api/Patients'
 import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify'
@@ -13,7 +14,7 @@ import AccountDelete from './AccountDelete'
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture'
 import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
-function Account({ deactivePatient, currentPatient, profileUpdated }) {
+function Account({ deactivePatient, currentPatient, profileUpdated, insurances, setInsurances }) {
    const { user, setUser } = useContext(RootContext)
    const [patient, setPatient] = useState(currentPatient)
    const { t } = useTranslation()
@@ -80,7 +81,13 @@ function Account({ deactivePatient, currentPatient, profileUpdated }) {
             })
          })}
          onSubmit={async (values, { setSubmitting, resetForm }) => {
-            const response = await PatientApi.updatePatient(user._id, values)
+            const newValues = JSON.parse(JSON.stringify(values))
+            const insurancesId = []
+            insurances.selectedInsurances.map(item => {
+               insurancesId.push(item.value)
+            })
+            newValues.insurances = insurancesId
+            const response = await PatientApi.updatePatient(user._id, newValues)
             if (!response.error) {
                toast.success(t("patient_profile_updated"))
                setTimeout(() => {
@@ -137,6 +144,27 @@ function Account({ deactivePatient, currentPatient, profileUpdated }) {
                                     <option value="male">{t('male')}</option>
                                     <option value="female">{t('female')}</option>
                                  </SelectInput>
+                              </div>
+                           </div>
+                           <div className="col-md-6">
+                              <div className="form-group">
+                                 {insurances.selectedInsurances.length > 0 ? (
+                                    <MultipleSelect
+                                       options={insurances.insurances}
+                                       value={insurances.selectedInsurances}
+                                       changeHandler={(e) => { setInsurances({ ...insurances, selectedInsurances: e }) }}
+                                       label={"Select supported insurances (optional)"}
+                                       errorMessage={"Services are required"}
+                                    />
+                                 ) : (
+                                    <MultipleSelect
+                                       options={insurances.insurances}
+                                       value={insurances.selectedInsurances}
+                                       changeHandler={(e) => { setInsurances({ ...insurances, selectedInsurances: e }) }}
+                                       label={"Select supported insurances (optional)"}
+                                       errorMessage={"Services are required"}
+                                    />
+                                 )}
                               </div>
                            </div>
                         </div>

@@ -11,7 +11,7 @@ import MultipleSelect from '../../../../components/forms/MultipleSelect'
 // import MultiSelect from 'react-multiple-select-dropdown-lite'
 // import 'react-multiple-select-dropdown-lite/dist/index.css'
 
-const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories, services, setServices }) => {
+const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories, services, setServices, insurances, setInsurances }) => {
 
     const [categoriesError, setCategoriesError] = useState(false)
     const [servicesError, setServicesError] = useState(false)
@@ -22,16 +22,15 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
         <>
             <Formik
                 initialValues={{
+                    name: hospital?.hospital?.name,
                     openingTime: hospital?.hospital?.openingTime,
                     closingTime: hospital?.hospital?.closingTime,
-                    PCRDPI: hospital?.hospital?.PCRDPI,
                     about: hospital?.hospital?.about,
                     type: hospital?.hospital?.type
                 }}
                 validationSchema={Yup.object({
                     openingTime: Yup.string().required('Required'),
                     closingTime: Yup.string().required('Required'),
-                    PCRDPI: Yup.boolean().required('Required'),
                     about: Yup.string().required('Required'),
                     type: Yup.string().required('Required')
                 })}
@@ -60,8 +59,15 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                             servicesId.push(item.value)
                         })
 
+                        const insurancesId = []
+
+                        insurances.selectedInsurances.map(item => {
+                            insurancesId.push(item.value)
+                        })
+
                         newValues.services = servicesId
                         newValues.category = categoriesId
+                        newValues.insurances = insurancesId
                         HospitalApi.updateHospitalProfile(hospitalId, newValues).then(result => {
                             toast.success("Hospital Profile Updated")
                             setTimeout(() => {
@@ -164,11 +170,23 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                                <SelectInput name="PCRDPI" style={{ height: "50px" }}>
-                                                    <option value="">PCR/DPI</option>
-                                                    <option value={true}>Yes</option>
-                                                    <option value={false}>No</option>
-                                                </SelectInput>
+                                                {insurances.selectedInsurances.length > 0 ? (
+                                                    <MultipleSelect
+                                                        options={insurances.insurances}
+                                                        value={insurances.selectedInsurances}
+                                                        changeHandler={(e) => { setInsurances({ ...insurances, selectedInsurances: e }) }}
+                                                        label={"Select supported insurances (optional)"}
+                                                        errorMessage={"Services are required"}
+                                                    />
+                                                ) : (
+                                                    <MultipleSelect
+                                                        options={insurances.insurances}
+                                                        value={insurances.selectedInsurances}
+                                                        changeHandler={(e) => { setInsurances({ ...insurances, selectedInsurances: e }) }}
+                                                        label={"Select supported insurances (optional)"}
+                                                        errorMessage={"Services are required"}
+                                                    />
+                                                )}
                                             </div>
                                         </div>
                                         <div className="col-md-12">

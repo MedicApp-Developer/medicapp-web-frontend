@@ -33,7 +33,9 @@ function TopDoctors({ doctors, getDoctors }) {
                     </div>
                 ))}
                 {allDoctors.length === 0 && (
-                    <p>No doctors found</p>
+                    <div class="col-md-6">
+                        <p>No doctors found</p>
+                    </div>
                 )}
             </div>
         </>

@@ -909,6 +909,10 @@ header .dropdown-menu {
 	color: #EED705;
 }
 
+.green-border {
+	border: 2px solid rgba(14, 235, 19, 0.75)
+}
+
 .lab-results .media span {
 	background: #E6F2FF;
 	border-radius: 3px;

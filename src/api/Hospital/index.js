@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { CATEGORIES_NAMESPACE, HOSPITAL_NAMESPACE } from '../../constants/namespaces';
+import { CATEGORIES_NAMESPACE, HOSPITAL_NAMESPACE, INSURANCE_REQUEST_NAMESPACE } from '../../constants/namespaces';
 import { trackPromise } from 'react-promise-tracker';
 
 const HospitalApi = {
@@ -11,6 +11,9 @@ const HospitalApi = {
     },
     getAllHospitalCategories() {
         return trackPromise(axios.get(`${CATEGORIES_NAMESPACE}`));
+    },
+    getAllInsurances() {
+        return trackPromise(axios.get(`${INSURANCE_REQUEST_NAMESPACE}`));
     },
     updateHospitalProfile(hospitalId, newData) {
         return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/${hospitalId}`, newData));

@@ -13,6 +13,7 @@ export default ({ children }) => {
 
   useEffect(
     () => {
+      console.log("Current User", user);
       if (!selectedNav) console.log("");
       else window.localStorage.setItem('selectedNav', selectedNav);
 

@@ -13,7 +13,7 @@ function SearchedDoctors({ allSearchedDoctors }) {
     return (
         <>
             {allSearchedDoctors?.length > 0 && allSearchedDoctors.map(doctor => (
-                <div class="media mb-2 shadow-lg mb-2" style={{ padding: "0px 15px", boxShadow: "1px 1px 10px 2px lightgray" }}>
+                <div class="media shadow-lg mb-4" style={{ padding: "0px 15px", boxShadow: "0px 0px 16px 0px rgba(202,202,202,0.75)", borderRadius: "8px" }}>
                     <img src={allSearchedDoctors.length > 0 ? doctor.image ? doctor.image : EMPTY_IMAGE_PLACEHOLDER : EMPTY_IMAGE_PLACEHOLDER} class="mr-3" alt="medeor_logo" style={{ cursor: "pointer" }} onClick={(e) => history.push(`/doctor/${doctor._id}`)} />
                     <div class="media-body">
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
