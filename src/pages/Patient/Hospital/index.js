@@ -34,7 +34,7 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                 hospitalTypes
             })
         }
-    }, [])
+    }, [setSearchText])
 
     const onCategoriesCheckboxChanged = (spec) => {
         if (checkedCategories.filter(item => item === spec._id).length > 0) {
@@ -135,7 +135,10 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                                 </select> */}
                             </div>
                             {/* Searched Hospitals */}
-                            <SearchedHospitals allSearchedHospitals={allSearchedHospitals} />
+                            {allSearchedHospitals.length > 0 && allSearchedHospitals?.map(hospital => {
+                                return <SearchedHospitals hospital={hospital} />
+                            }
+                            )}
                         </div>
                         {/* <div class="col-md-2 mt-4 mt-md-0">
                         <img class="img-fluid mt-2" src="https://via.placeholder.com/300x700?text=Add" alt="add" />
