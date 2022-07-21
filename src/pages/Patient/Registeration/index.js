@@ -82,7 +82,7 @@ function PatientRegisteration() {
             onSubmit={async (values, { setSubmitting }) => {
                 const newValues = JSON.parse(JSON.stringify(values))
                 const insurancesId = []
-                selectedInsurances.map(item => {
+                selectedInsurances.forEach(item => {
                     insurancesId.push(item.value)
                 })
                 newValues.insurances = insurancesId

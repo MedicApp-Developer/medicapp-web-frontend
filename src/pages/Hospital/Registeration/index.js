@@ -28,7 +28,7 @@ function HospitalRegisteration() {
     useEffect(() => {
         LookupApi.getInsurances().then(res => {
             const data = []
-            res.data.data.map(item => {
+            res.data.data.forEach(item => {
                 data.push({
                     label: item.name_en,
                     value: item._id
@@ -81,7 +81,7 @@ function HospitalRegisteration() {
 
     const onFileUpload = (e) => {
         var upld = e.target.files[0].type;
-        if (upld == "application/pdf") {
+        if (upld === "application/pdf") {
             setFile(e.target.files[0]);
             setFileError("");
         } else {
@@ -112,7 +112,7 @@ function HospitalRegisteration() {
 
         // Adding insurances ids
         const insurances = []
-        selectedInsurances.map(item => {
+        selectedInsurances.forEach(item => {
             insurances.push(item.value)
         })
         for (let index = 0; index < insurances.length; index++) {

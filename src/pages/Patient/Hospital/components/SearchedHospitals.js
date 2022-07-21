@@ -7,7 +7,7 @@ import { RootContext } from '../../../../contextApi'
 
 function SearchedHospitals({ hospital }) {
 
-    const { user, setUser } = useContext(RootContext)
+    const { user } = useContext(RootContext)
     const [isInsuranceSupported, setIsInsuranceSupported] = useState(false)
     const history = useHistory();
 
@@ -22,7 +22,7 @@ function SearchedHospitals({ hospital }) {
             });
         });
         setIsInsuranceSupported(includes)
-    }, [hospital])
+    }, [hospital, user.insurances])
 
     return (
         <div className={classNames("media  mb-4", { "green-border": isInsuranceSupported })} style={{ padding: "0px 15px", boxShadow: "0px 0px 16px 0px rgba(202,202,202,0.75)", borderRadius: "8px" }}>

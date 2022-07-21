@@ -32,42 +32,44 @@ function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
                <h4>Promo Videos</h4>
             </div>
             <div class="col-6 text-right">
-               <a href="javascript:void(0)" data-toggle="modal" data-target="#addPromo" class="btn btn-primary px-3">+ ADD PROMO VIDEO</a>
+               <button data-toggle="modal" data-target="#addPromo" class="btn btn-primary px-3">+ ADD PROMO VIDEO</button>
             </div>
          </div>
          <div className="row list-block patient-list">
-            {allPromos?.map(promo => (
-               <div key={promo?._id} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                  <div className="card">
-                     <div className="card-body">
-                        <div className="media" onClick={() => setSelectedPromo(promo)} data-toggle="modal" data-target="#video-wrapper" >
-                           <ReactPlayer
-                              url={promo.url}
-                              width="260px"
-                              height="250px"
-                           />
-                           <div className="media-body">
-                              <ul>
-                                 <li>
-                                    <h6>Name</h6>
-                                    <p>{promo.name}</p>
-                                    <p style={{ fontSize: "1rem" }}>{promo?.likes} <span> <img style={{ paddingTop: '7px', paddingLeft: '2px', width: "25px", height: "auto" }} src={LIKE_IMAGE}></img> </span></p>
-                                 </li>
-                              </ul>
+            {allPromos?.map(promo => {
+               console.log(promo.url);
+               return (
+                  <div key={promo?._id} className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                     <div className="card">
+                        <div className="card-body">
+                           <div className="media" onClick={() => setSelectedPromo(promo)} data-toggle="modal" data-target="#video-wrapper">
+                              <ReactPlayer
+                                 url={promo.url}
+                                 width="260px"
+                                 height="250px" />
+                              <div className="media-body">
+                                 <ul>
+                                    <li>
+                                       <h6>Name</h6>
+                                       <p>{promo.name}</p>
+                                       <p style={{ fontSize: "1rem" }}>{promo?.likes} <span> <img style={{ paddingTop: '7px', paddingLeft: '2px', width: "25px", height: "auto" }} src={LIKE_IMAGE}></img> </span></p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="dropdown">
+                           <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span className="icon-dots"></span>
+                           </a>
+                           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePromosHandler(promo?._id); }}>Delete</a>
                            </div>
                         </div>
                      </div>
-                     <div className="dropdown">
-                        <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <span className="icon-dots"></span>
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                           <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePromosHandler(promo?._id) }}>Delete</a>
-                        </div>
-                     </div>
                   </div>
-               </div>
-            ))}
+               );
+            })}
          </div>
          <div className="row">
             <div className="col-md-12">

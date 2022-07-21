@@ -16,7 +16,6 @@ import PCRAppointment from './PCRAppointment/PCRAppointment';
 import Specialities from "./Specialities";
 import Insurances from "./Insurances";
 import Vendors from './Vendors';
-import VendorType from './PackageCategories';
 import PackageCategories from './PackageCategories';
 
 const AdminRouter = withRouter(({ match, ...props }) => {

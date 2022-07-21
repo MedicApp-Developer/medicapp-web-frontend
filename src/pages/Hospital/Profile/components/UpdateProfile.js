@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import HospitalApi from '../../../../api/Hospital'
 import { getTimesArray } from '../../../../Utills/functions'
 import { Form, Formik } from 'formik'
@@ -49,19 +49,19 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
 
                         const categoriesId = []
 
-                        categories.selectedCategories.map(item => {
+                        categories.selectedCategories.forEach(item => {
                             categoriesId.push(item.value)
                         })
 
                         const servicesId = []
 
-                        services.selectedServices.map(item => {
+                        services.selectedServices.forEach(item => {
                             servicesId.push(item.value)
                         })
 
                         const insurancesId = []
 
-                        insurances.selectedInsurances.map(item => {
+                        insurances.selectedInsurances.forEach(item => {
                             insurancesId.push(item.value)
                         })
 
