@@ -14,6 +14,7 @@ function LabResults({ results }) {
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-md-12 col-xl-10 pb-5">
+                  <h4 class="mb-4">{t("lab_results")}</h4>
                   {results?.map((result, index) => (
                      <div key={index} class="card lab-result">
                         <div class="card-body py-2">
@@ -44,6 +45,11 @@ function LabResults({ results }) {
                         </div>
                      </div>
                   ))}
+                  {results === undefined || results?.length === 0 && (
+                     <div style={{ backgroundColor: "lightgray", padding: '1rem', borderRadius: '5px' }}>
+                        {t("no_lab_results_available_yet")} !
+                     </div>
+                  )}
                   <SendResults selectedLabResult={selectedLabResult} />
                </div>
             </div>

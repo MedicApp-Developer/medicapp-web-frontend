@@ -9,16 +9,14 @@ import PatientApi from '../../../../api/Patients'
 import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify'
 import { useTranslation } from "react-i18next"
-import { useHistory } from 'react-router-dom'
 import AccountDelete from './AccountDelete'
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture'
 import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
 function Account({ deactivePatient, currentPatient, profileUpdated, insurances, setInsurances }) {
-   const { user, setUser } = useContext(RootContext)
+   const { user } = useContext(RootContext)
    const [patient, setPatient] = useState(currentPatient)
    const { t } = useTranslation()
-   const history = useHistory()
 
    const funDeactivePatient = async () => {
       let nUser = await deactivePatient(patient._id);
@@ -83,7 +81,7 @@ function Account({ deactivePatient, currentPatient, profileUpdated, insurances, 
          onSubmit={async (values, { setSubmitting, resetForm }) => {
             const newValues = JSON.parse(JSON.stringify(values))
             const insurancesId = []
-            insurances.selectedInsurances.map(item => {
+            insurances.selectedInsurances.forEach(item => {
                insurancesId.push(item.value)
             })
             newValues.insurances = insurancesId

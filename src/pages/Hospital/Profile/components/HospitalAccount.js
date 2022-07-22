@@ -6,15 +6,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import HospitalApi from '../../../../api/Hospital';
-import { useHistory } from 'react-router-dom';
-import { LOGIN_ROUTE } from '../../../../constants/Redirects';
-import ShowMap from './ShowMap';
 import ProfilePicture from './ProfilePicture';
 import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 
 function HospitalAccount({ hospitalId, hospital, profilePictureUpdated }) {
    console.log('hospital?.hospital: ', hospital?.hospital)
-   const history = useHistory();
 
    const formik = useFormik({
       initialValues: {

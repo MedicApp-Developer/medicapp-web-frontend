@@ -50,8 +50,8 @@ function Images({ vendor, imageDeleted, imageAdded }) {
 		<>
 			<div className="row mt-2">
 				{vendorImages?.length > 0 && vendorImages?.map(img => (
-					<div className="col-xm-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 justify-content-center">
-						<img className="banner-picture" style={{ marginBottom: "20px" }} src={img} alt="hospital" />
+					<div className="col-xm-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 justify-content-center mr-3">
+						<img className="banner-picture" style={{ marginBottom: "20px",  boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)', }} src={img} alt="hospital" />
 						<button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
 					</div>
 				))}
@@ -70,6 +70,8 @@ function Images({ vendor, imageDeleted, imageAdded }) {
 							alignItems: 'center',
 							justifyContent: 'center',
 							flexDirection: 'column',
+							borderRadius: '10px',
+							boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)',
 							marginTop: "0",
 							cursor: 'pointer',
 						}}

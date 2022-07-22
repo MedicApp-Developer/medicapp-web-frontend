@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { href } from '../../../../constants/extra';
 import ImageUploading from "react-images-uploading"
 import { toast } from 'react-toastify';
 import CAMERA_IMAGE from '../../../../assets/images/camera.png';
@@ -16,17 +15,19 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 
 	const onChange = (imageList, addUpdateIndex) => {
 		// data for submit
-		console.log(imageList, addUpdateIndex)
+		console.log("onChange", imageList, addUpdateIndex)
 		setImages(imageList)
 		imageCropRef.current.click()
 	}
 
 	const uploadProfilePic = () => {
 		if (croppedImage) {
+			console.log('Uploading Cropped Image');
 			let formData = new FormData()
 			formData.append('image', croppedImage)
 			console.log('IDDD', data._id);
 			updatePicture(data._id, formData)
+			setImages([])
 		}
 	}
 
@@ -49,9 +50,16 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 		setImages([])
 	}
 
+	const onCancelHandler = () => {
+		setImages([])
+		imageCropRef.current.click()
+	}
+
 	const croppedImageHandler = (file, url) => {
+		setImages([])
 		imageCropRef.current.click()
 		if (file && url) {
+			console.log('Image Cropped');
 			setCroppedImage(file)
 			setImageUrl(url)
 		}
@@ -61,7 +69,7 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 	return (
 		<div className="col-md-3 col-lg-3 col-xl-2">
 			<div class="col-md-1 text-right" style={{ visibility: 'hidden' }}>
-				<a ref={imageCropRef} href={href} data-toggle="modal" data-target="#gellryImageCropp" class="btn btn-primary px-3"></a>
+				<button ref={imageCropRef} data-toggle="modal" data-target="#imageCropp" class="btn btn-primary px-3"></button>
 			</div>
 			<div class="col-md-4">
 				<ImageUploading
@@ -72,7 +80,7 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 					acceptType={["jpg", "jpeg"]}
 					maxFileSize={500000}
 					onError={(err, list) => {
-						if (err.maxFileSize === true) {
+						if (err.maxFileSize) {
 							toast.error('Size should be less than or equal to 500 KB')
 						}
 					}}
@@ -87,7 +95,7 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 						<>
 							<div className='imageBox' style={{ width: '200px', height: '200px', borderRadius: '10px', cursor: "pointer" }}>
 								<div style={{
-									width: '200px', height: '200px', position: 'absolute', backgroundColor: '#fff', borderRadius: '10px', opacity: 0.4, zIndex: 99999,
+									width: '200px', height: '200px', position: 'absolute', backgroundColor: '#fff', borderRadius: '10px', opacity: 0.4, zIndex: 99,
 									justifyContent: 'center', alignItems: 'center',
 									display: 'flex'
 								}}
@@ -98,8 +106,8 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 									<img
 										src={imageUrl ? imageUrl : data?.image ? data?.image : DEFAULTIMAGE}
 										alt="doctor"
-										style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', }} //border: '1px solid #D3D3D3'
-										// onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
+										style={{ width: '200px', height: '200px', borderRadius: '10px', objectFit: 'cover', border: '1px solid #C8C8C8' }} //border: '1px solid #D3D3D3'
+										onClick={imageList[0]?.data_url ? onImageUpdate.bind(this, 0) : onImageUpload}
 										{...dragProps}
 									/>
 								}
@@ -107,13 +115,13 @@ function ProfilePicture({ data, updatePicture, removePicture, DEFAULTIMAGE }) {
 							<hr style={{ visibility: 'hidden' }} />
 							<div >
 								<a href="" onClick={(e) => { e.preventDefault(); removeImage() }}>Remove</a>
-								<a href="" style={{ pointerEvents: imageList.length < 1 && 'none', marginLeft: "15px", border: '1px solid dodgerblue', padding: '5px', fontWeight: 'bold' }} onClick={(e) => { e.preventDefault(); uploadProfilePic() }}>Upload</a>
+								<a href="" style={{ pointerEvents: !croppedImage && 'none', marginLeft: "15px", border: '1px solid dodgerblue', padding: '5px', fontWeight: 'bold' }} onClick={(e) => { e.preventDefault(); uploadProfilePic() }}>Upload</a>
 							</div>
 						</>
 					)}
 				</ImageUploading>
 				{/* <img class="img-fluid" src={DOCTOR_SHIFTING_IN_FRONT} alt="doctor" /> */}
-				<ImageCrop selectedFile={images[0]} croppedImageFile={croppedImageHandler} />
+				<ImageCrop selectedFile={images[0]} croppedImageFile={croppedImageHandler} onCancel={onCancelHandler} />
 			</div>
 		</div>
 	)

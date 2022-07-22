@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver'
 import { useTranslation } from "react-i18next"
 import VerifyCode from './VerifyCode'
 
-function Appointments({ appointments }) {
+function Appointments({ upcommingAppointments, prevAppointments }) {
 
     const [selectedAppointment, setSelectedAppointment] = useState(null)
     const { t } = useTranslation()
@@ -18,9 +18,9 @@ function Appointments({ appointments }) {
     let yesterday = new Date()
     yesterday.setDate(today.getDate() - 1)
 
-    const history = appointments.filter(appointment => moment(appointment.to).isBefore(today))
+    // const history = appointments.filter(appointment => moment(appointment.to).isBefore(today))
 
-    const upcomming = appointments.filter(appointment => moment(appointment.to).isSameOrAfter(today))
+    // const upcomming = appointments.filter(appointment => moment(appointment.to).isSameOrAfter(today))
 
     const generateAppointmentSlip = (id) => {
         SlotApi.getAppointmentSlip(id).then(res => {
@@ -36,7 +36,7 @@ function Appointments({ appointments }) {
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-xl-12 pb-5">
                             <h4 class="mb-4">{t("upcoming")}</h4>
-                            {upcomming?.map(item => (
+                            {upcommingAppointments?.map(item => (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">
@@ -91,7 +91,7 @@ function Appointments({ appointments }) {
                                     </div>
                                 </div>
                             ))}
-                            {upcomming.length === 0 && (
+                            {prevAppointments.length === 0 && (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">
@@ -107,7 +107,7 @@ function Appointments({ appointments }) {
                                 </div>
                             )}
                             <h4 class="mb-4 mt-5">{t("history")}</h4>
-                            {history.map(item => (
+                            {prevAppointments.map(item => (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">
@@ -162,7 +162,7 @@ function Appointments({ appointments }) {
                                     </div>
                                 </div>
                             ))}
-                            {history.length === 0 && (
+                            {prevAppointments.length === 0 && (
                                 <div class="card lab-result">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center">

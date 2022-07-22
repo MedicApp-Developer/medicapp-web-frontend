@@ -88,7 +88,7 @@
 	"family_members": "Family Members",
 	"member_name": "Member Name",
 	"relation": "Relation",
-	"no_family_members_added_yet": "No Family Members Added Yet",
+	"no_family_members_added_yet": "No family members added yet",
 	"QR_Prescriprion": "Prescriptions",
 	"show_prescription": "Show Prescription",
 	"generate_QR_code": "Generate QR Code",
@@ -162,5 +162,8 @@
 	"accountDelete": "Are you sure you want to permanently delete your account?",
 	"accountDeleteDate": "Your Account Will be deleted on: ",
 	"download_report": "Download Report",
-	"select_insurance": "Select insurance(s) (optional)"
+	"select_insurance": "Select insurance(s) (optional)",
+	"no_sick_leaves_available_yet": "No sick leaves available yet",
+	"no_prescriptions_available_yet": "No prescriptions available yet",
+	"no_lab_results_available_yet": "No lab results available yet"
 }

@@ -3,7 +3,7 @@ import AvatarEditor from 'react-avatar-editor'
 import { Range, getTrackBackground } from 'react-range';
 
 
-function GalleryImageCrop({ selectedFile, croppedImageFile }) {
+function GalleryImageCrop({ selectedFile, croppedImageFile, onCancel }) {
 
 
     const [value, setValue] = useState([1])
@@ -32,7 +32,7 @@ function GalleryImageCrop({ selectedFile, croppedImageFile }) {
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-body text-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" aria-label="Close" onClick={onCancel}>
                             <span class="icon-close"></span>
                         </button>
                         <div>
@@ -118,7 +118,7 @@ function GalleryImageCrop({ selectedFile, croppedImageFile }) {
                             />
                             <h5>Zoom</h5>
                             <div class='mt-5'>
-                                <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2">Cancel</a>
+                                <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2" onClick={onCancel}>Cancel</a>
                                 <a href="javascript:void(0)" class="btn btn-primary px-5 mx-2" onClick={onClickSave}>Crop</a>
                             </div>
                         </div>

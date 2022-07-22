@@ -67,8 +67,8 @@ function HospitalInfo({ hospital, imageDeleted, imageAdded }) {
             </div>
             <div className="row mt-2">
                 {hospitalImages?.length > 0 && hospitalImages?.map(img => (
-                    <div className="col-md-3" >
-                        <img className="banner-picture" style={{ marginBottom: "20px" }} src={img} alt="hospital" />
+                    <div className="col-md-3 mr-3" >
+                        <img className="banner-picture" style={{ marginBottom: "20px", boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)', }} src={img} alt="hospital" />
                         <button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
                     </div>
                 ))}
@@ -87,6 +87,8 @@ function HospitalInfo({ hospital, imageDeleted, imageAdded }) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             flexDirection: 'column',
+                            borderRadius: '10px',
+                            boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)',
                             marginTop: "0",
                             cursor: 'pointer',
                         }}

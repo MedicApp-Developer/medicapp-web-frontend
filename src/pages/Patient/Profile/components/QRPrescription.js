@@ -56,6 +56,11 @@ function QRPrescription({ prescriptions }) {
                         </div>
                      </div>
                   ))}
+                  {prescriptions === undefined || prescriptions?.length === 0 && (
+                     <div style={{ backgroundColor: "lightgray", padding: '1rem', borderRadius: '5px' }}>
+                        {t("no_prescriptions_available_yet")} !
+                     </div>
+                  )}
                </div>
             </div>
          </div>

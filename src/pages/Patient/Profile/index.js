@@ -9,12 +9,9 @@ import LabResults from './components/LabResults'
 import Account from './components/Account'
 import { connect } from 'react-redux'
 import { getPatientAccountInfo, refreshPatientAccountInfo, deactivePatient } from '../../../store/actions/patientActions'
-import { GET_PATIENT } from '../../../store/types/patientTypes'
 import { RootContext } from '../../../contextApi'
 import FamilyMembers from './components/FamilyMembers'
 import SickLeaves from './components/SickLeaves'
-import Rewards from './components/Rewards'
-import AccountDelete from './components/AccountDelete'
 import HospitalApi from '../../../api/Hospital'
 
 function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
@@ -30,21 +27,21 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
 
     useEffect(() => {
         getPatientAccountInfo(user?._id)
-    }, [getPatientAccountInfo])
+    }, [getPatientAccountInfo, user?._id])
 
     useEffect(() => {
         if (patient) {
             HospitalApi.getAllInsurances().then(res => {
                 console.log("Insurances", res.data)
                 const insurancesOptions = []
-                res.data.data.map(service => {
+                res.data.data.forEach(service => {
                     insurancesOptions.push({
                         label: service.name_en,
                         value: service._id
                     })
                 })
                 const prevInsurances = []
-                insurancesOptions.map(outerItem => {
+                insurancesOptions.forEach(outerItem => {
                     patient?.patient?.insurances?.map(innerItem => {
                         if (outerItem.value === innerItem._id) {
                             prevInsurances.push(outerItem)
@@ -73,7 +70,7 @@ function PatientProfile({ getPatientAccountInfo, patients, deactivePatient }) {
         case FAMILY_MEMBERS:
             componentToRender = <FamilyMembers familyMembers={patient?.familyMembers} />; break
         case APPOINTMENTS:
-            componentToRender = <Appointments appointments={patient?.upcommingAppointments} />; break
+            componentToRender = <Appointments upcommingAppointments={patient?.upcommingAppointments} prevAppointments={patient?.prevAppointments} />; break
         case SICK_LEAVES:
             componentToRender = <SickLeaves />; break
         // case REWARDS:

@@ -31,6 +31,7 @@ function SickLeaves() {
 			<div class="row justify-content-center">
 				<div class="col-md-12 col-xl-10 pb-5">
 					<h4 class="mb-4">{t("sick_leaves")}</h4>
+
 					{sickLeaves?.map(leave => (
 						<div class="card lab-result">
 							<div class="card-body py-md-2">
@@ -64,6 +65,11 @@ function SickLeaves() {
 							</div>
 						</div>
 					))}
+					{sickLeaves === undefined || sickLeaves?.length === 0 && (
+						<div style={{ backgroundColor: "lightgray", padding: '1rem', borderRadius: '5px' }}>
+							{t("no_sick_leaves_available_yet")} !
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

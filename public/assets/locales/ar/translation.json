@@ -161,5 +161,8 @@
 	"accountDelete": "هل أنت متأكد بحذف حسابك بشكل نهائي؟",
 	"accountDeleteDate": "سيتم حذف حسابك في:",
 	"download_report": "تنزيل التقرير",
-	"select_insurance": "الرجاء اختيار شركة التأمين (اختياري)"
+	"select_insurance": "الرجاء اختيار شركة التأمين (اختياري)",
+	"no_sick_leaves_available_yet": "لا توجد إجازات مرضية متاحة حتى الآن",
+	"no_prescriptions_available_yet": "لا توجد وصفات طبية متاحة حتى الآن",
+	"no_lab_results_available_yet": "لا توجد نتائج معملية متاحة حتى الآن"
 }

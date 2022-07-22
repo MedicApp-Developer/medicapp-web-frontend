@@ -110,7 +110,7 @@ function MedicalProfile({ patient }) {
                                     <div class="card lab-result">
                                         <div class="card-body">
                                             <h5>{t("upcoming_appointment")}</h5>
-                                            {patient?.upcommingAppointments?.map(appointment => (
+                                            {patient?.upcommingAppointments?.length > 0 ? patient?.upcommingAppointments?.map(appointment => (
                                                 <div class="row align-items-center">
                                                     <div class="col-md-12 col-lg-8 pr-0">
                                                         <ul>
@@ -135,7 +135,7 @@ function MedicalProfile({ patient }) {
                                                         <a href="javascript:void(0)" onClick={(e) => { e.preventDefault(); setSelectedAppointment(appointment) }} data-toggle="modal" data-target="#cancel" class="btn btn-danger px-3">{t("CANCEL")}</a>
                                                     </div>
                                                 </div>
-                                            ))}
+                                            )) : (<p style={{ color: 'GrayText', marginTop: '20px' }}>No appointments found</p>)}
                                         </div>
                                     </div>
                                 </div>
@@ -145,8 +145,8 @@ function MedicalProfile({ patient }) {
                                     <div class="card lab-results">
                                         <div class="card-body">
                                             <h5 class="mb-0">{t("lab_results")}</h5>
-                                            <div class="row">
-                                                {patient?.labResults?.map(labResult => (
+                                            {patient?.labResults?.length > 0 ? patient?.labResults?.map(labResult => (
+                                                <div class="row ">
                                                     <div class="col-sm-12 col-md-6">
                                                         <div class="media">
                                                             <span> <img src={LAB_IMAGE} style={{ width: "20px", height: "20px", borderRadius: "0px" }} alt="lab" /></span>
@@ -156,8 +156,8 @@ function MedicalProfile({ patient }) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))}
-                                            </div>
+                                                </div>
+                                            )) : (<p style={{ color: 'GrayText', marginTop: '20px' }}>No lab results found</p>)}
                                         </div>
                                     </div>
                                 </div>
@@ -165,8 +165,8 @@ function MedicalProfile({ patient }) {
                                     <div class="card lab-results pb-1">
                                         <div class="card-body pb-4">
                                             <h5 class="mb-0">{t("QR_Prescriprion")}</h5>
-                                            <div class="row">
-                                                {patient?.qrPrescriptions?.map(prescription => (
+                                            {patient?.qrPrescriptions?.length > 0 ? patient?.qrPrescriptions?.map(prescription => (
+                                                <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="media">
                                                             <span class="bg-danger"> <img src={VIEW_QR_IMAGE} style={{ width: "20px", height: "20px", borderRadius: "0px" }} alt="view-qr" /></span>
@@ -177,9 +177,9 @@ function MedicalProfile({ patient }) {
                                                             <a href={href} data-toggle="modal" data-target="#qrCode" onClick={(e) => { e.preventDefault(); setSelectedResult(prescription) }} class="btn btn-primary px-3 py-1">{t("view")}</a>
                                                         </div>
                                                     </div>
-                                                ))}
-                                                <GenerateQrCode selectedResult={selectedResult} setSelectedResult={setSelectedResult} />
-                                            </div>
+                                                </div>
+                                            )) : (<p style={{ color: 'GrayText', marginTop: '20px' }}>No prescriptions found</p>)}
+                                            <GenerateQrCode selectedResult={selectedResult} setSelectedResult={setSelectedResult} />
                                         </div>
                                     </div>
                                 </div>

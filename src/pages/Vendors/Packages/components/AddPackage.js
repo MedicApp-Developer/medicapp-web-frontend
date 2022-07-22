@@ -27,24 +27,9 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 		}
 	}, [getVendors, allVendors]);
 
-	const handleImageSelect = (e) => {
-		setImage(e.target.files[0]);
-		//setImageSrc(URL.createObjectURL(e.target.files[0]))
-	}
-
 	const profilePictureUpdateHandler = (file) => {
 		setImage(file);
 		setImageSrc(URL.createObjectURL(file))
-	}
-
-	const profilePictureDeleteHandler = (id, formData) => {
-		// HospitalApi.removeProfilePicture(id).then(res => {
-		//    toast.success("Profile picture deleted");
-		//    profilePictureUpdated(res.data.data)
-		// }).catch(err => {
-		//    console.log(err);
-		//    toast.error("Failed to delete profile picture")
-		// })
 	}
 
 	return (
@@ -196,11 +181,10 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 													placeholder="About Package"
 												/>
 											</div>
-											<div className="form-group text-center" style={{ marginBottom: "1.5rem" }}>
+											<div className="form-group" style={{ marginBottom: "1.5rem"}}>
 												<GalleryImgePicker
 													image={selectedPackage?.images[0]}
 													updatePicture={profilePictureUpdateHandler}
-													removePicture={profilePictureDeleteHandler}
 													DEFAULTIMAGE={HOSPITAL_IMAGE}
 												/>
 											</div>
