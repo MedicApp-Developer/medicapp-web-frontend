@@ -24,7 +24,7 @@ function AddDoctor({ addDoctor }) {
         DoctorApi.getAllSpecialities("undefined").then(res => {
             const data = []
 
-            res.data.data.map(item => {
+            res.data.data.forEach(item => {
                 data.push({
                     label: item.name_en,
                     value: item._id
@@ -71,7 +71,7 @@ function AddDoctor({ addDoctor }) {
                     setSpecialityError(false)
 
                     const specialityIds = []
-                    selectedSpeciality.map(item => {
+                    selectedSpeciality.forEach(item => {
                         specialityIds.push(item.value)
                     })
 

@@ -85,27 +85,29 @@ function BookAppointment() {
 
     return (
         <AppLayout>
-            <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
-                <a ref={buttonRef} href={href} data-toggle="modal" data-target="#setAppointment" class="btn btn-primary px-3"></a>
-            </div>
-            <div className="col-md-12 mb-3">
-                <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>
-                    <h4><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{selectedDoctorName}'s</span> {t("available_slots")}</h4>
+            <div class='container'>
+                <div class="col-6 text-right" style={{ visibility: 'hidden' }}>
+                    <a ref={buttonRef} href={href} data-toggle="modal" data-target="#setAppointment" class="btn btn-primary px-3"></a>
                 </div>
-                <Calendar
-                    popup
-                    localizer={localizer}
-                    events={slots}
-                    onSelectEvent={onSelectEvent}
-                    startAccessor="start"
-                    views={['month']}
-                    endAccessor="end"
-                    selectable={true}
-                    eventPropGetter={(eventStyleGetter)}
-                />
+                <div className="col-md-12 mb-3">
+                    <div class="col-6 mb-4" style={{ marginLeft: '-15px', fontWeight: '600', fontSize: "22px" }}>
+                        <h4><span style={{ fontStyle: 'italic', textDecoration: 'underline' }}>{selectedDoctorName}'s</span> {t("available_slots")}</h4>
+                    </div>
+                    <Calendar
+                        popup
+                        localizer={localizer}
+                        events={slots}
+                        onSelectEvent={onSelectEvent}
+                        startAccessor="start"
+                        views={['month']}
+                        endAccessor="end"
+                        selectable={true}
+                        style={{ height: 900 }}
+                        eventPropGetter={(eventStyleGetter)}
+                    />
+                </div>
+                <CreateAppointment doctor={doctor} selectedSlot={selectedSlot} />
             </div>
-
-            <CreateAppointment doctor={doctor} selectedSlot={selectedSlot} />
         </AppLayout>
     )
 }

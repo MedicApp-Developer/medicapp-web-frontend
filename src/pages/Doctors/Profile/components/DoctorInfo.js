@@ -5,7 +5,6 @@ import DoctorApi from '../../../../api/Doctors'
 import { toast } from 'react-toastify'
 
 function DoctorInfo({ doctor }) {
-   console.log(doctor)
    const [images, setImages] = React.useState([])
    const maxNumber = 1
 
@@ -31,11 +30,11 @@ function DoctorInfo({ doctor }) {
       <>
          <div class="row align-items-start add-list hospital-info">
             <div class="col-12 text-right">
-               <a href="javascript:void(0)" data-toggle="modal" data-target="#updateDoctor" class="btn btn-primary px-5">Update</a>
+               <button data-toggle="modal" data-target="#updateDoctor" class="btn btn-primary px-5">Update</button>
             </div>
          </div>
          <div class="row mt-4">
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                <ImageUploading
                   multiple
                   value={images}

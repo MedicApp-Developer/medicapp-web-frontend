@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PATIENT_IMAGE from '../../../../assets/images/doctor_placeholder.png'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -14,7 +14,7 @@ import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture'
 import NumberFormatInput from '../../../../components/forms/NumberFormat'
 
 function Account({ deactivePatient, currentPatient, profileUpdated, insurances, setInsurances }) {
-   const { user } = useContext(RootContext)
+   const { user, setUser } = useContext(RootContext)
    const [patient, setPatient] = useState(currentPatient)
    const { t } = useTranslation()
 
@@ -86,12 +86,12 @@ function Account({ deactivePatient, currentPatient, profileUpdated, insurances, 
             })
             newValues.insurances = insurancesId
             const response = await PatientApi.updatePatient(user._id, newValues)
-            if (!response.error) {
+            if (!response.data.error) {
+               setPatient(response.data.data)
                toast.success(t("patient_profile_updated"))
-               setTimeout(() => {
-                  localStorage.clear()
-                  window.location.href = "/"
-               }, 2000)
+               window.localStorage.setItem('user', JSON.stringify(response.data.data));
+               setUser(response.data.data)
+               profileUpdated(response.data.data)
             } else {
                toast.error(t("problem_while_updating_patient_profile"))
             }

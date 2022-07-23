@@ -54,8 +54,8 @@ function HospitalProfile() {
                     })
                 })
                 const prevCategories = []
-                categoryOptions.map(outerItem => {
-                    hospital?.hospital?.category?.map(innerItem => {
+                categoryOptions.forEach(outerItem => {
+                    hospital?.hospital?.category?.forEach(innerItem => {
                         if (outerItem.value === innerItem) {
                             prevCategories.push(outerItem)
                         }
@@ -69,15 +69,15 @@ function HospitalProfile() {
 
             HospitalApi.getAllHospitalServices().then(res => {
                 const servicesOptions = []
-                res.data.data.map(service => {
+                res.data.data.forEach(service => {
                     servicesOptions.push({
                         label: service.name_en,
                         value: service._id
                     })
                 })
                 const prevServices = []
-                servicesOptions.map(outerItem => {
-                    hospital?.hospital?.services?.map(innerItem => {
+                servicesOptions.forEach(outerItem => {
+                    hospital?.hospital?.services?.forEach(innerItem => {
                         if (outerItem.value === innerItem._id) {
                             prevServices.push(outerItem)
                         }
@@ -92,15 +92,15 @@ function HospitalProfile() {
             HospitalApi.getAllInsurances().then(res => {
                 console.log("Insurances", res.data)
                 const insurancesOptions = []
-                res.data.data.map(service => {
+                res.data.data.forEach(service => {
                     insurancesOptions.push({
                         label: service.name_en,
                         value: service._id
                     })
                 })
                 const prevInsurances = []
-                insurancesOptions.map(outerItem => {
-                    hospital?.hospital?.insurances?.map(innerItem => {
+                insurancesOptions.forEach(outerItem => {
+                    hospital?.hospital?.insurances?.forEach(innerItem => {
                         if (outerItem.value === innerItem._id) {
                             prevInsurances.push(outerItem)
                         }
@@ -116,7 +116,7 @@ function HospitalProfile() {
 
     const imageDeletedHandler = (url) => {
         const images = hospital.hospital.images
-        const updatedImages = images.filter(item => item != url)
+        const updatedImages = images.filter(item => item !== url)
         hospital.hospital.images = updatedImages
         setHospital(hospital)
 
@@ -140,11 +140,11 @@ function HospitalProfile() {
     let returnedComponent = null
 
     if (tabSelected === "Account") {
-        returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} profilePictureUpdated={profilePictureUpdateHandler} />
+        returnedComponent = <HospitalAccount hospitalId={user.referenceId} hospital={hospital} profilePictureUpdated={profilePictureUpdateHandler} setHospital={setHospital} />
     } else if (tabSelected === "Profile") {
         returnedComponent = <HospitalInfo hospital={hospital} imageDeleted={imageDeletedHandler} imageAdded={imageAddedHandler} />
     } else if (tabSelected === "Location") {
-        returnedComponent = <ShowMap hospitalId={user.referenceId} lat={hospital?.hospital?.location?.coordinates[0]} lng={hospital?.hospital?.location?.coordinates[1]} />
+        returnedComponent = <ShowMap hospitalId={user.referenceId} hospital={hospital} setHospital={setHospital} lat={hospital?.hospital?.location?.coordinates[0]} lng={hospital?.hospital?.location?.coordinates[1]} />
     }
 
     return (

@@ -11,13 +11,22 @@ import { RootContext } from '../../../contextApi';
 function DoctorProfile() {
     const [doctor, setDoctor] = useState({});
     const [accountTabSelected, setAccountTabSelected] = useState(true);
+    const [selectedSpeciality, setSelectedSpeciality] = useState([])
     const { user } = useContext(RootContext);
 
     useEffect(() => {
         DoctorApi.getSingleDoctor(user.referenceId).then(res => {
             setDoctor(res.data.data);
+            const selectedSpec = []
+            res.data.data.specialityId.forEach(item => {
+                selectedSpec.push({
+                    label: item.name_en,
+                    value: item._id
+                })
+            })
+            setSelectedSpeciality(selectedSpec)
         });
-    }, []);
+    }, [user.referenceId]);
 
     const profilePictureUpdateHandler = (vendor) => {
         setDoctor(vendor)
@@ -38,11 +47,11 @@ function DoctorProfile() {
                 </div>
             </div>
             {accountTabSelected ?
-                <DoctorAccount doctor={doctor} profilePictureUpdated={profilePictureUpdateHandler} />
+                <DoctorAccount doctor={doctor} setDoctor={setDoctor} profilePictureUpdated={profilePictureUpdateHandler} />
                 :
                 <DoctorInfo doctor={doctor} />
             }
-            <UpdateDoctorProfile doctor={doctor} setDoctor={setDoctor} />
+            <UpdateDoctorProfile doctor={doctor} setDoctor={setDoctor} selectedSpeciality={selectedSpeciality} setSelectedSpeciality={setSelectedSpeciality} />
         </DashboardLayout>
     )
 }

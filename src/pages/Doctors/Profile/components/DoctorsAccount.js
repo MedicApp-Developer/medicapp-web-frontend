@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import DOCTOR_IMAGE from '../../../../assets/images/doctor_placeholder.png'
-import { href } from '../../../../constants/extra'
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../../../../components/forms/TextInput';
 import DoctorApi from '../../../../api/Doctors';
+import { RootContext } from '../../../../contextApi'
 import { toast } from 'react-toastify';
 import ProfilePicture from '../../../Hospital/Profile/components/ProfilePicture';
 
-function DoctorAccount({ doctor, profilePictureUpdated }) {
+function DoctorAccount({ doctor, setDoctor, profilePictureUpdated }) {
+
+   const { setUser } = useContext(RootContext)
 
    const profilePictureUpdateHandler = (id, formData) => {
       DoctorApi.uploadProfilePic(id, formData).then(res => {
@@ -24,7 +26,6 @@ function DoctorAccount({ doctor, profilePictureUpdated }) {
    const profilePictureDeleteHandler = (id) => {
       DoctorApi.removeProfilePicture(id).then(res => {
          toast.success("Profile picture deleted");
-         //setVendor(res.data.data)
          profilePictureUpdated(res.data.data)
       }).catch(err => {
          console.log(err);
@@ -58,26 +59,22 @@ function DoctorAccount({ doctor, profilePictureUpdated }) {
                      )
                   })
                })}
-               onSubmit={(values, { setSubmitting, resetForm }) => {
-                  DoctorApi.updateDoctor(doctor._id, values).then(res => {
+               onSubmit={async (values, { setSubmitting, resetForm }) => {
+                  const response = await DoctorApi.updateDoctor(doctor._id, values)
+                  if (!response.data.error) {
+                     console.log('Doctor Updated', response.data);
+                     setDoctor(response.data.data.doctor)
                      toast.success("Doctor profile updated");
-                     localStorage.clear();
-                     setTimeout(() => {
-                        window.location.reload();
-                     }, 2000);
-                  }).catch(err => {
-                     toast.error("Problem while updating doctor profile");
-                  })
-                  resetForm();
+                     window.localStorage.setItem('user', JSON.stringify(response.data.data.user));
+                     setUser(response.data.data.user)
+                  } else {
+                     toast.error("Problem while updating the doctor");
+                  }
+                  //resetForm();
                }}
             >
                <>
-                  <div class="row align-items-center add-list mb-5">
-                     <div class="col-12">
-                        <h4>Account</h4>
-                     </div>
-                  </div>
-                  <div class="row patient-profile">
+                  <div class="row mt-4">
                      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3">
                         <ProfilePicture
                            data={doctor}
