@@ -5,42 +5,61 @@ import TextArea from '../../../../components/forms/TextArea'
 import TextInput from '../../../../components/forms/TextInput'
 import DoctorApi from '../../../../api/Doctors'
 import { toast } from 'react-toastify'
-import SelectInput from '../../../../components/forms/SelectInput'
+import MultipleSelect from '../../../../components/forms/MultipleSelect'
 
-function UpdateDoctorProfile({ doctor, setDoctor }) {
+function UpdateDoctorProfile({ doctor, setDoctor, selectedSpeciality, setSelectedSpeciality }) {
 
    const [allSpecialities, setAllSpecialities] = useState([])
 
+   const [specialityError, setSpecialityError] = useState(false)
+
    useEffect(() => {
-      DoctorApi.getAllSpecialities().then(res => {
-         setAllSpecialities(res.data.data)
+      DoctorApi.getAllSpecialities("undefined").then(res => {
+         const data = []
+
+         res.data.data.forEach(item => {
+            data.push({
+               label: item.name_en,
+               value: item._id
+            })
+         })
+         setAllSpecialities(data)
       })
-   }, [])
+   }, [doctor])
 
    return (
       <>
          {Object.keys(doctor).length > 0 && (
             <Formik
                initialValues={{
-                  specialityId: doctor.specialityId._id,
                   experience: doctor.experience,
                   about: doctor.about
                }}
                validationSchema={Yup.object({
-                  specialityId: Yup.string().required('Required'),
                   experience: Yup.string().required('Required'),
                   about: Yup.string().required('Required')
                })}
-               onSubmit={(values, { setSubmitting, resetForm }) => {
-                  DoctorApi.updateDoctor(doctor._id, values).then(res => {
-                     toast.success("Doctor profile updated")
-                     setTimeout(() => {
-                        window.location.reload()
-                     }, 2000)
-                  }).catch(err => {
-                     toast.error("Problem while updating doctor profile")
-                  })
-                  resetForm()
+               onSubmit={async (values, { setSubmitting, resetForm }) => {
+                  if (selectedSpeciality.length === 0) {
+                     setSelectedSpeciality(true)
+                  } else {
+                     const newValues = JSON.parse(JSON.stringify(values))
+
+                     const specialityIds = []
+                     selectedSpeciality.forEach(item => {
+                        specialityIds.push(item.value)
+                     })
+                     newValues.specialityId = specialityIds
+                     const response = await DoctorApi.updateDoctor(doctor._id, newValues)
+                     if (!response.data.error) {
+                        console.log('Doctor Updated', response.data);
+                        setDoctor(response.data.data.doctor)
+                        toast.success("Doctor profile updated");
+                     } else {
+                        toast.error("Problem while updating the doctor");
+                     }
+                  }
+
                }}
             >
                <div class="modal fade" id="updateDoctor" tabindex="-1" aria-labelledby="updateDoctorLabel" aria-hidden="true">
@@ -55,12 +74,14 @@ function UpdateDoctorProfile({ doctor, setDoctor }) {
                               <div class="row">
                                  <div class="col-sm-6">
                                     <div class="form-group">
-                                       <SelectInput name="specialityId" style={{ height: "50px" }}>
-                                          <option value="">Select Speciality</option>
-                                          {allSpecialities?.map(spec => (
-                                             <option value={spec._id}>{spec.name_en}</option>
-                                          ))}
-                                       </SelectInput>
+                                       <MultipleSelect
+                                          options={allSpecialities}
+                                          value={selectedSpeciality}
+                                          changeHandler={(e) => { setSelectedSpeciality(e); e.length > 0 ? setSpecialityError(false) : setSpecialityError(true) }}
+                                          hasError={specialityError}
+                                          label={"Select Speciality"}
+                                          errorMessage={"Speciality is required"}
+                                       />
                                     </div>
                                  </div>
                                  <div class="col-sm-6">

@@ -151,6 +151,7 @@ function SetDoctorSchedule() {
                     views={['month']}
                     endAccessor="end"
                     selectable={true}
+                    style={{ height: 900 }}
                     onSelectEvent={onSelectEvent}
                     onSelectSlot={onSelectSlot}
                     eventPropGetter={(eventStyleGetter)}

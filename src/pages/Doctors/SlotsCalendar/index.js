@@ -175,6 +175,7 @@ function SlotsCalendar() {
                     views={['month']}
                     endAccessor="end"
                     selectable={true}
+                    style={{ height: 900 }}
                     eventPropGetter={(eventStyleGetter)}
                 />
                 <div class="col-6 text-right" style={{ visibility: 'hidden' }}>

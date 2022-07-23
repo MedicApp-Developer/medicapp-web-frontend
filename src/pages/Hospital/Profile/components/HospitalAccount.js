@@ -1,17 +1,15 @@
-import React from 'react'
-import { href } from '../../../../constants/extra'
-import mapImage from '../../../../assets/images/map.png';
-import PATIENT_IMAGE from '../../../../assets/images/patient.png';
+import React, { useContext } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import HospitalApi from '../../../../api/Hospital';
 import ProfilePicture from './ProfilePicture';
+import { RootContext } from '../../../../contextApi'
 import HOSPITAL_IMAGE from '../../../../assets/images/medeor_logo.png';
 
-function HospitalAccount({ hospitalId, hospital, profilePictureUpdated }) {
-   console.log('hospital?.hospital: ', hospital?.hospital)
+function HospitalAccount({ hospitalId, hospital, setHospital, profilePictureUpdated }) {
 
+   const { setUser } = useContext(RootContext)
    const formik = useFormik({
       initialValues: {
          name: hospital?.hospital?.name,
@@ -34,12 +32,12 @@ function HospitalAccount({ hospitalId, hospital, profilePictureUpdated }) {
       }),
       onSubmit: async values => {
          const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
-         if (!response.error) {
+         if (!response.data.error) {
+            console.log('Hospital Updated', response.data);
+            setHospital(response.data.data.hospital)
             toast.success("Hospital profile updated");
-            localStorage.clear();
-            setTimeout(() => {
-               window.location.reload();
-            }, 2000);
+            window.localStorage.setItem('user', JSON.stringify(response.data.data.user));
+            setUser(response.data.data.user)
          } else {
             toast.error("Problem while updating the hospital");
          }

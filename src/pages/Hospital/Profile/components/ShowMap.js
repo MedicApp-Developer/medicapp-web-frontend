@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState, useContext } from 'react'
 import {
     GoogleMap,
     useLoadScript,
@@ -6,6 +6,7 @@ import {
 } from '@react-google-maps/api'
 import HOSPITAL_LOCATION_IMAGE from '../../../../assets/images/hospital-location.png'
 import { toast } from 'react-toastify';
+import { RootContext } from '../../../../contextApi'
 import SearchMap from '../../Registeration/components/SearchMap';
 import LocateMap from '../../Registeration/components/LocateMap';
 import HospitalApi from '../../../../api/Hospital';
@@ -21,7 +22,8 @@ const options = {
     zoomControl: true
 }
 
-function ShowMap({ lat, lng, hospitalId }) {
+function ShowMap({ lat, lng, hospitalId, hospital, setHospital }) {
+    const { setUser } = useContext(RootContext)
     const center = {
         lat,
         lng
@@ -63,12 +65,17 @@ function ShowMap({ lat, lng, hospitalId }) {
                 location: {
                     type: 'Point',
                     coordinates: location
-                }
+                },
+                name: hospital?.hospital?.name
             }
 
             const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
-            if (!response.error) {
+            if (!response.data.error) {
+                console.log('Hospital Updated', response.data);
+                setHospital(response.data.data.hospital)
                 toast.success("Hospital profile updated");
+                window.localStorage.setItem('user', JSON.stringify(response.data.data.user));
+                setUser(response.data.data.user)
             } else {
                 toast.error("Problem while updating the hospital");
             }
@@ -86,7 +93,7 @@ function ShowMap({ lat, lng, hospitalId }) {
                         <LocateMap panTo={panTo} component="HospitalProfile" />
                         <GoogleMap
                             mapContainerStyle={mapContainerStyle}
-                            zoom={8}
+                            zoom={15}
                             center={markers ?? center}
                             options={options}
                             onClick={onMapClick}
