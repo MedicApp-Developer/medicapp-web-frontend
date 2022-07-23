@@ -11,9 +11,11 @@ const instance = axios.create({
 // http://localhost:8080/api
 
 if (token) {
-  instance.defaults.headers.common['authorization'] = "Bearer" + " " + token
+  instance.defaults.headers.common['authorization'] = `Bearer ${token}`
 }
-
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+console.log(timezone);
+instance.defaults.headers.common['timezone'] = timezone;
 instance.interceptors.response.use(function (response) {
   // Do something with response data
   return response
