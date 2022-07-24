@@ -16,7 +16,6 @@ export const searchedHospitalsReducer = (state = initialState, action) => {
                 ...state,
                 searchedHospitals: action.payload,
             };
-            break;
         case HOSPITAL_TYPES_FILTER: 
             return {
                 ...state,
@@ -25,7 +24,6 @@ export const searchedHospitalsReducer = (state = initialState, action) => {
                     hospitalTypes: action.payload
                 }
             }
-            break;
         case CATEGORIES_FILTER: 
             return {
                 ...state,
@@ -34,7 +32,6 @@ export const searchedHospitalsReducer = (state = initialState, action) => {
                     checkedCategories: action.payload
                 }
             }
-            break;
         case ADDONS_FILTER: 
             return {
                 ...state,
@@ -43,7 +40,6 @@ export const searchedHospitalsReducer = (state = initialState, action) => {
                     checkedAddons: action.payload
                 }
             }
-            break;
         case CLEAR_HOSPITALS_SEARCHED: 
             return {
                 ...state,
@@ -54,7 +50,6 @@ export const searchedHospitalsReducer = (state = initialState, action) => {
                     checkedAddons: []
                 }
             }
-            break;
         case CLEAR_FILTERS_ONLY: 
             return {
                 ...state,
