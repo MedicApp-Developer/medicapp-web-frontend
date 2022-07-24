@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import AppLayout from '../../../layout/AppLayout'
+import { RootContext } from '../../../contextApi'
 import SearchedHospitals from './components/SearchedHospitals'
 import SearchHospital from './components/SearchHospital'
 import HospitalTypeFilters from '../Doctor/components/filters/HospitalTypeFilters'
@@ -12,6 +13,7 @@ import { useTranslation } from "react-i18next"
 function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals, filterHospitals, categoriesFilter, hospitalTypesFilter, addonsFilter }) {
     const { searchedHospitals: allSearchedHospitals, filters: { checkedCategories, hospitalTypes, checkedAddons } } = searchedHospitals && searchedHospitals
     const [searchText, setSearchText] = useState("")
+    const { user } = useContext(RootContext)
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -34,7 +36,7 @@ function Hospital({ searchHospitalByText, clearHospitalSearch, searchedHospitals
                 hospitalTypes
             })
         }
-    }, [setSearchText])
+    }, [])
 
     const onCategoriesCheckboxChanged = (spec) => {
         if (checkedCategories.filter(item => item === spec._id).length > 0) {

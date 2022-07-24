@@ -12,7 +12,6 @@ function SearchedHospitals({ hospital }) {
     const history = useHistory();
 
     React.useEffect(() => {
-        console.log(hospital);
         var includes = false
         user.insurances.forEach(outerElement => {
             hospital.insurances.forEach(element => {
