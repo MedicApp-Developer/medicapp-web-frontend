@@ -9,8 +9,8 @@ const PromoApi = {
     getAllPromoVideosForPatient() {
         return trackPromise(axios.get(`/${PROMO_REQUEST_NAMESPACE}/all?getAll=${true}`));
     },
-    deletePromo(id) {
-        return trackPromise(axios.delete(`${PROMO_REQUEST_NAMESPACE}/${id}`));
+    deletePromo(id, videoId) {
+        return trackPromise(axios.delete(`${PROMO_REQUEST_NAMESPACE}/${id}/${videoId}`));
     },
     createPromo(data) {
         return trackPromise(axios.post(`/${PROMO_REQUEST_NAMESPACE}`, data));

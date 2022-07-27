@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import { getPromos, deletePromo, setPageNumber } from '../../../store/actions/promosActions'
 import { getPagesArray } from '../../../Utills/functions';
@@ -19,8 +19,10 @@ function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
       getPromos(pageNumber || 0);
    }, [getPromos, pageNumber]);
 
-   const deletePromosHandler = (id) => {
-      deletePromo(id);
+   const deletePromosHandler = (id, url) => {
+      const videoPublicId = url.split('\\').pop().split('/').pop().split('.')[0];
+      console.log(videoPublicId);
+      deletePromo(id, videoPublicId);
    }
 
    const pages = getPagesArray(numberOfPages);
@@ -63,7 +65,7 @@ function Promos({ promos, getPromos, deletePromo, setPageNumber }) {
                               <span className="icon-dots"></span>
                            </a>
                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePromosHandler(promo?._id); }}>Delete</a>
+                              <a className="dropdown-item delete-item" href={href} onClick={(e) => { e.preventDefault(); deletePromosHandler(promo?._id, promo?.url); }}>Delete</a>
                            </div>
                         </div>
                      </div>
