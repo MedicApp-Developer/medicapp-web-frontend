@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 function HospitalInfo({ hospital, imageDeleted, imageAdded }) {
 
-    const { name, address, openingTime, closingTime, about, _id } = hospital.hospital;
+    const { name, openingTime, closingTime, about, _id } = hospital.hospital;
     const [imageSrc, setImageSrc] = useState(null);
     const [image, setImage] = useState(null);
     const [hospitalImages, setHospitalImages] = useState(hospital.hospital.images);
@@ -38,7 +38,7 @@ function HospitalInfo({ hospital, imageDeleted, imageAdded }) {
             console.log(res);
             toast.success("Hospital gallery image deleted");
             const images = hospitalImages
-            const updatedImages = images.filter(item => item != url)
+            const updatedImages = images.filter(item => item !== url)
             setHospitalImages(updatedImages)
             imageDeleted(url)
         }).catch(err => {
