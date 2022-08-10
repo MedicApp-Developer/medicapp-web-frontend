@@ -18,8 +18,8 @@ const localizer = momentLocalizer(moment)
 function SlotsCalendar() {
 
     const [selectedDate, setSelectedDate] = useState(null)
-    const [startDate, setStartDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
-    const [endDate, setEndDate] = useState(new Date().setHours(new Date().setMinutes(new Date(), 0), 9))
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
     const [slots, setSlots] = useState([])
     const { user } = useContext(RootContext)
     const [selectedSlot, setSelectedSlot] = useState(null)
@@ -30,9 +30,14 @@ function SlotsCalendar() {
 
     const filterPassedTime = (time) => {
         const currentDate = new Date()
-        const selectedDate = new Date(time)
-
+        const selectedDate = new Date(time.getTime())
         return currentDate.getTime() < selectedDate.getTime()
+    }
+
+    const filterEndPassedTime = (time) => {
+        const newDate = moment(time)
+        const dateSelected = moment(startDate)
+        return newDate.isAfter(dateSelected)
     }
 
     useEffect(() => {
@@ -105,6 +110,28 @@ function SlotsCalendar() {
     const onSelectSlot = (box) => {
         if (isTodayOrFuture(moment(box.start))) {
             setSelectedDate(box.start)
+            const startDate = new Date(box.start.getTime());
+            const endDate = new Date(box.start.getTime());
+
+            const currentTime = new Date()
+            console.log("Start Date", startDate);
+            console.log("End Date", endDate);
+            if (currentTime.getMinutes() < 30) {
+                startDate.setMinutes(30)
+                startDate.setHours(currentTime.getHours())
+                setStartDate(startDate)
+                endDate.setMinutes(0)
+                endDate.setHours(new Date().getHours() + 1)
+                setEndDate(endDate)
+            } else {
+                startDate.setMinutes(0)
+                startDate.setHours(new Date().getHours() + 1)
+                setStartDate(startDate)
+
+                endDate.setMinutes(30)
+                endDate.setHours(new Date().getHours() + 1)
+                setEndDate(endDate)
+            }
             createSlotRef.current.click()
         }
     }
@@ -200,11 +227,23 @@ function SlotsCalendar() {
                                                     placeholderText="From Date"
                                                     autoComplete='off'
                                                     selected={startDate}
-                                                    onChange={(date) => setStartDate(date)}
+                                                    onChange={(date) => {
+                                                        setStartDate(date)
+                                                        const dateSelected = new Date(date.getTime());
+                                                        if (dateSelected.getMinutes() < 30) {
+                                                            dateSelected.setMinutes(30)
+                                                            dateSelected.setHours(dateSelected.getHours())
+                                                            setEndDate(dateSelected)
+                                                        } else {
+                                                            dateSelected.setMinutes(0)
+                                                            dateSelected.setHours(dateSelected.getHours() + 1)
+                                                            setEndDate(dateSelected)
+                                                        }
+                                                    }}
                                                     showTimeSelect
                                                     filterTime={filterPassedTime}
-                                                    minDate={new Date(selectedDate)}
-                                                    // maxDate={new Date(selectedDate)}
+                                                    minDate={selectedDate}
+                                                    maxDate={selectedDate}
                                                     dateFormat="MMMM d, yyyy h:mm aa"
                                                 />
                                             </div>
@@ -220,9 +259,9 @@ function SlotsCalendar() {
                                                     selected={endDate}
                                                     onChange={(date) => setEndDate(date)}
                                                     showTimeSelect
-                                                    filterTime={filterPassedTime}
-                                                    minDate={new Date(selectedDate)}
-                                                    // maxDate={new Date(selectedDate)}
+                                                    filterTime={filterEndPassedTime}
+                                                    minDate={selectedDate}
+                                                    maxDate={selectedDate}
                                                     dateFormat="MMMM d, yyyy h:mm aa"
                                                 />
                                             </div>
