@@ -33,7 +33,7 @@ function HospitalAccount({ hospitalId, hospital, setHospital, profilePictureUpda
       onSubmit: async values => {
          const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
          if (!response.data.error) {
-            console.log('Hospital Updated', response.data);
+            console.log('Hospital Updated', response.data.data);
             setHospital(response.data.data.hospital)
             toast.success("Hospital profile updated");
             window.localStorage.setItem('user', JSON.stringify(response.data.data.user));
