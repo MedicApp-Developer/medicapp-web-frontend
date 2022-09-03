@@ -8,15 +8,19 @@ export const filterHospitals = (filters) => async (dispatch, getState) => {
         const response = await HospitalApi.filterHospitals(filters);
         var hospitals = response.data.data
         if (prevUser !== "") {
+            console.log("1");
             if (prevUser.insurances && prevUser.insurances.length !== 0) {
                 let insuranceSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
                         hos.insurances.forEach(i1 => {
-                            console.log("In Filter", i1);
-                            include = prevUser.insurances.some(i2 => {
-                                return i1._id === i2._id
-                            })
+                            for (let i2 of prevUser.insurances) {
+                                if (i1._id === i2._id) {
+                                    include = true;
+                                    break
+                                }
+                            }
+
                         })
                         return include
                     } else {
@@ -24,17 +28,19 @@ export const filterHospitals = (filters) => async (dispatch, getState) => {
                     }
                 })
                 let insuranceNotSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
-                        hos.insurances.forEach(i1 => {
-                            include = prevUser.insurances.some(i2 => {
+                        for (let i1 of hos.insurances) {
+                            for (let i2 of prevUser.insurances) {
                                 if (i1._id !== i2._id) {
-                                    return false
+                                    include = false;
                                 } else {
-                                    return true
+                                    include = true
+                                    break
                                 }
-                            })
-                        })
+                            }
+                            if (include === true) { break }
+                        }
                         return !include
                     } else {
                         return true
@@ -59,15 +65,19 @@ export const searchHospitalByText = (text) => async (dispatch, getState) => {
         const response = await HospitalApi.searchHospitalByText(text);
         var hospitals = response.data.data
         if (prevUser !== "") {
+            console.log("2");
             if (prevUser.insurances && prevUser.insurances.length !== 0) {
                 let insuranceSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
                         hos.insurances.forEach(i1 => {
-                            console.log("In Filter", i1);
-                            include = prevUser.insurances.some(i2 => {
-                                return i1._id === i2._id
-                            })
+                            for (let i2 of prevUser.insurances) {
+                                if (i1._id === i2._id) {
+                                    include = true;
+                                    break
+                                }
+                            }
+
                         })
                         return include
                     } else {
@@ -75,17 +85,19 @@ export const searchHospitalByText = (text) => async (dispatch, getState) => {
                     }
                 })
                 let insuranceNotSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
-                        hos.insurances.forEach(i1 => {
-                            include = prevUser.insurances.some(i2 => {
+                        for (let i1 of hos.insurances) {
+                            for (let i2 of prevUser.insurances) {
                                 if (i1._id !== i2._id) {
-                                    return false
+                                    include = false;
                                 } else {
-                                    return true
+                                    include = true
+                                    break
                                 }
-                            })
-                        })
+                            }
+                            if (include === true) { break }
+                        }
                         return !include
                     } else {
                         return true
@@ -112,14 +124,19 @@ export const clearHospitalSearch = () => async (dispatch, getState) => {
         const response = await HospitalApi.getAllHospitals();
         var hospitals = response.data.data
         if (prevUser !== "") {
+            console.log("3");
             if (prevUser.insurances && prevUser.insurances.length !== 0) {
                 let insuranceSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
                         hos.insurances.forEach(i1 => {
-                            include = prevUser.insurances.some(i2 => {
-                                return i1._id === i2._id
-                            })
+                            for (let i2 of prevUser.insurances) {
+                                if (i1._id === i2._id) {
+                                    include = true;
+                                    break
+                                }
+                            }
+
                         })
                         return include
                     } else {
@@ -127,17 +144,19 @@ export const clearHospitalSearch = () => async (dispatch, getState) => {
                     }
                 })
                 let insuranceNotSupportingHospitals = response.data.data.filter((hos) => {
-                    if (hos.insurances !== 0) {
+                    if (hos.insurances.length !== 0) {
                         var include = false;
-                        hos.insurances.forEach(i1 => {
-                            include = prevUser.insurances.some(i2 => {
+                        for (let i1 of hos.insurances) {
+                            for (let i2 of prevUser.insurances) {
                                 if (i1._id !== i2._id) {
-                                    return false
+                                    include = false;
                                 } else {
-                                    return true
+                                    include = true
+                                    break
                                 }
-                            })
-                        })
+                            }
+                            if (include === true) { break }
+                        }
                         return !include
                     } else {
                         return true

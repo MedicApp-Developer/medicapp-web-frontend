@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import HospitalApi from '../../../../api/Hospital'
 import { getTimesArray } from '../../../../Utills/functions'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { RootContext } from '../../../../contextApi'
 import SelectInput from '../../../../components/forms/SelectInput'
 import TextArea from '../../../../components/forms/TextArea'
 import { CLINIC, HOSPITAL } from '../../../../constants/Roles'
@@ -11,8 +12,9 @@ import MultipleSelect from '../../../../components/forms/MultipleSelect'
 // import MultiSelect from 'react-multiple-select-dropdown-lite'
 // import 'react-multiple-select-dropdown-lite/dist/index.css'
 
-const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories, services, setServices, insurances, setInsurances }) => {
+const UpdateHospitalProfile = ({ hospitalId, hospital, setHospital, categories, setCategories, services, setServices, insurances, setInsurances, hos }) => {
 
+    const { setUser } = useContext(RootContext)
     const [categoriesError, setCategoriesError] = useState(false)
     const [servicesError, setServicesError] = useState(false)
 
@@ -34,7 +36,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                     about: Yup.string().required('Required'),
                     type: Yup.string().required('Required')
                 })}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={async (values, { setSubmitting }) => {
 
                     if (categories.selectedCategories.length === 0) {
                         setCategoriesError(true)
@@ -68,13 +70,15 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, categories, setCategories
                         newValues.services = servicesId
                         newValues.category = categoriesId
                         newValues.insurances = insurancesId
-                        HospitalApi.updateHospitalProfile(hospitalId, newValues).then(result => {
-                            toast.success("Hospital Profile Updated")
-                            setTimeout(() => {
-                                localStorage.clear()
-                                window.location.reload()
-                            }, 2000)
-                        })
+                        const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
+                        if (!response.data.error) {
+                            setHospital(response.data.data)
+                            toast.success("Hospital profile updated");
+                            window.localStorage.setItem('user', JSON.stringify(response.data.data.user));
+                            setUser(response.data.data.user)
+                        } else {
+                            toast.error("Problem while updating the hospital");
+                        }
                     }
 
                 }}

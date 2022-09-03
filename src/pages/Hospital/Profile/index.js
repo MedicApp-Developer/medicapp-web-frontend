@@ -8,7 +8,6 @@ import classNames from 'classnames'
 import HospitalApi from '../../../api/Hospital'
 import { RootContext } from '../../../contextApi/index'
 import { toast } from 'react-toastify'
-import moment from 'moment'
 import ShowMap from './components/ShowMap'
 
 function HospitalProfile() {
@@ -47,7 +46,7 @@ function HospitalProfile() {
         if (hospital && Object.keys(hospital).length > 0) {
             HospitalApi.getAllHospitalCategories().then(res => {
                 const categoryOptions = []
-                res.data.data.map(category => {
+                res.data.data.forEach(category => {
                     categoryOptions.push({
                         label: category.name_en,
                         value: category._id
@@ -167,7 +166,7 @@ function HospitalProfile() {
                 </div>
                 {returnedComponent}
                 {services?.services?.length > 0 && categories?.categories?.length > 0 && (
-                    <UpdateHospitalProfile hospitalId={user.referenceId} hospital={hospital} categories={categories} setCategories={setCategories} services={services} setServices={setServices} insurances={insurances} setInsurances={setInsurances} />
+                    <UpdateHospitalProfile hospitalId={user.referenceId} hospital={hospital} setHospital={setHospital} categories={categories} setCategories={setCategories} services={services} setServices={setServices} insurances={insurances} setInsurances={setInsurances} />
                 )}
             </DashboardLayout>
         </>
