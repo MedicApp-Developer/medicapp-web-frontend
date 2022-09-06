@@ -70,7 +70,7 @@ const UpdateHospitalProfile = ({ hospitalId, hospital, setHospital, categories, 
                         newValues.services = servicesId
                         newValues.category = categoriesId
                         newValues.insurances = insurancesId
-                        const response = await HospitalApi.updateHospitalProfile(hospitalId, values);
+                        const response = await HospitalApi.updateHospitalProfile(hospitalId, newValues);
                         if (!response.data.error) {
                             setHospital(response.data.data)
                             toast.success("Hospital profile updated");

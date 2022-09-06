@@ -7,7 +7,6 @@ import LanguageFilters from './components/filters/LanguageFilters'
 import NationalityFilters from './components/filters/NationalityFilters'
 import SpecialityFilters from './components/filters/SpecialityFilters'
 import SearchedDoctors from './components/SearchedDoctors'
-import axios from '../../../axios'
 import { searchDoctorsByText, clearDoctorSearch, filterDoctors, specialityFilter, hospitalTypesFilter, nationalityFilter, genderFilter, languageFilter } from '../../../store/actions/patient/searchedDoctorsActions'
 import SearchDoctor from './components/filters/SearchDoctor'
 import { useTranslation } from "react-i18next"
