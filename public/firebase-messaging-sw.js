@@ -18,24 +18,18 @@ firebase.initializeApp(firebaseConfig);
 // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage(function(payload) {
+messaging.onBackgroundMessage(function (payload) {
   console.log('Received background message ', payload);
-  console.log( "this: ", this );
-  console.log( "self: ", self );
-  console.log( "window: ", window );
-  console.log( "localStorage: ", localStorage );
-  // if(self.window.localStorage) {
-  //   self.window.localStorage.clear();
-  //   self.window.location.href="/";
-  // }else{
-    self.localStorage.clear();
-    self.location.href="/";
-  // }
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-  };
+  console.log("this: ", this);
+  console.log("self: ", self);
+  console.log("window: ", window);
+  console.log("localStorage: ", localStorage);
+  setTimeout(() => {
+    // setNotification({title: '', body: ''})
+    //localStorage.clear();
+    //history.push(LOGIN_ROUTE);
+  }, 1500);
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
+  // self.registration.showNotification(notificationTitle,
+  //   notificationOptions);
 });

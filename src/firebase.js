@@ -37,11 +37,10 @@ export const onMessageListener = () =>
   new Promise((resolve) => {
 
     onMessage(messaging, (payload) => {
-      console.log( "Payload resolve", payload )
+      console.log("Payload resolve", payload)
       resolve(payload);
     });
-    
-    
+
   });
 
 export const requestFirebaseNotificationPermission = () =>
