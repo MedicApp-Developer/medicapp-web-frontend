@@ -34,10 +34,7 @@ function VendorAccount({ vendorId, vendor, profilePictureUpdated }) {
 			const response = await VendorApi.updateVendor(vendorId, values);
 			if (!response.error) {
 				toast.success("Vendor profile updated");
-				localStorage.clear();
-				setTimeout(() => {
-					window.location.reload();
-				}, 2000);
+				profilePictureUpdated(response.data.data)
 			} else {
 				toast.error("Problem while updating the vendor");
 			}

@@ -1,16 +1,14 @@
 import ImageUpload from 'image-upload-react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import VendorApi from '../../../../api/Vendor';
 import { href } from '../../../../constants/extra';
-import { RootContext } from '../../../../contextApi/index'
 
 function Images({ vendor, imageDeleted, imageAdded }) {
 	const { _id } = vendor;
 	const [imageSrc, setImageSrc] = useState(null);
 	const [image, setImage] = useState(null);
 	const [vendorImages, setVendorImages] = useState(vendor.images);
-	const { user } = useContext(RootContext);
 
 	const handleImageSelect = (e) => {
 		setImage(e.target.files[0]);
@@ -51,7 +49,7 @@ function Images({ vendor, imageDeleted, imageAdded }) {
 			<div className="row mt-2">
 				{vendorImages?.length > 0 && vendorImages?.map(img => (
 					<div className="col-xm-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 justify-content-center mr-3">
-						<img className="banner-picture" style={{ marginBottom: "20px",  boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)', }} src={img} alt="hospital" />
+						<img className="banner-picture" style={{ marginBottom: "20px", boxShadow: '0px 6px 15px 4px rgba(202,202,202,0.75)', }} src={img} alt="hospital" />
 						<button className="btn btn-danger mb-4 cursor-pointer" onClick={deleteImage.bind(this, img)}>Delete</button>
 					</div>
 				))}
