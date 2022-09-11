@@ -3,7 +3,7 @@ import { href } from '../../../constants/extra'
 import DashboardLayout from '../../../layout/DashboardLayout'
 import { getVendors, deleteVendor } from '../../../store/actions/vendorActions'
 import { connect } from 'react-redux'
-import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/cateogries_placeholder.png'
+import CATEGORY_PLACEHOLDER_IMAGE from '../../../assets/images/placeholder_img.jpeg'
 import { useState } from 'react'
 import AddVendor from './components/AddVendor'
 
@@ -35,8 +35,11 @@ function Vendors({ getVendors, vendors, deleteVendor }) {
 					{allVendors?.map((ven, key) => (
 						<div key={key} className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
 							<div className="card">
-								{ven?.image !== "" && (
+								{ven?.image !== undefined && (
 									<img src={ven?.image} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px", objectFit: "cover", padding: "0px" }} alt="package_image" />
+								)}
+								{ven?.image === undefined && (
+									<img src={CATEGORY_PLACEHOLDER_IMAGE} style={{ height: "200px", borderTopLeftRadius: "5px", borderTopRightRadius: "5px", objectFit: "cover", padding: "0px" }} alt="package_image" />
 								)}
 								<div className="card-body">
 									<div className="media">

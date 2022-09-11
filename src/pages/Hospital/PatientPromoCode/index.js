@@ -3,12 +3,15 @@ import DashboardLayout from '../../../layout/DashboardLayout'
 import CodesApi from '../../../api/Codes'
 import { RootContext } from '../../../contextApi';
 import moment from 'moment'
+import 'moment-timezone';
 
 function PatientPromoCode() {
 	const [hospitalCodes, setHospitalCodes] = useState([]);
 	const [search, setSearch] = useState("");
 	const { user } = useContext(RootContext);
 	const [searchedHospitalCodes, setSearchedHospitalCodes] = useState([]);
+
+	const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	useEffect(() => {
 		CodesApi.getAllHospitalCodes(user.referenceId).then(res => {
@@ -55,7 +58,7 @@ function PatientPromoCode() {
 								{searchedHospitalCodes?.map(code => (
 									<tr key={code._id} style={{ border: '1px solid gray', padding: '7px' }}>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.patientId?.firstName + " " + code?.patientId?.lastName}</td>
-										<td style={{ border: '1px solid gray', padding: '7px' }}>{`${moment(code?.slotId?.from).format("DD-MM-YY")} - ( ${moment(code?.slotId?.from).format('HH.mm')} - ${moment(code?.slotId?.to).format('HH.mm')} )`}</td>
+										<td style={{ border: '1px solid gray', padding: '7px' }}>{`${moment.tz(code?.slotId?.from, timezone).format("DD/MM/YYYY")} - ( ${moment.tz(code?.slotId?.from, timezone).format("hh:mm a")} - ${moment.tz(code?.slotId?.to, timezone).format("hh:mm a")} )`}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.patientId?.emiratesId}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code.slotId?.doctorId?.firstName + " " + code.slotId?.doctorId?.lastName}</td>
 										<td style={{ border: '1px solid gray', padding: '7px' }}>{code?.code}</td>
