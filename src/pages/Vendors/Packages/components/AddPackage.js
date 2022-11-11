@@ -21,11 +21,6 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 	const { vendors: allVendors } = vendors
 	const { user } = useContext(RootContext);
 
-	const [pointsValue, setPointsValue] = useState('');
-	const [offValue, setOffValue] = useState('');
-	const [buyValue, setBuyValue] = useState('');
-	const [getValue, setGetValue] = useState('');
-
 	useEffect(() => {
 		if (allVendors.length === 0) {
 			getVendors();
@@ -36,26 +31,6 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 		setImage(file);
 		setImageSrc(URL.createObjectURL(file))
 	}
-
-	const handlePointsChange = (event) => {
-		const result = event.target.value.replace(/\D/g, '');
-		setPointsValue(result);
-	};
-
-	const handleOffChange = (event) => {
-		const result = event.target.value.replace(/\D/g, '');
-		setOffValue(result);
-	};
-
-	const handleBuyChange = (event) => {
-		const result = event.target.value.replace(/\D/g, '');
-		setBuyValue(result);
-	};
-
-	const handleGetChange = (event) => {
-		const result = event.target.value.replace(/\D/g, '');
-		setGetValue(result);
-	};
 
 	return (
 
@@ -176,40 +151,35 @@ function AddVendors({ categories, createPackage, selectedPackage, updatePackage,
 											</div>
 											<div className="form-group">
 												<TextInput
-													type="text"
+													type="number"
 													name="points"
 													placeholder="Points Required"
-													value={pointsValue}
-													onChange={handlePointsChange} />
+												/>
 											</div>
 											{values?.type === BUY_SOME_GET_SOME ? (
 												<>
 													<div className="form-group">
 														<TextInput
-															type="text"
+															type="number"
 															name="buyQuantity"
 															placeholder="Buy Quantity"
-															value={buyValue}
-															onChange={handleBuyChange}
 														/>
 													</div>
 													<div className="form-group">
 														<TextInput
-															type="text"
+															type="number"
 															name="getQuantity"
 															placeholder="Get Quantity"
-															value={getValue}
-															onChange={handleGetChange} />
+														/>
 													</div>
 												</>
 											) : (
 												<div className="form-group">
 													<TextInput
-														type="text"
+														type="number"
 														name="off"
 														placeholder="Off"
-														value={offValue}
-														onChange={handleOffChange} />
+													 />
 												</div>
 											)}
 											<div className="form-group">
