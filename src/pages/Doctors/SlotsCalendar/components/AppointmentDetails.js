@@ -37,13 +37,13 @@ function AppointmentDetails(selectedSlot) {
                                 </table>
                             </div>
                         </div>
-                        <div className="form-group text-center mb-0">
+                        {/* <div className="form-group text-center mb-0">
                             <a href={href} data-toggle="modal" data-target="#sickLeave" class="btn btn-primary px-3 mb-4">Approve Sick Leave</a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
-            <CreateSickLeave patientId={selectedSlot?.selectedSlot?.patientId?._id} />
+            {/* <CreateSickLeave patientId={selectedSlot?.selectedSlot?.patientId?._id} /> */}
         </>
 
     )

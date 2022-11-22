@@ -100,7 +100,6 @@ function StartTreatment({ QRCodeValue, setQRCodeValue, patientId, doctorId }) {
                               </div>
                            </div>
                            <div class="form-group text-center mb-0">
-                              <a href={href} data-toggle="modal" data-target="#requestLaboratory" data-dismiss="modal" aria-label="Close" class="btn btn-primary px-3 mr-1">Request for Laboratory</a>
                               <button type="submit" class="btn btn-primary px-3 ml-1">Send</button>
                            </div>
                         </Form>

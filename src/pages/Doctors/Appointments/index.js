@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { getPagesArray } from '../../../Utills/functions';
 import classNames from 'classnames'
 import moment from 'moment'
+import { useHistory, userHistory } from 'react-router-dom'
 
 function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber, deleteDoctorAppointment }) {
 
@@ -19,6 +20,7 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
    const [QRCodeValue, setQRCodeValue] = useState(null);
    const [selectedAppointment, setSelectedAppointment] = useState({});
    const { pageNumber, numberOfPages, appointments } = doctorAppointments && doctorAppointments;
+   const history = useHistory();
 
    useEffect(() => {
       getDoctorAppointments(user.referenceId, pageNumber || 0);
@@ -44,7 +46,7 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
          </div>
          <div class="row">
             {appointments?.map(appointment => (
-               <div class="col-md-12 col-xl-12">
+               <div class="col-md-12 col-xl-12" style={{ cursor: 'pointer' }} onClick={() => { history.push(`/doctors/patient-info/${appointment.patientId._id}/${appointment._id}`) }}>
                   <div class="card lab-result">
                      <div class="card-body">
                         <div class="row align-items-center">
@@ -67,11 +69,11 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                                  </li>
                               </ul>
                            </div>
-                           {appointment.patientId !== null && (
+                           {/* {appointment.patientId !== null && (
                               <div class="col-sm-12 col-md-3 col-lg-3 text-center text-lg-right mt-3 mt-md-0 pr-4">
                                  <a href={href} data-toggle="modal" data-target="#startTreatment" class="btn btn-primary px-3 py-2" onClick={onStartTreatment.bind(this, appointment)}>Start Treatment</a>
                               </div>
-                           )}
+                           )} */}
                         </div>
                         {/* <div class="dropdown">
                            <a href={href} id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -103,9 +105,9 @@ function Appointments({ doctorAppointments, getDoctorAppointments, setPageNumber
                )}
             </div>
          </div>
-         <StartTreatment QRCodeValue={QRCodeValue} setQRCodeValue={setQRCodeValue} doctorId={user?.referenceId} patientId={selectedAppointment?.patientId?._id} />
+         {/* <StartTreatment QRCodeValue={QRCodeValue} setQRCodeValue={setQRCodeValue} doctorId={user?.referenceId} patientId={selectedAppointment?.patientId?._id} />
          <RequestToLab appointment={selectedAppointment} />
-         <GenerateQR />
+         <GenerateQR /> */}
       </DashboardLayout>
    )
 }

@@ -27,9 +27,9 @@ const AppointmentApi = {
     approvePatientAppointment(slotId, patientId) {
         return trackPromise(axios.get(`/${APPOINTMENT_NAMESPACE}/approvePatientAppointment/${slotId}/${patientId}`));
     },
-
-
-
+    getSingleAppointment(appointmentId) {
+        return trackPromise(axios.get(`/${APPOINTMENT_NAMESPACE}/${appointmentId}`));
+    },
     // Updated Ones
     createAppointment(data) {
         return trackPromise(axios.post(`${APPOINTMENT_NAMESPACE}`, data));
