@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import AppointmentApi from "../../api/Appointment";
-import { GET_APPOINTMENTS } from "../types/appointments";
+import { GET_APPOINTMENTS, ADD_APPOINTMENTS } from "../types/appointments";
 
 export const getAppointments = (hospitalId) => async (dispatch, getState) => {
     try {
@@ -10,7 +10,14 @@ export const getAppointments = (hospitalId) => async (dispatch, getState) => {
             payload: response.data.data
         })
         return response;
-    }catch(err) {
+    } catch (err) {
         toast.error("Problem while getting appointments");
     }
+}
+
+export const addAppointment = (data) => async (dispatch, getState) => {
+    dispatch({
+        type: ADD_APPOINTMENTS,
+        payload: data
+    })
 }

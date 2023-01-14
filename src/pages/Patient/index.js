@@ -12,12 +12,6 @@ import PatientProfile from "./Profile"
 import Getaqoute from "./Getaqoute"
 import PatientDoctorProfile from "./Doctor/components/PatientDoctorProfile"
 import BookAppointment from "./Doctor/components/BookAppointment"
-import BookVaccinationHospital from './Hospital/components/appointment/BookVaccinationHospital'
-import BookTestHospitalAppointment from './Hospital/components/appointment/BookTestHospitalAppointment'
-import PCRAppointments from './PCRAppointments'
-import Rewards from './Rewards'
-import Details from './Rewards/Details'
-import PublicRoute from '../../ProtectedRoutes/PublicRoute'
 import { expgetToken, onMessageListener } from "../../firebase";
 import PatientApi from '../../api/Patients';
 import { RootContext } from '../../contextApi'
@@ -42,7 +36,7 @@ const PatientRouter = withRouter(({ match, ...props }) => {
     useEffect(() => {
         const handleFocus = () => {
             if (user.role === PATIENT) {
-                PatientApi.getSinglePatient(user._id).then(res => {
+                PatientApi.getSinglePatient(user._id, false).then(res => {
                     if (res.data.data.accountDeletionRequest) {
                         localStorage.clear();
                         window.location.href = "/";
@@ -83,16 +77,22 @@ const PatientRouter = withRouter(({ match, ...props }) => {
     }, [isTokenFound, user])
 
     onMessageListener().then(payload => {
-        setShow(true);
-        // setNotification({title: payload.notification.title, body: payload.notification.body})
-        toast.success(payload.notification.title);
-        setTimeout(() => {
-            // setNotification({title: '', body: ''})
-            setShow(false);
-            localStorage.clear();
-            setUser(false)
-            history.push(LOGIN_ROUTE);
-        }, 1500);
+        console.log("DDDAAAATAAA => ", payload);
+        if (payload?.notification?.title === "Congratulations") {
+            toast.success(payload?.notification?.body);
+            setUser({ ...user, points: parseFloat(user.points) + parseFloat(payload?.data?.points) });
+        } else {
+            setShow(true);
+            // setNotification({title: payload.notification.title, body: payload.notification.body})
+            toast.success(payload.notification.title);
+            setTimeout(() => {
+                // setNotification({title: '', body: ''})
+                setShow(false);
+                localStorage.clear();
+                setUser(false);
+                history.push(LOGIN_ROUTE);
+            }, 1500);
+        }
     }).catch(err => console.log('failed: ', err));
 
     return (

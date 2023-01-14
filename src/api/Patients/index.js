@@ -12,8 +12,12 @@ const PatientApi = {
     deletePatient(id) {
         return trackPromise(axios.delete(`${PATIENT_NAMESPACE}/${id}`))
     },
-    getSinglePatient(id) {
-        return trackPromise(axios.get(`/${PATIENT_NAMESPACE}/${id}`))
+    getSinglePatient(id, loading = true) {
+        if (loading) {
+            return trackPromise(axios.get(`/${PATIENT_NAMESPACE}/${id}`))
+        } else {
+            return axios.get(`/${PATIENT_NAMESPACE}/${id}`)
+        }
     },
     createPatientFromNurse(data) {
         return trackPromise(axios.post(`/${PATIENT_NAMESPACE}/createNursePatient`, data))

@@ -15,6 +15,9 @@ const HospitalApi = {
     getAllInsurances() {
         return trackPromise(axios.get(`${INSURANCE_REQUEST_NAMESPACE}`));
     },
+    updateFcToken(data) {
+        return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/webfcToken`, data))
+    },
     updateHospitalProfile(hospitalId, newData) {
         return trackPromise(axios.put(`${HOSPITAL_NAMESPACE}/${hospitalId}`, newData));
     },
