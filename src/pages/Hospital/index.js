@@ -17,6 +17,7 @@ import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../contextApi";
 import HospitalApi from "../../api/Hospital";
 import { toast } from "react-toastify";
+import PlayAlert from "alert-sound-notify";
 
 const HospitalRouter = withRouter(({ match, ...props }) => {
 
@@ -41,6 +42,7 @@ const HospitalRouter = withRouter(({ match, ...props }) => {
 
     onMessageListener().then(payload => {
         toast.success(payload?.notification?.body);
+        PlayAlert();
         setTimeout(() => {
             window.location.reload();
         }, 3000);

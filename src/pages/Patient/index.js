@@ -19,6 +19,8 @@ import { useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { LOGIN_ROUTE } from "../../constants/Redirects";
 import { PATIENT } from '../../constants/Roles';
+import PlayAlert from 'alert-sound-notify';
+
 const PatientRouter = withRouter(({ match, ...props }) => {
 
     const { user, setUser } = useContext(RootContext)
@@ -77,14 +79,15 @@ const PatientRouter = withRouter(({ match, ...props }) => {
     }, [isTokenFound, user])
 
     onMessageListener().then(payload => {
-        console.log("DDDAAAATAAA => ", payload);
         if (payload?.notification?.title === "Congratulations") {
             toast.success(payload?.notification?.body);
+            PlayAlert();
             setUser({ ...user, points: parseFloat(user.points) + parseFloat(payload?.data?.points) });
         } else {
             setShow(true);
             // setNotification({title: payload.notification.title, body: payload.notification.body})
             toast.success(payload.notification.title);
+            PlayAlert();
             setTimeout(() => {
                 // setNotification({title: '', body: ''})
                 setShow(false);
