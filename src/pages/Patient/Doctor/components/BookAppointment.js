@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { RootContext } from '../../../../contextApi/index'
@@ -24,6 +24,8 @@ function BookAppointment() {
     const [selectedSlot, setSelectedSlot] = useState({})
     const buttonRef = useRef()
 
+    const { user } = useContext(RootContext);
+
     useEffect(() => {
         let selectedDoctorId = id ?? doctor?._id
         selectedDoctorId = hospitalDetailPage ? doctor?._id : selectedDoctorId
@@ -32,13 +34,15 @@ function BookAppointment() {
             if (res.data.data && res.data.data.length > 0) {
                 const events = []
                 res.data.data.forEach(slot => {
-                    events.push({
-                        title: moment(slot.from).format("hh:mm a") + " - " + moment(slot.to).format("hh:mm a"),
-                        start: slot.from,
-                        end: slot.to,
-                        status: slot.status,
-                        _id: slot._id
-                    })
+                    if ((user._id === slot?.patientId?._id && slot.status === "BOOKED") || slot.status === "AVAILABLE") {
+                        events.push({
+                            title: moment(slot.from).format("hh:mm a") + " - " + moment(slot.to).format("hh:mm a"),
+                            start: slot.from,
+                            end: slot.to,
+                            status: slot.status,
+                            _id: slot._id
+                        })
+                    }
                 })
                 setSlots(events)
             }

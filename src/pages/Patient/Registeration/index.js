@@ -65,7 +65,7 @@ function PatientRegisteration() {
                 firstName: Yup.string().required(t('required')),
                 lastName: Yup.string().required(t('required')),
                 email: Yup.string().required(t('required')),
-                emiratesId: Yup.string().required(t('required')),
+                emiratesId: Yup.string().required('Required'),
                 birthday: Yup.string().required(t('required')),
                 gender: Yup.string().required(t('required')).nullable(),
                 location: Yup.string().required(t('required')),
